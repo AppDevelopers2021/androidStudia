@@ -8,8 +8,6 @@ import android.os.Bundle;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import app.web.studia_kr.ui.login.LoginActivity;
-
 public class MainActivity extends AppCompatActivity {
 
     Timer introtimer;
