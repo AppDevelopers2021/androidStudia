@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Intro → Login Activity Change
         introtimer = new Timer();
         introtimer.schedule(new TimerTask() {
             @Override
