@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "654717768488",
+    "firebase_url": "https://studia-kr-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "studia-kr",
+    "storage_bucket": "studia-kr.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:654717768488:android:ef1bb365bdd6dcc933361d",
+        "android_client_info": {
+          "package_name": "app.web.studia_kr"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "654717768488-7eb1tidmkr1g8ea3s5lah8c6el42dt5v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWzQrB_phrv_jKc8NekdnUdvjCGtIq-Nc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "654717768488-7eb1tidmkr1g8ea3s5lah8c6el42dt5v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
