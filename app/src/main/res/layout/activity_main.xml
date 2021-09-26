@@ -7,20 +7,6 @@
     tools:context=".MainActivity">
 
     <ImageView
-        android:id="@+id/iv_studialogo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="107dp"
-        android:layout_marginTop="327dp"
-        android:layout_marginEnd="108dp"
-        android:layout_marginBottom="328dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo_studia_light_blue" />
-
-    <ImageView
         android:id="@+id/iv_appdlogo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -31,5 +17,22 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/logo_appd_intro" />
+
+    <TextView
+        android:id="@+id/tvStudialogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="124dp"
+        android:layout_marginTop="327dp"
+        android:layout_marginEnd="124dp"
+        android:layout_marginBottom="256dp"
+        android:fontFamily="@font/courgetteregular"
+        android:text="studia"
+        android:textColor="@color/studia_brandcolor"
+        android:textSize="60sp"
+        app:layout_constraintBottom_toTopOf="@+id/iv_appdlogo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
