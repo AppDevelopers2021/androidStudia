@@ -6,4 +6,131 @@
     android:layout_height="match_parent"
     tools:context=".CalendarActivity">
 
+    <ImageView
+        android:id="@+id/ivCalendarBar"
+        android:layout_width="416dp"
+        android:layout_height="75dp"
+        android:layout_marginBottom="661dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/calendar_studia_bar" />
+
+    <ImageView
+        android:id="@+id/ivCalendarTodoBG"
+        android:layout_width="406dp"
+        android:layout_height="208dp"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="2dp"
+        app:layout_constraintBottom_toTopOf="@+id/ivCalendarMemoBG"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivCalendarBar"
+        app:srcCompat="@drawable/calendar_studia_category" />
+
+    <ImageView
+        android:id="@+id/ivCalendarMemoBG"
+        android:layout_width="406dp"
+        android:layout_height="208dp"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="11dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginBottom="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/ivCalendarAssignBG"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivCalendarTodoBG"
+        app:srcCompat="@drawable/calendar_studia_category" />
+
+    <ImageView
+        android:id="@+id/ivCalendarAssignBG"
+        android:layout_width="406dp"
+        android:layout_height="208dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginEnd="3dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivCalendarMemoBG"
+        app:srcCompat="@drawable/calendar_studia_category" />
+
+    <ImageButton
+        android:id="@+id/btCalendarMenu"
+        android:layout_width="61dp"
+        android:layout_height="61dp"
+        android:layout_marginTop="-70dp"
+        android:layout_marginEnd="-60dp"
+        app:layout_constraintEnd_toStartOf="@id/ivCalendarTodoBG"
+        app:layout_constraintTop_toBottomOf="@+id/ivCalendarBar"
+        app:srcCompat="@drawable/calendar_studia_menu"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <ImageButton
+        android:id="@+id/btCalendarLeft"
+        android:layout_width="44dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="-330dp"
+        android:layout_marginTop="-62dp"
+        app:layout_constraintStart_toEndOf="@+id/ivCalendarBar"
+        app:layout_constraintTop_toBottomOf="@+id/ivCalendarBar"
+        app:srcCompat="@drawable/calendar_studia_rightarrow"
+        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+    <ImageButton
+        android:id="@+id/btCalendarRight"
+        android:layout_width="44dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="-130dp"
+        android:layout_marginTop="-62dp"
+        app:layout_constraintStart_toEndOf="@+id/ivCalendarBar"
+        app:layout_constraintTop_toBottomOf="@+id/ivCalendarBar"
+        app:srcCompat="@drawable/calendar_studia_leftarrow"
+        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+    <TextView
+        android:id="@+id/tvCalendarDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="-51dp"
+        android:fontFamily="@font/nanumsquarer"
+        android:text="2021/09/26"
+        android:textColor="#ffffff"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/btCalendarLeft"
+        app:layout_constraintTop_toBottomOf="@+id/ivCalendarBar" />
+
+    <TextView
+        android:id="@+id/tvCalendarMemo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="-380dp"
+        android:layout_marginTop="-185dp"
+        android:fontFamily="@font/nanumsquarer"
+        android:text="Memo"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/ivCalendarMemoBG"
+        app:layout_constraintTop_toBottomOf="@+id/ivCalendarMemoBG" />
+
+    <TextView
+        android:id="@+id/tvCalendarMemo2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="-380dp"
+        android:layout_marginTop="36dp"
+        android:fontFamily="@font/nanumsquarer"
+        android:text="과제 및 준비물"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/ivCalendarMemoBG"
+        app:layout_constraintTop_toBottomOf="@+id/ivCalendarMemoBG" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
