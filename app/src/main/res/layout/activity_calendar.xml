@@ -11,6 +11,8 @@
         android:layout_width="416dp"
         android:layout_height="75dp"
         android:layout_marginBottom="661dp"
+        android:background="#2291FF"
+        android:backgroundTint="@color/studia_brandcolor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,6 +28,7 @@
         android:layout_marginEnd="2dp"
         app:layout_constraintBottom_toTopOf="@+id/ivCalendarMemoBG"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ivCalendarBar"
         app:srcCompat="@drawable/calendar_studia_category" />
@@ -132,5 +135,73 @@
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/ivCalendarMemoBG"
         app:layout_constraintTop_toBottomOf="@+id/ivCalendarMemoBG" />
+
+    <ImageButton
+        android:id="@+id/btDatePicker"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="-60dp"
+        android:layout_marginTop="11dp"
+        android:layout_marginEnd="-450dp"
+        android:layout_marginBottom="-60dp"
+        android:backgroundTint="#2291FF"
+        app:layout_constraintBottom_toTopOf="@+id/ivCalendarBar"
+        app:layout_constraintEnd_toStartOf="@+id/ivCalendarBar"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/ivCalendarBar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/calendar_studia_datepicker"
+        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+    <ImageButton
+        android:id="@+id/btTodoAdd"
+        android:layout_width="42dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="-45dp"
+        android:layout_marginTop="-50dp"
+        android:layout_marginEnd="3dp"
+        android:layout_marginBottom="-500dp"
+        android:backgroundTint="#EEEEEE"
+        app:layout_constraintBottom_toTopOf="@+id/ivCalendarTodoBG"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/ivCalendarTodoBG"
+        app:layout_constraintTop_toBottomOf="@+id/ivCalendarTodoBG"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/calendar_studia_addbutton"
+        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+    <ImageButton
+        android:id="@+id/btMemoEdit"
+        android:layout_width="45dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="381dp"
+        android:layout_marginBottom="15dp"
+        android:backgroundTint="#EEEEEE"
+        app:layout_constraintBottom_toTopOf="@+id/ivCalendarAssignBG"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/ivCalendarMemoBG"
+        app:layout_constraintTop_toBottomOf="@+id/ivCalendarBar"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/calendar_studia_editbutton"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <ImageButton
+        android:id="@+id/btAssignEdit"
+        android:layout_width="45dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="173dp"
+        android:layout_marginBottom="4dp"
+        android:backgroundTint="#EEEEEE"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/ivCalendarAssignBG"
+        app:layout_constraintTop_toBottomOf="@+id/btMemoEdit"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/calendar_studia_editbutton"
+        tools:ignore="SpeakableTextPresentCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
