@@ -95,20 +95,6 @@
         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
     <TextView
-        android:id="@+id/tvCalendarDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="-51dp"
-        android:fontFamily="@font/nanumsquarer"
-        android:text="2021/09/26"
-        android:textColor="#ffffff"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/btCalendarLeft"
-        app:layout_constraintTop_toBottomOf="@+id/ivCalendarBar" />
-
-    <TextView
         android:id="@+id/tvCalendarMemo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -136,23 +122,18 @@
         app:layout_constraintStart_toEndOf="@+id/ivCalendarMemoBG"
         app:layout_constraintTop_toBottomOf="@+id/ivCalendarMemoBG" />
 
-    <ImageButton
-        android:id="@+id/btDatePicker"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="-60dp"
-        android:layout_marginTop="11dp"
-        android:layout_marginEnd="-450dp"
-        android:layout_marginBottom="-60dp"
-        android:backgroundTint="#2291FF"
-        app:layout_constraintBottom_toTopOf="@+id/ivCalendarBar"
-        app:layout_constraintEnd_toStartOf="@+id/ivCalendarBar"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvTodoLIst"
+        android:layout_width="376dp"
+        android:layout_height="163dp"
+        android:layout_marginStart="-392dp"
+        android:layout_marginBottom="35dp"
+        app:layout_constraintBottom_toTopOf="@+id/ivCalendarMemoBG"
+        app:layout_constraintEnd_toStartOf="@+id/btTodoAdd"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/ivCalendarBar"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/calendar_studia_datepicker"
-        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+        app:layout_constraintStart_toEndOf="@+id/ivCalendarTodoBG"
+        app:layout_constraintTop_toBottomOf="@+id/ivCalendarTodoBG"
+        app:layout_constraintVertical_bias="1.0" />
 
     <ImageButton
         android:id="@+id/btTodoAdd"
@@ -163,6 +144,7 @@
         android:layout_marginEnd="3dp"
         android:layout_marginBottom="-500dp"
         android:backgroundTint="#EEEEEE"
+        android:onClick="scheduleSetup"
         app:layout_constraintBottom_toTopOf="@+id/ivCalendarTodoBG"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -170,7 +152,7 @@
         app:layout_constraintTop_toBottomOf="@+id/ivCalendarTodoBG"
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/calendar_studia_addbutton"
-        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+        tools:ignore="OnClick,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <ImageButton
         android:id="@+id/btMemoEdit"
@@ -203,5 +185,23 @@
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/calendar_studia_editbutton"
         tools:ignore="SpeakableTextPresentCheck" />
+
+    <Button
+        android:id="@+id/btDateManager"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="-64dp"
+        android:layout_marginEnd="3dp"
+        android:backgroundTint="@color/studia_brandcolor"
+        android:fontFamily="@font/nanumsquarer"
+        android:text="2021/09/26"
+        android:textColor="@color/white"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/btCalendarRight"
+        app:layout_constraintStart_toEndOf="@+id/btCalendarLeft"
+        app:layout_constraintTop_toBottomOf="@+id/ivCalendarBar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
