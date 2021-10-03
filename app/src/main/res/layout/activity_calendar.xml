@@ -78,6 +78,7 @@
         android:layout_height="42dp"
         android:layout_marginStart="-330dp"
         android:layout_marginTop="-62dp"
+        android:onClick="yesterdayClick"
         app:layout_constraintStart_toEndOf="@+id/ivCalendarBar"
         app:layout_constraintTop_toBottomOf="@+id/ivCalendarBar"
         app:srcCompat="@drawable/calendar_studia_rightarrow"
@@ -89,6 +90,7 @@
         android:layout_height="42dp"
         android:layout_marginStart="-130dp"
         android:layout_marginTop="-62dp"
+        android:onClick="tomorrowClick"
         app:layout_constraintStart_toEndOf="@+id/ivCalendarBar"
         app:layout_constraintTop_toBottomOf="@+id/ivCalendarBar"
         app:srcCompat="@drawable/calendar_studia_leftarrow"
@@ -203,5 +205,39 @@
         app:layout_constraintEnd_toStartOf="@+id/btCalendarRight"
         app:layout_constraintStart_toEndOf="@+id/btCalendarLeft"
         app:layout_constraintTop_toBottomOf="@+id/ivCalendarBar" />
+
+    <TextView
+        android:id="@+id/tvAssign"
+        android:layout_width="321dp"
+        android:layout_height="134dp"
+        android:layout_marginStart="-375dp"
+        android:layout_marginTop="-150dp"
+        android:layout_marginEnd="11dp"
+        android:fontFamily="@font/nanumsquarel"
+        android:lines="5"
+        android:maxLines="5"
+        android:text="TextView"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/btAssignEdit"
+        app:layout_constraintStart_toEndOf="@+id/ivCalendarAssignBG"
+        app:layout_constraintTop_toBottomOf="@+id/ivCalendarAssignBG" />
+
+    <TextView
+        android:id="@+id/tvMemo"
+        android:layout_width="321dp"
+        android:layout_height="134dp"
+        android:layout_marginStart="-375dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="-200dp"
+        android:fontFamily="@font/nanumsquarel"
+        android:lines="5"
+        android:maxLines="5"
+        android:text="TextView"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/ivCalendarMemoBG"
+        app:layout_constraintStart_toEndOf="@+id/ivCalendarMemoBG"
+        app:layout_constraintTop_toBottomOf="@+id/tvCalendarMemo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
