@@ -30,9 +30,16 @@ public class CalendarActivity extends AppCompatActivity {
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private ArrayList<Todo> arrayList;
-    private FirebaseDatabase database;
-    private DatabaseReference databaseReference;
     private Button btDate;
+    public FirebaseDatabase database;
+    public DatabaseReference databaseReference;
+    public DatabaseReference calendarRef;
+    public DatabaseReference dateRef;
+    public DatabaseReference noteRef;
+    public DatabaseReference memoRef;
+    public DatabaseReference assignRef;
+    public DatabaseReference reminderRef;
+    public DatabaseReference uidRef;
     public Calendar calendar;
     public DateFormat dateFormat;
     public DateFormat firebaseFormat;
@@ -62,10 +69,10 @@ public class CalendarActivity extends AppCompatActivity {
         //Firebase Database RecyclerView
         database = FirebaseDatabase.getInstance();
         databaseReference = database.getReference();
-        DatabaseReference calendarRef = databaseReference.child("calendar");
-        DatabaseReference uidRef = calendarRef.child("firebaseUID");
-        DatabaseReference dateRef = uidRef.child(firebaseFormat.format(calendar.getTime()));
-        DatabaseReference noteRef = dateRef.child("note");
+        calendarRef = databaseReference.child("calendar");
+        uidRef = calendarRef.child("firebaseUID");
+        dateRef = uidRef.child(firebaseFormat.format(calendar.getTime()));
+        noteRef = dateRef.child("note");
 
         noteRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -88,7 +95,7 @@ public class CalendarActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         //Firebase Database Memo
-        DatabaseReference memoRef = dateRef.child("memo");
+        memoRef = dateRef.child("memo");
 
         memoRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -105,8 +112,8 @@ public class CalendarActivity extends AppCompatActivity {
         });
 
         //Firebase Database Assignment(Reminder)
-        DatabaseReference assignRef = dateRef.child("reminder");
-        DatabaseReference reminderRef = assignRef.child("0");
+        assignRef = dateRef.child("reminder");
+        reminderRef = assignRef.child("0");
 
         reminderRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -137,6 +144,69 @@ public class CalendarActivity extends AppCompatActivity {
         dateFormat = new SimpleDateFormat("yyyy/MM/dd");
         firebaseFormat = new SimpleDateFormat("yyyyMMdd");
         btDate.setText(dateFormat.format(calendar.getTime()));
+
+        //Firebase Database Refresh
+        database = FirebaseDatabase.getInstance();
+        databaseReference = database.getReference();
+        calendarRef = databaseReference.child("calendar");
+        uidRef = calendarRef.child("firebaseUID");
+        dateRef = uidRef.child(firebaseFormat.format(calendar.getTime()));
+        noteRef = dateRef.child("note");
+
+        noteRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                arrayList.clear();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Todo todo = snapshot.getValue(Todo.class);
+                    arrayList.add(todo);
+                }
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("CalendarActivity", String.valueOf(error.toException()));
+            }
+        });
+
+        adapter = new CustomAdapter(arrayList, this);
+        recyclerView.setAdapter(adapter);
+
+        //Firebase Database Memo
+        memoRef = dateRef.child("memo");
+
+        memoRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Memo = snapshot.getValue(String.class);
+                TextView tvMemo = findViewById(R.id.tvMemo);
+                tvMemo.setText(Memo);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("CalendarActivity", String.valueOf(error.toException()));
+            }
+        });
+
+        //Firebase Database Assignment(Reminder)
+        assignRef = dateRef.child("reminder");
+        reminderRef = assignRef.child("0");
+
+        reminderRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Assign = snapshot.getValue(String.class);
+                TextView tvAssign = findViewById(R.id.tvAssign);
+                tvAssign.setText(Assign);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("CalendarActivity", String.valueOf(error.toException()));
+            }
+        });
     }
 
     public void tomorrowClick(View view) {
@@ -146,5 +216,68 @@ public class CalendarActivity extends AppCompatActivity {
         dateFormat = new SimpleDateFormat("yyyy/MM/dd");
         firebaseFormat = new SimpleDateFormat("yyyyMMdd");
         btDate.setText(dateFormat.format(calendar.getTime()));
+
+        //Firebase Database Refresh
+        database = FirebaseDatabase.getInstance();
+        databaseReference = database.getReference();
+        calendarRef = databaseReference.child("calendar");
+        uidRef = calendarRef.child("firebaseUID");
+        dateRef = uidRef.child(firebaseFormat.format(calendar.getTime()));
+        noteRef = dateRef.child("note");
+
+        noteRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                arrayList.clear();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Todo todo = snapshot.getValue(Todo.class);
+                    arrayList.add(todo);
+                }
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("CalendarActivity", String.valueOf(error.toException()));
+            }
+        });
+
+        adapter = new CustomAdapter(arrayList, this);
+        recyclerView.setAdapter(adapter);
+
+        //Firebase Database Memo
+        memoRef = dateRef.child("memo");
+
+        memoRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Memo = snapshot.getValue(String.class);
+                TextView tvMemo = findViewById(R.id.tvMemo);
+                tvMemo.setText(Memo);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("CalendarActivity", String.valueOf(error.toException()));
+            }
+        });
+
+        //Firebase Database Assignment(Reminder)
+        assignRef = dateRef.child("reminder");
+        reminderRef = assignRef.child("0");
+
+        reminderRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Assign = snapshot.getValue(String.class);
+                TextView tvAssign = findViewById(R.id.tvAssign);
+                tvAssign.setText(Assign);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("CalendarActivity", String.valueOf(error.toException()));
+            }
+        });
     }
 }
