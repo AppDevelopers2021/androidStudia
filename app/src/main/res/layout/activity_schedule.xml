@@ -6,100 +6,111 @@
     android:layout_height="match_parent"
     tools:context=".ScheduleActivity">
 
-    /* Feedback, 각각의 View 혹은 Object를 보면 빨간 밑줄이 있는 것을 볼 수 있습니다. 이는 Constraints 설정을 하지 않아서 그렇습니다.
-    이를 해결하기 위해서 Constraints를 Vertical과 Horizontal 모두 설정해 주어야합니다. 설정 방법은 임현우에게 문의 */
-
-    <Button
-        android:id="@+id/button"
+    <TextView
+        android:id="@+id/tvScheduleDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="54dp"
-        android:text="Button"
+        android:layout_marginStart="140dp"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/nanumsquarer"
+        android:text="2021/09/26"
+        android:textColor="#ffffff"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_bias="0.5" />
+
+    <ImageButton
+        android:id="@+id/btSubmit"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="4dp"
+        android:backgroundTint="#EEEEEE"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextDate2" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintVertical_bias="0.969"
+        app:srcCompat="@drawable/login" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="44dp"
-        android:layout_height="33dp"
-        android:layout_marginStart="29dp"
-        android:layout_marginEnd="28dp"
-        android:layout_marginBottom="199dp"
-        android:text="메모"
-        app:layout_constraintBottom_toTopOf="@+id/textView3"
-        app:layout_constraintEnd_toStartOf="@+id/editTextTextMultiLine"
+    <ImageView
+        android:id="@+id/ivScheduleBar"
+        android:layout_width="416dp"
+        android:layout_height="75dp"
+        android:layout_marginBottom="661dp"
+        android:background="#2291FF"
+        android:backgroundTint="@color/studia_brandcolor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/calendar_studia_bar" />
 
     <EditText
-        android:id="@+id/editTextTextMultiLine"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="46dp"
-        android:layout_marginBottom="97dp"
+        android:id="@+id/editTextTopic"
+        android:layout_width="212dp"
+        android:layout_height="38dp"
+        android:ems="10"
+        android:inputType="textShortMessage"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewTopic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textViewTopic"
+        app:layout_constraintTop_toTopOf="@+id/textViewTopic"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/textViewTopic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="주제"
+        app:layout_constraintBottom_toTopOf="@+id/textViewMemo"
+        app:layout_constraintEnd_toStartOf="@+id/editTextTopic"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewMemo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="메모"
+        app:layout_constraintBottom_toTopOf="@+id/textViewReminder"
+        app:layout_constraintEnd_toStartOf="@+id/editTextMemo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTopic" />
+
+    <EditText
+        android:id="@+id/editTextMemo"
+        android:layout_width="212dp"
+        android:layout_height="190dp"
         android:ems="10"
         android:gravity="start|top"
         android:inputType="textMultiLine"
-        app:layout_constraintBottom_toTopOf="@+id/editTextDate2"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewMemo"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName"
-        tools:ignore="SpeakableTextPresentCheck" />
+        app:layout_constraintStart_toEndOf="@+id/textViewMemo"
+        app:layout_constraintTop_toTopOf="@+id/textViewMemo" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textViewReminder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="29dp"
-        android:layout_marginTop="97dp"
-        android:layout_marginEnd="45dp"
-        android:layout_marginBottom="220dp"
-        android:text="주제"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
-        app:layout_constraintEnd_toStartOf="@+id/editTextTextPersonName"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="29dp"
-        android:layout_marginEnd="19dp"
-        android:layout_marginBottom="162dp"
         android:text="리마인더"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/editTextDate2"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextReminder"
+        app:layout_constraintEnd_toStartOf="@+id/editTextReminder"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toTopOf="@+id/editTextReminder" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/editTextReminder"
         android:layout_width="212dp"
         android:layout_height="38dp"
-        android:layout_marginTop="84dp"
-        android:layout_marginEnd="45dp"
-        android:layout_marginBottom="105dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextMultiLine"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView2"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/editTextDate2"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="47dp"
-        android:layout_marginBottom="53dp"
         android:ems="10"
         android:inputType="date"
-        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView3"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine" />
+        app:layout_constraintStart_toEndOf="@+id/textViewReminder"
+        app:layout_constraintTop_toBottomOf="@+id/editTextMemo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
