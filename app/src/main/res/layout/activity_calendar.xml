@@ -62,17 +62,6 @@
         app:srcCompat="@drawable/calendar_studia_category" />
 
     <ImageButton
-        android:id="@+id/btCalendarMenu"
-        android:layout_width="61dp"
-        android:layout_height="61dp"
-        android:layout_marginTop="-70dp"
-        android:layout_marginEnd="-60dp"
-        app:layout_constraintEnd_toStartOf="@id/ivCalendarTodoBG"
-        app:layout_constraintTop_toBottomOf="@+id/ivCalendarBar"
-        app:srcCompat="@drawable/calendar_studia_menu"
-        tools:ignore="SpeakableTextPresentCheck" />
-
-    <ImageButton
         android:id="@+id/btCalendarLeft"
         android:layout_width="44dp"
         android:layout_height="42dp"

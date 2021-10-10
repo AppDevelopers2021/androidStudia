@@ -31,6 +31,8 @@ public class CalendarActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     private ArrayList<Todo> arrayList;
     private Button btDate;
+    private String uid;
+    private String Date;
     public FirebaseDatabase database;
     public DatabaseReference databaseReference;
     public DatabaseReference calendarRef;
@@ -56,6 +58,7 @@ public class CalendarActivity extends AppCompatActivity {
         calendar.setTime(new Date());
         dateFormat = new SimpleDateFormat("yyyy/MM/dd");
         firebaseFormat = new SimpleDateFormat("yyyyMMdd");
+        Date = dateFormat.format(calendar.getTime());
         btDate = findViewById(R.id.btDateManager);
         btDate.setText(dateFormat.format(calendar.getTime()));
 
@@ -66,11 +69,15 @@ public class CalendarActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         arrayList = new ArrayList<>();
 
+        //Intent Firebase UID Data Get
+        Intent intent = getIntent();
+        uid = intent.getStringExtra("firebaseUID");
+
         //Firebase Database RecyclerView
         database = FirebaseDatabase.getInstance();
         databaseReference = database.getReference();
         calendarRef = databaseReference.child("calendar");
-        uidRef = calendarRef.child("firebaseUID");
+        uidRef = calendarRef.child(uid);
         dateRef = uidRef.child(firebaseFormat.format(calendar.getTime()));
         noteRef = dateRef.child("note");
 
@@ -134,6 +141,8 @@ public class CalendarActivity extends AppCompatActivity {
         //btTodoAdd OnClick Event
         //Calendar → Schedule Activity Change
         Intent intent = new Intent(CalendarActivity.this, ScheduleActivity.class);
+        intent.putExtra("firebaseUID", uid);
+        intent.putExtra("date", Date);
         startActivity(intent);
     }
 
@@ -143,13 +152,14 @@ public class CalendarActivity extends AppCompatActivity {
         calendar.add(Calendar.DATE, -1);
         dateFormat = new SimpleDateFormat("yyyy/MM/dd");
         firebaseFormat = new SimpleDateFormat("yyyyMMdd");
+        Date = dateFormat.format(calendar.getTime());
         btDate.setText(dateFormat.format(calendar.getTime()));
 
         //Firebase Database Refresh
         database = FirebaseDatabase.getInstance();
         databaseReference = database.getReference();
         calendarRef = databaseReference.child("calendar");
-        uidRef = calendarRef.child("firebaseUID");
+        uidRef = calendarRef.child(uid);
         dateRef = uidRef.child(firebaseFormat.format(calendar.getTime()));
         noteRef = dateRef.child("note");
 
@@ -215,13 +225,14 @@ public class CalendarActivity extends AppCompatActivity {
         calendar.add(Calendar.DATE, +1);
         dateFormat = new SimpleDateFormat("yyyy/MM/dd");
         firebaseFormat = new SimpleDateFormat("yyyyMMdd");
+        Date = dateFormat.format(calendar.getTime());
         btDate.setText(dateFormat.format(calendar.getTime()));
 
         //Firebase Database Refresh
         database = FirebaseDatabase.getInstance();
         databaseReference = database.getReference();
         calendarRef = databaseReference.child("calendar");
-        uidRef = calendarRef.child("firebaseUID");
+        uidRef = calendarRef.child(uid);
         dateRef = uidRef.child(firebaseFormat.format(calendar.getTime()));
         noteRef = dateRef.child("note");
 
