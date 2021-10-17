@@ -10,6 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomViewHolder> {
@@ -45,13 +47,13 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
 
     public class CustomViewHolder extends RecyclerView.ViewHolder {
 
-        ImageView subject;
+        TextView subject;
         TextView content;
 
         public CustomViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            this.subject = itemView.findViewById(R.id.ivSubject);
+            this.subject = itemView.findViewById(R.id.tvSubject);
             this.content = itemView.findViewById(R.id.tvContent);
         }
     }

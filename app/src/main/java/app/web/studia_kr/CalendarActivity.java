@@ -80,9 +80,7 @@ public class CalendarActivity extends AppCompatActivity {
         uidRef = calendarRef.child(uid);
 
         if (uidRef.child(firebaseFormat.format(calendar.getTime())) != null) {
-            dateRef = uidRef.child(firebaseFormat.format(calendar.getTime()));
-
-            noteRef = dateRef.child("note");
+            noteRef = uidRef.child(firebaseFormat.format(calendar.getTime())).child("note");
 
             noteRef.addValueEventListener(new ValueEventListener() {
                 @Override
@@ -166,9 +164,7 @@ public class CalendarActivity extends AppCompatActivity {
         uidRef = calendarRef.child(uid);
 
         if (uidRef.child(firebaseFormat.format(calendar.getTime())) != null) {
-            dateRef = uidRef.child(firebaseFormat.format(calendar.getTime()));
-
-            noteRef = dateRef.child("note");
+            noteRef = uidRef.child(firebaseFormat.format(calendar.getTime())).child("note");
 
             noteRef.addValueEventListener(new ValueEventListener() {
                 @Override
@@ -242,9 +238,7 @@ public class CalendarActivity extends AppCompatActivity {
         calendarRef = databaseReference.child("calendar");
         uidRef = calendarRef.child(uid);
         if (uidRef.child(firebaseFormat.format(calendar.getTime())) != null) {
-            dateRef = uidRef.child(firebaseFormat.format(calendar.getTime()));
-
-            noteRef = dateRef.child("note");
+            noteRef = uidRef.child(firebaseFormat.format(calendar.getTime())).child("note");
 
             noteRef.addValueEventListener(new ValueEventListener() {
                 @Override
