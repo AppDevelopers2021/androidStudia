@@ -6,21 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ScheduleActivity">
 
-    <TextView
-        android:id="@+id/tvScheduleDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="140dp"
-        android:layout_marginTop="24dp"
-        android:fontFamily="@font/nanumsquarer"
-        android:text="2021/09/26"
-        android:textColor="#ffffff"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="0.5" />
-
     <ImageButton
         android:id="@+id/btSubmit"
         android:layout_width="100dp"
@@ -34,19 +19,6 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintVertical_bias="0.969"
         app:srcCompat="@drawable/login" />
-
-    <ImageView
-        android:id="@+id/ivScheduleBar"
-        android:layout_width="416dp"
-        android:layout_height="75dp"
-        android:layout_marginBottom="661dp"
-        android:background="#2291FF"
-        android:backgroundTint="@color/studia_brandcolor"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/calendar_studia_bar" />
 
     <EditText
         android:id="@+id/editTextTopic"
@@ -112,5 +84,32 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textViewReminder"
         app:layout_constraintTop_toBottomOf="@+id/editTextMemo" />
+
+    <ImageView
+        android:id="@+id/ivScheduleBar"
+        android:layout_width="416dp"
+        android:layout_height="75dp"
+        android:layout_marginBottom="661dp"
+        android:background="#2291FF"
+        android:backgroundTint="@color/studia_brandcolor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/calendar_studia_bar" />
+
+    <TextView
+        android:id="@+id/tvScheduleDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="140dp"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/nanumsquarer"
+        android:text="2021/09/26"
+        android:textColor="#ffffff"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
