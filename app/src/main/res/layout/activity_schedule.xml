@@ -7,83 +7,79 @@
     tools:context=".ScheduleActivity">
 
     <ImageButton
-        android:id="@+id/btSubmit"
-        android:layout_width="100dp"
-        android:layout_height="40dp"
-        android:layout_marginBottom="4dp"
+        android:id="@+id/btAddSchedule"
+        android:layout_width="42dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="-45dp"
+        android:layout_marginTop="-50dp"
+        android:layout_marginEnd="3dp"
+        android:layout_marginBottom="-500dp"
         android:backgroundTint="#EEEEEE"
+        android:elevation="4dp"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintBottom_toTopOf="@+id/ivScheduleBar"
+        app:layout_constraintStart_toEndOf="@+id/ivScheduleBar"
+        app:layout_constraintTop_toBottomOf="@+id/ivScheduleBar"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/calendar_studia_addbutton"
+        tools:ignore="OnClick,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+    <ImageView
+        android:id="@+id/ivScheduleReminderBG"
+        android:layout_width="406dp"
+        android:layout_height="208dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginEnd="3dp"
+        android:layout_marginBottom="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintVertical_bias="0.969"
-        app:srcCompat="@drawable/login" />
+        app:layout_constraintTop_toBottomOf="@+id/ivScheduleMemoBG"
+        app:srcCompat="@drawable/calendar_studia_category" />
 
-    <EditText
-        android:id="@+id/editTextTopic"
-        android:layout_width="212dp"
-        android:layout_height="38dp"
-        android:ems="10"
-        android:inputType="textShortMessage"
-        app:layout_constraintBottom_toBottomOf="@+id/textViewTopic"
+    <ImageView
+        android:id="@+id/ivScheduleTopicBG"
+        android:layout_width="406dp"
+        android:layout_height="208dp"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="2dp"
+        app:layout_constraintBottom_toTopOf="@+id/ivScheduleMemoBG"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textViewTopic"
-        app:layout_constraintTop_toTopOf="@+id/textViewTopic"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivScheduleBar"
+        app:srcCompat="@drawable/calendar_studia_category" />
+
+    <ImageView
+        android:id="@+id/ivScheduleMemoBG"
+        android:layout_width="406dp"
+        android:layout_height="208dp"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="11dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginBottom="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/ivScheduleReminderBG"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivScheduleTopicBG"
+        app:srcCompat="@drawable/calendar_studia_category" />
 
     <TextView
-        android:id="@+id/textViewTopic"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="주제"
-        app:layout_constraintBottom_toTopOf="@+id/textViewMemo"
-        app:layout_constraintEnd_toStartOf="@+id/editTextTopic"
+        android:id="@+id/tvScheduleDate"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="136dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/nanumsquarer"
+        android:text="2021/09/26"
+        android:textColor="@color/white"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:elevation="4dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textViewMemo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="메모"
-        app:layout_constraintBottom_toTopOf="@+id/textViewReminder"
-        app:layout_constraintEnd_toStartOf="@+id/editTextMemo"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTopic" />
-
-    <EditText
-        android:id="@+id/editTextMemo"
-        android:layout_width="212dp"
-        android:layout_height="190dp"
-        android:ems="10"
-        android:gravity="start|top"
-        android:inputType="textMultiLine"
-        app:layout_constraintBottom_toBottomOf="@+id/textViewMemo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textViewMemo"
-        app:layout_constraintTop_toTopOf="@+id/textViewMemo" />
-
-    <TextView
-        android:id="@+id/textViewReminder"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="리마인더"
-        app:layout_constraintBottom_toBottomOf="@+id/editTextReminder"
-        app:layout_constraintEnd_toStartOf="@+id/editTextReminder"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/editTextReminder" />
-
-    <EditText
-        android:id="@+id/editTextReminder"
-        android:layout_width="212dp"
-        android:layout_height="38dp"
-        android:ems="10"
-        android:inputType="date"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textViewReminder"
-        app:layout_constraintTop_toBottomOf="@+id/editTextMemo" />
 
     <ImageView
         android:id="@+id/ivScheduleBar"
@@ -98,18 +94,96 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/calendar_studia_bar" />
 
+    <EditText
+        android:id="@+id/editTextTopic"
+        android:layout_width="321dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="-375dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="-200dp"
+        android:ems="10"
+        android:fontFamily="@font/nanumsquarel"
+        android:inputType="textShortMessage"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/ivScheduleTopicBG"
+        app:layout_constraintStart_toEndOf="@+id/ivScheduleTopicBG"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTopic" />
+
     <TextView
-        android:id="@+id/tvScheduleDate"
+        android:id="@+id/textViewTopic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="140dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="-380dp"
+        android:layout_marginTop="-185dp"
         android:fontFamily="@font/nanumsquarer"
-        android:text="2021/09/26"
-        android:textColor="#ffffff"
+        android:text="Topic"
+        android:textColor="#000000"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/ivScheduleTopicBG"
+        app:layout_constraintTop_toBottomOf="@+id/ivScheduleTopicBG" />
+
+    <TextView
+        android:id="@+id/textViewMemo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="-380dp"
+        android:layout_marginTop="-185dp"
+        android:fontFamily="@font/nanumsquarer"
+        android:text="Memo"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/ivScheduleMemoBG"
+        app:layout_constraintTop_toBottomOf="@+id/ivScheduleMemoBG" />
+
+    <EditText
+        android:id="@+id/editTextMemo"
+        android:layout_width="321dp"
+        android:layout_height="134dp"
+        android:layout_marginStart="-375dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="-200dp"
+        android:ems="10"
+        android:fontFamily="@font/nanumsquarel"
+        android:inputType="textMultiLine"
+        android:lines="5"
+        android:maxLines="4"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/ivScheduleMemoBG"
+        app:layout_constraintStart_toEndOf="@+id/ivScheduleMemoBG"
+        app:layout_constraintTop_toBottomOf="@+id/textViewMemo" />
+
+    <TextView
+        android:id="@+id/textViewReminder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="-380dp"
+        android:layout_marginTop="-185dp"
+        android:fontFamily="@font/nanumsquarer"
+        android:text="Reminder"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/ivScheduleReminderBG"
+        app:layout_constraintTop_toBottomOf="@+id/ivScheduleReminderBG" />
+
+    <EditText
+        android:id="@+id/editTextReminder"
+        android:layout_marginStart="-375dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="-200dp"
+        android:layout_width="212dp"
+        android:layout_height="38dp"
+        android:ems="10"
+        android:inputType="date"
+        android:fontFamily="@font/nanumsquarel"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/ivScheduleReminderBG"
+        app:layout_constraintStart_toEndOf="@+id/ivScheduleReminderBG"
+        app:layout_constraintTop_toBottomOf="@+id/textViewReminder" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
