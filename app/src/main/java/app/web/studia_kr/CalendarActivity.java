@@ -33,6 +33,7 @@ public class CalendarActivity extends AppCompatActivity {
     private Button btDate;
     private String uid;
     private String Date;
+    private String bDate;
     public FirebaseDatabase database;
     public DatabaseReference databaseReference;
     public DatabaseReference calendarRef;
@@ -58,7 +59,8 @@ public class CalendarActivity extends AppCompatActivity {
         calendar.setTime(new Date());
         dateFormat = new SimpleDateFormat("yyyy/MM/dd");
         firebaseFormat = new SimpleDateFormat("yyyyMMdd");
-        Date = dateFormat.format(calendar.getTime());
+        Date = firebaseFormat.format(calendar.getTime());
+        bDate = dateFormat.format(calendar.getTime());
         btDate = findViewById(R.id.btDateManager);
         btDate.setText(dateFormat.format(calendar.getTime()));
 
@@ -145,6 +147,7 @@ public class CalendarActivity extends AppCompatActivity {
         Intent intent = new Intent(CalendarActivity.this, ScheduleActivity.class);
         intent.putExtra("firebaseUID", uid);
         intent.putExtra("date", Date);
+        intent.putExtra("bdate", bDate);
         startActivity(intent);
     }
 

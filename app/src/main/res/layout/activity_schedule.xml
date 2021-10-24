@@ -16,6 +16,7 @@
         android:layout_marginBottom="-500dp"
         android:backgroundTint="#EEEEEE"
         android:elevation="4dp"
+        android:onClick="scheduleAdd"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintBottom_toTopOf="@+id/ivScheduleBar"
         app:layout_constraintStart_toEndOf="@+id/ivScheduleBar"
