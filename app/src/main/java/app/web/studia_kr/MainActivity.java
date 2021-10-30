@@ -10,6 +10,8 @@ import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
 
+    //Code Inspection Complete by Jacob Lim 20211030
+
     Timer introtimer;
 
     @Override

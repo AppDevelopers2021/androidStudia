@@ -5,8 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -16,11 +19,13 @@ import java.text.SimpleDateFormat;
 public class ScheduleActivity extends AppCompatActivity {
 
     private EditText content;
-    private EditText subject;
+    private Spinner subject;
     private TextView Bdate;
     private String date;
     private String bdate;
     private String uid;
+    private String content1;
+    private String subject1;
     private FirebaseDatabase database;
     private DatabaseReference databaseReference;
     private DatabaseReference calendarRef;
@@ -46,10 +51,23 @@ public class ScheduleActivity extends AppCompatActivity {
     }
 
     public void scheduleAdd(View view) {
-        content = findViewById(R.id.editTextMemo);
-        subject = findViewById(R.id.editTextTopic);
+        content = findViewById(R.id.etMemo);
+        content1 = content.getText().toString();
+        subject = findViewById(R.id.spSubject);
 
-        if (content.getText() != null && subject.getText() != null){
+        subject.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                subject1 = adapterView.getItemAtPosition(i).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                Toast.makeText(getApplicationContext(), "과목이 정해지지 않았습니다.", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        if (content1 != null && subject1 != null){
             database = FirebaseDatabase.getInstance();
             databaseReference = database.getReference();
             calendarRef = databaseReference.child("calendar") ;
@@ -64,8 +82,8 @@ public class ScheduleActivity extends AppCompatActivity {
                 dateRef.child("reminder");
                 noteRef = dateRef.child("note");
                 numberRef = noteRef.child("0");
-                numberRef.child("content").setValue(content);
-                numberRef.child("subject").setValue(subject);
+                numberRef.child("content").setValue(content1);
+                numberRef.child("subject").setValue(subject1);
 
                 Intent intent = new Intent(ScheduleActivity.this, CalendarActivity.class);
                 startActivity(intent);
@@ -82,8 +100,8 @@ public class ScheduleActivity extends AppCompatActivity {
                     dateRef.child("reminder");
                     noteRef.child("0");
                     numberRef = noteRef.child("0");
-                    numberRef.child("content").setValue(content);
-                    numberRef.child("subject").setValue(subject);
+                    numberRef.child("content").setValue(content1);
+                    numberRef.child("subject").setValue(subject1);
 
                     Intent intent = new Intent(ScheduleActivity.this, CalendarActivity.class);
                     startActivity(intent);
@@ -96,8 +114,8 @@ public class ScheduleActivity extends AppCompatActivity {
                     if (noteRef.child("0") == null) {
                         noteRef.child("0");
                         numberRef = noteRef.child("0");
-                        numberRef.child("content").setValue(content);
-                        numberRef.child("subject").setValue(subject);
+                        numberRef.child("content").setValue(content1);
+                        numberRef.child("subject").setValue(subject1);
 
                         Intent intent = new Intent(ScheduleActivity.this, CalendarActivity.class);
                         startActivity(intent);
@@ -116,8 +134,8 @@ public class ScheduleActivity extends AppCompatActivity {
 
                         noteRef.child(stringcount);
                         numberRef = noteRef.child(stringcount);
-                        numberRef.child("content").setValue(content);
-                        numberRef.child("subject").setValue(subject);
+                        numberRef.child("content").setValue(content1);
+                        numberRef.child("subject").setValue(subject1);
 
                         Intent intent = new Intent(ScheduleActivity.this, CalendarActivity.class);
                         startActivity(intent);

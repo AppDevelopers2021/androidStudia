@@ -38,6 +38,22 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
     public void onBindViewHolder(@NonNull CustomViewHolder holder, int position) {
         holder.content.setText(arrayList.get(position).getContent());
         subject = arrayList.get(position).getSubject();
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Edit
+            }
+        });
+
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                //Delete
+                remove(holder.getAdapterPosition());
+                return true;
+            }
+        });
     }
 
     @Override
@@ -55,6 +71,16 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
 
             this.subject = itemView.findViewById(R.id.tvSubject);
             this.content = itemView.findViewById(R.id.tvContent);
+        }
+    }
+
+    public void remove(int position) {
+        try {
+            arrayList.remove(position);
+            notifyItemRemoved(position);
+        }
+        catch (IndexOutOfBoundsException ex) {
+            ex.printStackTrace();
         }
     }
 }

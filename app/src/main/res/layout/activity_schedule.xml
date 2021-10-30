@@ -10,34 +10,13 @@
         android:id="@+id/btAddSchedule"
         android:layout_width="42dp"
         android:layout_height="46dp"
-        android:layout_marginStart="-45dp"
-        android:layout_marginTop="-50dp"
-        android:layout_marginEnd="3dp"
-        android:layout_marginBottom="-500dp"
         android:backgroundTint="#EEEEEE"
         android:elevation="4dp"
         android:onClick="scheduleAdd"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintBottom_toTopOf="@+id/ivScheduleBar"
-        app:layout_constraintStart_toEndOf="@+id/ivScheduleBar"
-        app:layout_constraintTop_toBottomOf="@+id/ivScheduleBar"
-        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/calendar_studia_addbutton"
-        tools:ignore="OnClick,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
-
-    <ImageView
-        android:id="@+id/ivScheduleReminderBG"
-        android:layout_width="406dp"
-        android:layout_height="208dp"
-        android:layout_marginStart="2dp"
-        android:layout_marginEnd="3dp"
-        android:layout_marginBottom="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivScheduleMemoBG"
-        app:srcCompat="@drawable/calendar_studia_category" />
+        tools:ignore="OnClick,SpeakableTextPresentCheck,TouchTargetSizeCheck"
+        tools:layout_editor_absoluteX="136dp"
+        tools:layout_editor_absoluteY="635dp" />
 
     <ImageView
         android:id="@+id/ivScheduleTopicBG"
@@ -58,11 +37,10 @@
         android:layout_width="406dp"
         android:layout_height="208dp"
         android:layout_marginStart="3dp"
-        android:layout_marginTop="11dp"
+        android:layout_marginTop="44dp"
         android:layout_marginEnd="2dp"
-        android:layout_marginBottom="15dp"
-        app:layout_constraintBottom_toTopOf="@+id/ivScheduleReminderBG"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ivScheduleTopicBG"
         app:srcCompat="@drawable/calendar_studia_category" />
@@ -95,30 +73,14 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/calendar_studia_bar" />
 
-    <EditText
-        android:id="@+id/editTextTopic"
-        android:layout_width="321dp"
-        android:layout_height="38dp"
-        android:layout_marginStart="-375dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="-200dp"
-        android:ems="10"
-        android:fontFamily="@font/nanumsquarel"
-        android:inputType="textShortMessage"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/ivScheduleTopicBG"
-        app:layout_constraintStart_toEndOf="@+id/ivScheduleTopicBG"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTopic" />
-
     <TextView
-        android:id="@+id/textViewTopic"
+        android:id="@+id/tvTopic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="-380dp"
         android:layout_marginTop="-185dp"
         android:fontFamily="@font/nanumsquarer"
-        android:text="Topic"
+        android:text="과목"
         android:textColor="#000000"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -126,13 +88,13 @@
         app:layout_constraintTop_toBottomOf="@+id/ivScheduleTopicBG" />
 
     <TextView
-        android:id="@+id/textViewMemo"
+        android:id="@+id/tvMemo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="-380dp"
         android:layout_marginTop="-185dp"
         android:fontFamily="@font/nanumsquarer"
-        android:text="Memo"
+        android:text="노트"
         android:textColor="#000000"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -140,10 +102,10 @@
         app:layout_constraintTop_toBottomOf="@+id/ivScheduleMemoBG" />
 
     <EditText
-        android:id="@+id/editTextMemo"
+        android:id="@+id/etMemo"
         android:layout_width="321dp"
         android:layout_height="134dp"
-        android:layout_marginStart="-375dp"
+        android:layout_marginStart="-364dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="-200dp"
         android:ems="10"
@@ -155,36 +117,18 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/ivScheduleMemoBG"
         app:layout_constraintStart_toEndOf="@+id/ivScheduleMemoBG"
-        app:layout_constraintTop_toBottomOf="@+id/textViewMemo" />
+        app:layout_constraintTop_toBottomOf="@+id/tvMemo" />
 
-    <TextView
-        android:id="@+id/textViewReminder"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="-380dp"
-        android:layout_marginTop="-185dp"
-        android:fontFamily="@font/nanumsquarer"
-        android:text="Reminder"
-        android:textColor="#000000"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/ivScheduleReminderBG"
-        app:layout_constraintTop_toBottomOf="@+id/ivScheduleReminderBG" />
-
-    <EditText
-        android:id="@+id/editTextReminder"
-        android:layout_marginStart="-375dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="-200dp"
-        android:layout_width="212dp"
-        android:layout_height="38dp"
-        android:ems="10"
-        android:inputType="date"
-        android:fontFamily="@font/nanumsquarel"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/ivScheduleReminderBG"
-        app:layout_constraintStart_toEndOf="@+id/ivScheduleReminderBG"
-        app:layout_constraintTop_toBottomOf="@+id/textViewReminder" />
+    <Spinner
+        android:id="@+id/spSubject"
+        android:layout_width="227dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="-365dp"
+        android:layout_marginBottom="250dp"
+        app:layout_constraintBottom_toTopOf="@+id/ivScheduleMemoBG"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/etMemo"
+        app:layout_constraintTop_toBottomOf="@+id/ivScheduleTopicBG"
+        android:entries="@array/subject"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

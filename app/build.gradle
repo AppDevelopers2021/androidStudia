@@ -49,4 +49,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-database:20.0.2' //Firebase SDK
     implementation 'com.google.firebase:firebase-auth' //Firebase SDK
     implementation 'com.google.android.gms:play-services-auth:19.2.0' //Firebase SDK
+    implementation 'com.google.firebase:firebase-analytics:17.2.1'
+    implementation 'com.firebaseui:firebase-ui-auth:4.2.1'
+    implementation 'com.google.firebase:firebase-core:17.2.1'
 }

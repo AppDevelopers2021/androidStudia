@@ -6,9 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".LoginActivity">
 
-    /* Feedback, 각각의 View 혹은 Object를 보면 빨간 밑줄이 있는 것을 볼 수 있습니다. 이는 Constraints 설정을 하지 않아서 그렇습니다.
-    이를 해결하기 위해서 Constraints를 Vertical과 Horizontal 모두 설정해 주어야합니다. 설정 방법은 임현우에게 문의 */
-
     <TextView
         android:id="@+id/tvIntroduce"
         android:layout_width="wrap_content"
@@ -29,10 +26,14 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="55dp"
         android:layout_marginTop="49dp"
+        android:layout_marginEnd="315dp"
+        android:layout_marginBottom="29dp"
         android:fontFamily="@font/nanumsquare_acr"
         android:text="로그인"
         android:textColor="#000000"
         android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/ivEmail"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -83,16 +84,70 @@
         app:layout_constraintTop_toBottomOf="@+id/etEmail"
         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
+    <Button
+        android:id="@+id/btSignup"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="11dp"
+        android:layout_marginEnd="118dp"
+        android:layout_marginBottom="17dp"
+        android:backgroundTint="@color/white"
+        android:fontFamily="@font/nanumsquare_acr"
+        android:onClick="Register"
+        android:text="계정 만들기"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/btLogin"
+        app:layout_constraintEnd_toStartOf="@+id/btLost"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etPassword" />
+
+    <Button
+        android:id="@+id/btLost"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="11dp"
+        android:layout_marginEnd="-450dp"
+        android:layout_marginBottom="17dp"
+        android:backgroundTint="@color/white"
+        android:fontFamily="@font/nanumsquare_acr"
+        android:onClick="Lost"
+        android:text="비밀번호 찾기"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/btLogin"
+        app:layout_constraintEnd_toStartOf="@+id/ivEmail"
+        app:layout_constraintStart_toEndOf="@+id/btSignup"
+        app:layout_constraintTop_toBottomOf="@+id/etPassword" />
+
     <ImageButton
         android:id="@+id/btLogin"
-        android:layout_width="334dp"
-        android:layout_height="97dp"
-        android:layout_marginStart="-465dp"
-        android:layout_marginTop="-70dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="-475dp"
+        android:layout_marginTop="17dp"
+        android:layout_marginEnd="30dp"
+        android:backgroundTint="@color/white"
         android:onClick="loginRequest"
-        app:layout_constraintStart_toEndOf="@+id/ivPassword"
-        app:layout_constraintTop_toBottomOf="@+id/ivEmail"
-        app:srcCompat="@drawable/login_loginbutton"
+        app:layout_constraintBottom_toTopOf="@+id/btGoogle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ivEmail"
+        app:layout_constraintTop_toBottomOf="@+id/btSignup"
+        app:srcCompat="@drawable/login_button"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <ImageButton
+        android:id="@+id/btGoogle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="-470dp"
+        android:layout_marginEnd="-472dp"
+        android:backgroundTint="@color/white"
+        app:layout_constraintEnd_toStartOf="@+id/ivEmail"
+        app:layout_constraintStart_toEndOf="@+id/ivEmail"
+        app:layout_constraintTop_toBottomOf="@+id/btLogin"
+        app:srcCompat="@drawable/login_button_google"
         tools:ignore="SpeakableTextPresentCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
