@@ -68,8 +68,9 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         sharedPreferences = getSharedPreferences("file", 0);
         String autoEmail = sharedPreferences.getString("email", "");
         String autoPassword = sharedPreferences.getString("password", "");
+        String google = sharedPreferences.getString("google", "");
 
-        if (autoEmail != null && autoPassword != null) {
+        if (autoEmail != null && autoPassword != null && google == "no") {
             mFirebaseAuth.signInWithEmailAndPassword(autoEmail, autoPassword).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
@@ -84,6 +85,11 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                     }
                 }
             });
+        }
+
+        if (google == "yes") {
+            Intent intent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
+            startActivityForResult(intent, REQ_SIGN_GOOGLE);
         }
     }
 
@@ -114,6 +120,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                     editor.commit();
                     editor.putString("email", Email);
                     editor.putString("password", Password);
+                    editor.putString("google", "no");
                     editor.commit();
                     startActivity(intent);
                     finish();
@@ -162,6 +169,19 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             //Login Success
+                            uid = mFirebaseAuth.getUid();
+                            Intent intent = new Intent(LoginActivity.this, CalendarActivity.class);
+                            intent.putExtra("firebaseUID", uid);
+                            sharedPreferences = getSharedPreferences("file", 0);
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.clear();
+                            editor.commit();
+                            editor.putString("email", account.getEmail());
+                            editor.putString("password", null);
+                            editor.putString("google", "yes");
+                            editor.commit();
+                            startActivity(intent);
+                            finish();
                         }
                         else {
                             //Login Failure
