@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ScheduleActivity" >
+    tools:context=".MemoEditActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/Assign"
@@ -30,11 +30,15 @@
 
         <EditText
             android:id="@+id/etAssign"
-            android:layout_width="370dp"
-            android:layout_height="72dp"
-            android:layout_marginTop="15dp"
+            android:layout_width="364dp"
+            android:layout_height="141dp"
+            android:layout_marginTop="40dp"
             android:ems="10"
             android:inputType="textPersonName"
+            android:lines="4"
+            android:maxLines="8"
+            android:minLines="4"
+            android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -46,10 +50,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:layout_marginEnd="325dp"
+            android:layout_marginEnd="225dp"
             android:layout_marginBottom="150dp"
             android:fontFamily="@font/nanumsquareb"
-            android:text="내용"
+            android:text="과제 및 준비물"
             android:textColor="@color/black"
             android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -78,6 +82,23 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/calendar_studia_category" />
 
+        <EditText
+            android:id="@+id/etMemo"
+            android:layout_width="364dp"
+            android:layout_height="141dp"
+            android:layout_marginTop="40dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:lines="4"
+            android:maxLines="8"
+            android:minLines="4"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="SpeakableTextPresentCheck" />
+
         <TextView
             android:id="@+id/tvSubject"
             android:layout_width="wrap_content"
@@ -86,7 +107,7 @@
             android:layout_marginEnd="325dp"
             android:layout_marginBottom="150dp"
             android:fontFamily="@font/nanumsquareb"
-            android:text="과목"
+            android:text="메모"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="24sp"
@@ -94,16 +115,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <Spinner
-            android:id="@+id/snSubject"
-            android:layout_width="256dp"
-            android:layout_height="68dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="SpeakableTextPresentCheck" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -147,7 +158,6 @@
         android:layout_marginEnd="26dp"
         android:layout_marginBottom="45dp"
         android:backgroundTint="@color/white"
-        android:onClick="scheduleAdd"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

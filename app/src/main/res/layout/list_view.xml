@@ -59,6 +59,8 @@
                 android:layout_marginStart="-384dp"
                 android:layout_marginTop="23dp"
                 android:text="과목"
+                android:textColor="@color/white"
+                android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/ivTodoBG"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>

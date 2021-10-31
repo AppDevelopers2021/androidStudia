@@ -79,6 +79,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                         Intent intent = new Intent(LoginActivity.this, CalendarActivity.class);
                         intent.putExtra("firebaseUID", uid);
                         startActivity(intent);
+
+                        overridePendingTransition(0, 0);
                         finish();
                     } else {
                         Toast.makeText(getApplicationContext(), "로그인에 실패하였습니다.", Toast.LENGTH_SHORT).show();
@@ -123,6 +125,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                     editor.putString("google", "no");
                     editor.commit();
                     startActivity(intent);
+
+                    overridePendingTransition(0, 0);
                     finish();
                 }
                 else {
@@ -181,6 +185,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                             editor.putString("google", "yes");
                             editor.commit();
                             startActivity(intent);
+
+                            overridePendingTransition(0, 0);
                             finish();
                         }
                         else {

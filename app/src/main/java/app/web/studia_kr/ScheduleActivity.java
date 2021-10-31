@@ -43,7 +43,7 @@ public class ScheduleActivity extends AppCompatActivity {
         uid = intent.getStringExtra("firebaseUID");
         date = intent.getStringExtra("date");
         bdate = intent.getStringExtra("bdate");
-        Bdate = findViewById(R.id.tvScheduleDate);
+        Bdate = findViewById(R.id.btDate);
         Bdate.setText(bdate);
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
@@ -51,9 +51,9 @@ public class ScheduleActivity extends AppCompatActivity {
     }
 
     public void scheduleAdd(View view) {
-        content = findViewById(R.id.etMemo);
+        content = findViewById(R.id.etAssign);
         content1 = content.getText().toString();
-        subject = findViewById(R.id.spSubject);
+        subject = findViewById(R.id.snSubject);
 
         subject.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -78,8 +78,6 @@ public class ScheduleActivity extends AppCompatActivity {
                 uidRef.child(date);
                 dateRef = uidRef.child(date);
                 dateRef.child("note");
-                dateRef.child("memo");
-                dateRef.child("reminder");
                 noteRef = dateRef.child("note");
                 numberRef = noteRef.child("0");
                 numberRef.child("content").setValue(content1);
@@ -87,6 +85,8 @@ public class ScheduleActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(ScheduleActivity.this, CalendarActivity.class);
                 startActivity(intent);
+
+                overridePendingTransition(0, 0);
             }
             else {
                 uidRef = calendarRef.child(uid);
@@ -96,8 +96,6 @@ public class ScheduleActivity extends AppCompatActivity {
                     dateRef = uidRef.child(date);
                     dateRef.child("note");
                     noteRef = dateRef.child("note");
-                    dateRef.child("memo");
-                    dateRef.child("reminder");
                     noteRef.child("0");
                     numberRef = noteRef.child("0");
                     numberRef.child("content").setValue(content1);
@@ -105,6 +103,8 @@ public class ScheduleActivity extends AppCompatActivity {
 
                     Intent intent = new Intent(ScheduleActivity.this, CalendarActivity.class);
                     startActivity(intent);
+
+                    overridePendingTransition(0, 0);
                 }
                 else {
                     uidRef.child(date);
@@ -119,6 +119,8 @@ public class ScheduleActivity extends AppCompatActivity {
 
                         Intent intent = new Intent(ScheduleActivity.this, CalendarActivity.class);
                         startActivity(intent);
+
+                        overridePendingTransition(0, 0);
                     }
                     else {
                         int intcount = 0;
@@ -139,6 +141,8 @@ public class ScheduleActivity extends AppCompatActivity {
 
                         Intent intent = new Intent(ScheduleActivity.this, CalendarActivity.class);
                         startActivity(intent);
+
+                        overridePendingTransition(0, 0);
                     }
                 }
             }

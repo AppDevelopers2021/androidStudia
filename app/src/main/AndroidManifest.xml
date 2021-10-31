@@ -3,7 +3,7 @@
     package="app.web.studia_kr" >
 
     <uses-permission android:name="android.permission.INTERNET" />
-    
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher_studia"
@@ -11,6 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_studia_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidStudia" >
+        <activity
+            android:name=".MemoEditActivity"
+            android:exported="true" />
         <activity
             android:name=".CalendarActivity"
             android:exported="true"

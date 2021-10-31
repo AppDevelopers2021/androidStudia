@@ -39,13 +39,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
         holder.content.setText(arrayList.get(position).getContent());
         subject = arrayList.get(position).getSubject();
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Edit
-            }
-        });
-
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
