@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -33,8 +34,8 @@ public class CalendarActivity extends AppCompatActivity {
     private ArrayList<Todo> arrayList;
     private Button btDate;
     private String uid;
-    private String Date;
-    private String bDate;
+    private String firebaseDate;
+    private String showDate;
     public FirebaseDatabase database;
     public DatabaseReference databaseReference;
     public DatabaseReference calendarRef;
@@ -59,11 +60,11 @@ public class CalendarActivity extends AppCompatActivity {
         calendar = Calendar.getInstance();
         calendar.setTime(new Date());
         dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        showDate = dateFormat.format(calendar.getTime());
         firebaseFormat = new SimpleDateFormat("yyyyMMdd");
-        Date = firebaseFormat.format(calendar.getTime());
-        bDate = dateFormat.format(calendar.getTime());
+        firebaseDate = firebaseFormat.format(calendar.getTime());
         btDate = findViewById(R.id.btDate);
-        btDate.setText(dateFormat.format(calendar.getTime()));
+        btDate.setText(showDate);
 
         //Firebase RecyclerView Declare
         recyclerView = findViewById(R.id.rvTodo);
@@ -76,204 +77,87 @@ public class CalendarActivity extends AppCompatActivity {
         Intent intent = getIntent();
         uid = intent.getStringExtra("firebaseUID");
 
-        //Firebase Database RecyclerView
-        database = FirebaseDatabase.getInstance();
-        databaseReference = database.getReference();
-        calendarRef = databaseReference.getDatabase().getReference("calendar");
-        uidRef = calendarRef.getDatabase().getReference(uid);
+        CalendarLoad(uid, calendar);
 
-        if (uidRef.getDatabase().getReference(firebaseFormat.format(calendar.getTime())) != null) {
-            dateRef = uidRef.getDatabase().getReference(firebaseFormat.format(calendar.getTime())).getDatabase().getReference("note");
-            if (dateRef.getDatabase().getReference("memo") != null) {
-                noteRef = dateRef.getDatabase().getReference("memo");
-
-                noteRef.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        arrayList.clear();
-                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                            Todo todo = snapshot.getValue(Todo.class);
-                            arrayList.add(todo);
-                        }
-                        adapter.notifyDataSetChanged();
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                        Log.e("CalendarActivity", String.valueOf(error.toException()));
-                    }
-                });
-
-                adapter = new CustomAdapter(arrayList, this);
-                recyclerView.setAdapter(adapter);
+        ImageButton btPrevious = (ImageButton)findViewById(R.id.btPrevious);
+        btPrevious.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                calendar.add(Calendar.DATE, -1);
+                CalendarLoad(uid, calendar);
             }
+        });
 
-            if (dateRef.getDatabase().getReference("memo") != null) {
-                //Firebase Database Memo
-                memoRef = dateRef.getDatabase().getReference("memo");
-
-                memoRef.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        Memo = snapshot.getValue(String.class);
-                        TextView tvMemo = findViewById(R.id.tvShowMemo);
-                        tvMemo.setText(Memo);
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                        Log.e("CalendarActivity", String.valueOf(error.toException()));
-                    }
-                });
+        ImageButton btNext = (ImageButton)findViewById(R.id.btNext);
+        btNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                calendar.add(Calendar.DATE, +1);
+                CalendarLoad(uid, calendar);
             }
+        });
 
-            if (dateRef.child("reminder") != null) {
-                //Firebase Database Assignment(Reminder)
-                assignRef = dateRef.getDatabase().getReference("reminder");
-                int Count = 0;
-                String Reference = Integer.toString(Count);
+        ImageButton btSchedule = (ImageButton)findViewById(R.id.btAddSchedule);
+        btSchedule.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CalendarActivity.this, ScheduleActivity.class);
+                intent.putExtra("firebaseUID", uid);
+                intent.putExtra("date", showDate);
+                intent.putExtra("bdate", firebaseDate);
+                startActivity(intent);
 
-                while (assignRef.getDatabase().getReference(Reference) != null) {
-                    reminderRef = assignRef.getDatabase().getReference(Reference);
-
-                    reminderRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            Assign = snapshot.getValue(String.class);
-                            TextView tvAssign = findViewById(R.id.tvShowAssign);
-                            tvAssign.append("\n" + "•" + Assign);
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-                            Log.e("CalendarActivity", String.valueOf(error.toException()));
-                        }
-                    });
-                }
+                overridePendingTransition(0, 0);
             }
-        }
+        });
+
+        ImageButton btEditMemo = (ImageButton)findViewById(R.id.btEditMemo);
+        btEditMemo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CalendarActivity.this, ScheduleActivity.class);
+                intent.putExtra("firebaseUID", uid);
+                intent.putExtra("date", showDate);
+                intent.putExtra("bdate", firebaseDate);
+                startActivity(intent);
+
+                overridePendingTransition(0, 0);
+            }
+        });
+
+        ImageButton btEditAssign = (ImageButton)findViewById(R.id.btEditAssign);
+        btEditAssign.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CalendarActivity.this, ScheduleActivity.class);
+                intent.putExtra("firebaseUID", uid);
+                intent.putExtra("date", showDate);
+                intent.putExtra("bdate", firebaseDate);
+                startActivity(intent);
+
+                overridePendingTransition(0, 0);
+            }
+        });
     }
 
-    public void scheduleSetup(View view) {
-        //btTodoAdd OnClick Event
-        //Calendar → Schedule Activity Change
-        Intent intent = new Intent(CalendarActivity.this, ScheduleActivity.class);
-        intent.putExtra("firebaseUID", uid);
-        intent.putExtra("date", Date);
-        intent.putExtra("bdate", bDate);
-        startActivity(intent);
-
-        overridePendingTransition(0, 0);
-    }
-
-    public void yesterdayClick(View view) {
-        //btCalendarLeft OnClick Event
-        //Subtract one day from calendar
-        calendar.add(Calendar.DATE, -1);
+    public void CalendarLoad(String uid, Calendar calendar) {
         dateFormat = new SimpleDateFormat("yyyy/MM/dd");
         firebaseFormat = new SimpleDateFormat("yyyyMMdd");
-        Date = dateFormat.format(calendar.getTime());
-        btDate.setText(dateFormat.format(calendar.getTime()));
+        showDate = dateFormat.format(calendar.getTime());
+        firebaseDate = firebaseFormat.format(calendar.getTime());
+        btDate.setText(showDate);
 
         //Firebase Database Refresh
         database = FirebaseDatabase.getInstance();
         databaseReference = database.getReference();
-        calendarRef = databaseReference.getDatabase().getReference("calendar");
-        uidRef = calendarRef.getDatabase().getReference(uid);
+        calendarRef = databaseReference.child("calendar");
+        uidRef = calendarRef.child(uid);
 
         if (uidRef.getDatabase().getReference(firebaseFormat.format(calendar.getTime())) != null) {
-            dateRef = uidRef.getDatabase().getReference(firebaseFormat.format(calendar.getTime()));
+            dateRef = uidRef.child(firebaseFormat.format(calendar.getTime()));
 
             if (dateRef.getDatabase().getReference("note") != null) {
-                noteRef = dateRef.getDatabase().getReference("note");
-
-                noteRef.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    arrayList.clear();
-                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                        Todo todo = snapshot.getValue(Todo.class);
-                        arrayList.add(todo);
-                    }
-                    adapter.notifyDataSetChanged();
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                    Log.e("CalendarActivity", String.valueOf(error.toException()));
-                }
-            });
-
-                adapter = new CustomAdapter(arrayList, this);
-                recyclerView.setAdapter(adapter);
-        }
-
-            if (dateRef.getDatabase().getReference("memo") != null) {
-                //Firebase Database Memo
-                memoRef = dateRef.getDatabase().getReference("memo");
-
-                memoRef.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        Memo = snapshot.getValue(String.class);
-                        TextView tvMemo = findViewById(R.id.tvShowMemo);
-                        tvMemo.setText(Memo);
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                        Log.e("CalendarActivity", String.valueOf(error.toException()));
-                    }
-                });
-            }
-
-            if (dateRef.getDatabase().getReference("reminder") != null) {
-                //Firebase Database Assignment(Reminder)
-                assignRef = dateRef.getDatabase().getReference("reminder");
-                int Count = 0;
-                String Reference = Integer.toString(Count);
-
-                while (assignRef.getDatabase().getReference(Reference) != null) {
-                    reminderRef = assignRef.getDatabase().getReference(Reference);
-
-                    reminderRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            Assign = snapshot.getValue(String.class);
-                            TextView tvAssign = findViewById(R.id.tvShowAssign);
-                            tvAssign.append("\n" + "•" + Assign);
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-                            Log.e("CalendarActivity", String.valueOf(error.toException()));
-                        }
-                    });
-                }
-            }
-        }
-    }
-
-    public void tomorrowClick(View view) {
-        //btCalendarRight OnClick Event
-        //Add one day to calendar
-        calendar.add(Calendar.DATE, +1);
-        dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-        firebaseFormat = new SimpleDateFormat("yyyyMMdd");
-        Date = dateFormat.format(calendar.getTime());
-        btDate.setText(dateFormat.format(calendar.getTime()));
-
-        //Firebase Database Refresh
-        database = FirebaseDatabase.getInstance();
-        databaseReference = database.getReference();
-        calendarRef = databaseReference.getDatabase().getReference("calendar");
-        uidRef = calendarRef.getDatabase().getReference(uid);
-
-        if (uidRef.getDatabase().getReference(firebaseFormat.format(calendar.getTime())) != null) {
-
-            if (uidRef.getDatabase().getReference(firebaseFormat.format(calendar.getTime())) != null) {
-                dateRef = uidRef.getDatabase().getReference(firebaseFormat.format(calendar.getTime()));
-                noteRef = uidRef.getDatabase().getReference(firebaseFormat.format(calendar.getTime())).getDatabase().getReference("note");
+                noteRef = dateRef.child("note");
 
                 noteRef.addValueEventListener(new ValueEventListener() {
                     @Override
@@ -298,13 +182,13 @@ public class CalendarActivity extends AppCompatActivity {
 
             if (dateRef.getDatabase().getReference("memo") != null) {
                 //Firebase Database Memo
-                memoRef = dateRef.getDatabase().getReference("memo");
+                memoRef = dateRef.child("memo");
 
                 memoRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         Memo = snapshot.getValue(String.class);
-                        TextView tvMemo = findViewById(R.id.tvSubject);
+                        TextView tvMemo = findViewById(R.id.tvShowMemo);
                         tvMemo.setText(Memo);
                     }
 
@@ -317,18 +201,18 @@ public class CalendarActivity extends AppCompatActivity {
 
             if (dateRef.getDatabase().getReference("reminder") != null) {
                 //Firebase Database Assignment(Reminder)
-                assignRef = dateRef.getDatabase().getReference("reminder");
+                assignRef = dateRef.child("reminder");
                 int Count = 0;
                 String Reference = Integer.toString(Count);
 
                 while (assignRef.getDatabase().getReference(Reference) != null) {
-                    reminderRef = assignRef.getDatabase().getReference(Reference);
+                    reminderRef = assignRef.child(Reference);
 
                     reminderRef.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             Assign = snapshot.getValue(String.class);
-                            TextView tvAssign = findViewById(R.id.tvContent);
+                            TextView tvAssign = findViewById(R.id.tvShowAssign);
                             tvAssign.append("\n" + "•" + Assign);
                         }
 

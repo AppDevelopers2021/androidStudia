@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,8 +22,8 @@ public class ScheduleActivity extends AppCompatActivity {
     private EditText content;
     private Spinner subject;
     private TextView Bdate;
-    private String date;
-    private String bdate;
+    private String showDate;
+    private String firebaseDate;
     private String uid;
     private String content1;
     private String subject1;
@@ -41,78 +42,46 @@ public class ScheduleActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         uid = intent.getStringExtra("firebaseUID");
-        date = intent.getStringExtra("date");
-        bdate = intent.getStringExtra("bdate");
+        showDate = intent.getStringExtra("showDate");
+        firebaseDate = intent.getStringExtra("firebaseDate");
         Bdate = findViewById(R.id.btDate);
-        Bdate.setText(bdate);
+        Bdate.setText(showDate);
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
         SimpleDateFormat firebaseFormat = new SimpleDateFormat("yyyyMMdd");
-    }
 
-    public void scheduleAdd(View view) {
-        content = findViewById(R.id.etAssign);
-        content1 = content.getText().toString();
-        subject = findViewById(R.id.snSubject);
-
-        subject.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        ImageButton btScheduleAdd = (ImageButton)findViewById(R.id.btAddSchedule);
+        btScheduleAdd.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                subject1 = adapterView.getItemAtPosition(i).toString();
-            }
+            public void onClick(View view) {
+                content = findViewById(R.id.etAssign);
+                content1 = content.getText().toString();
+                subject = findViewById(R.id.snSubject);
 
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-                Toast.makeText(getApplicationContext(), "과목이 정해지지 않았습니다.", Toast.LENGTH_SHORT).show();
-            }
-        });
+                subject.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                        subject1 = adapterView.getItemAtPosition(i).toString();
+                    }
 
-        if (content1 != null && subject1 != null){
-            database = FirebaseDatabase.getInstance();
-            databaseReference = database.getReference();
-            calendarRef = databaseReference.child("calendar") ;
+                    @Override
+                    public void onNothingSelected(AdapterView<?> adapterView) {
+                        Toast.makeText(getApplicationContext(), "과목이 정해지지 않았습니다.", Toast.LENGTH_SHORT).show();
+                    }
+                });
 
-            if (calendarRef.child(uid) == null){
-                calendarRef.child(uid);
-                uidRef = calendarRef.child(uid);
-                uidRef.child(date);
-                dateRef = uidRef.child(date);
-                dateRef.child("note");
-                noteRef = dateRef.child("note");
-                numberRef = noteRef.child("0");
-                numberRef.child("content").setValue(content1);
-                numberRef.child("subject").setValue(subject1);
+                if (content1 != null && subject1 != null){
+                    database = FirebaseDatabase.getInstance();
+                    databaseReference = database.getReference();
+                    calendarRef = databaseReference.child("calendar");
 
-                Intent intent = new Intent(ScheduleActivity.this, CalendarActivity.class);
-                startActivity(intent);
-
-                overridePendingTransition(0, 0);
-            }
-            else {
-                uidRef = calendarRef.child(uid);
-
-                if (uidRef.child(date) == null) {
-                    uidRef.child(date);
-                    dateRef = uidRef.child(date);
-                    dateRef.child("note");
-                    noteRef = dateRef.child("note");
-                    noteRef.child("0");
-                    numberRef = noteRef.child("0");
-                    numberRef.child("content").setValue(content1);
-                    numberRef.child("subject").setValue(subject1);
-
-                    Intent intent = new Intent(ScheduleActivity.this, CalendarActivity.class);
-                    startActivity(intent);
-
-                    overridePendingTransition(0, 0);
-                }
-                else {
-                    uidRef.child(date);
-                    dateRef = uidRef.child(date);
-                    noteRef = dateRef.child("note");
-
-                    if (noteRef.child("0") == null) {
-                        noteRef.child("0");
+                    if (calendarRef.child(uid) == null){
+                        calendarRef.child(uid);
+                        uidRef = calendarRef.child(uid);
+                        uidRef.child(firebaseDate);
+                        dateRef = uidRef.child(firebaseDate);
+                        dateRef.child("note");
+                        noteRef = dateRef.child("note");
                         numberRef = noteRef.child("0");
                         numberRef.child("content").setValue(content1);
                         numberRef.child("subject").setValue(subject1);
@@ -123,29 +92,65 @@ public class ScheduleActivity extends AppCompatActivity {
                         overridePendingTransition(0, 0);
                     }
                     else {
-                        int intcount = 0;
-                        String stringcount = Integer.toString(intcount);
+                        uidRef = calendarRef.child(uid);
 
-                        while (noteRef.child(stringcount) != null) {
-                            stringcount = Integer.toString(intcount);
-                            ++intcount;
+                        if (uidRef.child(firebaseDate) == null) {
+                            uidRef.child(firebaseDate);
+                            dateRef = uidRef.child(firebaseDate);
+                            dateRef.child("note");
+                            noteRef = dateRef.child("note");
+                            noteRef.child("0");
+                            numberRef = noteRef.child("0");
+                            numberRef.child("content").setValue(content1);
+                            numberRef.child("subject").setValue(subject1);
+
+                            Intent intent = new Intent(ScheduleActivity.this, CalendarActivity.class);
+                            startActivity(intent);
+
+                            overridePendingTransition(0, 0);
                         }
+                        else {
+                            uidRef.getDatabase().getReference(firebaseDate);
+                            dateRef = uidRef.child(firebaseDate);
+                            noteRef = dateRef.child("note");
 
-                        ++intcount;
-                        stringcount = Integer.toString(intcount);
+                            if (noteRef.child("0") == null) {
+                                noteRef.child("0");
+                                numberRef = noteRef.child("0");
+                                numberRef.child("content").setValue(content1);
+                                numberRef.child("subject").setValue(subject1);
 
-                        noteRef.child(stringcount);
-                        numberRef = noteRef.child(stringcount);
-                        numberRef.child("content").setValue(content1);
-                        numberRef.child("subject").setValue(subject1);
+                                Intent intent = new Intent(ScheduleActivity.this, CalendarActivity.class);
+                                startActivity(intent);
 
-                        Intent intent = new Intent(ScheduleActivity.this, CalendarActivity.class);
-                        startActivity(intent);
+                                overridePendingTransition(0, 0);
+                            }
+                            else {
+                                int intcount = 0;
+                                String stringcount = Integer.toString(intcount);
 
-                        overridePendingTransition(0, 0);
+                                while (noteRef.getDatabase().getReference(stringcount) != null) {
+                                    stringcount = Integer.toString(intcount);
+                                    ++intcount;
+                                }
+
+                                ++intcount;
+                                stringcount = Integer.toString(intcount);
+
+                                noteRef.child(stringcount);
+                                numberRef = noteRef.child(stringcount);
+                                numberRef.child("content").setValue(content1);
+                                numberRef.child("subject").setValue(subject1);
+
+                                Intent intent = new Intent(ScheduleActivity.this, CalendarActivity.class);
+                                startActivity(intent);
+
+                                overridePendingTransition(0, 0);
+                            }
+                        }
                     }
                 }
             }
-        }
+        });
     }
 }
