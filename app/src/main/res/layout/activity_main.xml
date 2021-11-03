@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    //Code Inspection Complete by Jacob Lim 20211102
+
     <ImageView
         android:id="@+id/iv_appdlogo"
         android:layout_width="wrap_content"

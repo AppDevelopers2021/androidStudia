@@ -13,6 +13,8 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -73,9 +75,10 @@ public class CalendarActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         arrayList = new ArrayList<>();
 
-        //Intent Firebase UID Data Get
-        Intent intent = getIntent();
-        uid = intent.getStringExtra("firebaseUID");
+        //Firebase UID Data Get
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = mAuth.getCurrentUser();
+        uid = user.getUid();
 
         CalendarLoad(uid, calendar);
 
@@ -136,6 +139,15 @@ public class CalendarActivity extends AppCompatActivity {
                 startActivity(intent);
 
                 overridePendingTransition(0, 0);
+            }
+        });
+
+        ImageButton btProfile = (ImageButton)findViewById(R.id.btProfile);
+        btProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CalendarActivity.this, PopupActivity.class);
+                startActivity(intent);
             }
         });
     }

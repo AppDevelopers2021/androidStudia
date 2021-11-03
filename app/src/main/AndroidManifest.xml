@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="app.web.studia_kr" >
+    package="app.web.studia_kr">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher_studia"
-        android:usesCleartextTraffic="true"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_studia_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AndroidStudia" >
+        android:theme="@style/Theme.AndroidStudia"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".PopupActivity"
+            android:theme="@android:style/Theme.Dialog"
+            android:exported="true" />
         <activity
             android:name=".MemoEditActivity"
             android:exported="true" />
@@ -30,7 +34,7 @@
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

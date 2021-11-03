@@ -99,6 +99,7 @@
             android:id="@+id/snSubject"
             android:layout_width="256dp"
             android:layout_height="68dp"
+            android:entries="@array/subject"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -147,11 +148,10 @@
         android:layout_marginEnd="26dp"
         android:layout_marginBottom="45dp"
         android:backgroundTint="@color/white"
-        android:onClick="scheduleAdd"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Assign"
-        app:srcCompat="@drawable/schedule_complete"
+        app:srcCompat="@drawable/schedule_button_complete"
         tools:ignore="SpeakableTextPresentCheck" />
 </androidx.constraintlayout.widget.ConstraintLayout>

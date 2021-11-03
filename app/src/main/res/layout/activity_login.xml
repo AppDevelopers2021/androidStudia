@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".LoginActivity">
 
+    //Code Inspection Complete by Jacob Lim 20211102
+
     <TextView
         android:id="@+id/tvIntroduce"
         android:layout_width="wrap_content"
@@ -60,23 +62,22 @@
 
     <EditText
         android:id="@+id/etEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="-408dp"
+        android:layout_width="244dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="-420dp"
         android:layout_marginTop="373dp"
         android:ems="10"
         android:inputType="textEmailAddress"
-        android:text="이메일 주소"
         android:textAlignment="center"
         app:layout_constraintStart_toEndOf="@+id/ivPassword"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="TouchTargetSizeCheck" />
+        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
     <EditText
         android:id="@+id/etPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="-408dp"
+        android:layout_width="243dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="-420dp"
         android:layout_marginTop="35dp"
         android:ems="10"
         android:inputType="textPassword"
@@ -145,7 +146,35 @@
         app:layout_constraintEnd_toStartOf="@+id/ivEmail"
         app:layout_constraintStart_toEndOf="@+id/ivEmail"
         app:layout_constraintTop_toBottomOf="@+id/btLogin"
-        app:srcCompat="@drawable/login_button_google"
+        app:srcCompat="@drawable/login_google_button"
         tools:ignore="SpeakableTextPresentCheck" />
+
+    <TextView
+        android:id="@+id/tvSayEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="-420dp"
+        android:layout_marginTop="98dp"
+        android:fontFamily="@font/nanumsquarer"
+        android:text="이메일"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/etEmail"
+        app:layout_constraintStart_toEndOf="@+id/ivPassword"
+        app:layout_constraintTop_toBottomOf="@+id/tvIntroduce" />
+
+    <TextView
+        android:id="@+id/tvSayPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="-420dp"
+        android:layout_marginTop="19dp"
+        android:fontFamily="@font/nanumsquarer"
+        android:text="비밀번호"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/etPassword"
+        app:layout_constraintStart_toEndOf="@+id/ivEmail"
+        app:layout_constraintTop_toBottomOf="@+id/etEmail" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

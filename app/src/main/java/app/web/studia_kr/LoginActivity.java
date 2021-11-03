@@ -25,6 +25,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
 public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
@@ -56,37 +57,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
         mFirebaseAuth = FirebaseAuth.getInstance();
 
-        sharedPreferences = getSharedPreferences("file", 0);
-        String autoEmail = sharedPreferences.getString("email", "");
-        String autoPassword = sharedPreferences.getString("password", "");
-        String google = sharedPreferences.getString("google", "");
-
-        if (autoEmail != null && autoPassword != null && google == "no") {
-            mFirebaseAuth.signInWithEmailAndPassword(autoEmail, autoPassword).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if (task.isSuccessful()) {
-                        Log.i("LoginActivity(Auth)", "LoginActivity - Auto Login Started.");
-
-                        uid = mFirebaseAuth.getUid();
-                        Intent intent = new Intent(LoginActivity.this, CalendarActivity.class);
-                        intent.putExtra("firebaseUID", uid);
-                        startActivity(intent);
-
-                        overridePendingTransition(0, 0);
-                        finish();
-                    } else {
-                        Toast.makeText(getApplicationContext(), "로그인에 실패하였습니다.", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
-        }
-
-        if (google == "yes") {
-            Intent intent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
-            startActivityForResult(intent, REQ_SIGN_GOOGLE);
-        }
-
         ImageButton btLogin =  (ImageButton)findViewById(R.id.btLogin);
         btLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,34 +69,28 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
                 mFirebaseAuth = FirebaseAuth.getInstance();
 
-                mFirebaseAuth.signInWithEmailAndPassword(Email, Password).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            Log.i("LoginActivity(Auth)", "LoginActivity - Default Login Started.");
+                if (Email.length() > 6 && Password.length() >6) {
+                    mFirebaseAuth.signInWithEmailAndPassword(Email, Password).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                Log.i("LoginActivity(Auth)", "LoginActivity - Default Login Started.");
 
-                            uid = mFirebaseAuth.getCurrentUser().getUid();
-                            Intent intent = new Intent(LoginActivity.this, CalendarActivity.class);
-                            intent.putExtra("firebaseUID", uid);
-                            sharedPreferences = getSharedPreferences("file", 0);
-                            SharedPreferences.Editor editor = sharedPreferences.edit();
-                            editor.clear();
-                            editor.commit();
-                            editor.putString("email", Email);
-                            editor.putString("password", Password);
-                            editor.putString("google", "no");
-                            editor.commit();
-                            startActivity(intent);
+                                Intent intent = new Intent(LoginActivity.this, CalendarActivity.class);
 
-                            overridePendingTransition(0, 0);
-                            finish();
+                                overridePendingTransition(0, 0);
+                                finish();
+                            } else {
+                                //Login Failure
+                                Log.w("Login Failure - E&P", task.getException());
+                                Toast.makeText(getApplicationContext(), "로그인에 실패하였습니다.", Toast.LENGTH_LONG).show();
+                            }
                         }
-                        else {
-                            //Login Failure
-                            Toast.makeText(getApplicationContext(), "이메일 또는 비밀번호가 옳지 않습니다.", Toast.LENGTH_LONG).show();
-                        }
-                    }
-                });
+                    });
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), "이메일 또는 비밀번호가 옳지 않습니다.", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -138,7 +102,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 startActivityForResult(intent, REQ_SIGN_GOOGLE);
             }
         });
-
     }
 
 
@@ -182,25 +145,15 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                             //Login Success
                             Log.i("LoginActivity(Auth)", "LoginActivity - Google Login Started.");
 
-                            uid = mFirebaseAuth.getCurrentUser().getUid();
                             Intent intent = new Intent(LoginActivity.this, CalendarActivity.class);
-                            intent.putExtra("firebaseUID", uid);
-                            sharedPreferences = getSharedPreferences("file", 0);
-                            SharedPreferences.Editor editor = sharedPreferences.edit();
-                            editor.clear();
-                            editor.commit();
-                            editor.putString("email", account.getEmail());
-                            editor.putString("password", "");
-                            editor.putString("google", "yes");
-                            editor.commit();
-                            startActivity(intent);
 
                             overridePendingTransition(0, 0);
                             finish();
                         }
                         else {
                             //Login Failure
-                            Toast.makeText(getApplicationContext(), "이메일 또는 비밀번호가 옳지 않습니다.", Toast.LENGTH_LONG).show();
+                            Log.w("Login Failure - Google", task.getException());
+                            Toast.makeText(getApplicationContext(), "로그인에 실패하였습니다.", Toast.LENGTH_LONG).show();
                         }
                     }
                 });

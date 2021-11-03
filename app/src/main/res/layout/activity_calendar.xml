@@ -205,9 +205,8 @@
             style="@style/Widget.AppCompat.Button.Borderless.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="160dp"
             android:layout_marginTop="11dp"
-            android:layout_marginEnd="160dp"
+            android:layout_marginEnd="100dp"
             android:layout_marginBottom="11dp"
             android:background="#2291FF"
             android:fontFamily="@font/nanumsquareeb"
@@ -224,9 +223,7 @@
             android:id="@+id/btPrevious"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="83dp"
             android:layout_marginTop="4dp"
-            android:layout_marginEnd="18dp"
             android:layout_marginBottom="7dp"
             android:background="#2291FF"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -240,9 +237,8 @@
             android:id="@+id/btNext"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="18dp"
             android:layout_marginTop="4dp"
-            android:layout_marginEnd="83dp"
+            android:layout_marginEnd="93dp"
             android:layout_marginBottom="7dp"
             android:background="#2291FF"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -250,6 +246,19 @@
             app:layout_constraintStart_toEndOf="@+id/btDate"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/calendar_studia_leftarrow"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <ImageButton
+            android:id="@+id/btProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="325dp"
+            android:backgroundTint="@color/studia_brandcolor"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/calendar_profile_img"
             tools:ignore="SpeakableTextPresentCheck" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
