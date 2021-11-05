@@ -8,7 +8,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -20,8 +23,8 @@ public class MemoEditActivity extends AppCompatActivity {
     private EditText etAssign;
     private Button btComplete;
     private TextView Bdate;
-    private String date;
-    private String bdate;
+    private String showDate;
+    private String firebaseDate;
     private String uid;
     private String memo1;
     private String assign1;
@@ -38,12 +41,15 @@ public class MemoEditActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_memo_edit);
 
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = mAuth.getCurrentUser();
+        uid = user.getUid();
+
         Intent intent = getIntent();
-        uid = intent.getStringExtra("firebaseUID");
-        date = intent.getStringExtra("date");
-        bdate = intent.getStringExtra("bdate");
+        showDate = intent.getStringExtra("date");
+        firebaseDate = intent.getStringExtra("dbDate");
         Bdate = findViewById(R.id.btDate);
-        Bdate.setText(bdate);
+        Bdate.setText(showDate);
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
         SimpleDateFormat firebaseFormat = new SimpleDateFormat("yyyyMMdd");
@@ -60,12 +66,12 @@ public class MemoEditActivity extends AppCompatActivity {
             databaseReference = database.getReference();
             calendarRef = databaseReference.child("calendar") ;
 
-            if (memo1 != null) {
+            if (memo1 != "") {
                 if (calendarRef.child(uid) == null){
                     calendarRef.child(uid);
                     uidRef = calendarRef.child(uid);
-                    uidRef.child(date);
-                    dateRef = uidRef.child(date);
+                    uidRef.child(firebaseDate);
+                    dateRef = uidRef.child(firebaseDate);
                     dateRef.child("memo");
                     memoRef = dateRef.child("memo");
                     memoRef.setValue(memo1);
@@ -77,9 +83,9 @@ public class MemoEditActivity extends AppCompatActivity {
                 }
                 else {
                     uidRef = calendarRef.child(uid);
-                    if (uidRef.child(date) == null) {
-                        uidRef.child(date);
-                        dateRef = uidRef.child(date);
+                    if (uidRef.child(firebaseDate) == null) {
+                        uidRef.child(firebaseDate);
+                        dateRef = uidRef.child(firebaseDate);
                         dateRef.child("memo");
                         memoRef = dateRef.child("memo");
                         memoRef.setValue(memo1);
@@ -90,8 +96,8 @@ public class MemoEditActivity extends AppCompatActivity {
                         overridePendingTransition(0, 0);
                     }
                     else {
-                        uidRef.child(date);
-                        dateRef = uidRef.child(date);
+                        uidRef.child(firebaseDate);
+                        dateRef = uidRef.child(firebaseDate);
 
                         if (dateRef.child("memo") == null) {
                             dateRef.child("memo");
@@ -116,12 +122,12 @@ public class MemoEditActivity extends AppCompatActivity {
                 }
             }
 
-            if (assign1 != null) {
+            if (assign1 != "") {
                 if (calendarRef.child(uid) == null){
                     calendarRef.child(uid);
                     uidRef = calendarRef.child(uid);
-                    uidRef.child(date);
-                    dateRef = uidRef.child(date);
+                    uidRef.child(firebaseDate);
+                    dateRef = uidRef.child(firebaseDate);
                     dateRef.child("reminder");
                     reminderRef = dateRef.child("reminder");
 
@@ -156,9 +162,9 @@ public class MemoEditActivity extends AppCompatActivity {
                 }
                 else {
                     uidRef = calendarRef.child(uid);
-                    if (uidRef.child(date) == null) {
-                        uidRef.child(date);
-                        dateRef = uidRef.child(date);
+                    if (uidRef.child(firebaseDate) == null) {
+                        uidRef.child(firebaseDate);
+                        dateRef = uidRef.child(firebaseDate);
                         dateRef.child("reminder");
                         reminderRef = dateRef.child("reminder");
 
@@ -192,8 +198,8 @@ public class MemoEditActivity extends AppCompatActivity {
                         overridePendingTransition(0, 0);
                     }
                     else {
-                        uidRef.child(date);
-                        dateRef = uidRef.child(date);
+                        uidRef.child(firebaseDate);
+                        dateRef = uidRef.child(firebaseDate);
 
                         if (dateRef.child("reminder") == null) {
                             dateRef.child("reminder");
@@ -268,8 +274,8 @@ public class MemoEditActivity extends AppCompatActivity {
             if (calendarRef.child(uid) == null){
                 calendarRef.child(uid);
                 uidRef = calendarRef.child(uid);
-                uidRef.child(date);
-                dateRef = uidRef.child(date);
+                uidRef.child(firebaseDate);
+                dateRef = uidRef.child(firebaseDate);
                 dateRef.child("reminder");
                 reminderRef = dateRef.child("reminder");
 
@@ -308,9 +314,9 @@ public class MemoEditActivity extends AppCompatActivity {
             }
             else {
                 uidRef = calendarRef.child(uid);
-                if (uidRef.child(date) == null) {
-                    uidRef.child(date);
-                    dateRef = uidRef.child(date);
+                if (uidRef.child(firebaseDate) == null) {
+                    uidRef.child(firebaseDate);
+                    dateRef = uidRef.child(firebaseDate);
                     dateRef.child("reminder");
                     reminderRef = dateRef.child("reminder");
 
@@ -347,8 +353,8 @@ public class MemoEditActivity extends AppCompatActivity {
 
                     overridePendingTransition(0, 0);
                 } else {
-                    uidRef.child(date);
-                    dateRef = uidRef.child(date);
+                    uidRef.child(firebaseDate);
+                    dateRef = uidRef.child(firebaseDate);
 
                     if (dateRef.child("reminder") == null) {
                         dateRef.child("reminder");

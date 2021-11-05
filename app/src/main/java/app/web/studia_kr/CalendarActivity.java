@@ -105,9 +105,8 @@ public class CalendarActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(CalendarActivity.this, ScheduleActivity.class);
-                intent.putExtra("firebaseUID", uid);
                 intent.putExtra("date", showDate);
-                intent.putExtra("bdate", firebaseDate);
+                intent.putExtra("dbDate", firebaseDate);
                 startActivity(intent);
 
                 overridePendingTransition(0, 0);
@@ -118,10 +117,9 @@ public class CalendarActivity extends AppCompatActivity {
         btEditMemo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(CalendarActivity.this, ScheduleActivity.class);
-                intent.putExtra("firebaseUID", uid);
+                Intent intent = new Intent(CalendarActivity.this, MemoEditActivity.class);
                 intent.putExtra("date", showDate);
-                intent.putExtra("bdate", firebaseDate);
+                intent.putExtra("dbDate", firebaseDate);
                 startActivity(intent);
 
                 overridePendingTransition(0, 0);
@@ -132,10 +130,9 @@ public class CalendarActivity extends AppCompatActivity {
         btEditAssign.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(CalendarActivity.this, ScheduleActivity.class);
-                intent.putExtra("firebaseUID", uid);
+                Intent intent = new Intent(CalendarActivity.this, MemoEditActivity.class);
                 intent.putExtra("date", showDate);
-                intent.putExtra("bdate", firebaseDate);
+                intent.putExtra("dbDate", firebaseDate);
                 startActivity(intent);
 
                 overridePendingTransition(0, 0);

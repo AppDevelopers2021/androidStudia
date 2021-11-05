@@ -12,6 +12,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -40,10 +42,13 @@ public class ScheduleActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedule);
 
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = mAuth.getCurrentUser();
+        uid = user.getUid();
+
         Intent intent = getIntent();
-        uid = intent.getStringExtra("firebaseUID");
-        showDate = intent.getStringExtra("showDate");
-        firebaseDate = intent.getStringExtra("firebaseDate");
+        showDate = intent.getStringExtra("date");
+        firebaseDate = intent.getStringExtra("dbDate");
         Bdate = findViewById(R.id.btDate);
         Bdate.setText(showDate);
 
@@ -70,7 +75,7 @@ public class ScheduleActivity extends AppCompatActivity {
                     }
                 });
 
-                if (content1 != null && subject1 != null){
+                if (content1 != "" && subject1 != null){
                     database = FirebaseDatabase.getInstance();
                     databaseReference = database.getReference();
                     calendarRef = databaseReference.child("calendar");
@@ -148,6 +153,11 @@ public class ScheduleActivity extends AppCompatActivity {
                                 overridePendingTransition(0, 0);
                             }
                         }
+                    }
+                }
+                else {
+                    if (content1 == "") {
+                        Toast.makeText(getApplicationContext(), "내용이 정해지지 않았습니다.", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
