@@ -69,7 +69,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
                 mFirebaseAuth = FirebaseAuth.getInstance();
 
-                if (Email.length() > 6 && Password.length() >6) {
+                if (Email.length() >= 6 && Password.length() >= 6) {
                     mFirebaseAuth.signInWithEmailAndPassword(Email, Password).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
