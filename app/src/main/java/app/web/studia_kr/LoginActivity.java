@@ -28,6 +28,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
+import java.util.Calendar;
+
 public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
 
     private EditText etEmail;
@@ -57,33 +59,31 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
         mFirebaseAuth = FirebaseAuth.getInstance();
 
+        etEmail = findViewById(R.id.etEmail);
+        etPassword = findViewById(R.id.etPassword);
+
         ImageButton btLogin =  (ImageButton)findViewById(R.id.btLogin);
         btLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                etEmail = findViewById(R.id.etEmail);
-                etPassword = findViewById(R.id.etPassword);
-
                 Email = etEmail.getText().toString();
                 Password = etPassword.getText().toString();
-
-                mFirebaseAuth = FirebaseAuth.getInstance();
 
                 if (Email.length() >= 6 && Password.length() >= 6) {
                     mFirebaseAuth.signInWithEmailAndPassword(Email, Password).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                Log.i("LoginActivity(Auth)", "LoginActivity - Default Login Started.");
+                                Log.i("Login Success", "Successful Login.");
 
                                 Intent intent = new Intent(LoginActivity.this, CalendarActivity.class);
-
-                                overridePendingTransition(0, 0);
+                                startActivity(intent);
                                 finish();
-                            } else {
-                                //Login Failure
-                                Log.w("Login Failure - E&P", task.getException());
-                                Toast.makeText(getApplicationContext(), "로그인에 실패하였습니다.", Toast.LENGTH_LONG).show();
+                            }
+                            else {
+                                Log.w("Login Failure", task.getException());
+
+                                Toast.makeText(getApplicationContext(), "로그인에 실패했습니다.", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
