@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "654717768488-dmq2q3n9g27kgk1uv3ndo0im4f0bokbh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "app.web.studia_kr",
+            "certificate_hash": "14b814ee757b604d50306df71670372ac8e9fa76"
+          }
+        },
+        {
           "client_id": "654717768488-7eb1tidmkr1g8ea3s5lah8c6el42dt5v.apps.googleusercontent.com",
           "client_type": 3
         }
