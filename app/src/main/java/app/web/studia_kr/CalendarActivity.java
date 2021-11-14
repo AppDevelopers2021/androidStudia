@@ -167,88 +167,88 @@ public class CalendarActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
-                            if (snapshot.hasChild(firebaseFormat.format(calendar.getTime()))) {
-                                dateRef = uidRef.child(firebaseFormat.format(calendar.getTime()));
+                    if (snapshot.hasChild(firebaseFormat.format(calendar.getTime()))) {
+                        dateRef = uidRef.child(firebaseFormat.format(calendar.getTime()));
 
-                                dateRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                        if (snapshot.hasChild("note")) {
-                                            noteRef = dateRef.child("note");
+                        dateRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                if (snapshot.hasChild("note")) {
+                                    noteRef = dateRef.child("note");
 
-                                            noteRef.addValueEventListener(new ValueEventListener() {
-                                                @Override
-                                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                                    arrayList.clear();
-                                                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                                                        Todo todo = snapshot.getValue(Todo.class);
-                                                        arrayList.add(todo);
-                                                    }
-                                                    adapter.notifyDataSetChanged();
+                                    noteRef.addValueEventListener(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                            arrayList.clear();
+                                            for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                                Todo todo = snapshot.getValue(Todo.class);
+                                                arrayList.add(todo);
+                                            }
+                                            adapter = new CustomAdapter(arrayList, CalendarActivity.this);
 
-                                                    adapter = new CustomAdapter(arrayList, CalendarActivity.this);
-                                                    recyclerView.setAdapter(adapter);
-                                                }
-
-                                                @Override
-                                                public void onCancelled(@NonNull DatabaseError error) {
-                                                    Log.e("CalendarActivity", String.valueOf(error.toException()));
-                                                }
-                                            });
+                                            adapter.notifyDataSetChanged();
+                                            recyclerView.setAdapter(adapter);
                                         }
 
-                                        if (snapshot.hasChild("memo")) {
-                                            memoRef = dateRef.child("memo");
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+                                            Log.e("CalendarActivity", String.valueOf(error.toException()));
+                                        }
+                                    });
+                                }
 
-                                            memoRef.addValueEventListener(new ValueEventListener() {
-                                                @Override
-                                                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                                    Memo = snapshot.getValue(String.class);
-                                                    TextView tvMemo = findViewById(R.id.tvShowMemo);
-                                                    tvMemo.setText(Memo);
-                                                }
+                                if (snapshot.hasChild("memo")) {
+                                    memoRef = dateRef.child("memo");
 
-                                                @Override
-                                                public void onCancelled(@NonNull DatabaseError error) {
-                                                    Log.e("CalendarActivity", String.valueOf(error.toException()));
-                                                }
-                                            });
+                                    memoRef.addValueEventListener(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            Memo = snapshot.getValue(String.class);
+                                            TextView tvMemo = findViewById(R.id.tvShowMemo);
+                                            tvMemo.setText(Memo);
                                         }
 
-                                        if (snapshot.hasChild("reminder")) {
-                                            reminderRef = dateRef.child("reminder");
-
-                                            reminderRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                                                @Override
-                                                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                                    if (snapshot.hasChild("1")) {
-                                                        int referenceNum = 0;
-
-                                                        TextView tvAssign = findViewById(R.id.tvShowAssign);
-
-                                                        reminderRefFinder(reminderRef, referenceNum, tvAssign);
-                                                    }
-                                                    else {
-                                                        Assign = snapshot.getValue(String.class);
-                                                        TextView tvAssign = findViewById(R.id.tvShowAssign);
-                                                        tvAssign.setText(Assign);
-                                                    }
-                                                }
-
-                                                @Override
-                                                public void onCancelled(@NonNull DatabaseError error) {
-                                                    Log.e("CalendarActivity", String.valueOf(error.toException()));
-                                                }
-                                            });
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+                                            Log.e("CalendarActivity", String.valueOf(error.toException()));
                                         }
-                                    }
+                                    });
+                                }
 
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError error) {
-                                        Log.e("CalendarActivity", String.valueOf(error.toException()));
-                                    }
-                                });
+                                if (snapshot.hasChild("reminder")) {
+                                    reminderRef = dateRef.child("reminder");
+
+                                    reminderRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            if (snapshot.hasChild("1")) {
+                                                int referenceNum = 0;
+
+                                                TextView tvAssign = findViewById(R.id.tvShowAssign);
+
+                                                reminderRefFinder(reminderRef, referenceNum, tvAssign);
+                                            }
+                                            else {
+                                                Assign = snapshot.getValue(String.class);
+                                                TextView tvAssign = findViewById(R.id.tvShowAssign);
+                                                tvAssign.setText(Assign);
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+                                            Log.e("CalendarActivity", String.valueOf(error.toException()));
+                                        }
+                                    });
+                                }
                             }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+                                Log.e("CalendarActivity", String.valueOf(error.toException()));
+                            }
+                        });
+                    }
                 }
             }
 
