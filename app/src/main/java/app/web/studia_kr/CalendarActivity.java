@@ -150,6 +150,8 @@ public class CalendarActivity extends AppCompatActivity {
     }
 
     public void CalendarLoad(String uid, Calendar calendar) {
+        Log.w("CalendarActivity", "void CalendarLoad successfully started.");
+
         dateFormat = new SimpleDateFormat("yyyy/MM/dd");
         firebaseFormat = new SimpleDateFormat("yyyyMMdd");
         showDate = dateFormat.format(calendar.getTime());
@@ -255,5 +257,7 @@ public class CalendarActivity extends AppCompatActivity {
                 }
             }
         }
+
+        Log.w("CalendarActivity", "void CalendarLoad finished.");
     }
 }
