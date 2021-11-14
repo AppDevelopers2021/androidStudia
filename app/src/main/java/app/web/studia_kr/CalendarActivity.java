@@ -161,17 +161,12 @@ public class CalendarActivity extends AppCompatActivity {
         //Firebase Database Refresh
         database = FirebaseDatabase.getInstance();
         databaseReference = database.getReference();
-        calendarRef = databaseReference.child("calendar");
+        uidRef = databaseReference.child("calendar").child(uid);
 
-        calendarRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        uidRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.hasChild(uid)) {
-                    uidRef = calendarRef.child(uid);
-
-                    uidRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
                             if (snapshot.hasChild(firebaseFormat.format(calendar.getTime()))) {
                                 dateRef = uidRef.child(firebaseFormat.format(calendar.getTime()));
 
@@ -254,13 +249,6 @@ public class CalendarActivity extends AppCompatActivity {
                                     }
                                 });
                             }
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-                            Log.e("CalendarActivity", String.valueOf(error.toException()));
-                        }
-                    });
                 }
             }
 
