@@ -1,177 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="left"
+    android:orientation="vertical"
+    android:paddingTop="50dp"
+    android:paddingLeft="40dp"
+    android:paddingRight="40dp"
     tools:context=".LoginActivity">
 
     <TextView
         android:id="@+id/tvIntroduce"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="-450dp"
-        android:layout_marginTop="-550dp"
         android:fontFamily="@font/nanumsquare_acb"
         android:lines="3"
         android:text="나만의\n독창적인 공부\n스타일 찾기"
         android:textColor="#000000"
         android:textSize="34sp"
-        app:layout_constraintStart_toEndOf="@+id/ivPassword"
-        app:layout_constraintTop_toBottomOf="@+id/ivEmail" />
-
-    <TextView
-        android:id="@+id/tvLogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="55dp"
-        android:layout_marginTop="49dp"
-        android:layout_marginEnd="315dp"
-        android:layout_marginBottom="29dp"
-        android:fontFamily="@font/nanumsquare_acr"
-        android:text="로그인"
-        android:textColor="#000000"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/ivEmail"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/ivEmail"
-        android:layout_width="600dp"
-        android:layout_height="600dp"
-        android:layout_marginStart="-95dp"
-        android:layout_marginTop="29dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvLogin"
-        app:srcCompat="@drawable/email" />
-
-    <ImageView
-        android:id="@+id/ivPassword"
-        android:layout_width="600dp"
-        android:layout_height="600dp"
-        android:layout_marginStart="-95dp"
-        android:layout_marginTop="-519dp"
-        android:backgroundTint="#FFFFFF"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivEmail"
-        app:srcCompat="@drawable/email" />
-
-    <EditText
-        android:id="@+id/etEmail"
-        android:layout_width="280dp"
-        android:layout_height="41dp"
-        android:layout_marginStart="-440dp"
-        android:layout_marginTop="383dp"
-        android:background="@android:color/transparent"
-        android:ems="10"
-        android:gravity="left"
-        android:inputType="textEmailAddress"
-        app:layout_constraintStart_toEndOf="@+id/ivPassword"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
-
-    <EditText
-        android:id="@+id/etPassword"
-        android:layout_width="280dp"
-        android:layout_height="44dp"
-        android:layout_marginStart="-440dp"
-        android:layout_marginTop="30dp"
-        android:background="@android:color/transparent"
-        android:ems="10"
-        android:inputType="textPassword"
-        app:layout_constraintStart_toEndOf="@+id/ivPassword"
-        app:layout_constraintTop_toBottomOf="@+id/etEmail"
-        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
-
-    <Button
-        android:id="@+id/btSignup"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="11dp"
-        android:layout_marginEnd="118dp"
-        android:layout_marginBottom="17dp"
-        android:backgroundTint="@color/white"
-        android:fontFamily="@font/nanumsquare_acr"
-        android:onClick="Register"
-        android:text="계정 만들기"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/btLogin"
-        app:layout_constraintEnd_toStartOf="@+id/btLost"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etPassword" />
-
-    <Button
-        android:id="@+id/btLost"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="-450dp"
-        android:layout_marginBottom="23dp"
-        android:backgroundTint="@color/white"
-        android:fontFamily="@font/nanumsquare_acr"
-        android:onClick="Lost"
-        android:text="비밀번호 찾기"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/btLogin"
-        app:layout_constraintEnd_toStartOf="@+id/ivEmail"
-        app:layout_constraintStart_toEndOf="@+id/btSignup"
-        app:layout_constraintTop_toBottomOf="@+id/etPassword" />
-
-    <Button
-        android:id="@+id/btLogin"
-        android:layout_width="300dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="-450dp"
-        android:layout_marginTop="17dp"
-        android:background="@drawable/loginbtn"
-        android:text="로그인"
-        android:textColor="@color/white"
-        app:layout_constraintStart_toEndOf="@+id/ivEmail"
-        app:layout_constraintTop_toBottomOf="@+id/btSignup"
-        tools:ignore="SpeakableTextPresentCheck" />
-
-    <Button
-        android:id="@+id/btGoogle"
-        android:layout_width="300dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="-450dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/logingooglebtn"
-        android:text="Google 계정으로 로그인"
-        app:layout_constraintStart_toEndOf="@+id/ivEmail"
-        app:layout_constraintTop_toBottomOf="@+id/btLogin"
-        tools:ignore="SpeakableTextPresentCheck" />
+        android:layout_marginBottom="40dp"/>
 
     <TextView
         android:id="@+id/tvSayEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="-420dp"
-        android:layout_marginTop="85dp"
         android:fontFamily="@font/nanumsquarer"
         android:text="이메일"
         android:textColor="@color/black"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/etEmail"
-        app:layout_constraintStart_toEndOf="@+id/ivPassword"
-        app:layout_constraintTop_toBottomOf="@+id/tvIntroduce" />
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/etEmail"
+        android:layout_width="match_parent"
+        android:layout_height="41dp"
+        android:paddingLeft="20dp"
+        android:background="@drawable/logintextbox"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
     <TextView
         android:id="@+id/tvSayPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="-420dp"
-        android:layout_marginTop="5dp"
         android:fontFamily="@font/nanumsquarer"
         android:text="비밀번호"
         android:textColor="@color/black"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/etPassword"
-        app:layout_constraintStart_toEndOf="@+id/ivEmail"
-        app:layout_constraintTop_toBottomOf="@+id/etEmail" />
+        android:layout_marginTop="10dp"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <EditText
+        android:id="@+id/etPassword"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:paddingLeft="20dp"
+        android:background="@drawable/logintextbox"
+        android:ems="10"
+        android:inputType="textPassword"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btSignup"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:fontFamily="@font/nanumsquare_acr"
+            android:onClick="Register"
+            android:text="계정 만들기"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btLost"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:fontFamily="@font/nanumsquare_acr"
+            android:onClick="Lost"
+            android:text="비밀번호 찾기"
+            android:textStyle="bold"
+            android:layout_alignParentRight="true"/>
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btLogin"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/loginbtn"
+        android:text="로그인"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@+id/btSignup"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <Button
+        android:id="@+id/btGoogle"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/logingooglebtn"
+        android:text="Google 계정으로 로그인"
+        app:layout_constraintTop_toBottomOf="@+id/btLogin"
+        tools:ignore="SpeakableTextPresentCheck" />
+</LinearLayout>
