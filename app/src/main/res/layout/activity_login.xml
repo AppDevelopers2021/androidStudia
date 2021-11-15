@@ -5,7 +5,7 @@
 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="left"
+    android:gravity="start"
     android:orientation="vertical"
     android:paddingTop="50dp"
     android:paddingLeft="40dp"
@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/nanumsquare_acb"
         android:lines="3"
-        android:text="나만의\n독창적인 공부\n스타일 찾기"
+        android:text="@string/appMotto"
         android:textColor="#000000"
         android:textSize="34sp"
         android:layout_marginBottom="40dp"/>
@@ -28,7 +28,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/nanumsquarer"
-        android:text="이메일"
+        android:text="@string/email"
         android:textColor="@color/black"
         android:textStyle="bold" />
 
@@ -36,7 +36,8 @@
         android:id="@+id/etEmail"
         android:layout_width="match_parent"
         android:layout_height="41dp"
-        android:paddingLeft="20dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
         android:background="@drawable/logintextbox"
         android:ems="10"
         android:inputType="textEmailAddress"
@@ -47,7 +48,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/nanumsquarer"
-        android:text="비밀번호"
+        android:text="@string/password"
         android:textColor="@color/black"
         android:textStyle="bold"
         android:layout_marginTop="10dp"/>
@@ -74,7 +75,7 @@
             android:backgroundTint="@color/white"
             android:fontFamily="@font/nanumsquare_acr"
             android:onClick="Register"
-            android:text="계정 만들기"
+            android:text="@string/signup"
             android:textStyle="bold" />
 
         <Button
@@ -85,9 +86,9 @@
             android:backgroundTint="@color/white"
             android:fontFamily="@font/nanumsquare_acr"
             android:onClick="Lost"
-            android:text="비밀번호 찾기"
+            android:text="@string/iforgot"
             android:textStyle="bold"
-            android:layout_alignParentRight="true"/>
+            android:layout_alignParentEnd="true"/>
     </RelativeLayout>
 
     <Button
@@ -95,7 +96,7 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:background="@drawable/loginbtn"
-        android:text="로그인"
+        android:text="@string/signin"
         android:textColor="@color/white"
         app:layout_constraintTop_toBottomOf="@+id/btSignup"
         tools:ignore="SpeakableTextPresentCheck" />
@@ -106,7 +107,8 @@
         android:layout_height="40dp"
         android:layout_marginTop="5dp"
         android:background="@drawable/logingooglebtn"
-        android:text="Google 계정으로 로그인"
+        android:text="@string/googlesignin"
         app:layout_constraintTop_toBottomOf="@+id/btLogin"
-        tools:ignore="SpeakableTextPresentCheck" />
+        tools:ignore="SpeakableTextPresentCheck"
+        android:textAllCaps="false" />
 </LinearLayout>

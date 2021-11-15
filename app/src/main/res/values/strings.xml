@@ -1,13 +1,17 @@
 <resources>
     <string name="app_name">Studia</string>
-    <!-- Strings related to login -->
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password</string>
-    <string name="action_sign_in">Sign in or register</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="welcome">"Welcome!"</string>
-    <string name="invalid_username">Not a valid username</string>
-    <string name="invalid_password">Password must be >5 characters</string>
-    <string name="login_failed">"Login failed"</string>
-    <string name="title_activity_login">LoginActivity</string>
+
+    <!-- MainActivity -->
+    <string name="appName">studia</string>
+    <string name="author">App Developers</string>
+
+    <!-- LoginActivity -->
+    <string name="appMotto">나만의\n독창적인 공부\n스타일 찾기</string>
+    <string name="email">이메일</string>
+    <string name="password">비밀번호</string>
+    <string name="signup">계정 만들기</string>
+    <string name="iforgot">비밀번호 찾기</string>
+    <string name="signin">로그인</string>
+    <string name="googlesignin">Google 계정으로 로그인</string>
+
 </resources>
