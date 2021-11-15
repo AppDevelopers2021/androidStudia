@@ -7,8 +7,10 @@
 
     <!-- LoginActivity -->
     <string name="appMotto">나만의\n독창적인 공부\n스타일 찾기</string>
-    <string name="email">이메일</string>
+    <string name="email">이메일 주소</string>
     <string name="password">비밀번호</string>
+    <string name="emailhint">email@example.com</string>
+    <string name="pwhint">• • • • • • • •</string>
     <string name="signup">계정 만들기</string>
     <string name="iforgot">비밀번호 찾기</string>
     <string name="signin">로그인</string>
