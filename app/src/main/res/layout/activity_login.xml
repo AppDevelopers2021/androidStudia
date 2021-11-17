@@ -27,6 +27,7 @@
         android:id="@+id/tvSayEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
         android:fontFamily="@font/nanumsquarer"
         android:text="@string/email"
         android:textColor="@color/black"
@@ -36,6 +37,7 @@
         android:id="@+id/etEmail"
         android:layout_width="match_parent"
         android:layout_height="41dp"
+        android:hint="@string/emailhint"
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
         android:background="@drawable/logintextbox"
@@ -47,6 +49,7 @@
         android:id="@+id/tvSayPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
         android:fontFamily="@font/nanumsquarer"
         android:text="@string/password"
         android:textColor="@color/black"
@@ -57,6 +60,7 @@
         android:id="@+id/etPassword"
         android:layout_width="match_parent"
         android:layout_height="44dp"
+        android:hint="@string/pwhint"
         android:paddingLeft="20dp"
         android:background="@drawable/logintextbox"
         android:ems="10"
@@ -98,8 +102,9 @@
         android:background="@drawable/loginbtn"
         android:text="@string/signin"
         android:textColor="@color/white"
+        android:layout_marginTop="10dp"
         app:layout_constraintTop_toBottomOf="@+id/btSignup"
-        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <Button
         android:id="@+id/btGoogle"
@@ -108,7 +113,10 @@
         android:layout_marginTop="5dp"
         android:background="@drawable/logingooglebtn"
         android:text="@string/googlesignin"
-        android:textAllCaps="false"
         app:layout_constraintTop_toBottomOf="@+id/btLogin"
-        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+        tools:ignore="SpeakableTextPresentCheck"
+        android:textAllCaps="false"
+        android:drawableLeft="@drawable/logingoogleicn"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"/>
 </LinearLayout>
