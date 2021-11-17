@@ -22,10 +22,10 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="300dp"
         android:fontFamily="@font/nanumsquare_acb"
         android:text="@string/author"
         android:textColor="#888"
-        android:textSize="30sp"
-        android:layout_marginTop="200dp"/>
+        android:textSize="20sp" />
 
 </LinearLayout>

@@ -1,6 +1,7 @@
 package app.web.studia_kr;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -144,7 +145,7 @@ public class CalendarActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(CalendarActivity.this, PopupActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, 1);
             }
         });
     }
@@ -294,5 +295,16 @@ public class CalendarActivity extends AppCompatActivity {
                 Log.e("CalendarActivity", String.valueOf(error.toException()));
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 1) {
+            if (resultCode == RESULT_OK) {
+
+            }
+        }
     }
 }

@@ -1,21 +1,24 @@
 package app.web.studia_kr;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import java.text.SimpleDateFormat;
+import com.google.firebase.database.ValueEventListener;
 
 public class MemoEditActivity extends AppCompatActivity {
 
@@ -26,11 +29,10 @@ public class MemoEditActivity extends AppCompatActivity {
     private String showDate;
     private String firebaseDate;
     private String uid;
-    private String memo1;
-    private String assign1;
+    private String memoString;
+    private String assignString;
     private FirebaseDatabase database;
     private DatabaseReference databaseReference;
-    private DatabaseReference calendarRef;
     private DatabaseReference uidRef;
     private DatabaseReference memoRef;
     private DatabaseReference reminderRef;
@@ -51,397 +53,139 @@ public class MemoEditActivity extends AppCompatActivity {
         Bdate = findViewById(R.id.btDate);
         Bdate.setText(showDate);
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-        SimpleDateFormat firebaseFormat = new SimpleDateFormat("yyyyMMdd");
-    }
+        ImageButton btComplete = (ImageButton) findViewById(R.id.btComplete);
+        btComplete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                etMemo = findViewById(R.id.etMemo);
+                memoString = etMemo.getText().toString();
+                etAssign = findViewById(R.id.etAssign);
+                assignString = etAssign.getText().toString();
 
-    public void update(View view) {
-        etMemo = findViewById(R.id.etMemo);
-        memo1 = etMemo.getText().toString();
-        etAssign = findViewById(R.id.etAssign);
-        assign1 = etAssign.getText().toString();
+                database = FirebaseDatabase.getInstance();
+                databaseReference = database.getReference();
+                uidRef = databaseReference.child("calendar").child(uid);
 
-        if (memo1 != "" || assign1 != "") {
-            database = FirebaseDatabase.getInstance();
-            databaseReference = database.getReference();
-            calendarRef = databaseReference.child("calendar") ;
+                uidRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.hasChild(firebaseDate)) {
+                            dateRef = uidRef.child(firebaseDate);
 
-            if (memo1 != "") {
-                if (calendarRef.child(uid) == null){
-                    calendarRef.child(uid);
-                    uidRef = calendarRef.child(uid);
-                    uidRef.child(firebaseDate);
-                    dateRef = uidRef.child(firebaseDate);
-                    dateRef.child("memo");
-                    memoRef = dateRef.child("memo");
-                    memoRef.setValue(memo1);
+                            dateRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    if (snapshot.hasChild("memo")) {
+                                        memoRef = dateRef.child("memo");
 
-                    Intent intent = new Intent(MemoEditActivity.this, CalendarActivity.class);
-                    startActivity(intent);
+                                        memoRef.addValueEventListener(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                memoRef.setValue(memoString);
+                                            }
 
-                    overridePendingTransition(0, 0);
-                }
-                else {
-                    uidRef = calendarRef.child(uid);
-                    if (uidRef.child(firebaseDate) == null) {
-                        uidRef.child(firebaseDate);
-                        dateRef = uidRef.child(firebaseDate);
-                        dateRef.child("memo");
-                        memoRef = dateRef.child("memo");
-                        memoRef.setValue(memo1);
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError error) {
+                                                Log.e("MemoEditActivity", String.valueOf(error.toException()));
+                                            }
+                                        });
+                                    }
+                                    else {
+                                        dateRef.child("memo");
+                                        memoRef = dateRef.child("memo");
 
-                        Intent intent = new Intent(MemoEditActivity.this, CalendarActivity.class);
-                        startActivity(intent);
+                                        memoRef.setValue(memoString);
 
-                        overridePendingTransition(0, 0);
-                    }
-                    else {
-                        uidRef.child(firebaseDate);
-                        dateRef = uidRef.child(firebaseDate);
+                                        Intent intent = new Intent(MemoEditActivity.this, CalendarActivity.class);
+                                        startActivity(intent);
 
-                        if (dateRef.child("memo") == null) {
-                            dateRef.child("memo");
-                            memoRef = dateRef.child("memo");
-                            memoRef.setValue(memo1);
+                                        overridePendingTransition(0, 0);
+                                    }
 
-                            Intent intent = new Intent(MemoEditActivity.this, CalendarActivity.class);
-                            startActivity(intent);
+                                    if (snapshot.hasChild("reminder")) {
+                                        reminderRef = dateRef.child("reminder");
 
-                            overridePendingTransition(0, 0);
+                                        reminderRef.addValueEventListener(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                int lineCount = etAssign.getLineCount();
+                                                int count = 0;
+
+                                                while (count != lineCount -1) {
+                                                    int lineStart = etAssign.getLayout().getLineStart(count);
+                                                    int lineEnd = etAssign.getLayout().getLineEnd(count);
+
+                                                    reminderRef.child(Integer.toString(count)).setValue(etAssign.getText().toString().substring(lineStart, lineEnd));
+
+                                                    ++count;
+                                                }
+                                            }
+
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError error) {
+                                                Log.e("MemoEditActivity", String.valueOf(error.toException()));
+                                            }
+                                        });
+                                    }
+                                    else {
+                                        dateRef.child("reminder");
+                                        reminderRef = dateRef.child("reminder");
+
+                                        reminderRef.child("0");
+                                        DatabaseReference zeroRef = reminderRef.child("0");
+
+                                        zeroRef.setValue(memoString);
+                                    }
+
+                                    Intent intent = new Intent(MemoEditActivity.this, CalendarActivity.class);
+                                    startActivity(intent);
+
+                                    overridePendingTransition(0, 0);
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+                                    Log.e("MemoEditActivity", String.valueOf(error.toException()));
+                                }
+                            });
                         }
                         else {
-                            memoRef = dateRef.child("memo");
-                            memoRef.setValue(memo1);
-
-                            Intent intent = new Intent(MemoEditActivity.this, CalendarActivity.class);
-                            startActivity(intent);
-
-                            overridePendingTransition(0, 0);
-                        }
-                    }
-                }
-            }
-
-            if (assign1 != "") {
-                if (calendarRef.child(uid) == null){
-                    calendarRef.child(uid);
-                    uidRef = calendarRef.child(uid);
-                    uidRef.child(firebaseDate);
-                    dateRef = uidRef.child(firebaseDate);
-                    dateRef.child("reminder");
-                    reminderRef = dateRef.child("reminder");
-
-                    int intcount = 0;
-                    String stringcount = Integer.toString(intcount);
-
-                    while (reminderRef.child(stringcount) != null) {
-                        stringcount = Integer.toString(intcount);
-                        reminderRef.child(stringcount).removeValue();
-                        ++intcount;
-                    }
-
-                    intcount = etAssign.getLineCount();
-                    int intadd = 0;
-                    stringcount = Integer.toString(intadd);
-
-                    while (intadd != intcount) {
-                        stringcount = Integer.toString(intadd);
-                        reminderRef.child(stringcount);
-                        DatabaseReference assignment = reminderRef.child(stringcount);
-
-                        int beginIndex = etAssign.getLayout().getLineStart(intadd);
-                        int endIndex = etAssign.getLayout().getLineEnd(intadd);
-
-                        assignment.setValue(etAssign.getText().toString().substring(beginIndex, endIndex));
-                    }
-
-                    Intent intent = new Intent(MemoEditActivity.this, CalendarActivity.class);
-                    startActivity(intent);
-
-                    overridePendingTransition(0, 0);
-                }
-                else {
-                    uidRef = calendarRef.child(uid);
-                    if (uidRef.child(firebaseDate) == null) {
-                        uidRef.child(firebaseDate);
-                        dateRef = uidRef.child(firebaseDate);
-                        dateRef.child("reminder");
-                        reminderRef = dateRef.child("reminder");
-
-                        int intcount = 0;
-                        String stringcount = Integer.toString(intcount);
-
-                        while (reminderRef.child(stringcount) != null) {
-                            stringcount = Integer.toString(intcount);
-                            reminderRef.child(stringcount).removeValue();
-                            ++intcount;
-                        }
-
-                        intcount = etAssign.getLineCount();
-                        int intadd = 0;
-                        stringcount = Integer.toString(intadd);
-
-                        while (intadd != intcount) {
-                            stringcount = Integer.toString(intadd);
-                            reminderRef.child(stringcount);
-                            DatabaseReference assignment = reminderRef.child(stringcount);
-
-                            int beginIndex = etAssign.getLayout().getLineStart(intadd);
-                            int endIndex = etAssign.getLayout().getLineEnd(intadd);
-
-                            assignment.setValue(etAssign.getText().toString().substring(beginIndex, endIndex));
-                        }
-
-                        Intent intent = new Intent(MemoEditActivity.this, CalendarActivity.class);
-                        startActivity(intent);
-
-                        overridePendingTransition(0, 0);
-                    }
-                    else {
-                        uidRef.child(firebaseDate);
-                        dateRef = uidRef.child(firebaseDate);
-
-                        if (dateRef.child("reminder") == null) {
+                            uidRef.child(firebaseDate);
+                            dateRef = uidRef.child(firebaseDate);
+                            dateRef.child("memo").setValue(memoString);
                             dateRef.child("reminder");
                             reminderRef = dateRef.child("reminder");
 
-                            int intcount = 0;
-                            String stringcount = Integer.toString(intcount);
+                            reminderRef.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    int lineCount = etAssign.getLineCount();
+                                    int count = 0;
 
-                            while (reminderRef.child(stringcount) != null) {
-                                stringcount = Integer.toString(intcount);
-                                reminderRef.child(stringcount).removeValue();
-                                ++intcount;
-                            }
+                                    while (count != lineCount -1) {
+                                        int lineStart = etAssign.getLayout().getLineStart(count);
+                                        int lineEnd = etAssign.getLayout().getLineEnd(count);
 
-                            intcount = etAssign.getLineCount();
-                            int intadd = 0;
-                            stringcount = Integer.toString(intadd);
+                                        reminderRef.child(Integer.toString(count)).setValue(etAssign.getText().toString().substring(lineStart, lineEnd));
 
-                            while (intadd != intcount) {
-                                stringcount = Integer.toString(intadd);
-                                reminderRef.child(stringcount);
-                                DatabaseReference assignment = reminderRef.child(stringcount);
+                                        ++count;
+                                    }
+                                }
 
-                                int beginIndex = etAssign.getLayout().getLineStart(intadd);
-                                int endIndex = etAssign.getLayout().getLineEnd(intadd);
-
-                                assignment.setValue(etAssign.getText().toString().substring(beginIndex, endIndex));
-                            }
-
-                            Intent intent = new Intent(MemoEditActivity.this, CalendarActivity.class);
-                            startActivity(intent);
-
-                            overridePendingTransition(0, 0);
-                        }
-                        else {
-                            reminderRef = dateRef.child("reminder");
-
-                            int intcount = 0;
-                            String stringcount = Integer.toString(intcount);
-
-                            while (reminderRef.child(stringcount) != null) {
-                                stringcount = Integer.toString(intcount);
-                                reminderRef.child(stringcount).removeValue();
-                                ++intcount;
-                            }
-
-                            intcount = etAssign.getLineCount();
-                            int intadd = 0;
-                            stringcount = Integer.toString(intadd);
-
-                            while (intadd != intcount) {
-                                stringcount = Integer.toString(intadd);
-                                reminderRef.child(stringcount);
-                                DatabaseReference assignment = reminderRef.child(stringcount);
-
-                                int beginIndex = etAssign.getLayout().getLineStart(intadd);
-                                int endIndex = etAssign.getLayout().getLineEnd(intadd);
-
-                                assignment.setValue(etAssign.getText().toString().substring(beginIndex, endIndex));
-                            }
-
-                            Intent intent = new Intent(MemoEditActivity.this, CalendarActivity.class);
-                            startActivity(intent);
-
-                            overridePendingTransition(0, 0);
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+                                    Log.e("MemoEditActivity", String.valueOf(error.toException()));
+                                }
+                            });
                         }
                     }
-                }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        Log.e("MemoEditActivity", String.valueOf(error.toException()));
+                    }
+                });
             }
-        }
-        else {
-            if (calendarRef.child(uid) == null){
-                calendarRef.child(uid);
-                uidRef = calendarRef.child(uid);
-                uidRef.child(firebaseDate);
-                dateRef = uidRef.child(firebaseDate);
-                dateRef.child("reminder");
-                reminderRef = dateRef.child("reminder");
-
-                dateRef.child("memo");
-                memoRef = dateRef.child("memo");
-                memoRef.setValue(memo1);
-
-                int intcount = 0;
-                String stringcount = Integer.toString(intcount);
-
-                while (reminderRef.child(stringcount) != null) {
-                    stringcount = Integer.toString(intcount);
-                    reminderRef.child(stringcount).removeValue();
-                    ++intcount;
-                }
-
-                intcount = etAssign.getLineCount();
-                int intadd = 0;
-                stringcount = Integer.toString(intadd);
-
-                while (intadd != intcount) {
-                    stringcount = Integer.toString(intadd);
-                    reminderRef.child(stringcount);
-                    DatabaseReference assignment = reminderRef.child(stringcount);
-
-                    int beginIndex = etAssign.getLayout().getLineStart(intadd);
-                    int endIndex = etAssign.getLayout().getLineEnd(intadd);
-
-                    assignment.setValue(etAssign.getText().toString().substring(beginIndex, endIndex));
-                }
-
-                Intent intent = new Intent(MemoEditActivity.this, CalendarActivity.class);
-                startActivity(intent);
-
-                overridePendingTransition(0, 0);
-            }
-            else {
-                uidRef = calendarRef.child(uid);
-                if (uidRef.child(firebaseDate) == null) {
-                    uidRef.child(firebaseDate);
-                    dateRef = uidRef.child(firebaseDate);
-                    dateRef.child("reminder");
-                    reminderRef = dateRef.child("reminder");
-
-                    dateRef.child("memo");
-                    memoRef = dateRef.child("memo");
-                    memoRef.setValue(memo1);
-
-                    int intcount = 0;
-                    String stringcount = Integer.toString(intcount);
-
-                    while (reminderRef.child(stringcount) != null) {
-                        stringcount = Integer.toString(intcount);
-                        reminderRef.child(stringcount).removeValue();
-                        ++intcount;
-                    }
-
-                    intcount = etAssign.getLineCount();
-                    int intadd = 0;
-                    stringcount = Integer.toString(intadd);
-
-                    while (intadd != intcount) {
-                        stringcount = Integer.toString(intadd);
-                        reminderRef.child(stringcount);
-                        DatabaseReference assignment = reminderRef.child(stringcount);
-
-                        int beginIndex = etAssign.getLayout().getLineStart(intadd);
-                        int endIndex = etAssign.getLayout().getLineEnd(intadd);
-
-                        assignment.setValue(etAssign.getText().toString().substring(beginIndex, endIndex));
-                    }
-
-                    Intent intent = new Intent(MemoEditActivity.this, CalendarActivity.class);
-                    startActivity(intent);
-
-                    overridePendingTransition(0, 0);
-                } else {
-                    uidRef.child(firebaseDate);
-                    dateRef = uidRef.child(firebaseDate);
-
-                    if (dateRef.child("reminder") == null) {
-                        dateRef.child("reminder");
-                        reminderRef = dateRef.child("reminder");
-
-                        int intcount = 0;
-                        String stringcount = Integer.toString(intcount);
-
-                        while (reminderRef.child(stringcount) != null) {
-                            stringcount = Integer.toString(intcount);
-                            reminderRef.child(stringcount).removeValue();
-                            ++intcount;
-                        }
-
-                        intcount = etAssign.getLineCount();
-                        int intadd = 0;
-                        stringcount = Integer.toString(intadd);
-
-                        while (intadd != intcount) {
-                            stringcount = Integer.toString(intadd);
-                            reminderRef.child(stringcount);
-                            DatabaseReference assignment = reminderRef.child(stringcount);
-
-                            int beginIndex = etAssign.getLayout().getLineStart(intadd);
-                            int endIndex = etAssign.getLayout().getLineEnd(intadd);
-
-                            assignment.setValue(etAssign.getText().toString().substring(beginIndex, endIndex));
-                        }
-
-                        if (dateRef.child("memo") == null) {
-                            dateRef.child("memo");
-                            memoRef = dateRef.child("memo");
-                            memoRef.setValue(memo1);
-                        }
-                        else {
-                            memoRef = dateRef.child("memo");
-                            memoRef.setValue(memo1);
-                        }
-
-                        Intent intent = new Intent(MemoEditActivity.this, CalendarActivity.class);
-                        startActivity(intent);
-
-                        overridePendingTransition(0, 0);
-                    } else {
-                        reminderRef = dateRef.child("reminder");
-
-                        int intcount = 0;
-                        String stringcount = Integer.toString(intcount);
-
-                        while (reminderRef.child(stringcount) != null) {
-                            stringcount = Integer.toString(intcount);
-                            reminderRef.child(stringcount).removeValue();
-                            ++intcount;
-                        }
-
-                        intcount = etAssign.getLineCount();
-                        int intadd = 0;
-                        stringcount = Integer.toString(intadd);
-
-                        while (intadd != intcount) {
-                            stringcount = Integer.toString(intadd);
-                            reminderRef.child(stringcount);
-                            DatabaseReference assignment = reminderRef.child(stringcount);
-
-                            int beginIndex = etAssign.getLayout().getLineStart(intadd);
-                            int endIndex = etAssign.getLayout().getLineEnd(intadd);
-
-                            assignment.setValue(etAssign.getText().toString().substring(beginIndex, endIndex));
-                        }
-
-                        if (dateRef.child("memo") == null) {
-                            dateRef.child("memo");
-                            memoRef = dateRef.child("memo");
-                            memoRef.setValue(memo1);
-                        }
-                        else {
-                            memoRef = dateRef.child("memo");
-                            memoRef.setValue(memo1);
-                        }
-
-                        Intent intent = new Intent(MemoEditActivity.this, CalendarActivity.class);
-                        startActivity(intent);
-
-                        overridePendingTransition(0, 0);
-                    }
-                }
-            }
-        }
+        });
     }
 }

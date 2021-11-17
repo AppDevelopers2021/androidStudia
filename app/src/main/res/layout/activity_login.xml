@@ -99,7 +99,7 @@
         android:text="@string/signin"
         android:textColor="@color/white"
         app:layout_constraintTop_toBottomOf="@+id/btSignup"
-        tools:ignore="SpeakableTextPresentCheck" />
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <Button
         android:id="@+id/btGoogle"
@@ -108,7 +108,7 @@
         android:layout_marginTop="5dp"
         android:background="@drawable/logingooglebtn"
         android:text="@string/googlesignin"
+        android:textAllCaps="false"
         app:layout_constraintTop_toBottomOf="@+id/btLogin"
-        tools:ignore="SpeakableTextPresentCheck"
-        android:textAllCaps="false" />
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 </LinearLayout>
