@@ -41,7 +41,6 @@ public class CalendarActivity extends AppCompatActivity {
     private String showDate;
     public FirebaseDatabase database;
     public DatabaseReference databaseReference;
-    public DatabaseReference calendarRef;
     public DatabaseReference dateRef;
     public DatabaseReference noteRef;
     public DatabaseReference memoRef;
@@ -81,14 +80,14 @@ public class CalendarActivity extends AppCompatActivity {
         FirebaseUser user = mAuth.getCurrentUser();
         uid = user.getUid();
 
-        CalendarLoad(uid, calendar);
+        CalendarLoad(uid, firebaseFormat.format(calendar.getTime()));
 
         ImageButton btPrevious = (ImageButton)findViewById(R.id.btPrevious);
         btPrevious.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 calendar.add(Calendar.DATE, -1);
-                CalendarLoad(uid, calendar);
+                CalendarLoad(uid, firebaseFormat.format(calendar.getTime()));
             }
         });
 
@@ -97,7 +96,7 @@ public class CalendarActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 calendar.add(Calendar.DATE, +1);
-                CalendarLoad(uid, calendar);
+                CalendarLoad(uid, firebaseFormat.format(calendar.getTime()));
             }
         });
 
@@ -150,13 +149,13 @@ public class CalendarActivity extends AppCompatActivity {
         });
     }
 
-    public void CalendarLoad(String uid, Calendar calendar) {
+    public void CalendarLoad(String uid, String calendar) {
         Log.w("CalendarActivity", "void CalendarLoad successfully started.");
 
         dateFormat = new SimpleDateFormat("yyyy/MM/dd");
         firebaseFormat = new SimpleDateFormat("yyyyMMdd");
-        showDate = dateFormat.format(calendar.getTime());
-        firebaseDate = firebaseFormat.format(calendar.getTime());
+        showDate = dateFormat.format(calendar);
+        firebaseDate = firebaseFormat.format(calendar);
         btDate.setText(showDate);
 
         //Firebase Database Refresh
@@ -168,8 +167,8 @@ public class CalendarActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
-                    if (snapshot.hasChild(firebaseFormat.format(calendar.getTime()))) {
-                        dateRef = uidRef.child(firebaseFormat.format(calendar.getTime()));
+                    if (snapshot.hasChild(firebaseFormat.format(calendar))) {
+                        dateRef = uidRef.child(firebaseFormat.format(calendar));
 
                         dateRef.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
@@ -197,7 +196,17 @@ public class CalendarActivity extends AppCompatActivity {
                                         }
                                     });
                                 }
+                            }
 
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+                                Log.e("CalendarActivity", String.valueOf(error.toException()));
+                            }
+                        });
+
+                        dateRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
                                 if (snapshot.hasChild("memo")) {
                                     memoRef = dateRef.child("memo");
 
@@ -215,7 +224,17 @@ public class CalendarActivity extends AppCompatActivity {
                                         }
                                     });
                                 }
+                            }
 
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+                                Log.e("CalendarActivity", String.valueOf(error.toException()));
+                            }
+                        });
+
+                        dateRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
                                 if (snapshot.hasChild("reminder")) {
                                     reminderRef = dateRef.child("reminder");
 
@@ -277,7 +296,6 @@ public class CalendarActivity extends AppCompatActivity {
                             tvAssign.append("\n" + "•" + Assign);
 
                             int newReferenceNum = referenceNum + 1;
-                            String newReferenceString = Integer.toString(newReferenceNum);
 
                             reminderRefFinder(reminderRef, newReferenceNum, tvAssign);
                         }

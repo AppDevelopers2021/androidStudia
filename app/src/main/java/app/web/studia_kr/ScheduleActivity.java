@@ -82,76 +82,93 @@ public class ScheduleActivity extends AppCompatActivity {
                 uidRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if (snapshot.hasChild(firebaseDate)) {
-                            dateRef = uidRef.child(firebaseDate);
+                        if (snapshot.exists()) {
+                            if (snapshot.hasChild(firebaseDate)) {
+                                dateRef = uidRef.child(firebaseDate);
 
-                            dateRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                    if (snapshot.hasChild("note")) {
-                                        noteRef = dateRef.child("note");
+                                dateRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        if (snapshot.hasChild("note")) {
+                                            noteRef = dateRef.child("note");
 
-                                        noteRef.addValueEventListener(new ValueEventListener() {
-                                            @Override
-                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                                if (snapshot.hasChild("1")) {
-                                                    int Number = (int) snapshot.getChildrenCount() - 1;
+                                            noteRef.addValueEventListener(new ValueEventListener() {
+                                                @Override
+                                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                    if (snapshot.hasChild("1")) {
+                                                        int Number = (int) snapshot.getChildrenCount() - 1;
 
-                                                    DatabaseReference addRef = noteRef.child(Integer.toString(Number));
+                                                        DatabaseReference addRef = noteRef.child(Integer.toString(Number));
 
-                                                    addRef.child("content").setValue(contentString);
-                                                    addRef.child("subject").setValue(subjectString);
+                                                        addRef.child("content").setValue(contentString);
+                                                        addRef.child("subject").setValue(subjectString);
 
-                                                    Intent intent = new Intent(ScheduleActivity.this, CalendarActivity.class);
-                                                    startActivity(intent);
+                                                        Intent intent = new Intent(ScheduleActivity.this, CalendarActivity.class);
+                                                        startActivity(intent);
 
-                                                    overridePendingTransition(0, 0);
+                                                        overridePendingTransition(0, 0);
+                                                    } else {
+                                                        noteRef.child("0");
+                                                        DatabaseReference zeroRef = noteRef.child("0");
+
+                                                        zeroRef.child("content").setValue(contentString);
+                                                        zeroRef.child("subject").setValue(subjectString);
+
+                                                        Intent intent = new Intent(ScheduleActivity.this, CalendarActivity.class);
+                                                        startActivity(intent);
+
+                                                        overridePendingTransition(0, 0);
+                                                    }
                                                 }
-                                                else {
-                                                    noteRef.child("0");
-                                                    DatabaseReference zeroRef = noteRef.child("0");
 
-                                                    zeroRef.child("content").setValue(contentString);
-                                                    zeroRef.child("subject").setValue(subjectString);
-
-                                                    Intent intent = new Intent(ScheduleActivity.this, CalendarActivity.class);
-                                                    startActivity(intent);
-
-                                                    overridePendingTransition(0, 0);
+                                                @Override
+                                                public void onCancelled(@NonNull DatabaseError error) {
+                                                    Log.e("ScheduleActivity", String.valueOf(error.toException()));
                                                 }
-                                            }
+                                            });
+                                        } else {
+                                            dateRef.child("note");
+                                            noteRef = dateRef.child("note");
+                                            noteRef.child("0");
+                                            DatabaseReference zeroRef = noteRef.child("0");
 
-                                            @Override
-                                            public void onCancelled(@NonNull DatabaseError error) {
-                                                Log.e("ScheduleActivity", String.valueOf(error.toException()));
-                                            }
-                                        });
+                                            zeroRef.child("content").setValue(contentString);
+                                            zeroRef.child("subject").setValue(subjectString);
+
+                                            Intent intent = new Intent(ScheduleActivity.this, CalendarActivity.class);
+                                            startActivity(intent);
+
+                                            overridePendingTransition(0, 0);
+                                        }
                                     }
-                                    else {
-                                        dateRef.child("note");
-                                        noteRef = dateRef.child("note");
-                                        noteRef.child("0");
-                                        DatabaseReference zeroRef = noteRef.child("0");
 
-                                        zeroRef.child("content").setValue(contentString);
-                                        zeroRef.child("subject").setValue(subjectString);
-
-                                        Intent intent = new Intent(ScheduleActivity.this, CalendarActivity.class);
-                                        startActivity(intent);
-
-                                        overridePendingTransition(0, 0);
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+                                        Log.e("ScheduleActivity", String.valueOf(error.toException()));
                                     }
-                                }
+                                });
+                            } else {
+                                uidRef.child(firebaseDate);
+                                dateRef = uidRef.child(firebaseDate);
+                                dateRef.child("note");
+                                noteRef = dateRef.child("note");
+                                noteRef.child("0");
+                                DatabaseReference zeroRef = noteRef.child("0");
 
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError error) {
-                                    Log.e("ScheduleActivity", String.valueOf(error.toException()));
-                                }
-                            });
+                                zeroRef.child("content").setValue(contentString);
+                                zeroRef.child("subject").setValue(subjectString);
+
+                                Intent intent = new Intent(ScheduleActivity.this, CalendarActivity.class);
+                                startActivity(intent);
+
+                                overridePendingTransition(0, 0);
+                            }
                         }
                         else {
+                            databaseReference.child("calendar").child(uid);
+                            uidRef = databaseReference.child("calendar").child(uid);
                             uidRef.child(firebaseDate);
-                            dateRef=uidRef.child(firebaseDate);
+                            dateRef = uidRef.child(firebaseDate);
                             dateRef.child("note");
                             noteRef = dateRef.child("note");
                             noteRef.child("0");

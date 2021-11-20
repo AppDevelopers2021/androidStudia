@@ -69,87 +69,131 @@ public class MemoEditActivity extends AppCompatActivity {
                 uidRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if (snapshot.hasChild(firebaseDate)) {
-                            dateRef = uidRef.child(firebaseDate);
+                        if (snapshot.exists()) {
+                            if (snapshot.hasChild(firebaseDate)) {
+                                dateRef = uidRef.child(firebaseDate);
 
-                            dateRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                    if (snapshot.hasChild("memo")) {
-                                        memoRef = dateRef.child("memo");
+                                dateRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        if (snapshot.hasChild("memo")) {
+                                            memoRef = dateRef.child("memo");
 
-                                        memoRef.addValueEventListener(new ValueEventListener() {
-                                            @Override
-                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                                memoRef.setValue(memoString);
-                                            }
-
-                                            @Override
-                                            public void onCancelled(@NonNull DatabaseError error) {
-                                                Log.e("MemoEditActivity", String.valueOf(error.toException()));
-                                            }
-                                        });
-                                    }
-                                    else {
-                                        dateRef.child("memo");
-                                        memoRef = dateRef.child("memo");
-
-                                        memoRef.setValue(memoString);
-
-                                        Intent intent = new Intent(MemoEditActivity.this, CalendarActivity.class);
-                                        startActivity(intent);
-
-                                        overridePendingTransition(0, 0);
-                                    }
-
-                                    if (snapshot.hasChild("reminder")) {
-                                        reminderRef = dateRef.child("reminder");
-
-                                        reminderRef.addValueEventListener(new ValueEventListener() {
-                                            @Override
-                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                                int lineCount = etAssign.getLineCount();
-                                                int count = 0;
-
-                                                while (count != lineCount -1) {
-                                                    int lineStart = etAssign.getLayout().getLineStart(count);
-                                                    int lineEnd = etAssign.getLayout().getLineEnd(count);
-
-                                                    reminderRef.child(Integer.toString(count)).setValue(etAssign.getText().toString().substring(lineStart, lineEnd));
-
-                                                    ++count;
+                                            memoRef.addValueEventListener(new ValueEventListener() {
+                                                @Override
+                                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                    memoRef.setValue(memoString);
                                                 }
-                                            }
 
-                                            @Override
-                                            public void onCancelled(@NonNull DatabaseError error) {
-                                                Log.e("MemoEditActivity", String.valueOf(error.toException()));
-                                            }
-                                        });
+                                                @Override
+                                                public void onCancelled(@NonNull DatabaseError error) {
+                                                    Log.e("MemoEditActivity", String.valueOf(error.toException()));
+                                                }
+                                            });
+                                        }
+                                        else {
+                                            dateRef.child("memo");
+                                            memoRef = dateRef.child("memo");
+
+                                            memoRef.setValue(memoString);
+
+                                            Intent intent = new Intent(MemoEditActivity.this, CalendarActivity.class);
+                                            startActivity(intent);
+
+                                            overridePendingTransition(0, 0);
+                                        }
                                     }
-                                    else {
-                                        dateRef.child("reminder");
-                                        reminderRef = dateRef.child("reminder");
 
-                                        reminderRef.child("0");
-                                        DatabaseReference zeroRef = reminderRef.child("0");
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+                                        Log.e("MemoEditActivity", String.valueOf(error.toException()));
+                                    }
+                                });
 
-                                        zeroRef.setValue(memoString);
+                                dateRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        if (snapshot.hasChild("reminder")) {
+                                            reminderRef = dateRef.child("reminder");
+
+                                            reminderRef.addValueEventListener(new ValueEventListener() {
+                                                @Override
+                                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                    int lineCount = etAssign.getLineCount();
+                                                    int count = 0;
+
+                                                    while (count != lineCount - 1) {
+                                                        int lineStart = etAssign.getLayout().getLineStart(count);
+                                                        int lineEnd = etAssign.getLayout().getLineEnd(count);
+
+                                                        reminderRef.child(Integer.toString(count)).setValue(etAssign.getText().toString().substring(lineStart, lineEnd));
+
+                                                        ++count;
+                                                    }
+                                                }
+
+                                                @Override
+                                                public void onCancelled(@NonNull DatabaseError error) {
+                                                    Log.e("MemoEditActivity", String.valueOf(error.toException()));
+                                                }
+                                            });
+                                        }
+                                        else {
+                                            dateRef.child("reminder");
+                                            reminderRef = dateRef.child("reminder");
+
+                                            reminderRef.child("0");
+                                            DatabaseReference zeroRef = reminderRef.child("0");
+
+                                            zeroRef.setValue(assignString);
+                                        }
                                     }
 
-                                    Intent intent = new Intent(MemoEditActivity.this, CalendarActivity.class);
-                                    startActivity(intent);
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
 
-                                    overridePendingTransition(0, 0);
-                                }
+                                    }
+                                });
 
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError error) {
-                                    Log.e("MemoEditActivity", String.valueOf(error.toException()));
-                                }
-                            });
+                                Intent intent = new Intent(MemoEditActivity.this, CalendarActivity.class);
+                                startActivity(intent);
+
+                                overridePendingTransition(0, 0);
+
+                            }
+                            else {
+                                uidRef.child(firebaseDate);
+                                dateRef = uidRef.child(firebaseDate);
+                                dateRef.child("memo").setValue(memoString);
+                                dateRef.child("reminder");
+                                reminderRef = dateRef.child("reminder");
+
+                                reminderRef.addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        int lineCount = etAssign.getLineCount();
+                                        int count = 0;
+
+                                        while (count != lineCount - 1) {
+                                            int lineStart = etAssign.getLayout().getLineStart(count);
+                                            int lineEnd = etAssign.getLayout().getLineEnd(count);
+
+                                            reminderRef.child(Integer.toString(count)).setValue(etAssign.getText().toString().substring(lineStart, lineEnd));
+
+                                            ++count;
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+                                        Log.e("MemoEditActivity", String.valueOf(error.toException()));
+                                    }
+                                });
+                            }
                         }
                         else {
+                            databaseReference.child("calendar").child(uid);
+                            uidRef = databaseReference.child("calendar").child(uid);
                             uidRef.child(firebaseDate);
                             dateRef = uidRef.child(firebaseDate);
                             dateRef.child("memo").setValue(memoString);
@@ -162,7 +206,7 @@ public class MemoEditActivity extends AppCompatActivity {
                                     int lineCount = etAssign.getLineCount();
                                     int count = 0;
 
-                                    while (count != lineCount -1) {
+                                    while (count != lineCount - 1) {
                                         int lineStart = etAssign.getLayout().getLineStart(count);
                                         int lineEnd = etAssign.getLayout().getLineEnd(count);
 

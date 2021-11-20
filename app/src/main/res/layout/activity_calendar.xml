@@ -152,14 +152,13 @@
 
         <ImageView
             android:id="@+id/ivNoteBG"
-            android:layout_width="416dp"
-            android:layout_height="210dp"
-            android:layout_marginTop="10dp"
+            android:layout_width="380dp"
+            android:layout_height="214dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/calendar_studia_category" />
+            app:srcCompat="@drawable/calendar_todocategory" />
 
         <ImageButton
             android:id="@+id/btAddSchedule"
@@ -167,7 +166,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="350dp"
             android:layout_marginTop="120dp"
-            android:backgroundTint="#EEEEEE"
+            android:backgroundTint="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
