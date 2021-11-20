@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -27,6 +28,8 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 
 public class CalendarActivity extends AppCompatActivity {
 
@@ -44,14 +47,12 @@ public class CalendarActivity extends AppCompatActivity {
     public DatabaseReference dateRef;
     public DatabaseReference noteRef;
     public DatabaseReference memoRef;
-    public DatabaseReference assignRef;
     public DatabaseReference reminderRef;
     public DatabaseReference uidRef;
     public Calendar calendar;
     public DateFormat dateFormat;
     public DateFormat firebaseFormat;
     public String Memo;
-    public String Assign;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,14 +81,14 @@ public class CalendarActivity extends AppCompatActivity {
         FirebaseUser user = mAuth.getCurrentUser();
         uid = user.getUid();
 
-        CalendarLoad(uid, firebaseFormat.format(calendar.getTime()));
+        CalendarLoad(uid, calendar);
 
         ImageButton btPrevious = (ImageButton)findViewById(R.id.btPrevious);
         btPrevious.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 calendar.add(Calendar.DATE, -1);
-                CalendarLoad(uid, firebaseFormat.format(calendar.getTime()));
+                CalendarLoad(uid, calendar);
             }
         });
 
@@ -96,7 +97,7 @@ public class CalendarActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 calendar.add(Calendar.DATE, +1);
-                CalendarLoad(uid, firebaseFormat.format(calendar.getTime()));
+                CalendarLoad(uid, calendar);
             }
         });
 
@@ -149,13 +150,12 @@ public class CalendarActivity extends AppCompatActivity {
         });
     }
 
-    public void CalendarLoad(String uid, String calendar) {
-        Log.w("CalendarActivity", "void CalendarLoad successfully started.");
+    public void CalendarLoad(String uid, Calendar calendar) {
+        Log.w("CalendarActivity", "void CalendarLoad started.");
 
         dateFormat = new SimpleDateFormat("yyyy/MM/dd");
         firebaseFormat = new SimpleDateFormat("yyyyMMdd");
-        showDate = dateFormat.format(calendar);
-        firebaseDate = firebaseFormat.format(calendar);
+        showDate = dateFormat.format(calendar.getTime());
         btDate.setText(showDate);
 
         //Firebase Database Refresh
@@ -167,8 +167,8 @@ public class CalendarActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
-                    if (snapshot.hasChild(firebaseFormat.format(calendar))) {
-                        dateRef = uidRef.child(firebaseFormat.format(calendar));
+                    if (snapshot.hasChild(firebaseFormat.format(calendar.getTime()))) {
+                        dateRef = uidRef.child(firebaseFormat.format(calendar.getTime()));
 
                         dateRef.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
@@ -232,6 +232,7 @@ public class CalendarActivity extends AppCompatActivity {
                             }
                         });
 
+
                         dateRef.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -241,17 +242,11 @@ public class CalendarActivity extends AppCompatActivity {
                                     reminderRef.addListenerForSingleValueEvent(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                            if (snapshot.hasChild("1")) {
-                                                int referenceNum = 0;
+                                            for (DataSnapshot datasnapshot : snapshot.getChildren()) {
+                                                String reminder = datasnapshot.getValue().toString();
 
                                                 TextView tvAssign = findViewById(R.id.tvShowAssign);
-
-                                                reminderRefFinder(reminderRef, referenceNum, tvAssign);
-                                            }
-                                            else {
-                                                Assign = snapshot.getValue(String.class);
-                                                TextView tvAssign = findViewById(R.id.tvShowAssign);
-                                                tvAssign.setText(Assign);
+                                                tvAssign.append("\n" + "•" + reminder);
                                             }
                                         }
 
@@ -269,7 +264,19 @@ public class CalendarActivity extends AppCompatActivity {
                             }
                         });
                     }
+                    else {
+                        arrayList.clear();
+                        adapter.notifyDataSetChanged();
+                        recyclerView.setAdapter(adapter);
+
+                        TextView memo = findViewById(R.id.tvShowMemo);
+                        memo.setText("");
+
+                        TextView assign = findViewById(R.id.tvShowAssign);
+                        assign.setText("");
+                    }
                 }
+
             }
 
             @Override
@@ -279,50 +286,5 @@ public class CalendarActivity extends AppCompatActivity {
         });
 
         Log.w("CalendarActivity", "void CalendarLoad finished.");
-    }
-
-    public void reminderRefFinder(DatabaseReference reminderRef, int referenceNum, TextView tvAssign) {
-
-        String referenceString = Integer.toString(referenceNum);
-
-        reminderRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.hasChild(referenceString)) {
-                    reminderRef.child(referenceString).addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            Assign = snapshot.getValue(String.class);
-                            tvAssign.append("\n" + "•" + Assign);
-
-                            int newReferenceNum = referenceNum + 1;
-
-                            reminderRefFinder(reminderRef, newReferenceNum, tvAssign);
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-                            Log.e("CalendarActivity", String.valueOf(error.toException()));
-                        }
-                    });
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.e("CalendarActivity", String.valueOf(error.toException()));
-            }
-        });
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == 1) {
-            if (resultCode == RESULT_OK) {
-
-            }
-        }
     }
 }

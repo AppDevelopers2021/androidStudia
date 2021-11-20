@@ -20,11 +20,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
+
 public class MemoEditActivity extends AppCompatActivity {
 
     private EditText etMemo;
     private EditText etAssign;
-    private Button btComplete;
     private TextView Bdate;
     private String showDate;
     private String firebaseDate;
@@ -231,5 +232,103 @@ public class MemoEditActivity extends AppCompatActivity {
                 });
             }
         });
+    }
+
+    private void CalendarLoad(String uid, String showDate, String firebaseDate) {
+        Log.w("MemoEditActivity", "void CalendarLoad started.");
+
+        Button btDate = findViewById(R.id.btDate);
+        btDate.setText(showDate);
+
+        //Firebase Database Refresh
+        database = FirebaseDatabase.getInstance();
+        databaseReference = database.getReference();
+        uidRef = databaseReference.child("calendar").child(uid);
+
+        uidRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    if (snapshot.hasChild(firebaseDate)) {
+                        dateRef = uidRef.child(firebaseDate);
+
+                        dateRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                if (snapshot.hasChild("memo")) {
+                                    memoRef = dateRef.child("memo");
+
+                                    memoRef.addValueEventListener(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            String Memo = snapshot.getValue(String.class);
+                                            EditText tvMemo = findViewById(R.id.etMemo);
+                                            tvMemo.setText(Memo);
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+                                            Log.e("MemoEditActivity", String.valueOf(error.toException()));
+                                        }
+                                    });
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+                                Log.e("MemoEditActivity", String.valueOf(error.toException()));
+                            }
+                        });
+
+
+                        dateRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                if (snapshot.hasChild("reminder")) {
+                                    reminderRef = dateRef.child("reminder");
+
+                                    reminderRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            for (DataSnapshot datasnapshot : snapshot.getChildren()) {
+                                                String reminder = datasnapshot.getValue().toString();
+
+                                                EditText tvAssign = findViewById(R.id.etAssign);
+                                                tvAssign.append("\n" + reminder);
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+                                            Log.e("MemoEditActivity", String.valueOf(error.toException()));
+                                        }
+                                    });
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+                                Log.e("MemoEditActivity", String.valueOf(error.toException()));
+                            }
+                        });
+                    }
+                    else {
+                        EditText memo = findViewById(R.id.etMemo);
+                        memo.setText("");
+
+                        EditText assign = findViewById(R.id.etAssign);
+                        assign.setText("");
+                    }
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("MemoEditActivity", String.valueOf(error.toException()));
+            }
+        });
+
+        Log.w("MemoEditActivity", "void CalendarLoad finished.");
     }
 }
