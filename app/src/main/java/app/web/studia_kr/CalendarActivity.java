@@ -204,6 +204,12 @@ public class CalendarActivity extends AppCompatActivity {
                             }
                         });
 
+                        TextView assign = findViewById(R.id.tvShowAssign);
+                        TextView memo = findViewById(R.id.tvShowMemo);
+
+                        memo.setText("");
+                        assign.setText("");
+
                         dateRef.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -265,17 +271,19 @@ public class CalendarActivity extends AppCompatActivity {
                         });
                     }
                     else {
+
+                        TextView assign = findViewById(R.id.tvShowAssign);
+                        TextView memo = findViewById(R.id.tvShowMemo);
+
                         if (!arrayList.isEmpty()) {
                             arrayList.clear();
                             adapter.notifyDataSetChanged();
                             recyclerView.setAdapter(adapter);
 
-                            TextView memo = findViewById(R.id.tvShowMemo);
                             memo.setText("");
-
-                            TextView assign = findViewById(R.id.tvShowAssign);
                             assign.setText("");
                         }
+
                     }
                 }
 
