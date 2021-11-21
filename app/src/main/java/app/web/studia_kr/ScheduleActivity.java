@@ -63,17 +63,7 @@ public class ScheduleActivity extends AppCompatActivity {
                 contentString = content.getText().toString();
                 subject = findViewById(R.id.snSubject);
 
-                subject.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                        subjectString = adapterView.getItemAtPosition(i).toString();
-                    }
-
-                    @Override
-                    public void onNothingSelected(AdapterView<?> adapterView) {
-                        Toast.makeText(getApplicationContext(), "과목이 정해지지 않았습니다.", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                subjectString = subject.getSelectedItem().toString();
 
                 database = FirebaseDatabase.getInstance();
                 databaseReference = database.getReference();
