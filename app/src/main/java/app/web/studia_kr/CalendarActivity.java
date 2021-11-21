@@ -81,14 +81,16 @@ public class CalendarActivity extends AppCompatActivity {
         FirebaseUser user = mAuth.getCurrentUser();
         uid = user.getUid();
 
-        CalendarLoad(uid, calendar);
+        CalendarLoad(uid, firebaseDate, showDate);
 
         ImageButton btPrevious = (ImageButton)findViewById(R.id.btPrevious);
         btPrevious.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 calendar.add(Calendar.DATE, -1);
-                CalendarLoad(uid, calendar);
+                firebaseDate = firebaseFormat.format(calendar.getTime());
+                showDate = dateFormat.format(calendar.getTime());
+                CalendarLoad(uid, firebaseDate, showDate);
             }
         });
 
@@ -97,7 +99,9 @@ public class CalendarActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 calendar.add(Calendar.DATE, +1);
-                CalendarLoad(uid, calendar);
+                firebaseDate = firebaseFormat.format(calendar.getTime());
+                showDate = dateFormat.format(calendar.getTime());
+                CalendarLoad(uid, firebaseDate, showDate);
             }
         });
 
@@ -150,12 +154,8 @@ public class CalendarActivity extends AppCompatActivity {
         });
     }
 
-    public void CalendarLoad(String uid, Calendar calendar) {
+    public void CalendarLoad(String uid, String firebaseDate, String showDate) {
         Log.w("CalendarActivity", "void CalendarLoad started.");
-
-        dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-        firebaseFormat = new SimpleDateFormat("yyyyMMdd");
-        showDate = dateFormat.format(calendar.getTime());
         btDate.setText(showDate);
 
         //Firebase Database Refresh
@@ -167,8 +167,8 @@ public class CalendarActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
-                    if (snapshot.hasChild(firebaseFormat.format(calendar.getTime()))) {
-                        dateRef = uidRef.child(firebaseFormat.format(calendar.getTime()));
+                    if (snapshot.hasChild(firebaseDate)) {
+                        dateRef = uidRef.child(firebaseDate);
 
                         dateRef.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
