@@ -55,7 +55,7 @@ public class ScheduleActivity extends AppCompatActivity {
         Bdate = findViewById(R.id.btDate);
         Bdate.setText(showDate);
 
-        ImageButton btScheduleAdd = (ImageButton)findViewById(R.id.btAddSchedule);
+        ImageButton btScheduleAdd = (ImageButton)findViewById(R.id.btComplete);
         btScheduleAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
