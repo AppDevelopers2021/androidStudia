@@ -15,7 +15,7 @@
         android:usesCleartextTraffic="true">
         <activity
             android:name=".PopupActivity"
-            android:theme="@android:style/Theme.Dialog"
+            android:theme="@style/Theme.AppCompat.DayNight.Dialog"
             android:exported="true" />
         <activity
             android:name=".MemoEditActivity"
