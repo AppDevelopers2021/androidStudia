@@ -1,202 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".CalendarActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/Assign"
-        android:layout_width="416dp"
-        android:layout_height="193dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="42dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Memo">
-
-        <ImageView
-            android:id="@+id/ivContentBG"
-            android:layout_width="416dp"
-            android:layout_height="210dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.529"
-            app:srcCompat="@drawable/calendar_studia_category" />
-
-        <TextView
-            android:id="@+id/tvContent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="225dp"
-            android:layout_marginBottom="150dp"
-            android:fontFamily="@font/nanumsquareb"
-            android:text="과제 및 준비물"
-            android:textColor="@color/black"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tvShowAssign"
-            android:layout_width="368dp"
-            android:layout_height="127dp"
-            android:layout_marginStart="21dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="21dp"
-            android:layout_marginBottom="15dp"
-            android:lines="4"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvContent" />
-
-        <ImageButton
-            android:id="@+id/btEditAssign"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="350dp"
-            android:layout_marginTop="120dp"
-            android:backgroundTint="#EEEEEE"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/calendar_studia_editbutton"
-            tools:ignore="SpeakableTextPresentCheck" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/Memo"
-        android:layout_width="416dp"
-        android:layout_height="193dp"
-        android:layout_marginTop="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Note">
-
-        <TextView
-            android:id="@+id/tvShowMemo"
-            android:layout_width="372dp"
-            android:layout_height="127dp"
-            android:layout_marginStart="21dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="21dp"
-            android:layout_marginBottom="15dp"
-            android:lines="4"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvSubject" />
-
-        <ImageView
-            android:id="@+id/ivSubjectBG"
-            android:layout_width="416dp"
-            android:layout_height="210dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/calendar_studia_category" />
-
-        <TextView
-            android:id="@+id/tvSubject"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="325dp"
-            android:layout_marginBottom="150dp"
-            android:fontFamily="@font/nanumsquareb"
-            android:text="메모"
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageButton
-            android:id="@+id/btEditMemo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="350dp"
-            android:layout_marginTop="120dp"
-            android:backgroundTint="#EEEEEE"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/calendar_studia_editbutton"
-            tools:ignore="SpeakableTextPresentCheck" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/Note"
-        android:layout_width="416dp"
-        android:layout_height="193dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="15dp"
-        app:layout_constraintBottom_toTopOf="@+id/Memo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TopBar">
-
-        <ImageView
-            android:id="@+id/ivNoteBG"
-            android:layout_width="380dp"
-            android:layout_height="214dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/calendar_todocategory" />
-
-        <ImageButton
-            android:id="@+id/btAddSchedule"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="350dp"
-            android:layout_marginTop="120dp"
-            android:backgroundTint="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/calendar_studia_addbutton"
-            tools:ignore="SpeakableTextPresentCheck" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvTodo"
-            android:layout_width="340dp"
-            android:layout_height="180dp"
-            android:layout_marginTop="9dp"
-            android:layout_marginBottom="25dp"
-            app:layout_constraintBottom_toBottomOf="@+id/ivNoteBG"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.302"
-            app:layout_constraintStart_toEndOf="@+id/ivNoteBG"
-            app:layout_constraintStart_toStartOf="@+id/ivNoteBG"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.428" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:id="@+id/TopBar"
         android:layout_width="462dp"
         android:layout_height="70dp"
         android:background="#2291FF"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/btPrevious"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginLeft="7dp"
+            android:background="#2291FF"
+            app:srcCompat="@drawable/calendar_studia_rightarrow"
+            tools:ignore="SpeakableTextPresentCheck" />
 
         <Button
             android:id="@+id/btDate"
@@ -204,45 +30,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="11dp"
-            android:layout_marginEnd="100dp"
-            android:layout_marginBottom="11dp"
+            android:layout_marginLeft="4dp"
             android:background="#2291FF"
             android:fontFamily="@font/nanumsquareeb"
             android:text="2021/10/31"
             android:textAlignment="center"
             android:textColor="@color/white"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageButton
-            android:id="@+id/btPrevious"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="7dp"
-            android:background="#2291FF"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/btDate"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/calendar_studia_rightarrow"
-            tools:ignore="SpeakableTextPresentCheck" />
+            android:textSize="24sp" />
 
         <ImageButton
             android:id="@+id/btNext"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:layout_marginEnd="93dp"
-            android:layout_marginBottom="7dp"
+            android:layout_marginLeft="4dp"
             android:background="#2291FF"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/btDate"
-            app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/calendar_studia_leftarrow"
             tools:ignore="SpeakableTextPresentCheck" />
 
@@ -250,15 +52,165 @@
             android:id="@+id/btProfile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="325dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginLeft="45dp"
+            android:layout_marginRight="5dp"
             android:backgroundTint="@color/studia_brandcolor"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/calendar_profile_img"
             tools:ignore="SpeakableTextPresentCheck" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:id="@+id/Note"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/verticalNote"
+            android:layout_width="410dp"
+            android:layout_height="193dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/calendar_todocategory"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@+id/Memo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/TopBar">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvTodo"
+                android:layout_width="340dp"
+                android:layout_height="180dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="5dp" />
+
+            <ImageButton
+                android:id="@+id/btAddSchedule"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="355dp"
+                android:layout_marginTop="-50dp"
+                android:background="@drawable/calendar_studia_addbutton"
+                android:background_color="@android:color/transparent"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/Memo"
+        android:layout_width="416dp"
+        android:layout_height="193dp"
+        android:layout_marginTop="1dp"
+        android:background="@drawable/calendar_studia_category"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:id="@+id/verticalMemo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:="@+id/verticalMemo"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvSubject"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/nanumsquareb"
+                android:text="메모"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="24sp" />
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvShowMemo"
+                        android:layout_width="372dp"
+                        android:layout_height="127dp"
+                        android:layout_marginLeft="20dp"
+                        android:minLines="4" />
+                </LinearLayout>
+            </ScrollView>
+
+            <ImageButton
+                android:id="@+id/btEditMemo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="355dp"
+                android:layout_marginTop="-50dp"
+                android:background="@drawable/calendar_studia_editbutton"
+                android:background_color="@android:color/transparent"
+                tools:ignore="SpeakableTextPresentCheck" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/Assign"
+        android:layout_width="416dp"
+        android:layout_height="193dp"
+        android:layout_marginTop="17dp"
+        android:background="@drawable/calendar_studia_category"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/verticalAssign"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvContent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/nanumsquareb"
+                android:text="과제 및 준비물"
+                android:textColor="@color/black"
+                android:textSize="24sp" />
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tvShowAssign"
+                        android:layout_width="368dp"
+                        android:layout_height="127dp"
+                        android:layout_marginLeft="20dp"
+                        android:minLines="4" />
+
+                </LinearLayout>
+            </ScrollView>
+
+            <ImageButton
+                android:id="@+id/btEditAssign"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="355dp"
+                android:layout_marginTop="-50dp"
+                android:background="@drawable/calendar_studia_editbutton"
+                android:background_color="@android:color/transparent"
+                tools:ignore="SpeakableTextPresentCheck" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
