@@ -30,11 +30,12 @@
 
         <EditText
             android:id="@+id/etAssign"
-            android:layout_width="370dp"
-            android:layout_height="72dp"
+            android:layout_width="350dp"
+            android:layout_height="109dp"
             android:layout_marginTop="15dp"
             android:ems="10"
-            android:inputType="textPersonName"
+            android:inputType="textMultiLine"
+            android:scrollHorizontally="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

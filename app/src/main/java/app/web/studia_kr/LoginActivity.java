@@ -43,6 +43,33 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        sharedPreferences = getSharedPreferences("preference", 0);
+        if (sharedPreferences.getString("auto", "") == "1") {
+            if (sharedPreferences.getString("google", "") == "0") {
+                mFirebaseAuth.signInWithEmailAndPassword(sharedPreferences.getString("email", ""), sharedPreferences.getString("password", "")).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            Log.i("Login Success", "Successful Login.");
+
+                            Intent intent = new Intent(LoginActivity.this, CalendarActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }
+                        else {
+                            Log.w("Login Failure", task.getException());
+
+                            Toast.makeText(getApplicationContext(), "로그인에 실패했습니다.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+            }
+            else {
+                Intent intent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
+                startActivityForResult(intent, REQ_SIGN_GOOGLE);
+            }
+        }
+
         GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
@@ -71,6 +98,13 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 Log.i("Login Success", "Successful Login.");
+
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                editor.putString("auto", "1");
+                                editor.putString("google", "0");
+                                editor.putString("email", Email);
+                                editor.putString("password", Password);
+                                editor.commit();
 
                                 Intent intent = new Intent(LoginActivity.this, CalendarActivity.class);
                                 startActivity(intent);
@@ -140,6 +174,11 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                         if (task.isSuccessful()) {
                             //Login Success
                             Log.i("LoginActivity(Auth)", "LoginActivity - Google Login Started.");
+
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.putString("auto", "1");
+                            editor.putString("google", "1");
+                            editor.commit();
 
                             Intent intent = new Intent(LoginActivity.this, CalendarActivity.class);
 

@@ -156,6 +156,13 @@ public class CalendarActivity extends AppCompatActivity {
 
     public void CalendarLoad(String uid, String firebaseDate, String showDate) {
         Log.w("CalendarActivity", "void CalendarLoad started.");
+
+        TextView assign = findViewById(R.id.tvShowAssign);
+        TextView memo = findViewById(R.id.tvShowMemo);
+
+        memo.setText("");
+        assign.setText("");
+
         btDate.setText(showDate);
 
         //Firebase Database Refresh
@@ -203,12 +210,6 @@ public class CalendarActivity extends AppCompatActivity {
                                 Log.e("CalendarActivity", String.valueOf(error.toException()));
                             }
                         });
-
-                        TextView assign = findViewById(R.id.tvShowAssign);
-                        TextView memo = findViewById(R.id.tvShowMemo);
-
-                        memo.setText("");
-                        assign.setText("");
 
                         dateRef.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
@@ -296,5 +297,14 @@ public class CalendarActivity extends AppCompatActivity {
         });
 
         Log.w("CalendarActivity", "void CalendarLoad finished.");
+    }
+
+    public void delete(int position) {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference reference = database.getReference();
+
+        DatabaseReference deleteRef = reference.child("calendar").child(uid).child(firebaseDate).child("note").child(Integer.toString(position));
+
+        deleteRef.removeValue();
     }
 }

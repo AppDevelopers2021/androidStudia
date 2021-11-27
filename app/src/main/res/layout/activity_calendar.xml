@@ -64,7 +64,8 @@
     <LinearLayout
         android:id="@+id/Note"
         android:layout_height="wrap_content"
-        android:layout_width="wrap_content">
+        android:layout_width="wrap_content"
+        android:layout_marginTop="10dp">
 
         <LinearLayout
             android:id="@+id/verticalNote"
@@ -93,7 +94,6 @@
                 android:layout_marginLeft="355dp"
                 android:layout_marginTop="-50dp"
                 android:background="@drawable/calendar_studia_addbutton"
-                android:background_color="@android:color/transparent"
                 tools:ignore="SpeakableTextPresentCheck" />
 
         </LinearLayout>
@@ -105,14 +105,12 @@
         android:layout_height="193dp"
         android:layout_marginTop="1dp"
         android:background="@drawable/calendar_studia_category"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toTopOf="parent">
+        android:orientation="horizontal">
 
         <LinearLayout
             android:id="@+id/verticalMemo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:="@+id/verticalMemo"
             android:orientation="vertical">
 
             <TextView
@@ -153,7 +151,6 @@
                 android:layout_marginLeft="355dp"
                 android:layout_marginTop="-50dp"
                 android:background="@drawable/calendar_studia_editbutton"
-                android:background_color="@android:color/transparent"
                 tools:ignore="SpeakableTextPresentCheck" />
         </LinearLayout>
     </LinearLayout>
@@ -209,7 +206,6 @@
                 android:layout_marginLeft="355dp"
                 android:layout_marginTop="-50dp"
                 android:background="@drawable/calendar_studia_editbutton"
-                android:background_color="@android:color/transparent"
                 tools:ignore="SpeakableTextPresentCheck" />
         </LinearLayout>
     </LinearLayout>

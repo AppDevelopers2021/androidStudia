@@ -4,12 +4,18 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
@@ -38,13 +44,12 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
         holder.content.setText(arrayList.get(position).getContent());
         holder.subject.setText(arrayList.get(position).getSubject());
 
-
-
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
                 //Delete
                 remove(holder.getAdapterPosition());
+
                 return true;
             }
         });
@@ -67,7 +72,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
             this.subject = itemView.findViewById(R.id.tvSubject);
             this.content = itemView.findViewById(R.id.tvContent);
             this.constraintLayout = (ConstraintLayout) itemView.findViewById(R.id.layout);
-
         }
     }
 
