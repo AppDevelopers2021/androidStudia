@@ -98,6 +98,7 @@ public class MemoEditActivity extends AppCompatActivity {
 
                                             Intent intent = new Intent(MemoEditActivity.this, CalendarActivity.class);
                                             startActivity(intent);
+                                            finish();
 
                                             overridePendingTransition(0, 0);
                                         }
@@ -156,6 +157,7 @@ public class MemoEditActivity extends AppCompatActivity {
 
                                 Intent intent = new Intent(MemoEditActivity.this, CalendarActivity.class);
                                 startActivity(intent);
+                                finish();
 
                                 overridePendingTransition(0, 0);
 

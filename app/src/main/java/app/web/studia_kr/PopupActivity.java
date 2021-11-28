@@ -41,7 +41,7 @@ public class PopupActivity extends AppCompatActivity {
                 SharedPreferences sharedPreferences = getSharedPreferences("preference", 0);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.clear();
-                editor.commit();
+                editor.apply();
 
                 Intent intent = new Intent(PopupActivity.this, LoginActivity.class);
                 startActivity(intent);

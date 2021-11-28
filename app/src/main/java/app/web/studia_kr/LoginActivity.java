@@ -99,12 +99,13 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                             if (task.isSuccessful()) {
                                 Log.i("Login Success", "Successful Login.");
 
+                                sharedPreferences = getSharedPreferences("preference", 0);
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
                                 editor.putString("auto", "1");
                                 editor.putString("google", "0");
                                 editor.putString("email", Email);
                                 editor.putString("password", Password);
-                                editor.commit();
+                                editor.apply();
 
                                 Intent intent = new Intent(LoginActivity.this, CalendarActivity.class);
                                 startActivity(intent);
@@ -175,10 +176,11 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                             //Login Success
                             Log.i("LoginActivity(Auth)", "LoginActivity - Google Login Started.");
 
+                            sharedPreferences = getSharedPreferences("preference", 0);
                             SharedPreferences.Editor editor = sharedPreferences.edit();
                             editor.putString("auto", "1");
                             editor.putString("google", "1");
-                            editor.commit();
+                            editor.apply();
 
                             Intent intent = new Intent(LoginActivity.this, CalendarActivity.class);
 

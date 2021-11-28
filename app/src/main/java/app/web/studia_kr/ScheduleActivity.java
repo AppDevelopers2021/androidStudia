@@ -91,6 +91,7 @@ public class ScheduleActivity extends AppCompatActivity {
 
                                                         Intent intent = new Intent(ScheduleActivity.this, CalendarActivity.class);
                                                         startActivity(intent);
+                                                        finish();
 
                                                         overridePendingTransition(0, 0);
                                                     } else {
@@ -102,6 +103,7 @@ public class ScheduleActivity extends AppCompatActivity {
 
                                                         Intent intent = new Intent(ScheduleActivity.this, CalendarActivity.class);
                                                         startActivity(intent);
+                                                        finish();
 
                                                         overridePendingTransition(0, 0);
                                                     }
@@ -123,6 +125,7 @@ public class ScheduleActivity extends AppCompatActivity {
 
                                             Intent intent = new Intent(ScheduleActivity.this, CalendarActivity.class);
                                             startActivity(intent);
+                                            finish();
 
                                             overridePendingTransition(0, 0);
                                         }
@@ -146,6 +149,7 @@ public class ScheduleActivity extends AppCompatActivity {
 
                                 Intent intent = new Intent(ScheduleActivity.this, CalendarActivity.class);
                                 startActivity(intent);
+                                finish();
 
                                 overridePendingTransition(0, 0);
                             }
@@ -165,6 +169,7 @@ public class ScheduleActivity extends AppCompatActivity {
 
                             Intent intent = new Intent(ScheduleActivity.this, CalendarActivity.class);
                             startActivity(intent);
+                            finish();
 
                             overridePendingTransition(0, 0);
                         }
