@@ -1,17 +1,17 @@
 package app.web.studia_kr;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -28,8 +28,6 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
-import java.util.Locale;
 
 public class CalendarActivity extends AppCompatActivity {
 
@@ -82,6 +80,26 @@ public class CalendarActivity extends AppCompatActivity {
         uid = user.getUid();
 
         CalendarLoad(uid, firebaseDate, showDate);
+
+        DatePickerDialog dialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+                Button btDate = (Button)findViewById(R.id.btDate);
+                calendar.set(i, i1, i2);
+
+                firebaseDate = firebaseFormat.format(calendar.getTime());
+                showDate = dateFormat.format(calendar.getTime());
+                CalendarLoad(uid, firebaseDate, showDate);
+            }
+        }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DATE));
+
+        Button btDate = (Button)findViewById(R.id.btDate);
+        btDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.show();
+            }
+        });
 
         ImageButton btPrevious = (ImageButton)findViewById(R.id.btPrevious);
         btPrevious.setOnClickListener(new View.OnClickListener() {
@@ -249,11 +267,24 @@ public class CalendarActivity extends AppCompatActivity {
                                     reminderRef.addListenerForSingleValueEvent(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                                            int Count = 1;
+
                                             for (DataSnapshot datasnapshot : snapshot.getChildren()) {
                                                 String reminder = datasnapshot.getValue().toString();
 
-                                                TextView tvAssign = findViewById(R.id.tvShowAssign);
-                                                tvAssign.append("\n" + "•" + reminder);
+                                                if (Count == 1) {
+                                                    TextView tvAssign = findViewById(R.id.tvShowAssign);
+                                                    tvAssign.append("•" + reminder);
+
+                                                    Count = Count +1;
+                                                }
+                                                else {
+                                                    TextView tvAssign = findViewById(R.id.tvShowAssign);
+                                                    tvAssign.append("\n" + "•" + reminder);
+
+                                                    Count = Count +1;
+                                                }
                                             }
                                         }
 

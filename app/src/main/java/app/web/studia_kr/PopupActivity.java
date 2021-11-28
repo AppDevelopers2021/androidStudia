@@ -3,7 +3,6 @@ package app.web.studia_kr;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.MotionEvent;
