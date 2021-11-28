@@ -46,7 +46,11 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         sharedPreferences = getSharedPreferences("preference", 0);
         if (sharedPreferences.getString("auto", "0").equals("1")) {
             if (sharedPreferences.getString("google", "0").equals("0")) {
-                mFirebaseAuth.signInWithEmailAndPassword(sharedPreferences.getString("email", "none"), sharedPreferences.getString("password", "none")).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+
+                Email = sharedPreferences.getString("email", "none");
+                Password = sharedPreferences.getString("password", "none");
+
+                mFirebaseAuth.signInWithEmailAndPassword(Email, Password).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
