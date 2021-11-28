@@ -3,6 +3,7 @@ package app.web.studia_kr;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -36,6 +37,12 @@ public class PopupActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 mAuth.signOut();
+
+                SharedPreferences sharedPreferences = getSharedPreferences("preference", 0);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.clear();
+                editor.commit();
+
                 Intent intent = new Intent(PopupActivity.this, LoginActivity.class);
                 startActivity(intent);
             }
