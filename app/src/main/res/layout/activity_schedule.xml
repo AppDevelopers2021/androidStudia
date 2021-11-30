@@ -9,7 +9,7 @@
 
     <LinearLayout
         android:id="@+id/TopBar"
-        android:layout_width="462dp"
+        android:layout_width="match_parent"
         android:layout_height="70dp"
         android:background="#2291FF">
 
@@ -30,7 +30,7 @@
 
     <LinearLayout
         android:id="@+id/Memo"
-        android:layout_width="416dp"
+        android:layout_width="match_parent"
         android:layout_height="193dp"
         android:layout_marginTop="25dp"
         android:background="@drawable/calendar_studia_category"
@@ -57,10 +57,10 @@
                 android:id="@+id/snSubject"
                 android:layout_width="256dp"
                 android:layout_height="68dp"
-                android:entries="@array/subject"
-                android:layout_marginTop="45dp"
-                android:layout_marginLeft="20dp"
                 android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="45dp"
+                android:entries="@array/subject"
                 tools:ignore="SpeakableTextPresentCheck" />
 
         </LinearLayout>
@@ -75,10 +75,10 @@
 
         <LinearLayout
             android:id="@+id/verticalAssign"
-            android:layout_width="416dp"
+            android:layout_width="match_parent"
             android:layout_height="193dp"
-            android:orientation="vertical"
-            android:background="@drawable/calendar_studia_category">
+            android:background="@drawable/calendar_studia_category"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/tvContent"
@@ -103,6 +103,7 @@
                     android:layout_marginLeft="25dp"
                     android:layout_marginTop="10dp"
                     android:ems="10"
+                    android:hint="내용을 입력하세요"
                     android:inputType="textMultiLine"
                     android:lines="4"
                     android:maxLines="8"

@@ -46,21 +46,21 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
         holder.content.setText(arrayList.get(position).getContent());
         holder.subject.setText(arrayList.get(position).getSubject());
 
-        if (arrayList.get(position).getSubject() == "가정")
+        if (arrayList.get(position).getSubject().equals("가정"))
             holder.constraintLayout.setBackground(ContextCompat.getDrawable(context, R.drawable.rectangleblue));
-        if (arrayList.get(position).getSubject() == "과학")
+        if (arrayList.get(position).getSubject().equals("과학"))
             holder.constraintLayout.setBackground(ContextCompat.getDrawable(context, R.drawable.rectanglegray));
-        if (arrayList.get(position).getSubject() == "국어")
+        if (arrayList.get(position).getSubject().equals("국어"))
             holder.constraintLayout.setBackground(ContextCompat.getDrawable(context, R.drawable.rectanglegreen));
-        if (arrayList.get(position).getSubject() == "기술")
+        if (arrayList.get(position).getSubject().equals("기술"))
             holder.constraintLayout.setBackground(ContextCompat.getDrawable(context, R.drawable.rectanglelightblue));
-        if (arrayList.get(position).getSubject() == "도덕")
+        if (arrayList.get(position).getSubject().equals("도덕"))
             holder.constraintLayout.setBackground(ContextCompat.getDrawable(context, R.drawable.rectanglelightgreen));
-        if (arrayList.get(position).getSubject() == "독서")
+        if (arrayList.get(position).getSubject().equals("독서"))
             holder.constraintLayout.setBackground(ContextCompat.getDrawable(context, R.drawable.rectanglepurple));
-        if (arrayList.get(position).getSubject() == "미술")
+        if (arrayList.get(position).getSubject().equals("미술"))
             holder.constraintLayout.setBackground(ContextCompat.getDrawable(context, R.drawable.rectanglered));
-        if (arrayList.get(position).getSubject() == "보건")
+        if (arrayList.get(position).getSubject().equals("보건"))
             holder.constraintLayout.setBackground(ContextCompat.getDrawable(context, R.drawable.rectangleyellow));
         if (arrayList.get(position).getSubject() == "사회")
             holder.constraintLayout.setBackground(ContextCompat.getDrawable(context, R.drawable.rectangleblue));
