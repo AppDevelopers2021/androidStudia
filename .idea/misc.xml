@@ -31,21 +31,26 @@
         <entry key="..\:/adprojects/projects/AndroidStudia/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.26979166666666665" />
         <entry key="..\:/adprojects/projects/AndroidStudia/app/src/main/res/mipmap-anydpi-v26/ic_launcher_studia.xml" value="0.26979166666666665" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.3260416666666667" />
+        <entry key="app/src/main/res/drawable/calendarsection.xml" value="0.3260416666666667" />
         <entry key="app/src/main/res/drawable/defaultbutton.xml" value="0.3260416666666667" />
+        <entry key="app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.3260416666666667" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.3260416666666667" />
         <entry key="app/src/main/res/drawable/ic_launcher_studia_background.xml" value="0.3260416666666667" />
         <entry key="app/src/main/res/drawable/loginbtn.xml" value="0.3260416666666667" />
         <entry key="app/src/main/res/drawable/logingooglebtn.xml" value="0.3260416666666667" />
         <entry key="app/src/main/res/drawable/logingoogleicn.xml" value="0.3260416666666667" />
         <entry key="app/src/main/res/drawable/logintextbox.xml" value="0.3260416666666667" />
-        <entry key="app/src/main/res/layout/activity_calendar.xml" value="0.19882246376811594" />
+        <entry key="app/src/main/res/drawable/mainbtn.xml" value="0.3260416666666667" />
+        <entry key="app/src/main/res/drawable/notes_container.xml" value="0.3260416666666667" />
+        <entry key="app/src/main/res/layout/activity_calendar.xml" value="0.36067782396714526" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/layout/activity_popup.xml" value="0.18342391304347827" />
         <entry key="app/src/main/res/layout/defaultbutton.xml" value="0.2033514492753623" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="Android API 31 Platform" project-jdk-type="Android SDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
