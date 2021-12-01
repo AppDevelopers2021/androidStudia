@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Studia</string>
+    <string name="displayName">STUDIA</string>
 
     <!-- MainActivity -->
     <string name="appName">studia</string>
