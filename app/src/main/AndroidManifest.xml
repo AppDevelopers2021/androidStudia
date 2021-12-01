@@ -14,9 +14,12 @@
         android:theme="@style/Theme.AndroidStudia"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".PopupActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.Dialog"
+            android:name=".NoNetworkActivity"
             android:exported="true" />
+        <activity
+            android:name=".PopupActivity"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.DayNight.Dialog" />
         <activity
             android:name=".MemoEditActivity"
             android:exported="true" />

@@ -9,7 +9,7 @@
 
     <LinearLayout
         android:id="@+id/TopBar"
-        android:layout_width="462dp"
+        android:layout_width="match_parent"
         android:layout_height="70dp"
         android:background="#2291FF">
 
@@ -37,7 +37,7 @@
 
         <LinearLayout
             android:id="@+id/verticalMemo"
-            android:layout_width="416dp"
+            android:layout_width="match_parent"
             android:layout_height="193dp"
             android:background="@drawable/calendar_studia_category"
             android:orientation="vertical">
@@ -86,10 +86,10 @@
 
         <LinearLayout
             android:id="@+id/verticalAssign"
-            android:layout_width="416dp"
+            android:layout_width="match_parent"
             android:layout_height="193dp"
-            android:orientation="vertical"
-            android:background="@drawable/calendar_studia_category">
+            android:background="@drawable/calendar_studia_category"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/tvContent"
