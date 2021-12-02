@@ -62,27 +62,27 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
             holder.constraintLayout.setBackground(ContextCompat.getDrawable(context, R.drawable.rectanglered));
         if (arrayList.get(position).getSubject().equals("보건"))
             holder.constraintLayout.setBackground(ContextCompat.getDrawable(context, R.drawable.rectangleyellow));
-        if (arrayList.get(position).getSubject() == "사회")
+        if (arrayList.get(position).getSubject().equals("사회"))
             holder.constraintLayout.setBackground(ContextCompat.getDrawable(context, R.drawable.rectangleblue));
-        if (arrayList.get(position).getSubject() == "수학")
+        if (arrayList.get(position).getSubject().equals("수학"))
             holder.constraintLayout.setBackground(ContextCompat.getDrawable(context, R.drawable.rectanglegray));
-        if (arrayList.get(position).getSubject() == "영어")
+        if (arrayList.get(position).getSubject().equals("영어"))
             holder.constraintLayout.setBackground(ContextCompat.getDrawable(context, R.drawable.rectanglegreen));
-        if (arrayList.get(position).getSubject() == "음악")
+        if (arrayList.get(position).getSubject().equals("음악"))
             holder.constraintLayout.setBackground(ContextCompat.getDrawable(context, R.drawable.rectanglelightblue));
-        if (arrayList.get(position).getSubject() == "정보")
+        if (arrayList.get(position).getSubject().equals("정보"))
             holder.constraintLayout.setBackground(ContextCompat.getDrawable(context, R.drawable.rectanglelightgreen));
-        if (arrayList.get(position).getSubject() == "진로")
+        if (arrayList.get(position).getSubject().equals("진로"))
             holder.constraintLayout.setBackground(ContextCompat.getDrawable(context, R.drawable.rectanglepurple));
-        if (arrayList.get(position).getSubject() == "창체")
+        if (arrayList.get(position).getSubject().equals("창체"))
             holder.constraintLayout.setBackground(ContextCompat.getDrawable(context, R.drawable.rectanglered));
-        if (arrayList.get(position).getSubject() == "체육")
+        if (arrayList.get(position).getSubject().equals("체육"))
             holder.constraintLayout.setBackground(ContextCompat.getDrawable(context, R.drawable.rectangleyellow));
-        if (arrayList.get(position).getSubject() == "환경")
+        if (arrayList.get(position).getSubject().equals("환경"))
             holder.constraintLayout.setBackground(ContextCompat.getDrawable(context, R.drawable.rectangleblue));
-        if (arrayList.get(position).getSubject() == "자율")
+        if (arrayList.get(position).getSubject().equals("자율"))
             holder.constraintLayout.setBackground(ContextCompat.getDrawable(context, R.drawable.rectanglegray));
-        if (arrayList.get(position).getSubject() == "기타")
+        if (arrayList.get(position).getSubject().equals("기타"))
             holder.constraintLayout.setBackground(ContextCompat.getDrawable(context, R.drawable.rectanglegreen));
     }
 

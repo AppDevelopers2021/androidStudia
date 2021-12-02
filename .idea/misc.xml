@@ -14,12 +14,14 @@
         <entry key="..\:/adprojects/projects/AndroidStudia/app/src/main/res/drawable/rectanglepurple.xml" value="0.26979166666666665" />
         <entry key="..\:/adprojects/projects/AndroidStudia/app/src/main/res/drawable/rectanglered.xml" value="0.26979166666666665" />
         <entry key="..\:/adprojects/projects/AndroidStudia/app/src/main/res/drawable/rectangleyellow.xml" value="0.26979166666666665" />
+        <entry key="..\:/adprojects/projects/AndroidStudia/app/src/main/res/layout-sw600dp/activity_calendar.xml" value="0.190234375" />
         <entry key="..\:/adprojects/projects/AndroidStudia/app/src/main/res/layout/activity_calendar.xml" value="0.264" />
         <entry key="..\:/adprojects/projects/AndroidStudia/app/src/main/res/layout/activity_edit_assign.xml" value="0.2390625" />
         <entry key="..\:/adprojects/projects/AndroidStudia/app/src/main/res/layout/activity_edit_memo.xml" value="0.25364583333333335" />
-        <entry key="..\:/adprojects/projects/AndroidStudia/app/src/main/res/layout/activity_login.xml" value="0.264" />
+        <entry key="..\:/adprojects/projects/AndroidStudia/app/src/main/res/layout/activity_login.xml" value="0.2" />
         <entry key="..\:/adprojects/projects/AndroidStudia/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/adprojects/projects/AndroidStudia/app/src/main/res/layout/activity_memo_edit.xml" value="0.264" />
+        <entry key="..\:/adprojects/projects/AndroidStudia/app/src/main/res/layout/activity_no_network.xml" value="0.264" />
         <entry key="..\:/adprojects/projects/AndroidStudia/app/src/main/res/layout/activity_popup.xml" value="0.264" />
         <entry key="..\:/adprojects/projects/AndroidStudia/app/src/main/res/layout/activity_schedule.xml" value="0.264" />
         <entry key="..\:/adprojects/projects/AndroidStudia/app/src/main/res/layout/fragment_activity_login.xml" value="0.25364583333333335" />
