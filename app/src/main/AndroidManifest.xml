@@ -8,7 +8,7 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher_studia"
-        android:label="@string/app_name"
+        android:label="@string/displayName"
         android:roundIcon="@mipmap/ic_launcher_studia_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidStudia"
