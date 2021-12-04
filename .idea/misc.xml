@@ -14,14 +14,12 @@
         <entry key="..\:/adprojects/projects/AndroidStudia/app/src/main/res/drawable/rectanglepurple.xml" value="0.26979166666666665" />
         <entry key="..\:/adprojects/projects/AndroidStudia/app/src/main/res/drawable/rectanglered.xml" value="0.26979166666666665" />
         <entry key="..\:/adprojects/projects/AndroidStudia/app/src/main/res/drawable/rectangleyellow.xml" value="0.26979166666666665" />
-        <entry key="..\:/adprojects/projects/AndroidStudia/app/src/main/res/layout-sw600dp/activity_calendar.xml" value="0.190234375" />
-        <entry key="..\:/adprojects/projects/AndroidStudia/app/src/main/res/layout/activity_calendar.xml" value="0.176" />
+        <entry key="..\:/adprojects/projects/AndroidStudia/app/src/main/res/layout/activity_calendar.xml" value="0.264" />
         <entry key="..\:/adprojects/projects/AndroidStudia/app/src/main/res/layout/activity_edit_assign.xml" value="0.2390625" />
         <entry key="..\:/adprojects/projects/AndroidStudia/app/src/main/res/layout/activity_edit_memo.xml" value="0.25364583333333335" />
-        <entry key="..\:/adprojects/projects/AndroidStudia/app/src/main/res/layout/activity_login.xml" value="0.2" />
+        <entry key="..\:/adprojects/projects/AndroidStudia/app/src/main/res/layout/activity_login.xml" value="0.264" />
         <entry key="..\:/adprojects/projects/AndroidStudia/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/adprojects/projects/AndroidStudia/app/src/main/res/layout/activity_memo_edit.xml" value="0.264" />
-        <entry key="..\:/adprojects/projects/AndroidStudia/app/src/main/res/layout/activity_no_network.xml" value="0.264" />
         <entry key="..\:/adprojects/projects/AndroidStudia/app/src/main/res/layout/activity_popup.xml" value="0.264" />
         <entry key="..\:/adprojects/projects/AndroidStudia/app/src/main/res/layout/activity_schedule.xml" value="0.264" />
         <entry key="..\:/adprojects/projects/AndroidStudia/app/src/main/res/layout/fragment_activity_login.xml" value="0.25364583333333335" />
@@ -56,12 +54,13 @@
         <entry key="app/src/main/res/layout/activity_calendar.xml" value="0.36067782396714526" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/layout/activity_no_network.xml" value="0.16770833333333332" />
         <entry key="app/src/main/res/layout/activity_popup.xml" value="0.18342391304347827" />
         <entry key="app/src/main/res/layout/defaultbutton.xml" value="0.2033514492753623" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android API 31 Platform" project-jdk-type="Android SDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="Android API 31 Platform" project-jdk-type="Android SDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
