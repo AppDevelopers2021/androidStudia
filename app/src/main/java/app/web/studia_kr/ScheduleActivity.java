@@ -82,7 +82,7 @@ public class ScheduleActivity extends AppCompatActivity {
                                                 @Override
                                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                                                     if (snapshot.hasChild("1")) {
-                                                        int Number = (int) snapshot.getChildrenCount() - 1;
+                                                        int Number = (int) snapshot.getChildrenCount();
 
                                                         DatabaseReference addRef = noteRef.child(Integer.toString(Number));
 
