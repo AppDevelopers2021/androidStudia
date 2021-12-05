@@ -4,125 +4,150 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     tools:context=".ScheduleActivity" >
 
-    <LinearLayout
-        android:id="@+id/TopBar"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:background="#2291FF">
-
-        <Button
-            android:id="@+id/btDate"
-            style="@style/Widget.AppCompat.Button.Borderless.Colored"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="128dp"
-            android:layout_marginTop="11dp"
-            android:background="#2291FF"
-            android:fontFamily="@font/nanumsquareeb"
-            android:text="2021/10/31"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textSize="24sp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/Memo"
-        android:layout_width="match_parent"
-        android:layout_height="193dp"
-        android:layout_marginTop="25dp"
-        android:background="@drawable/calendar_studia_category"
-        android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@+id/TopBar">
+        android:layout_height="wrap_content">
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tvSubject"
+            <LinearLayout
+                android:id="@+id/TopBar"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:orientation="horizontal"
+                android:background="#2291FF">
+
+                <ImageView
+                    android:id="@+id/btBack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginLeft="10dp"
+                    app:srcCompat="@drawable/goback" />
+
+                <TextView
+                    android:id="@+id/btDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="1dp"
+                    android:background="#2291FF"
+                    android:fontFamily="@font/nanumsquareeb"
+                    android:text="2021/10/31"
+                    android:layout_gravity="center"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="24sp" />
+            </LinearLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/Memo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/calendar_studia_category"
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@+id/TopBar">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="10dp"
+                    android:layout_marginBottom="52dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/tvSubject"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="25dp"
+                        android:layout_marginTop="15dp"
+                        android:fontFamily="@font/nanumsquareb"
+                        android:text="과목"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textSize="24sp" />
+
+                    <Spinner
+                        android:id="@+id/snSubject"
+                        android:layout_width="256dp"
+                        android:layout_height="68dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="15dp"
+                        android:entries="@array/subject"
+                        tools:ignore="SpeakableTextPresentCheck" />
+
+                </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/Assign"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/calendar_studia_category"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="10dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/tvContent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="25dp"
+                        android:layout_marginTop="15dp"
+                        android:fontFamily="@font/nanumsquareb"
+                        android:text="내용"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textSize="24sp" />
+
+                    <EditText
+                        android:id="@+id/etAssign"
+                        android:layout_width="320dp"
+                        android:layout_height="141dp"
+                        android:layout_gravity="center"
+                        android:ems="10"
+                        android:hint="내용을 입력하세요"
+                        android:inputType="textMultiLine"
+                        android:lines="4"
+                        android:maxLines="8"
+                        android:minLines="4"
+                        android:scrollHorizontally="false"
+                        android:textColor="@color/black"
+                        tools:ignore="SpeakableTextPresentCheck" />
+
+                </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <ImageButton
+                android:id="@+id/btComplete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="15dp"
-                android:fontFamily="@font/nanumsquareb"
-                android:text="과목"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                android:textSize="24sp" />
-
-            <Spinner
-                android:id="@+id/snSubject"
-                android:layout_width="256dp"
-                android:layout_height="68dp"
+                android:layout_marginTop="100dp"
                 android:layout_gravity="center"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="45dp"
-                android:entries="@array/subject"
+                android:backgroundTint="@color/white"
+                app:srcCompat="@drawable/schedule_button_complete"
                 tools:ignore="SpeakableTextPresentCheck" />
 
         </LinearLayout>
-    </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/Assign"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:id="@+id/verticalAssign"
-            android:layout_width="match_parent"
-            android:layout_height="193dp"
-            android:background="@drawable/calendar_studia_category"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/tvContent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="15dp"
-                android:fontFamily="@font/nanumsquareb"
-                android:text="내용"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                android:textSize="24sp" />
-
-            <ScrollView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <EditText
-                    android:id="@+id/etAssign"
-                    android:layout_width="364dp"
-                    android:layout_height="141dp"
-                    android:layout_marginLeft="25dp"
-                    android:layout_marginTop="10dp"
-                    android:ems="10"
-                    android:hint="내용을 입력하세요"
-                    android:inputType="textMultiLine"
-                    android:lines="4"
-                    android:maxLines="8"
-                    android:minLines="4"
-                    android:scrollHorizontally="false"
-                    android:textColor="@color/black"
-                    tools:ignore="SpeakableTextPresentCheck" />
-
-            </ScrollView>
-        </LinearLayout>
-    </LinearLayout>
-
-    <ImageButton
-        android:id="@+id/btComplete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="25dp"
-        android:layout_marginTop="100dp"
-        android:backgroundTint="@color/white"
-        app:srcCompat="@drawable/schedule_button_complete"
-        tools:ignore="SpeakableTextPresentCheck" />
+    </ScrollView>
 </LinearLayout>
