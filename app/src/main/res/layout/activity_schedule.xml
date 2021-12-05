@@ -23,23 +23,25 @@
                 android:orientation="horizontal"
                 android:background="#2291FF">
 
-                <ImageView
+                <ImageButton
                     android:id="@+id/btBack"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="3dp"
                     android:layout_marginLeft="10dp"
-                    app:srcCompat="@drawable/goback" />
+                    android:layout_marginBottom="5dp"
+                    android:backgroundTint="@color/studia_brandcolor"
+                    app:srcCompat="@drawable/goback"
+                    tools:ignore="SpeakableTextPresentCheck" />
 
-                <TextView
+                <Button
                     android:id="@+id/btDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_marginBottom="1dp"
                     android:background="#2291FF"
                     android:fontFamily="@font/nanumsquareeb"
-                    android:text="2021/10/31"
-                    android:layout_gravity="center"
+                    android:text="2021/12/25"
                     android:textAlignment="center"
                     android:textColor="@color/white"
                     android:textSize="24sp" />

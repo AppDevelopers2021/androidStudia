@@ -4,13 +4,15 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -24,7 +26,7 @@ public class ScheduleActivity extends AppCompatActivity {
 
     private EditText content;
     private Spinner subject;
-    private TextView Bdate;
+    private Button Bdate;
     private String showDate;
     private String firebaseDate;
     private String uid;
@@ -50,6 +52,28 @@ public class ScheduleActivity extends AppCompatActivity {
         firebaseDate = intent.getStringExtra("dbDate");
         Bdate = findViewById(R.id.btDate);
         Bdate.setText(showDate);
+
+        Bdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "Easter Egg by Jacob Lim!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=Il0S8BoucSA"));
+                startActivity(intent);
+            }
+        });
+
+        ImageButton btBack = (ImageButton)findViewById(R.id.btBack);
+        btBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ScheduleActivity.this, CalendarActivity.class);
+                startActivity(intent);
+                finish();
+
+                overridePendingTransition(0, 0);
+            }
+        });
+
 
         ImageButton btScheduleAdd = (ImageButton)findViewById(R.id.btComplete);
         btScheduleAdd.setOnClickListener(new View.OnClickListener() {

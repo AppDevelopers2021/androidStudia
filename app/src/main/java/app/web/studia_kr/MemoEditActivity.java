@@ -52,6 +52,8 @@ public class MemoEditActivity extends AppCompatActivity {
         Bdate = findViewById(R.id.btDate);
         Bdate.setText(showDate);
 
+        CalendarLoad(uid, firebaseDate);
+
         ImageButton btComplete = (ImageButton) findViewById(R.id.btComplete);
         btComplete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -234,11 +236,8 @@ public class MemoEditActivity extends AppCompatActivity {
         });
     }
 
-    private void CalendarLoad(String uid, String showDate, String firebaseDate) {
+    private void CalendarLoad(String uid, String firebaseDate) {
         Log.w("MemoEditActivity", "void CalendarLoad started.");
-
-        Button btDate = findViewById(R.id.btDate);
-        btDate.setText(showDate);
 
         //Firebase Database Refresh
         database = FirebaseDatabase.getInstance();
