@@ -27,6 +27,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
 
+import java.util.Calendar;
+
 public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
 
     private EditText etEmail;
@@ -59,8 +61,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         if (sharedPreferences.getString("auto", "0").equals("1")) {
             if (sharedPreferences.getString("google", "0").equals("0")) {
 
-                Email = sharedPreferences.getString("email", "none");
-                Password = sharedPreferences.getString("password", "none");
+                String Email = sharedPreferences.getString("email", "none");
+                String Password = sharedPreferences.getString("password", "none");
 
                 mFirebaseAuth.signInWithEmailAndPassword(Email, Password).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
