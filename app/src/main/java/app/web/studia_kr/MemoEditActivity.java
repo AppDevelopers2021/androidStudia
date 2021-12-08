@@ -99,6 +99,8 @@ public class MemoEditActivity extends AppCompatActivity {
                                             memoRef.setValue(memoString);
 
                                             Intent intent = new Intent(MemoEditActivity.this, CalendarActivity.class);
+                                            intent.putExtra("date", showDate);
+                                            intent.putExtra("dbDate", firebaseDate);
                                             startActivity(intent);
                                             finish();
 
@@ -121,16 +123,14 @@ public class MemoEditActivity extends AppCompatActivity {
                                             reminderRef.addValueEventListener(new ValueEventListener() {
                                                 @Override
                                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                                    int lineCount = etAssign.getLineCount();
-                                                    int count = 0;
+                                                    String getReminder = etAssign.getText().toString();
+                                                    String[] lines;
+                                                    String delimiter = "\n";
 
-                                                    while (count != lineCount - 1) {
-                                                        int lineStart = etAssign.getLayout().getLineStart(count);
-                                                        int lineEnd = etAssign.getLayout().getLineEnd(count);
+                                                    lines = getReminder.split(delimiter);
 
-                                                        reminderRef.child(Integer.toString(count)).setValue(etAssign.getText().toString().substring(lineStart, lineEnd));
-
-                                                        ++count;
+                                                    for(int i=0; i<lines.length; i++) {
+                                                        reminderRef.child(Integer.toString(i)).setValue(lines[i]);
                                                     }
                                                 }
 
@@ -153,11 +153,13 @@ public class MemoEditActivity extends AppCompatActivity {
 
                                     @Override
                                     public void onCancelled(@NonNull DatabaseError error) {
-
+                                        Log.e("MemoEditActivity", String.valueOf(error.toException()));
                                     }
                                 });
 
                                 Intent intent = new Intent(MemoEditActivity.this, CalendarActivity.class);
+                                intent.putExtra("date", showDate);
+                                intent.putExtra("dbDate", firebaseDate);
                                 startActivity(intent);
                                 finish();
 
@@ -174,16 +176,14 @@ public class MemoEditActivity extends AppCompatActivity {
                                 reminderRef.addValueEventListener(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                        int lineCount = etAssign.getLineCount();
-                                        int count = 0;
+                                        String getReminder = etAssign.getText().toString();
+                                        String[] lines;
+                                        String delimiter = "\n";
 
-                                        while (count != lineCount - 1) {
-                                            int lineStart = etAssign.getLayout().getLineStart(count);
-                                            int lineEnd = etAssign.getLayout().getLineEnd(count);
+                                        lines = getReminder.split(delimiter);
 
-                                            reminderRef.child(Integer.toString(count)).setValue(etAssign.getText().toString().substring(lineStart, lineEnd));
-
-                                            ++count;
+                                        for(int i=0; i<lines.length; i++) {
+                                            reminderRef.child(Integer.toString(i)).setValue(lines[i]);
                                         }
                                     }
 
@@ -192,6 +192,14 @@ public class MemoEditActivity extends AppCompatActivity {
                                         Log.e("MemoEditActivity", String.valueOf(error.toException()));
                                     }
                                 });
+
+                                Intent intent = new Intent(MemoEditActivity.this, CalendarActivity.class);
+                                intent.putExtra("date", showDate);
+                                intent.putExtra("dbDate", firebaseDate);
+                                startActivity(intent);
+                                finish();
+
+                                overridePendingTransition(0, 0);
                             }
                         }
                         else {
@@ -206,16 +214,14 @@ public class MemoEditActivity extends AppCompatActivity {
                             reminderRef.addValueEventListener(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                    int lineCount = etAssign.getLineCount();
-                                    int count = 0;
+                                    String getReminder = etAssign.getText().toString();
+                                    String[] lines;
+                                    String delimiter = "\n";
 
-                                    while (count != lineCount - 1) {
-                                        int lineStart = etAssign.getLayout().getLineStart(count);
-                                        int lineEnd = etAssign.getLayout().getLineEnd(count);
+                                    lines = getReminder.split(delimiter);
 
-                                        reminderRef.child(Integer.toString(count)).setValue(etAssign.getText().toString().substring(lineStart, lineEnd));
-
-                                        ++count;
+                                    for(int i=0; i<lines.length; i++) {
+                                        reminderRef.child(Integer.toString(i)).setValue(lines[i]);
                                     }
                                 }
 
@@ -224,6 +230,14 @@ public class MemoEditActivity extends AppCompatActivity {
                                     Log.e("MemoEditActivity", String.valueOf(error.toException()));
                                 }
                             });
+
+                            Intent intent = new Intent(MemoEditActivity.this, CalendarActivity.class);
+                            intent.putExtra("date", showDate);
+                            intent.putExtra("dbDate", firebaseDate);
+                            startActivity(intent);
+                            finish();
+
+                            overridePendingTransition(0, 0);
                         }
                     }
 

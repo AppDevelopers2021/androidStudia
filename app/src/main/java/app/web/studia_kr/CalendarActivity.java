@@ -57,15 +57,24 @@ public class CalendarActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
 
-        //Calendar Instance TimeSet
-        calendar = Calendar.getInstance();
-        calendar.setTime(new Date());
-        dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-        showDate = dateFormat.format(calendar.getTime());
-        firebaseFormat = new SimpleDateFormat("yyyyMMdd");
-        firebaseDate = firebaseFormat.format(calendar.getTime());
-        btDate = findViewById(R.id.btDate);
-        btDate.setText(showDate);
+        //Get Calendar Date
+        if (getIntent().getExtras() != null) {
+            Intent intent = getIntent();
+            showDate = intent.getStringExtra("date");
+            firebaseDate = intent.getStringExtra("dbDate");
+            btDate = findViewById(R.id.btDate);
+            btDate.setText(showDate);
+        }
+        else {
+            calendar = Calendar.getInstance();
+            calendar.setTime(new Date());
+            dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+            showDate = dateFormat.format(calendar.getTime());
+            firebaseFormat = new SimpleDateFormat("yyyyMMdd");
+            firebaseDate = firebaseFormat.format(calendar.getTime());
+            btDate = findViewById(R.id.btDate);
+            btDate.setText(showDate);
+        }
 
         //Firebase RecyclerView Declare
         recyclerView = findViewById(R.id.rvTodo);
