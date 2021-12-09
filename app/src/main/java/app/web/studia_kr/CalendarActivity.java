@@ -1,5 +1,6 @@
 package app.web.studia_kr;
 
+import android.app.ActivityOptions;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -56,6 +57,9 @@ public class CalendarActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
+
+        // Get rid of the 'flashing' effect
+        getWindow().setEnterTransition(null);
 
         //Calendar Instance TimeSet
         calendar = Calendar.getInstance();
@@ -130,9 +134,12 @@ public class CalendarActivity extends AppCompatActivity {
                 Intent intent = new Intent(CalendarActivity.this, ScheduleActivity.class);
                 intent.putExtra("date", showDate);
                 intent.putExtra("dbDate", firebaseDate);
-                startActivity(intent);
+                getWindow().setExitTransition(null);
 
-                overridePendingTransition(0, 0);
+                // Custom transition effect
+                ActivityOptions options = ActivityOptions
+                        .makeSceneTransitionAnimation(CalendarActivity.this, btDate, "date");
+                startActivity(intent, options.toBundle());
             }
         });
 

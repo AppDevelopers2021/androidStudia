@@ -29,7 +29,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="#2291FF"
-                    app:srcCompat="@drawable/calendar_studia_rightarrow"
+                    android:layout_marginStart="10dp"
+                    app:srcCompat="@drawable/ic_baseline_arrow_back_ios_new_40"
                     tools:ignore="SpeakableTextPresentCheck" />
 
                 <Button
@@ -38,18 +39,19 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="#2291FF"
-                    android:fontFamily="@font/nanumsquareeb"
+                    android:fontFamily="@font/nanumsquareb"
                     android:text="2021/10/31"
                     android:textAlignment="center"
                     android:textColor="@color/white"
-                    android:textSize="24sp" />
+                    android:textSize="26sp"
+                    android:transitionName="date"/>
 
                 <ImageButton
                     android:id="@+id/btNext"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="#2291FF"
-                    app:srcCompat="@drawable/calendar_studia_leftarrow"
+                    app:srcCompat="@drawable/ic_baseline_arrow_forward_ios_40"
                     tools:ignore="SpeakableTextPresentCheck" />
 
                 <View
