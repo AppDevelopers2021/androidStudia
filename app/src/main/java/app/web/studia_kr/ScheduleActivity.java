@@ -109,7 +109,7 @@ public class ScheduleActivity extends AppCompatActivity {
                                             noteRef.addValueEventListener(new ValueEventListener() {
                                                 @Override
                                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                                    if (snapshot.hasChild("1")) {
+                                                    if (snapshot.hasChild("0")) {
                                                         int Number = (int) snapshot.getChildrenCount();
 
                                                         DatabaseReference addRef = noteRef.child(Integer.toString(Number));
@@ -118,6 +118,8 @@ public class ScheduleActivity extends AppCompatActivity {
                                                         addRef.child("subject").setValue(subjectString);
 
                                                         Intent intent = new Intent(ScheduleActivity.this, CalendarActivity.class);
+                                                        intent.putExtra("date", showDate);
+                                                        intent.putExtra("dbDate", firebaseDate);
                                                         startActivity(intent);
                                                         finish();
 
@@ -130,6 +132,8 @@ public class ScheduleActivity extends AppCompatActivity {
                                                         zeroRef.child("subject").setValue(subjectString);
 
                                                         Intent intent = new Intent(ScheduleActivity.this, CalendarActivity.class);
+                                                        intent.putExtra("date", showDate);
+                                                        intent.putExtra("dbDate", firebaseDate);
                                                         startActivity(intent);
                                                         finish();
 
@@ -152,6 +156,8 @@ public class ScheduleActivity extends AppCompatActivity {
                                             zeroRef.child("subject").setValue(subjectString);
 
                                             Intent intent = new Intent(ScheduleActivity.this, CalendarActivity.class);
+                                            intent.putExtra("date", showDate);
+                                            intent.putExtra("dbDate", firebaseDate);
                                             startActivity(intent);
                                             finish();
 
@@ -176,6 +182,8 @@ public class ScheduleActivity extends AppCompatActivity {
                                 zeroRef.child("subject").setValue(subjectString);
 
                                 Intent intent = new Intent(ScheduleActivity.this, CalendarActivity.class);
+                                intent.putExtra("date", showDate);
+                                intent.putExtra("dbDate", firebaseDate);
                                 startActivity(intent);
                                 finish();
 
@@ -196,6 +204,8 @@ public class ScheduleActivity extends AppCompatActivity {
                             zeroRef.child("subject").setValue(subjectString);
 
                             Intent intent = new Intent(ScheduleActivity.this, CalendarActivity.class);
+                            intent.putExtra("date", showDate);
+                            intent.putExtra("dbDate", firebaseDate);
                             startActivity(intent);
                             finish();
 

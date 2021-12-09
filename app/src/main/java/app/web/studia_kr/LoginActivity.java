@@ -15,7 +15,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
@@ -27,13 +29,15 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
 
-public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
+import java.util.Calendar;
+
+public class LoginActivity extends AppCompatActivity {
 
     private EditText etEmail;
     private EditText etPassword;
     private String Email;
     private String Password;
-    private GoogleApiClient googleApiClient;
+    private GoogleSignInClient googleSignInClient;
     private static final int REQ_SIGN_GOOGLE = 100;
     private FirebaseAuth mFirebaseAuth;
     public SharedPreferences sharedPreferences;
@@ -48,19 +52,15 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 .requestEmail()
                 .build();
 
-        googleApiClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this, this)
-                .addApi(Auth.GOOGLE_SIGN_IN_API, googleSignInOptions)
-                .build();
-
+        googleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions);
         mFirebaseAuth = FirebaseAuth.getInstance();
 
         sharedPreferences = getSharedPreferences("preference", 0);
         if (sharedPreferences.getString("auto", "0").equals("1")) {
             if (sharedPreferences.getString("google", "0").equals("0")) {
 
-                Email = sharedPreferences.getString("email", "none");
-                Password = sharedPreferences.getString("password", "none");
+                String Email = sharedPreferences.getString("email", "none");
+                String Password = sharedPreferences.getString("password", "none");
 
                 mFirebaseAuth.signInWithEmailAndPassword(Email, Password).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -81,7 +81,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 });
             }
             else {
-                Intent intent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
+                Intent intent = googleSignInClient.getSignInIntent();
                 startActivityForResult(intent, REQ_SIGN_GOOGLE);
             }
         }
@@ -133,7 +133,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         btGoogle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
+                Intent intent = googleSignInClient.getSignInIntent();
                 startActivityForResult(intent, REQ_SIGN_GOOGLE);
             }
         });
@@ -155,17 +155,12 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == REQ_SIGN_GOOGLE) {
-            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
-            if (result.isSuccess()) {
-                GoogleSignInAccount account = result.getSignInAccount();
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            if (task.isSuccessful()) {
+                GoogleSignInAccount account = task.getResult();
                 resultLogin(account);
             }
         }
-    }
-
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
     }
 
     private void resultLogin(GoogleSignInAccount account) {
