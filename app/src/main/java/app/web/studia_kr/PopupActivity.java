@@ -61,6 +61,7 @@ public class PopupActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(PopupActivity.this, CalendarActivity.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0);
             }
         });
     }

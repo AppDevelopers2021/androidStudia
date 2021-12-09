@@ -1,5 +1,6 @@
 package app.web.studia_kr;
 
+import android.app.ActivityOptions;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -47,6 +48,8 @@ public class ScheduleActivity extends AppCompatActivity {
         FirebaseUser user = mAuth.getCurrentUser();
         uid = user.getUid();
 
+        getWindow().setEnterTransition(null);
+
         Intent intent = getIntent();
         showDate = intent.getStringExtra("date");
         firebaseDate = intent.getStringExtra("dbDate");
@@ -67,15 +70,16 @@ public class ScheduleActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(ScheduleActivity.this, CalendarActivity.class);
-                startActivity(intent);
-                finish();
-
-                overridePendingTransition(0, 0);
+                getWindow().setExitTransition(null);
+                ActivityOptions options = ActivityOptions
+                        .makeSceneTransitionAnimation(ScheduleActivity.this, Bdate, "date");
+                startActivity(intent, options.toBundle());
+                finishAfterTransition();
             }
         });
 
 
-        ImageButton btScheduleAdd = (ImageButton)findViewById(R.id.btComplete);
+        Button btScheduleAdd = (Button)findViewById(R.id.btComplete);
         btScheduleAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

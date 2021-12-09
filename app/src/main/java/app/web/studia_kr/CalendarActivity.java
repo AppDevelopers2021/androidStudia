@@ -1,5 +1,6 @@
 package app.web.studia_kr;
 
+import android.app.ActivityOptions;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -57,24 +58,18 @@ public class CalendarActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
 
-        //Get Calendar Date
-        if (getIntent().getExtras() != null) {
-            Intent intent = getIntent();
-            showDate = intent.getStringExtra("date");
-            firebaseDate = intent.getStringExtra("dbDate");
-            btDate = findViewById(R.id.btDate);
-            btDate.setText(showDate);
-        }
-        else {
-            calendar = Calendar.getInstance();
-            calendar.setTime(new Date());
-            dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-            showDate = dateFormat.format(calendar.getTime());
-            firebaseFormat = new SimpleDateFormat("yyyyMMdd");
-            firebaseDate = firebaseFormat.format(calendar.getTime());
-            btDate = findViewById(R.id.btDate);
-            btDate.setText(showDate);
-        }
+        // Get rid of the 'flashing' effect
+        getWindow().setEnterTransition(null);
+
+        //Calendar Instance TimeSet
+        calendar = Calendar.getInstance();
+        calendar.setTime(new Date());
+        dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        showDate = dateFormat.format(calendar.getTime());
+        firebaseFormat = new SimpleDateFormat("yyyyMMdd");
+        firebaseDate = firebaseFormat.format(calendar.getTime());
+        btDate = findViewById(R.id.btDate);
+        btDate.setText(showDate);
 
         //Firebase RecyclerView Declare
         recyclerView = findViewById(R.id.rvTodo);
@@ -139,9 +134,12 @@ public class CalendarActivity extends AppCompatActivity {
                 Intent intent = new Intent(CalendarActivity.this, ScheduleActivity.class);
                 intent.putExtra("date", showDate);
                 intent.putExtra("dbDate", firebaseDate);
-                startActivity(intent);
+                getWindow().setExitTransition(null);
 
-                overridePendingTransition(0, 0);
+                // Custom transition effect
+                ActivityOptions options = ActivityOptions
+                        .makeSceneTransitionAnimation(CalendarActivity.this, btDate, "date");
+                startActivity(intent, options.toBundle());
             }
         });
 
