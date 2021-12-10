@@ -59,8 +59,8 @@ public class ScheduleActivity extends AppCompatActivity {
         Bdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "Easter Egg by Jacob Lim!", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=Il0S8BoucSA"));
+                Toast.makeText(getApplicationContext(), "빙빙 돌아온 우리의 시간처럼", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=tnAxZipkuWw"));
                 startActivity(intent);
             }
         });
