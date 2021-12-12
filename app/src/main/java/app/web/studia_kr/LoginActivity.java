@@ -48,43 +48,12 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestIdToken("654717768488-dmq2q3n9g27kgk1uv3ndo0im4f0bokbh.apps.googleusercontent.com")
                 .requestEmail()
                 .build();
 
         googleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions);
         mFirebaseAuth = FirebaseAuth.getInstance();
-
-        sharedPreferences = getSharedPreferences("preference", 0);
-        if (sharedPreferences.getString("auto", "0").equals("1")) {
-            if (sharedPreferences.getString("google", "0").equals("0")) {
-
-                String Email = sharedPreferences.getString("email", "none");
-                String Password = sharedPreferences.getString("password", "none");
-
-                mFirebaseAuth.signInWithEmailAndPassword(Email, Password).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            Log.i("Login Success", "Successful Login.");
-
-                            Intent intent = new Intent(LoginActivity.this, CalendarActivity.class);
-                            startActivity(intent);
-                            finish();
-                        }
-                        else {
-                            Log.w("Login Failure", task.getException());
-
-                            Toast.makeText(getApplicationContext(), "로그인에 실패했습니다.", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-            }
-            else {
-                Intent intent = googleSignInClient.getSignInIntent();
-                startActivityForResult(intent, REQ_SIGN_GOOGLE);
-            }
-        }
 
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);

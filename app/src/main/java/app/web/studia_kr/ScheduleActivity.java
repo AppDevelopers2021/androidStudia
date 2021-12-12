@@ -59,8 +59,8 @@ public class ScheduleActivity extends AppCompatActivity {
         Bdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "빙빙 돌아온 우리의 시간처럼", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=tnAxZipkuWw"));
+                Toast.makeText(getApplicationContext(), "서프라이즈!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://blog.studia.blue/notice/intro-blog/"));
                 startActivity(intent);
             }
         });
@@ -106,7 +106,7 @@ public class ScheduleActivity extends AppCompatActivity {
                                         if (snapshot.hasChild("note")) {
                                             noteRef = dateRef.child("note");
 
-                                            noteRef.addValueEventListener(new ValueEventListener() {
+                                            noteRef.addListenerForSingleValueEvent(new ValueEventListener() {
                                                 @Override
                                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                                                     if (snapshot.hasChild("0")) {
