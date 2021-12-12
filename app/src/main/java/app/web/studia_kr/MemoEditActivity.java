@@ -54,7 +54,7 @@ public class MemoEditActivity extends AppCompatActivity {
 
         CalendarLoad(uid, firebaseDate);
 
-        ImageButton btComplete = (ImageButton) findViewById(R.id.btComplete);
+        Button btComplete = (Button) findViewById(R.id.btComplete);
         btComplete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

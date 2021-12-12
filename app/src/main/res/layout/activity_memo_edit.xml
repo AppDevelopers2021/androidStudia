@@ -1,157 +1,148 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal"
-    tools:context=".MemoEditActivity">
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="horizontal"
+              android:background="@color/white"
+              tools:context=".MemoEditActivity">
 
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:id="@+id/TopBar"
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:orientation="horizontal"
-                android:background="#2291FF">
-
-                <ImageButton
-                    android:id="@+id/btBack"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginBottom="5dp"
-                    android:backgroundTint="@color/studia_brandcolor"
-                    app:srcCompat="@drawable/goback"
-                    tools:ignore="SpeakableTextPresentCheck" />
-
-                <TextView
-                    android:id="@+id/btDate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="1dp"
-                    android:background="#2291FF"
-                    android:fontFamily="@font/nanumsquareeb"
-                    android:text="2021/12/25"
-                    android:textAlignment="center"
-                    android:textColor="@color/white"
-                    android:textSize="24sp" />
-            </LinearLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/Memo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:background="@drawable/calendar_studia_category"
                 android:orientation="vertical">
 
-                <LinearLayout
+            <LinearLayout
+                    android:id="@+id/TopBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:background="#2291FF">
+
+                <ImageButton
+                        android:id="@+id/btBack"
+                        android:layout_width="40dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:backgroundTint="@color/studia_brandcolor"
+                        android:src="@drawable/ic_baseline_arrow_back_40"
+                        tools:ignore="SpeakableTextPresentCheck"/>
+
+                <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"/>
+
+                <TextView
+                        android:id="@+id/btDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="#2291FF"
+                        android:fontFamily="@font/nanumsquareb"
+                        android:text="2021/12/25"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="26sp"
+                        android:stateListAnimator="@null"
+                        android:transitionName="date"/>
+
+
+                <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="55dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/Memo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:padding="10dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    android:layout_margin="15dp"
+                    android:background="@drawable/calendarsection">
 
-                    <TextView
+                <TextView
                         android:id="@+id/tvMemo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="25dp"
-                        android:layout_marginTop="15dp"
+                        android:layout_marginTop="5dp"
                         android:fontFamily="@font/nanumsquareb"
                         android:text="메모"
                         android:textAlignment="center"
                         android:textColor="@color/black"
-                        android:textSize="24sp" />
+                        android:textSize="24sp"/>
 
-                    <EditText
+                <EditText
                         android:id="@+id/etMemo"
-                        android:layout_width="320dp"
-                        android:layout_height="141dp"
-                        android:layout_gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:gravity="top"
+                        android:background="@android:color/transparent"
                         android:ems="10"
                         android:hint="내용을 입력하세요"
                         android:inputType="textMultiLine"
-                        android:lines="4"
-                        android:maxLines="8"
-                        android:minLines="4"
+                        android:minLines="6"
                         android:scrollHorizontally="false"
                         android:textColor="@color/black"
-                        tools:ignore="SpeakableTextPresentCheck" />
+                        tools:ignore="SpeakableTextPresentCheck"/>
+            </LinearLayout>
 
-                </LinearLayout>
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/Assign"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:background="@drawable/calendar_studia_category"
-                android:orientation="vertical">
-
-                <LinearLayout
+            <LinearLayout
+                    android:id="@+id/Assign"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:padding="10dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    android:layout_margin="15dp"
+                    android:background="@drawable/calendarsection">
 
                     <TextView
-                        android:id="@+id/tvContent"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="25dp"
-                        android:layout_marginTop="15dp"
-                        android:fontFamily="@font/nanumsquareb"
-                        android:text="과제 및 준비물"
-                        android:textAlignment="center"
-                        android:textColor="@color/black"
-                        android:textSize="24sp" />
+                            android:id="@+id/tvContent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:fontFamily="@font/nanumsquareb"
+                            android:text="과제 및 준비물"
+                            android:textAlignment="center"
+                            android:textColor="@color/black"
+                            android:textSize="24sp"/>
 
                     <EditText
-                        android:id="@+id/etAssign"
-                        android:layout_width="320dp"
-                        android:layout_height="141dp"
-                        android:layout_gravity="center"
-                        android:ems="10"
-                        android:hint="내용을 입력하세요"
-                        android:inputType="textMultiLine"
-                        android:lines="4"
-                        android:maxLines="8"
-                        android:minLines="4"
-                        android:scrollHorizontally="false"
-                        android:textColor="@color/black"
-                        tools:ignore="SpeakableTextPresentCheck" />
+                            android:id="@+id/etAssign"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:gravity="top"
+                            android:background="@android:color/transparent"
+                            android:ems="10"
+                            android:hint="내용을 입력하세요"
+                            android:inputType="textMultiLine"
+                            android:minLines="6"
+                            android:scrollHorizontally="false"
+                            android:textColor="@color/black"
+                            tools:ignore="SpeakableTextPresentCheck"/>
+            </LinearLayout>
 
-                </LinearLayout>
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <ImageButton
-                android:id="@+id/btComplete"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="100dp"
-                android:layout_gravity="center"
-                android:backgroundTint="@color/white"
-                app:srcCompat="@drawable/schedule_button_complete"
-                tools:ignore="SpeakableTextPresentCheck" />
+            <Button
+                    android:id="@+id/btComplete"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_margin="15dp"
+                    android:background="@drawable/loginbtn"
+                    android:text="완료"
+                    android:textColor="@color/white"
+                    tools:ignore="SpeakableTextPresentCheck"/>
 
         </LinearLayout>
 

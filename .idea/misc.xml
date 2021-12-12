@@ -57,12 +57,14 @@
         <entry key="app/src/main/res/layout/activity_calendar.xml" value="0.36067782396714526" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/layout/activity_memo_edit.xml" value="0.375" />
         <entry key="app/src/main/res/layout/activity_popup.xml" value="0.18342391304347827" />
+        <entry key="app/src/main/res/layout/activity_schedule.xml" value="0.2509057971014493" />
         <entry key="app/src/main/res/layout/defaultbutton.xml" value="0.2033514492753623" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="Android API 31 Platform" project-jdk-type="Android SDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android API 31 Platform" project-jdk-type="Android SDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
