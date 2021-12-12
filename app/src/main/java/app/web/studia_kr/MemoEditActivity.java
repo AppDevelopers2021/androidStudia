@@ -3,6 +3,7 @@ package app.web.studia_kr;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -53,6 +54,21 @@ public class MemoEditActivity extends AppCompatActivity {
         Bdate.setText(showDate);
 
         CalendarLoad(uid, firebaseDate);
+
+        ImageButton btBack = (ImageButton)findViewById(R.id.btBack);
+        btBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MemoEditActivity.this, CalendarActivity.class);
+                intent.putExtra("date", showDate);
+                intent.putExtra("dbDate", firebaseDate);
+                getWindow().setExitTransition(null);
+                ActivityOptions options = ActivityOptions
+                        .makeSceneTransitionAnimation(MemoEditActivity.this, Bdate, "date");
+                startActivity(intent, options.toBundle());
+                finishAfterTransition();
+            }
+        });
 
         Button btComplete = (Button) findViewById(R.id.btComplete);
         btComplete.setOnClickListener(new View.OnClickListener() {

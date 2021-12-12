@@ -70,6 +70,8 @@ public class ScheduleActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(ScheduleActivity.this, CalendarActivity.class);
+                intent.putExtra("date", showDate);
+                intent.putExtra("dbDate", firebaseDate);
                 getWindow().setExitTransition(null);
                 ActivityOptions options = ActivityOptions
                         .makeSceneTransitionAnimation(ScheduleActivity.this, Bdate, "date");

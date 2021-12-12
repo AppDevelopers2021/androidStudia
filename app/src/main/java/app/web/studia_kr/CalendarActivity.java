@@ -58,18 +58,27 @@ public class CalendarActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
 
+        //Get calendar data
+        if (getIntent().getExtras() != null) {
+            showDate = getIntent().getStringExtra("data");
+            firebaseDate = getIntent().getStringExtra("dbDate");
+            btDate = findViewById(R.id.btDate);
+            btDate.setText(showDate);
+        }
+        else {
+            //Calendar Instance TimeSet
+            calendar = Calendar.getInstance();
+            calendar.setTime(new Date());
+            dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+            showDate = dateFormat.format(calendar.getTime());
+            firebaseFormat = new SimpleDateFormat("yyyyMMdd");
+            firebaseDate = firebaseFormat.format(calendar.getTime());
+            btDate = findViewById(R.id.btDate);
+            btDate.setText(showDate);
+        }
+
         // Get rid of the 'flashing' effect
         getWindow().setEnterTransition(null);
-
-        //Calendar Instance TimeSet
-        calendar = Calendar.getInstance();
-        calendar.setTime(new Date());
-        dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-        showDate = dateFormat.format(calendar.getTime());
-        firebaseFormat = new SimpleDateFormat("yyyyMMdd");
-        firebaseDate = firebaseFormat.format(calendar.getTime());
-        btDate = findViewById(R.id.btDate);
-        btDate.setText(showDate);
 
         //Firebase RecyclerView Declare
         recyclerView = findViewById(R.id.rvTodo);
