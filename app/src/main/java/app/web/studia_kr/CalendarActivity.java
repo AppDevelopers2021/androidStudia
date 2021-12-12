@@ -280,7 +280,7 @@ public class CalendarActivity extends AppCompatActivity {
                                 if (snapshot.hasChild("reminder")) {
                                     reminderRef = dateRef.child("reminder");
 
-                                    reminderRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    reminderRef.addValueEventListener(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot snapshot) {
 
@@ -344,14 +344,5 @@ public class CalendarActivity extends AppCompatActivity {
         });
 
         Log.w("CalendarActivity", "void CalendarLoad finished.");
-    }
-
-    public void delete(int position) {
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference reference = database.getReference();
-
-        DatabaseReference deleteRef = reference.child("calendar").child(uid).child(firebaseDate).child("note").child(Integer.toString(position));
-
-        deleteRef.removeValue();
     }
 }
