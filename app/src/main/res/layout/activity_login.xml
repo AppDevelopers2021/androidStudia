@@ -99,11 +99,11 @@
         android:id="@+id/btLogin"
         android:layout_width="match_parent"
         android:layout_height="40dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/loginbtn"
         android:text="@string/signin"
         android:textColor="@color/white"
-        android:layout_marginTop="10dp"
-        tools:ignore="SpeakableTextPresentCheck" />
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <Button
         android:id="@+id/btGoogle"
@@ -111,10 +111,10 @@
         android:layout_height="40dp"
         android:layout_marginTop="5dp"
         android:background="@drawable/logingooglebtn"
-        android:text="@string/googlesignin"
-        tools:ignore="SpeakableTextPresentCheck"
-        android:textAllCaps="false"
         android:drawableStart="@drawable/logingoogleicn"
         android:paddingStart="20dp"
-        android:paddingEnd="20dp"/>
+        android:paddingEnd="20dp"
+        android:text="@string/googlesignin"
+        android:textAllCaps="false"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 </LinearLayout>

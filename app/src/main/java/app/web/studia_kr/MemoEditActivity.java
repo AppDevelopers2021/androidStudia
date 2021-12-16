@@ -140,14 +140,17 @@ public class MemoEditActivity extends AppCompatActivity {
                                                 @Override
                                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                                                     String getReminder = etAssign.getText().toString();
-                                                    String[] lines;
-                                                    String delimiter = "\n";
+                                                    if (getReminder != "") {
+                                                        String[] lines;
+                                                        String delimiter = "\n";
 
-                                                    lines = getReminder.split(delimiter);
+                                                        lines = getReminder.split(delimiter);
 
-                                                    for(int i=0; i<lines.length; i++) {
-                                                        reminderRef.child(Integer.toString(i)).setValue(lines[i]);
+                                                        for(int i=0; i<lines.length; i++) {
+                                                            reminderRef.child(Integer.toString(i)).setValue(lines[i]);
+                                                        }
                                                     }
+
                                                 }
 
                                                 @Override
@@ -323,7 +326,13 @@ public class MemoEditActivity extends AppCompatActivity {
                                                 String reminder = datasnapshot.getValue().toString();
 
                                                 EditText tvAssign = findViewById(R.id.etAssign);
-                                                tvAssign.append("\n" + reminder);
+
+                                                if (datasnapshot.getKey() == "0") {
+                                                    tvAssign.append(reminder);
+                                                }
+                                                else {
+                                                    tvAssign.append("\n" + reminder);
+                                                }
                                             }
                                         }
 
