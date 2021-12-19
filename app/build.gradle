@@ -17,6 +17,9 @@ android {
     }
 
     buildTypes {
+        debug {
+            signingConfig signingConfigs.debug
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -28,6 +31,11 @@ android {
     }
     buildFeatures {
         viewBinding true
+    }
+    signingConfigs {
+        debug {
+            storeFile file("C:\\Users\\임현우\\.android\\debug.keystore")
+        }
     }
 }
 
