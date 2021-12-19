@@ -15,11 +15,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "654717768488-dmq2q3n9g27kgk1uv3ndo0im4f0bokbh.apps.googleusercontent.com",
+          "client_id": "654717768488-8vukifmrgr3qk8g327op8hn7kengs593.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "app.web.studia_kr",
-            "certificate_hash": "14b814ee757b604d50306df71670372ac8e9fa76"
+            "certificate_hash": "25275d88f277acdda9018e5f448626aad7098590"
           }
         },
         {
