@@ -1,8 +1,14 @@
 package app.web.studia_kr;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContract;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -21,26 +27,34 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.Api;
+import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.PendingResult;
+import com.google.android.gms.common.api.Status;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
+import java.io.FileDescriptor;
+import java.io.PrintWriter;
 import java.util.Calendar;
+import java.util.concurrent.TimeUnit;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity{
 
     private EditText etEmail;
     private EditText etPassword;
     private String Email;
     private String Password;
     private GoogleSignInClient googleSignInClient;
-    private static final int REQ_SIGN_GOOGLE = 100;
+    private final static int RC_SIGN_IN = 123;
     private FirebaseAuth mFirebaseAuth;
-    public SharedPreferences sharedPreferences;
+    public ActivityResultLauncher<Intent> signInLauncher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,13 +67,33 @@ public class LoginActivity extends AppCompatActivity {
                 .build();
 
         googleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions);
+
         mFirebaseAuth = FirebaseAuth.getInstance();
 
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
 
+        signInLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+            @Override
+            public void onActivityResult(ActivityResult result) {
+                if (result.getResultCode() == RC_SIGN_IN) {
+                    Intent data = result.getData();
+
+                    Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+                    try {
+                        // Google Sign In was successful, authenticate with Firebase
+                        GoogleSignInAccount account = task.getResult(ApiException.class);
+                        Log.d("LoginActivity", "firebaseAuthWithGoogle: " + account.getId());
+                        resultLogin(account.getIdToken());
+                    } catch (ApiException e) {
+                        // Google Sign In failed, update UI appropriately
+                        Log.w("LoginActivity", "Google sign in failed", e);
+                    }
+                }
+            }
+        });
+
         Button btLogin =  (Button)findViewById(R.id.btLogin);
-        btLogin.setVisibility(View.GONE);
         btLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -73,13 +107,7 @@ public class LoginActivity extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 Log.i("Login Success", "Successful Login.");
 
-                                sharedPreferences = getSharedPreferences("preference", 0);
-                                SharedPreferences.Editor editor = sharedPreferences.edit();
-                                editor.putString("auto", "1");
-                                editor.putString("google", "0");
-                                editor.putString("email", Email);
-                                editor.putString("password", Password);
-                                editor.apply();
+                                FirebaseUser user = mFirebaseAuth.getCurrentUser();
 
                                 Intent intent = new Intent(LoginActivity.this, CalendarActivity.class);
                                 startActivity(intent);
@@ -103,40 +131,38 @@ public class LoginActivity extends AppCompatActivity {
         btGoogle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = googleSignInClient.getSignInIntent();
-                startActivityForResult(intent, REQ_SIGN_GOOGLE);
+                Intent signInIntent = googleSignInClient.getSignInIntent();
+                signInLauncher.launch(signInIntent);
+
+                //원래 있던 코드(혹시 몰라 남겼습니다)
+                startActivityForResult(signInIntent, RC_SIGN_IN);
             }
         });
     }
 
-
-    public void Register(View view) {
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://studia.blue/signup/"));
-        startActivity(intent);
-    }
-
-    public void Lost(View view) {
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://studia.blue/iforgot/"));
-        startActivity(intent);
-    }
-
+    //원래 있던 코드(혹시 몰라 남겼습니다)
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (resultCode == REQ_SIGN_GOOGLE) {
+        if (resultCode == RC_SIGN_IN) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            if (task.isSuccessful()) {
-                GoogleSignInAccount account = task.getResult();
-                resultLogin(account);
+            try {
+                // Google Sign In was successful, authenticate with Firebase
+                GoogleSignInAccount account = task.getResult(ApiException.class);
+                Log.d("LoginActivity", "firebaseAuthWithGoogle: " + account.getId());
+                resultLogin(account.getIdToken());
+            } catch (ApiException e) {
+                // Google Sign In failed, update UI appropriately
+                Log.w("LoginActivity", "Google sign in failed", e);
             }
         }
     }
 
-    private void resultLogin(GoogleSignInAccount account) {
+    private void resultLogin(String idToken) {
         mFirebaseAuth = FirebaseAuth.getInstance();
 
-        AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
+        AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
         mFirebaseAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -145,14 +171,10 @@ public class LoginActivity extends AppCompatActivity {
                             //Login Success
                             Log.i("LoginActivity(Auth)", "LoginActivity - Google Login Started.");
 
-                            sharedPreferences = getSharedPreferences("preference", 0);
-                            SharedPreferences.Editor editor = sharedPreferences.edit();
-                            editor.putString("auto", "1");
-                            editor.putString("google", "1");
-                            editor.apply();
+                            FirebaseUser user = mFirebaseAuth.getCurrentUser();
 
                             Intent intent = new Intent(LoginActivity.this, CalendarActivity.class);
-
+                            startActivity(intent);
                             overridePendingTransition(0, 0);
                             finish();
                         }
@@ -163,5 +185,15 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+    public void Register(View view) {
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://studia.blue/signup/"));
+        startActivity(intent);
+    }
+
+    public void Lost(View view) {
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://studia.blue/iforgot/"));
+        startActivity(intent);
     }
 }
