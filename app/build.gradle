@@ -34,7 +34,7 @@ android {
     }
     signingConfigs {
         debug {
-            storeFile file("C:\\Users\\임현우\\.android\\debug.keystore")
+            storeFile file("../keystore/debug.keystore")
         }
     }
 }
