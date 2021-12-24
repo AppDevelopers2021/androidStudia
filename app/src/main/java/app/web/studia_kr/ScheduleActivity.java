@@ -44,11 +44,16 @@ public class ScheduleActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedule);
 
+        // Get rid of the 'flashing' effect
+        getWindow().setEnterTransition(null);
+        getWindow().getSharedElementEnterTransition().setDuration(200);
+
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
         uid = user.getUid();
 
         getWindow().setEnterTransition(null);
+        getWindow().getSharedElementEnterTransition().setDuration(200);
 
         Intent intent = getIntent();
         showDate = intent.getStringExtra("date");
@@ -69,10 +74,10 @@ public class ScheduleActivity extends AppCompatActivity {
         btBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                getWindow().setExitTransition(null);
                 Intent intent = new Intent(ScheduleActivity.this, CalendarActivity.class);
                 intent.putExtra("date", showDate);
                 intent.putExtra("dbDate", firebaseDate);
-                getWindow().setExitTransition(null);
                 ActivityOptions options = ActivityOptions
                         .makeSceneTransitionAnimation(ScheduleActivity.this, Bdate, "date");
                 startActivity(intent, options.toBundle());

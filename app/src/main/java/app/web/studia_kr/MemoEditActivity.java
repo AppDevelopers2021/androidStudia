@@ -43,6 +43,10 @@ public class MemoEditActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_memo_edit);
 
+        // Get rid of the 'flashing' effect
+        getWindow().setEnterTransition(null);
+        getWindow().getSharedElementEnterTransition().setDuration(200);
+
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
         uid = user.getUid();
