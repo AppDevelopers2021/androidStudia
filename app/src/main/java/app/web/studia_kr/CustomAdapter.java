@@ -17,7 +17,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
 
     private ArrayList<Todo> arrayList;
     private Context context;
-    private String subject;
 
     public CustomAdapter(ArrayList<Todo> arrayList, Context context) {
         this.arrayList = arrayList;

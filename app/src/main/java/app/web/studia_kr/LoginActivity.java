@@ -3,16 +3,13 @@ package app.web.studia_kr;
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContract;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.HasDefaultViewModelProviderFactory;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,30 +18,21 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.auth.api.signin.GoogleSignInResult;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.Api;
 import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.PendingResult;
-import com.google.android.gms.common.api.Status;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthException;
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
-
-import java.io.FileDescriptor;
-import java.io.PrintWriter;
-import java.util.Calendar;
-import java.util.concurrent.TimeUnit;
 
 public class LoginActivity extends AppCompatActivity{
 
@@ -54,6 +42,8 @@ public class LoginActivity extends AppCompatActivity{
     private String Password;
     private GoogleSignInClient googleSignInClient;
     private FirebaseAuth mFirebaseAuth;
+
+    //Deprecated 처리된 startActivityForResult를 대체
     public ActivityResultLauncher<Intent> signInLauncher;
 
     @Override
@@ -61,8 +51,9 @@ public class LoginActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        //GoogleSignInOptions에서 requestIdToken은 google-services.json의 client>oauth_client>client_id를 하드코딩함
         GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken("654717768488-dmq2q3n9g27kgk1uv3ndo0im4f0bokbh.apps.googleusercontent.com")
+                .requestIdToken("654717768488-8vukifmrgr3qk8g327op8hn7kengs593.apps.googleusercontent.com")
                 .requestEmail()
                 .build();
 
@@ -94,9 +85,14 @@ public class LoginActivity extends AppCompatActivity{
                                 finish();
                             }
                             else {
-                                Log.w("Login Failure", task.getException());
+                                String errorCode = ((FirebaseAuthException) task.getException()).getErrorCode();
 
-                                Toast.makeText(getApplicationContext(), "로그인에 실패했습니다.", Toast.LENGTH_SHORT).show();
+                                if (errorCode == "ERROR_USER_NOT_FOUND") {
+                                    Toast.makeText(getApplicationContext(), "이메일 또는 비밀번호가 옳지 않습니다.", Toast.LENGTH_SHORT).show();
+                                }
+
+                                Log.w("Login Failure", task.getException());
+                                Toast.makeText(getApplicationContext(), "알 수 없는 이유로 로그인에 실패했습니다.", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
@@ -122,6 +118,8 @@ public class LoginActivity extends AppCompatActivity{
                         resultLogin(account.getIdToken());
                     } catch (ApiException e) {
                         // Google Sign In failed, update UI appropriately
+                        Toast.makeText(getApplicationContext(), "Google 로그인에 실패했습니다.", Toast.LENGTH_SHORT).show();
+                        e.printStackTrace();
                         Log.w("LoginActivity", "Google sign in failed", e);
                     }
                 }
@@ -159,6 +157,7 @@ public class LoginActivity extends AppCompatActivity{
                         }
                         else {
                             //Login Failure
+                            task.getException().printStackTrace();
                             Log.w("Login Failure - Google", task.getException());
                             Toast.makeText(getApplicationContext(), "로그인에 실패하였습니다.", Toast.LENGTH_LONG).show();
                         }

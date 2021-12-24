@@ -117,10 +117,11 @@ public class MemoEditActivity extends AppCompatActivity {
                                             Intent intent = new Intent(MemoEditActivity.this, CalendarActivity.class);
                                             intent.putExtra("date", showDate);
                                             intent.putExtra("dbDate", firebaseDate);
-                                            startActivity(intent);
-                                            finish();
-
-                                            overridePendingTransition(0, 0);
+                                            getWindow().setExitTransition(null);
+                                            ActivityOptions options = ActivityOptions
+                                                    .makeSceneTransitionAnimation(MemoEditActivity.this, Bdate, "date");
+                                            startActivity(intent, options.toBundle());
+                                            finishAfterTransition();
                                         }
                                     }
 
@@ -179,11 +180,11 @@ public class MemoEditActivity extends AppCompatActivity {
                                 Intent intent = new Intent(MemoEditActivity.this, CalendarActivity.class);
                                 intent.putExtra("date", showDate);
                                 intent.putExtra("dbDate", firebaseDate);
-                                startActivity(intent);
-                                finish();
-
-                                overridePendingTransition(0, 0);
-
+                                getWindow().setExitTransition(null);
+                                ActivityOptions options = ActivityOptions
+                                        .makeSceneTransitionAnimation(MemoEditActivity.this, Bdate, "date");
+                                startActivity(intent, options.toBundle());
+                                finishAfterTransition();
                             }
                             else {
                                 uidRef.child(firebaseDate);
@@ -215,10 +216,11 @@ public class MemoEditActivity extends AppCompatActivity {
                                 Intent intent = new Intent(MemoEditActivity.this, CalendarActivity.class);
                                 intent.putExtra("date", showDate);
                                 intent.putExtra("dbDate", firebaseDate);
-                                startActivity(intent);
-                                finish();
-
-                                overridePendingTransition(0, 0);
+                                getWindow().setExitTransition(null);
+                                ActivityOptions options = ActivityOptions
+                                        .makeSceneTransitionAnimation(MemoEditActivity.this, Bdate, "date");
+                                startActivity(intent, options.toBundle());
+                                finishAfterTransition();
                             }
                         }
                         else {
@@ -253,10 +255,11 @@ public class MemoEditActivity extends AppCompatActivity {
                             Intent intent = new Intent(MemoEditActivity.this, CalendarActivity.class);
                             intent.putExtra("date", showDate);
                             intent.putExtra("dbDate", firebaseDate);
-                            startActivity(intent);
-                            finish();
-
-                            overridePendingTransition(0, 0);
+                            getWindow().setExitTransition(null);
+                            ActivityOptions options = ActivityOptions
+                                    .makeSceneTransitionAnimation(MemoEditActivity.this, Bdate, "date");
+                            startActivity(intent, options.toBundle());
+                            finishAfterTransition();
                         }
                     }
 

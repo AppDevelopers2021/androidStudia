@@ -32,7 +32,6 @@ import java.util.Date;
 
 public class CalendarActivity extends AppCompatActivity {
 
-    //Declaration
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
@@ -58,10 +57,29 @@ public class CalendarActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
 
-        //Get calendar data
+        //Calendar Instance TimeSet
+        calendar = Calendar.getInstance();
+        calendar.setTime(new Date());
+        dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        showDate = dateFormat.format(calendar.getTime());
+        firebaseFormat = new SimpleDateFormat("yyyyMMdd");
+        firebaseDate = firebaseFormat.format(calendar.getTime());
+        btDate = findViewById(R.id.btDate);
+        btDate.setText(showDate);
+
+        //현재 ScheduleActivity 등에서 다시 CalendarActivity로 복귀했을 때 원래 날짜로 복귀하는 코드 개발 중
         if (getIntent().getExtras() != null) {
-            showDate = getIntent().getStringExtra("data");
             firebaseDate = getIntent().getStringExtra("dbDate");
+
+            int year = firebaseDate.charAt(0) + firebaseDate.charAt(1) + firebaseDate.charAt(2) + firebaseDate.charAt(4);
+            int month = firebaseDate.charAt(5) + firebaseDate.charAt(6);
+            int date = firebaseDate.charAt(7) + firebaseDate.charAt(8);
+            calendar.set(year, month, date);
+
+            dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+            showDate = dateFormat.format(calendar.getTime());
+            firebaseFormat = new SimpleDateFormat("yyyyMMdd");
+            firebaseDate = firebaseFormat.format(calendar.getTime());
             btDate = findViewById(R.id.btDate);
             btDate.setText(showDate);
         }
@@ -183,6 +201,8 @@ public class CalendarActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(CalendarActivity.this, PopupActivity.class);
+                intent.putExtra("date", showDate);
+                intent.putExtra("dbDate", firebaseDate);
                 startActivityForResult(intent, 1);
             }
         });

@@ -11,8 +11,6 @@ import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
 
-    //Code Inspection Complete by Jacob Lim 20211030
-
     Timer introtimer;
 
     @Override
@@ -20,12 +18,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //Intro → Login Activity Change
+        //처음 Splash Screen이 띄워지는 시간 설정 타이머(1초)
         introtimer = new Timer();
         introtimer.schedule(new TimerTask() {
             @Override
             public void run() {
                 Intent intent;
+
+                //FirebaseUser가 현재 로그인 상태인지 확인하여 실행하는 Activity를 나눔
                 if(FirebaseAuth.getInstance().getCurrentUser() != null) {
                     intent = new Intent(MainActivity.this, CalendarActivity.class);
                 } else {
@@ -34,6 +34,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             }
-        }, 2000);
+        }, 1000);
     }
 }
