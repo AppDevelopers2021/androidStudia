@@ -60,10 +60,14 @@ public class CalendarActivity extends AppCompatActivity {
 
         //Get calendar data
         if (getIntent().getExtras() != null) {
-            showDate = getIntent().getStringExtra("data");
+            dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+            showDate = getIntent().getStringExtra("date");
+            firebaseFormat = new SimpleDateFormat("yyyyMMdd");
             firebaseDate = getIntent().getStringExtra("dbDate");
             btDate = findViewById(R.id.btDate);
             btDate.setText(showDate);
+            calendar = Calendar.getInstance();
+            calendar.setTime(new Date(showDate));
         }
         else {
             //Calendar Instance TimeSet
@@ -79,6 +83,7 @@ public class CalendarActivity extends AppCompatActivity {
 
         // Get rid of the 'flashing' effect
         getWindow().setEnterTransition(null);
+        getWindow().getSharedElementEnterTransition().setDuration(200);
 
         //Firebase RecyclerView Declare
         recyclerView = findViewById(R.id.rvTodo);
@@ -159,9 +164,12 @@ public class CalendarActivity extends AppCompatActivity {
                 Intent intent = new Intent(CalendarActivity.this, MemoEditActivity.class);
                 intent.putExtra("date", showDate);
                 intent.putExtra("dbDate", firebaseDate);
-                startActivity(intent);
+                getWindow().setExitTransition(null);
 
-                overridePendingTransition(0, 0);
+                // Custom transition effect
+                ActivityOptions options = ActivityOptions
+                        .makeSceneTransitionAnimation(CalendarActivity.this, btDate, "date");
+                startActivity(intent, options.toBundle());
             }
         });
 
@@ -172,9 +180,12 @@ public class CalendarActivity extends AppCompatActivity {
                 Intent intent = new Intent(CalendarActivity.this, MemoEditActivity.class);
                 intent.putExtra("date", showDate);
                 intent.putExtra("dbDate", firebaseDate);
-                startActivity(intent);
+                getWindow().setExitTransition(null);
 
-                overridePendingTransition(0, 0);
+                // Custom transition effect
+                ActivityOptions options = ActivityOptions
+                        .makeSceneTransitionAnimation(CalendarActivity.this, btDate, "date");
+                startActivity(intent, options.toBundle());
             }
         });
 
