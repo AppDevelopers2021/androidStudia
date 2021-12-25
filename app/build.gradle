@@ -15,12 +15,25 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-
+    signingConfigs {
+        debug {
+            storeFile file("./keystore/debug.keystore")
+            storePassword "android"
+        }
+        release {
+            storeFile file("./keystore/AndroidStudia.jks")
+            storePassword "000000"
+            keyAlias "key0"
+            keyPassword "000000"
+        }
+    }
     buildTypes {
         debug {
             signingConfig signingConfigs.debug
         }
         release {
+            signingConfig signingConfigs.release
+
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -31,11 +44,6 @@ android {
     }
     buildFeatures {
         viewBinding true
-    }
-    signingConfigs {
-        debug {
-            storeFile file("./keystore/debug.keystore")
-        }
     }
 }
 

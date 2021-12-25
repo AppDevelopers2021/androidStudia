@@ -53,7 +53,7 @@ public class LoginActivity extends AppCompatActivity{
 
         //GoogleSignInOptions에서 requestIdToken은 google-services.json의 client>oauth_client>client_id를 하드코딩함
         GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken("654717768488-8vukifmrgr3qk8g327op8hn7kengs593.apps.googleusercontent.com")
+                .requestIdToken("654717768488-c2g03srdodqok4dvbn1h4iunnosak27c.apps.googleusercontent.com")
                 .requestEmail()
                 .build();
 
