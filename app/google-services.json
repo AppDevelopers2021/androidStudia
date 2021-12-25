@@ -15,11 +15,19 @@
       },
       "oauth_client": [
         {
-          "client_id": "654717768488-c2g03srdodqok4dvbn1h4iunnosak27c.apps.googleusercontent.com",
+          "client_id": "654717768488-d98i2cf3n52sd8dgdahr98hmfdhbu4ga.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "app.web.studia_kr",
-            "certificate_hash": "4b5c74fcc056ba52f814beac22c2521138c134cf"
+            "certificate_hash": "087b490ab47c743d288ca687dc85f808b292509a"
+          }
+        },
+        {
+          "client_id": "654717768488-ohfeovmpbsukbsu433uoralu64mu6akf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "app.web.studia_kr",
+            "certificate_hash": "18d96b6def766879aebc6aeb4c1c7faae1c22f84"
           }
         },
         {
