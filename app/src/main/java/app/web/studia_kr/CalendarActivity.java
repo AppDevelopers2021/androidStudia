@@ -78,8 +78,6 @@ public class CalendarActivity extends AppCompatActivity {
 
             dateFormat = new SimpleDateFormat("yyyy/MM/dd");
             showDate = dateFormat.format(calendar.getTime());
-            firebaseFormat = new SimpleDateFormat("yyyyMMdd");
-            firebaseDate = firebaseFormat.format(calendar.getTime());
             btDate = findViewById(R.id.btDate);
             btDate.setText(showDate);
         }
@@ -209,7 +207,7 @@ public class CalendarActivity extends AppCompatActivity {
     }
 
     public void CalendarLoad(String uid, String firebaseDate, String showDate) {
-        Log.w("CalendarActivity", "void CalendarLoad started.");
+        Log.d("CalendarActivity", "void CalendarLoad started");
 
         TextView assign = findViewById(R.id.tvShowAssign);
         TextView memo = findViewById(R.id.tvShowMemo);
@@ -363,6 +361,6 @@ public class CalendarActivity extends AppCompatActivity {
             }
         });
 
-        Log.w("CalendarActivity", "void CalendarLoad finished.");
+        Log.d("CalendarActivity", "void CalendarLoad finished");
     }
 }

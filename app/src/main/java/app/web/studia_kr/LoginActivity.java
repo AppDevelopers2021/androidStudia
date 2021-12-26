@@ -53,7 +53,7 @@ public class LoginActivity extends AppCompatActivity{
 
         //GoogleSignInOptions에서 requestIdToken은 google-services.json의 client>oauth_client>client_id를 하드코딩함
         GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken("654717768488-c2g03srdodqok4dvbn1h4iunnosak27c.apps.googleusercontent.com")
+                .requestIdToken("654717768488-d98i2cf3n52sd8dgdahr98hmfdhbu4ga.apps.googleusercontent.com")
                 .requestEmail()
                 .build();
 
@@ -76,7 +76,7 @@ public class LoginActivity extends AppCompatActivity{
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                Log.i("Login Success", "Successful Login.");
+                                Log.d("LoginActivity", "Successful Login with Email and Password");
 
                                 FirebaseUser user = mFirebaseAuth.getCurrentUser();
 
@@ -88,11 +88,13 @@ public class LoginActivity extends AppCompatActivity{
                                 String errorCode = ((FirebaseAuthException) task.getException()).getErrorCode();
 
                                 if (errorCode == "ERROR_USER_NOT_FOUND") {
+                                    Log.w("LoginActivity", task.getException());
                                     Toast.makeText(getApplicationContext(), "이메일 또는 비밀번호가 옳지 않습니다.", Toast.LENGTH_SHORT).show();
                                 }
-
-                                Log.w("Login Failure", task.getException());
-                                Toast.makeText(getApplicationContext(), "알 수 없는 이유로 로그인에 실패했습니다.", Toast.LENGTH_SHORT).show();
+                                else {
+                                    Log.w("LoginActivity", task.getException());
+                                    Toast.makeText(getApplicationContext(), "알 수 없는 이유로 로그인에 실패했습니다.", Toast.LENGTH_SHORT).show();
+                                }
                             }
                         }
                     });
@@ -118,7 +120,7 @@ public class LoginActivity extends AppCompatActivity{
                         resultLogin(account.getIdToken());
                     } catch (ApiException e) {
                         // Google Sign In failed, update UI appropriately
-                        Toast.makeText(getApplicationContext(), "Google 로그인에 실패했습니다.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "알 수 없는 이유로 Google 로그인에 실패했습니다.", Toast.LENGTH_SHORT).show();
                         e.printStackTrace();
                         Log.w("LoginActivity", "Google sign in failed", e);
                     }
@@ -151,7 +153,7 @@ public class LoginActivity extends AppCompatActivity{
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             //Login Success
-                            Log.i("LoginActivity(Auth)", "LoginActivity - Google Login Started.");
+                            Log.d("LoginActivity", "Successful Google AuthCredential");
 
                             FirebaseUser user = mFirebaseAuth.getCurrentUser();
 
@@ -163,8 +165,8 @@ public class LoginActivity extends AppCompatActivity{
                         else {
                             //Login Failure
                             task.getException().printStackTrace();
-                            Log.w("Login Failure - Google", task.getException());
-                            Toast.makeText(getApplicationContext(), "로그인에 실패하였습니다.", Toast.LENGTH_LONG).show();
+                            Log.w("LoginActivity", task.getException());
+                            Toast.makeText(getApplicationContext(), "알 수 없는 이유로 Google 로그인에 실패했습니다.", Toast.LENGTH_LONG).show();
                         }
                     }
                 });
