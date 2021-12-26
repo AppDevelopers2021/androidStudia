@@ -11,44 +11,57 @@
         tools:context=".PopupActivity">
 
     <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
         <TextView
-                android:id="@+id/tvEmail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="70dp"
-                android:fontFamily="@font/nanumsquarer"
-                android:text="이메일"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                android:textSize="17sp"/>
+            android:id="@+id/tvEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="70dp"
+            android:fontFamily="@font/nanumsquarer"
+            android:text="이메일"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="17sp" />
 
         <Button
-                android:id="@+id/btLogout"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@drawable/dialogbutton"
-                android:fontFamily="@font/nanumsquareb"
-                android:text="로그아웃"
-                android:layout_marginTop="10dp"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                android:textSize="20sp"/>
+            android:id="@+id/btLogout"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/dialogbutton"
+            android:fontFamily="@font/nanumsquareb"
+            android:text="로그아웃"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
 
         <Button
-                android:id="@+id/btIforgot"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@drawable/dialogbutton"
-                android:fontFamily="@font/nanumsquareb"
-                android:text="비밀번호 변경"
-                android:layout_marginTop="10dp"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                android:textSize="20sp"/>
+            android:id="@+id/btIforgot"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/dialogbutton"
+            android:fontFamily="@font/nanumsquareb"
+            android:text="비밀번호 변경"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tvPolicy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="#FFFFFF"
+            android:text="개인정보처리방침 및 사용자 데이터 수집 🔗"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimary"
+            android:textSize="14sp"
+            android:textStyle="bold" />
     </LinearLayout>
 
 

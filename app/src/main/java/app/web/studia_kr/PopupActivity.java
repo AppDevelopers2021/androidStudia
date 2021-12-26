@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.net.URL;
 
 public class PopupActivity extends AppCompatActivity {
 
@@ -34,6 +35,7 @@ public class PopupActivity extends AppCompatActivity {
         Button btLogout = (Button)findViewById(R.id.btLogout);
         Button btpasswordch = (Button)findViewById(R.id.btIforgot);
         ImageButton btClose = (ImageButton)findViewById(R.id.btClose);
+        TextView tvPolicy = (TextView)findViewById(R.id.tvPolicy);
 
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
@@ -65,6 +67,14 @@ public class PopupActivity extends AppCompatActivity {
                 intent.putExtra("dbDate", firebaseDate);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
+            }
+        });
+
+        tvPolicy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("//Policy HTML Path Here"));
+                startActivity(intent);
             }
         });
     }
