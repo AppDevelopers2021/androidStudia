@@ -106,8 +106,8 @@ public class LoginActivity extends AppCompatActivity{
         signInLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
             @Override
             public void onActivityResult(ActivityResult result) {
-                // 현재 result.getResultCode() == Activity.RESULT_CANCELED로 리턴
-                if (result.getResultCode() == Activity.RESULT_OK) {
+                int resultCode = result.getResultCode();
+                if (resultCode == Activity.RESULT_OK) {
                     Intent data = result.getData();
 
                     Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
@@ -122,7 +122,12 @@ public class LoginActivity extends AppCompatActivity{
                         e.printStackTrace();
                         Log.w("LoginActivity", "Google sign in failed", e);
                     }
+                } else if (resultCode == Activity.RESULT_CANCELED) {
+                    Log.d("LoginActivity", "Google sign in Activity failed with: RESULT_CANCELED");
+                } else {
+                    Log.d("LoginActivity", "Google sign in Activity failed with: UNKNOWN");
                 }
+
             }
         });
 
