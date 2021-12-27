@@ -67,13 +67,13 @@ public class CalendarActivity extends AppCompatActivity {
         btDate = findViewById(R.id.btDate);
         btDate.setText(showDate);
 
-        //현재 ScheduleActivity 등에서 다시 CalendarActivity로 복귀했을 때 원래 날짜로 복귀하는 코드 개발 중
+        //Issue: Cannot Load CalendarActivity after quitting ScheduleActivity or MemoEditActivity(#7)
         if (getIntent().getExtras() != null) {
             firebaseDate = getIntent().getStringExtra("dbDate");
 
-            int year = firebaseDate.charAt(0) + firebaseDate.charAt(1) + firebaseDate.charAt(2) + firebaseDate.charAt(4);
-            int month = firebaseDate.charAt(5) + firebaseDate.charAt(6);
-            int date = firebaseDate.charAt(7) + firebaseDate.charAt(8);
+            int year = firebaseDate.charAt(0) + firebaseDate.charAt(1) + firebaseDate.charAt(2) + firebaseDate.charAt(3);
+            int month = firebaseDate.charAt(4) + firebaseDate.charAt(5);
+            int date = firebaseDate.charAt(6) + firebaseDate.charAt(7);
             calendar.set(year, month, date);
 
             dateFormat = new SimpleDateFormat("yyyy/MM/dd");

@@ -73,8 +73,11 @@ public class PopupActivity extends AppCompatActivity {
         tvPolicy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("//Policy HTML Path Here"));
+                Intent intent = new Intent(PopupActivity.this, PolicyActivity.class);
+                intent.putExtra("date", showDate);
+                intent.putExtra("dbDate", firebaseDate);
                 startActivity(intent);
+                overridePendingTransition(0, 0);
             }
         });
     }

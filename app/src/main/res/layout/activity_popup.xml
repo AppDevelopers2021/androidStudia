@@ -60,7 +60,7 @@
             android:text="개인정보처리방침 및 사용자 데이터 수집 🔗"
             android:textAlignment="center"
             android:textColor="@color/colorPrimary"
-            android:textSize="14sp"
+            android:textSize="12sp"
             android:textStyle="bold" />
     </LinearLayout>
 
