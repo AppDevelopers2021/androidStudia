@@ -29,10 +29,10 @@ public class MainActivity extends AppCompatActivity {
                 // 앱을 처음 실행했을 때 약관 동의 페이지로 이동
                 final String PREFS_NAME = "PrefsFile";
                 SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
-                if(settings.getBoolean("firstrun", true)) {
-                    // 앱이 최초로 실행됨
+                if(!settings.getBoolean("agreed", false)) {
+                    // 사용자가 약관에 동의하지 않음
                     intent = new Intent(MainActivity.this, PolicyActivity.class);
-                    settings.edit().putBoolean("firstrun", false).commit();
+                    intent.putExtra("showAgreeBtn", true);
                 } else if(FirebaseAuth.getInstance().getCurrentUser() != null) {
                     // 사용자가 로그인되지 않음
                     intent = new Intent(MainActivity.this, CalendarActivity.class);
