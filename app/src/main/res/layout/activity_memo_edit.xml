@@ -26,13 +26,13 @@
                     android:background="#2291FF">
 
                 <ImageButton
-                        android:id="@+id/btBack"
-                        android:layout_width="40dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="15dp"
-                        android:backgroundTint="@color/studia_brandcolor"
-                        android:src="@drawable/ic_baseline_arrow_back_40"
-                        tools:ignore="SpeakableTextPresentCheck"/>
+                    android:id="@+id/btBack"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:backgroundTint="@color/studia_brandcolor"
+                    android:src="@drawable/ic_baseline_arrow_back_40"
+                    tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
                 <View
                         android:layout_width="0dp"
@@ -63,7 +63,7 @@
             </LinearLayout>
 
             <LinearLayout
-                    android:id="@+id/Memo"
+                    android:id="@+id/Policy"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
@@ -99,7 +99,7 @@
             </LinearLayout>
 
             <LinearLayout
-                    android:id="@+id/Assign"
+                    android:id="@+id/PersonalInfo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
@@ -135,14 +135,14 @@
             </LinearLayout>
 
             <Button
-                    android:id="@+id/btComplete"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_margin="15dp"
-                    android:background="@drawable/loginbtn"
-                    android:text="완료"
-                    android:textColor="@color/white"
-                    tools:ignore="SpeakableTextPresentCheck"/>
+                android:id="@+id/btComplete"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_margin="15dp"
+                android:background="@drawable/loginbtn"
+                android:text="완료"
+                android:textColor="@color/white"
+                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
         </LinearLayout>
 
