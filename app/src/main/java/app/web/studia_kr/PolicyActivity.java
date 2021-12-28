@@ -1,6 +1,7 @@
 package app.web.studia_kr;
 
 import android.content.SharedPreferences;
+import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -37,7 +38,7 @@ public class PolicyActivity extends AppCompatActivity {
 
         if(getIntent().getBooleanExtra("showAgreeBtn", false)) {
             // 동의 버튼 보이기
-            ImageButton btnAgree = findViewById(R.id.btnAgree);
+            Button btnAgree = findViewById(R.id.btnAgree);
             btnAgree.setVisibility(View.VISIBLE);
             // 나가기 버튼 숨기기
             btBack.setVisibility(View.INVISIBLE);
