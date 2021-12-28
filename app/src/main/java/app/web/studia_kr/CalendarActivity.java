@@ -57,20 +57,13 @@ public class CalendarActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
 
-        //Calendar Instance TimeSet
-        calendar = Calendar.getInstance();
-        calendar.setTime(new Date());
-        dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-        showDate = dateFormat.format(calendar.getTime());
-        firebaseFormat = new SimpleDateFormat("yyyyMMdd");
-        firebaseDate = firebaseFormat.format(calendar.getTime());
-        btDate = findViewById(R.id.btDate);
-        btDate.setText(showDate);
+        getWindow().setEnterTransition(null);
 
-        //현재 ScheduleActivity 등에서 다시 CalendarActivity로 복귀했을 때 원래 날짜로 복귀하는 코드 개발 중
+        //현재 ScheduleActivity 등에서 다시 CalendarActivity로 복귀했을 때 원래 날짜 복원
         if (getIntent().getExtras() != null) {
             firebaseDate = getIntent().getStringExtra("dbDate");
 
+            calendar = Calendar.getInstance();
             int year = firebaseDate.charAt(0) + firebaseDate.charAt(1) + firebaseDate.charAt(2) + firebaseDate.charAt(4);
             int month = firebaseDate.charAt(5) + firebaseDate.charAt(6);
             int date = firebaseDate.charAt(7) + firebaseDate.charAt(8);
@@ -92,9 +85,6 @@ public class CalendarActivity extends AppCompatActivity {
             btDate = findViewById(R.id.btDate);
             btDate.setText(showDate);
         }
-
-        // Get rid of the 'flashing' effect
-        getWindow().setEnterTransition(null);
 
         //Firebase RecyclerView Declare
         recyclerView = findViewById(R.id.rvTodo);
@@ -165,6 +155,7 @@ public class CalendarActivity extends AppCompatActivity {
                 ActivityOptions options = ActivityOptions
                         .makeSceneTransitionAnimation(CalendarActivity.this, btDate, "date");
                 startActivity(intent, options.toBundle());
+                finishAfterTransition();
             }
         });
 
@@ -175,9 +166,13 @@ public class CalendarActivity extends AppCompatActivity {
                 Intent intent = new Intent(CalendarActivity.this, MemoEditActivity.class);
                 intent.putExtra("date", showDate);
                 intent.putExtra("dbDate", firebaseDate);
-                startActivity(intent);
+                getWindow().setExitTransition(null);
 
-                overridePendingTransition(0, 0);
+                // Custom transition effect
+                ActivityOptions options = ActivityOptions
+                        .makeSceneTransitionAnimation(CalendarActivity.this, btDate, "date");
+                startActivity(intent, options.toBundle());
+                finishAfterTransition();
             }
         });
 
@@ -188,9 +183,13 @@ public class CalendarActivity extends AppCompatActivity {
                 Intent intent = new Intent(CalendarActivity.this, MemoEditActivity.class);
                 intent.putExtra("date", showDate);
                 intent.putExtra("dbDate", firebaseDate);
-                startActivity(intent);
+                getWindow().setExitTransition(null);
 
-                overridePendingTransition(0, 0);
+                // Custom transition effect
+                ActivityOptions options = ActivityOptions
+                        .makeSceneTransitionAnimation(CalendarActivity.this, btDate, "date");
+                startActivity(intent, options.toBundle());
+                finishAfterTransition();
             }
         });
 
