@@ -19,14 +19,15 @@ public class PolicyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_policy);
 
+        showDate = getIntent().getStringExtra("date");
+        firebaseDate = getIntent().getStringExtra("dbDate");
+
         ImageButton btBack = findViewById(R.id.btPolicyBack);
         btBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(PolicyActivity.this, CalendarActivity.class);
-                if(getIntent().getStringExtra("date") != null) {
-                    showDate = getIntent().getStringExtra("date");
-                    firebaseDate = getIntent().getStringExtra("dbDate");
+                if(showDate != null) {
                     intent.putExtra("date", showDate);
                     intent.putExtra("dbDate", firebaseDate);
                 }
@@ -48,13 +49,12 @@ public class PolicyActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     // 사용자가 약관에 동의함, 앞으로 페이지 스킵하기
-                    final String PREFS_NAME = "PrefsFile";
-                    SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+                    SharedPreferences settings = getSharedPreferences("PrefsFile", 0);
                     settings.edit().putBoolean("agreed", true).commit();
 
                     Intent intent = new Intent(PolicyActivity.this, CalendarActivity.class);
                     startActivity(intent);
-                    finish();
+                    finishAfterTransition();
                 }
             });
         }

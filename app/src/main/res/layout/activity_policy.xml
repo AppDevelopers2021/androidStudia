@@ -167,7 +167,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:background="@drawable/loginbtn"
-                        android:text="이용 약관을 읽었으면 이에 동의합니다."
+                        android:text="이용 약관을 읽었으며 이에 동의합니다."
                         android:textColor="@color/white"
                         android:visibility="invisible"
                 />

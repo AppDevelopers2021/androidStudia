@@ -27,8 +27,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent;
 
                 // 앱을 처음 실행했을 때 약관 동의 페이지로 이동
-                final String PREFS_NAME = "PrefsFile";
-                SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+                SharedPreferences settings = getSharedPreferences("PrefsFile", 0);
                 if(!settings.getBoolean("agreed", false)) {
                     // 사용자가 약관에 동의하지 않음
                     intent = new Intent(MainActivity.this, PolicyActivity.class);

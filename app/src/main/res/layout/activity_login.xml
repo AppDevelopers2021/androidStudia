@@ -114,7 +114,6 @@
         android:drawableStart="@drawable/logingoogleicn"
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
-        android:visibility="invisible"
         android:text="@string/googlesignin"
         android:textAllCaps="false"
         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
