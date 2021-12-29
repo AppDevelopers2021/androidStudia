@@ -6,7 +6,6 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.HasDefaultViewModelProviderFactory;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -15,6 +14,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -25,12 +25,10 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
-import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
@@ -42,6 +40,8 @@ public class LoginActivity extends AppCompatActivity{
     private String Password;
     private GoogleSignInClient googleSignInClient;
     private FirebaseAuth mFirebaseAuth;
+    private CheckBox chPolicy;
+    private Boolean firstRun;
 
     //Deprecated 처리된 startActivityForResult를 대체
     public ActivityResultLauncher<Intent> signInLauncher;
@@ -50,6 +50,14 @@ public class LoginActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        if (getIntent().hasExtra("")) {
+            chPolicy.setVisibility(View.VISIBLE);
+            firstRun = true;
+        }
+        else {
+            firstRun = false;
+        }
 
         //GoogleSignInOptions에서 requestIdToken은 google-services.json의 client>oauth_client>client_id를 하드코딩함
         GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -72,32 +80,67 @@ public class LoginActivity extends AppCompatActivity{
                 Password = etPassword.getText().toString();
 
                 if (Email.length() >= 6 && Password.length() >= 6) {
-                    mFirebaseAuth.signInWithEmailAndPassword(Email, Password).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                Log.d("LoginActivity", "Successful Login with Email and Password");
+                    if (firstRun == false) {
+                        mFirebaseAuth.signInWithEmailAndPassword(Email, Password).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    Log.d("LoginActivity", "Successful Login with Email and Password");
 
-                                FirebaseUser user = mFirebaseAuth.getCurrentUser();
+                                    FirebaseUser user = mFirebaseAuth.getCurrentUser();
 
-                                Intent intent = new Intent(LoginActivity.this, CalendarActivity.class);
-                                startActivity(intent);
-                                finish();
-                            }
-                            else {
-                                String errorCode = ((FirebaseAuthException) task.getException()).getErrorCode();
-
-                                if (errorCode == "ERROR_USER_NOT_FOUND") {
-                                    Log.w("LoginActivity", task.getException());
-                                    Toast.makeText(getApplicationContext(), "이메일 또는 비밀번호가 옳지 않습니다.", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(LoginActivity.this, CalendarActivity.class);
+                                    startActivity(intent);
+                                    finish();
                                 }
                                 else {
-                                    Log.w("LoginActivity", task.getException());
-                                    Toast.makeText(getApplicationContext(), "알 수 없는 이유로 로그인에 실패했습니다.", Toast.LENGTH_SHORT).show();
+                                    String errorCode = ((FirebaseAuthException) task.getException()).getErrorCode();
+
+                                    if (errorCode == "ERROR_USER_NOT_FOUND") {
+                                        Log.w("LoginActivity", task.getException());
+                                        Toast.makeText(getApplicationContext(), "이메일 또는 비밀번호가 옳지 않습니다.", Toast.LENGTH_SHORT).show();
+                                    }
+                                    else {
+                                        Log.w("LoginActivity", task.getException());
+                                        Toast.makeText(getApplicationContext(), "알 수 없는 이유로 로그인에 실패했습니다.", Toast.LENGTH_SHORT).show();
+                                    }
                                 }
                             }
+                        });
+                    }
+                    else {
+                        if (chPolicy.isChecked() == true) {
+                            mFirebaseAuth.signInWithEmailAndPassword(Email, Password).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()) {
+                                        Log.d("LoginActivity", "Successful Login with Email and Password");
+
+                                        FirebaseUser user = mFirebaseAuth.getCurrentUser();
+
+                                        Intent intent = new Intent(LoginActivity.this, CalendarActivity.class);
+                                        startActivity(intent);
+                                        finish();
+                                    }
+                                    else {
+                                        String errorCode = ((FirebaseAuthException) task.getException()).getErrorCode();
+
+                                        if (errorCode == "ERROR_USER_NOT_FOUND") {
+                                            Log.w("LoginActivity", task.getException());
+                                            Toast.makeText(getApplicationContext(), "이메일 또는 비밀번호가 옳지 않습니다.", Toast.LENGTH_SHORT).show();
+                                        }
+                                        else {
+                                            Log.w("LoginActivity", task.getException());
+                                            Toast.makeText(getApplicationContext(), "알 수 없는 이유로 로그인에 실패했습니다.", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                }
+                            });
                         }
-                    });
+                        else {
+                            Toast.makeText(getApplicationContext(), "스튜디아 이용약관 및 개인정보처리방침에 동의해야합니다.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
                 }
                 else {
                     Toast.makeText(getApplicationContext(), "이메일 또는 비밀번호가 옳지 않습니다.", Toast.LENGTH_LONG).show();
@@ -137,8 +180,19 @@ public class LoginActivity extends AppCompatActivity{
         btGoogle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent signInIntent = googleSignInClient.getSignInIntent();
-                signInLauncher.launch(signInIntent);
+                if (firstRun == false) {
+                    Intent signInIntent = googleSignInClient.getSignInIntent();
+                    signInLauncher.launch(signInIntent);
+                }
+                else {
+                    if (chPolicy.isChecked() == true) {
+                        Intent signInIntent = googleSignInClient.getSignInIntent();
+                        signInLauncher.launch(signInIntent);
+                    }
+                    else {
+                        Toast.makeText(getApplicationContext(), "스튜디아 이용약관 및 개인정보처리방침에 동의해야합니다.", Toast.LENGTH_SHORT).show();
+                    }
+                }
             }
         });
     }
