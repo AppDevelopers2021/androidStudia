@@ -1,5 +1,7 @@
 package app.web.studia_kr;
 
+import android.content.SharedPreferences;
+import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -25,11 +27,36 @@ public class PolicyActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(PolicyActivity.this, CalendarActivity.class);
-                intent.putExtra("date", showDate);
-                intent.putExtra("dbDate", firebaseDate);
+                if(showDate != null) {
+                    intent.putExtra("date", showDate);
+                    intent.putExtra("dbDate", firebaseDate);
+                }
                 startActivity(intent);
                 overridePendingTransition(0, 0);
+                finish();
             }
         });
+
+        if(getIntent().getBooleanExtra("showAgreeBtn", false)) {
+            // 동의 버튼 보이기
+            Button btnAgree = findViewById(R.id.btnAgree);
+            btnAgree.setVisibility(View.VISIBLE);
+            // 나가기 버튼 숨기기
+            btBack.setVisibility(View.INVISIBLE);
+
+            // 동의 버튼을 클릭했을 때
+            btnAgree.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    // 사용자가 약관에 동의함, 앞으로 페이지 스킵하기
+                    SharedPreferences settings = getSharedPreferences("PrefsFile", 0);
+                    settings.edit().putBoolean("agreed", true).commit();
+
+                    Intent intent = new Intent(PolicyActivity.this, CalendarActivity.class);
+                    startActivity(intent);
+                    finishAfterTransition();
+                }
+            });
+        }
     }
 }

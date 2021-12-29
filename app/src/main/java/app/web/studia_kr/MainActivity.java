@@ -1,5 +1,6 @@
 package app.web.studia_kr;
 
+import android.content.SharedPreferences;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,17 +19,24 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //처음 Splash Screen이 띄워지는 시간 설정 타이머(1초)
+        // 처음 Splash Screen이 띄워지는 시간 설정 타이머(1초)
         introtimer = new Timer();
         introtimer.schedule(new TimerTask() {
             @Override
             public void run() {
                 Intent intent;
 
-                //FirebaseUser가 현재 로그인 상태인지 확인하여 실행하는 Activity를 나눔
-                if(FirebaseAuth.getInstance().getCurrentUser() != null) {
+                // 앱을 처음 실행했을 때 약관 동의 페이지로 이동
+                SharedPreferences settings = getSharedPreferences("PrefsFile", 0);
+                if(!settings.getBoolean("agreed", false)) {
+                    // 사용자가 약관에 동의하지 않음
+                    intent = new Intent(MainActivity.this, PolicyActivity.class);
+                    intent.putExtra("showAgreeBtn", true);
+                } else if(FirebaseAuth.getInstance().getCurrentUser() != null) {
+                    // 사용자가 로그인되지 않음
                     intent = new Intent(MainActivity.this, CalendarActivity.class);
                 } else {
+                    // 정상적으로 로그인됨
                     intent = new Intent(MainActivity.this, LoginActivity.class);
                 }
                 startActivity(intent);

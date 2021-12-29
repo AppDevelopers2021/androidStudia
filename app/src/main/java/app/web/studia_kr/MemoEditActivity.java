@@ -191,7 +191,6 @@ public class MemoEditActivity extends AppCompatActivity {
                                 finishAfterTransition();
                             }
                             else {
-                                uidRef.child(firebaseDate);
                                 dateRef = uidRef.child(firebaseDate);
                                 dateRef.child("memo").setValue(memoString);
                                 dateRef.child("reminder");
