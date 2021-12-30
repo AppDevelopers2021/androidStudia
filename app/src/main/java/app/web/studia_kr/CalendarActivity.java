@@ -34,7 +34,6 @@ public class CalendarActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
-    private RecyclerView.LayoutManager layoutManager;
     private ArrayList<Todo> arrayList;
     private Button btDate;
     private String uid;
@@ -73,8 +72,6 @@ public class CalendarActivity extends AppCompatActivity {
 
             dateFormat = new SimpleDateFormat("yyyy/MM/dd");
             showDate = dateFormat.format(calendar.getTime());
-            btDate = findViewById(R.id.btDate);
-            btDate.setText(showDate);
         }
         else {
             //Calendar Instance TimeSet
@@ -84,14 +81,14 @@ public class CalendarActivity extends AppCompatActivity {
             showDate = dateFormat.format(calendar.getTime());
             firebaseFormat = new SimpleDateFormat("yyyyMMdd");
             firebaseDate = firebaseFormat.format(calendar.getTime());
-            btDate = findViewById(R.id.btDate);
-            btDate.setText(showDate);
         }
+        btDate = findViewById(R.id.btDate);
+        btDate.setText(showDate);
 
         //Firebase RecyclerView Declare
         recyclerView = findViewById(R.id.rvTodo);
         recyclerView.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(this);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         arrayList = new ArrayList<>();
 
