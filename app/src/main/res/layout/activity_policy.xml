@@ -26,7 +26,7 @@
                 android:orientation="horizontal">
 
                 <ImageButton
-                    android:id="@+id/btPolicyBack"
+                    android:id="@+id/btAppBack"
                     android:layout_width="40dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"

@@ -15,8 +15,6 @@ import android.widget.TextView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import java.net.URL;
-
 public class PopupActivity extends AppCompatActivity {
 
     private String showDate;
@@ -73,7 +71,7 @@ public class PopupActivity extends AppCompatActivity {
         tvPolicy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(PopupActivity.this, PolicyActivity.class);
+                Intent intent = new Intent(PopupActivity.this, AppInfoActivity.class);
                 intent.putExtra("date", showDate);
                 intent.putExtra("dbDate", firebaseDate);
                 startActivity(intent);

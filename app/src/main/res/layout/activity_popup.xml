@@ -51,27 +51,28 @@
             android:textColor="@color/black"
             android:textSize="20sp" />
 
-        <TextView
-            android:id="@+id/tvPolicy"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <Button
+            android:id="@+id/btSettings"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
             android:layout_marginTop="10dp"
-            android:background="#FFFFFF"
-            android:text="개인정보처리방침 및 사용자 데이터 수집 🔗"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/dialogbutton"
+            android:fontFamily="@font/nanumsquareb"
+            android:text="애플리케이션 정보"
             android:textAlignment="center"
-            android:textColor="@color/colorPrimary"
-            android:textSize="12sp"
-            android:textStyle="bold" />
+            android:textColor="@color/black"
+            android:textSize="20sp" />
     </LinearLayout>
 
 
     <ImageButton
-            android:id="@+id/btClose"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/white"
-            android:src="@drawable/ic_baseline_close_40"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            tools:ignore="SpeakableTextPresentCheck"/>
+        android:id="@+id/btClose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:backgroundTint="@color/white"
+        android:src="@drawable/ic_baseline_close_40"
+        tools:ignore="SpeakableTextPresentCheck" />
 </RelativeLayout>

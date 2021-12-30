@@ -28,15 +28,17 @@ public class MainActivity extends AppCompatActivity {
 
                 // 앱을 처음 실행했을 때 약관 동의 페이지로 이동
                 SharedPreferences settings = getSharedPreferences("PrefsFile", 0);
+
                 if(!settings.getBoolean("agreed", false)) {
                     // 사용자가 약관에 동의하지 않음
-                    intent = new Intent(MainActivity.this, PolicyActivity.class);
+                    settings.edit().putString("version","v1.0");
+                    intent = new Intent(MainActivity.this, LoginActivity.class);
                     intent.putExtra("showAgreeBtn", true);
                 } else if(FirebaseAuth.getInstance().getCurrentUser() != null) {
-                    // 사용자가 로그인되지 않음
+                    // 사용자가 로그인됨
                     intent = new Intent(MainActivity.this, CalendarActivity.class);
                 } else {
-                    // 정상적으로 로그인됨
+                    // 정상적으로 로그인되지 않음
                     intent = new Intent(MainActivity.this, LoginActivity.class);
                 }
                 startActivity(intent);

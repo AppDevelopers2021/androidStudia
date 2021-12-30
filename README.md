@@ -3,7 +3,7 @@
 ![Background image of Jacob Lim Google Playstore Account](https://play-lh.googleusercontent.com/jGPB7MySKjn6nALQH6mpvkWASBjCMPfTRaUmgHDTw36rBxnMv_yXzsxfp9AAb1p2X4I=w3840-h2160-rw)
 
 **오직 학생에게 맞춤! 언제 어디서나 스튜디아!**  
-Customized for students only! Studia, anytime, anywhere  
+Customized for students only! Studia, anytime, anywhere!
   
 ##  망각 곡선을 극복하는 가장 간단한 방법
 하루 한 번 정리로 수업 내용을 복습하고, 이전에 배운 내용을 손쉽게 앱으로  
@@ -20,3 +20,7 @@ Firebase로 하나된 웹 앱, Android 앱, iOS 앱.
   
 ## Google Playstore
 현재 검토중입니다.
+
+𝒔𝒕𝒖𝒅𝒊𝒂
+Copyright © 2021 App Developers.
+All Rights Reserved.

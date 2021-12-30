@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -36,12 +37,12 @@ public class LoginActivity extends AppCompatActivity{
 
     private EditText etEmail;
     private EditText etPassword;
+    private CheckBox chPolicy;
     private String Email;
     private String Password;
+    private Boolean firstRun;
     private GoogleSignInClient googleSignInClient;
     private FirebaseAuth mFirebaseAuth;
-    private CheckBox chPolicy;
-    private Boolean firstRun;
 
     //Deprecated 처리된 startActivityForResult를 대체
     public ActivityResultLauncher<Intent> signInLauncher;
@@ -51,7 +52,8 @@ public class LoginActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        if (getIntent().hasExtra("")) {
+        if (getIntent().hasExtra("showAgreeBtn")) {
+            chPolicy = findViewById(R.id.cbPolicy);
             chPolicy.setVisibility(View.VISIBLE);
             firstRun = true;
         }
@@ -110,6 +112,9 @@ public class LoginActivity extends AppCompatActivity{
                     }
                     else {
                         if (chPolicy.isChecked() == true) {
+                            SharedPreferences settings = getSharedPreferences("PrefsFile", 0);
+                            settings.edit().putBoolean("agreed", true).commit();
+
                             mFirebaseAuth.signInWithEmailAndPassword(Email, Password).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
@@ -186,6 +191,9 @@ public class LoginActivity extends AppCompatActivity{
                 }
                 else {
                     if (chPolicy.isChecked() == true) {
+                        SharedPreferences settings = getSharedPreferences("PrefsFile", 0);
+                        settings.edit().putBoolean("agreed", true).commit();
+
                         Intent signInIntent = googleSignInClient.getSignInIntent();
                         signInLauncher.launch(signInIntent);
                     }

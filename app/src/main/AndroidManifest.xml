@@ -14,6 +14,15 @@
         android:theme="@style/Theme.AndroidStudia"
         android:usesCleartextTraffic="true">
         <activity
+            android:name="com.google.android.gms.oss.licenses.OssLicensesMenuActivity"
+            android:theme="@style/Theme.AndroidStudia" />
+        <activity
+            android:name="com.google.android.gms.oss.licenses.OssLicensesActivity"
+            android:theme="@style/Theme.AndroidStudia" />
+        <activity
+            android:name=".AppInfoActivity"
+            android:exported="true" />
+        <activity
             android:name=".PolicyActivity"
             android:exported="true" />
         <activity

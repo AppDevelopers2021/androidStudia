@@ -40,17 +40,17 @@ public class CalendarActivity extends AppCompatActivity {
     private String uid;
     private String firebaseDate;
     private String showDate;
-    public FirebaseDatabase database;
-    public DatabaseReference databaseReference;
-    public DatabaseReference dateRef;
-    public DatabaseReference noteRef;
-    public DatabaseReference memoRef;
-    public DatabaseReference reminderRef;
-    public DatabaseReference uidRef;
-    public Calendar calendar;
-    public DateFormat dateFormat;
-    public DateFormat firebaseFormat;
-    public String Memo;
+    private String Memo;
+    private FirebaseDatabase database;
+    private DatabaseReference databaseReference;
+    private DatabaseReference dateRef;
+    private DatabaseReference noteRef;
+    private DatabaseReference memoRef;
+    private DatabaseReference reminderRef;
+    private DatabaseReference uidRef;
+    private Calendar calendar;
+    private DateFormat dateFormat;
+    private DateFormat firebaseFormat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,11 +62,13 @@ public class CalendarActivity extends AppCompatActivity {
         //현재 ScheduleActivity 등에서 다시 CalendarActivity로 복귀했을 때 원래 날짜 복원
         if (getIntent().getExtras() != null) {
             firebaseDate = getIntent().getStringExtra("dbDate");
+            String[] arrayDate = firebaseDate.split("");
+
+            int year = Integer.parseInt(arrayDate[1] + arrayDate[2] + arrayDate[3] + arrayDate[4]);
+            int month = Integer.parseInt(arrayDate[5] + arrayDate[6]);
+            int date = Integer.parseInt(arrayDate[7] + arrayDate[8]);
 
             calendar = Calendar.getInstance();
-            int year = firebaseDate.charAt(0) + firebaseDate.charAt(1) + firebaseDate.charAt(2) + firebaseDate.charAt(4);
-            int month = firebaseDate.charAt(5) + firebaseDate.charAt(6);
-            int date = firebaseDate.charAt(7) + firebaseDate.charAt(8);
             calendar.set(year, month, date);
 
             dateFormat = new SimpleDateFormat("yyyy/MM/dd");
@@ -108,6 +110,13 @@ public class CalendarActivity extends AppCompatActivity {
 
                 firebaseDate = firebaseFormat.format(calendar.getTime());
                 showDate = dateFormat.format(calendar.getTime());
+
+                //Memo, Assign Init
+                TextView assign = findViewById(R.id.tvShowAssign);
+                TextView memo = findViewById(R.id.tvShowMemo);
+                memo.setText("");
+                assign.setText("");
+
                 CalendarLoad(uid, firebaseDate, showDate);
             }
         }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DATE));
@@ -127,6 +136,13 @@ public class CalendarActivity extends AppCompatActivity {
                 calendar.add(Calendar.DATE, -1);
                 firebaseDate = firebaseFormat.format(calendar.getTime());
                 showDate = dateFormat.format(calendar.getTime());
+
+                //Memo, Assign Init
+                TextView assign = findViewById(R.id.tvShowAssign);
+                TextView memo = findViewById(R.id.tvShowMemo);
+                memo.setText("");
+                assign.setText("");
+
                 CalendarLoad(uid, firebaseDate, showDate);
             }
         });
@@ -138,6 +154,13 @@ public class CalendarActivity extends AppCompatActivity {
                 calendar.add(Calendar.DATE, +1);
                 firebaseDate = firebaseFormat.format(calendar.getTime());
                 showDate = dateFormat.format(calendar.getTime());
+
+                //Memo, Assign Init
+                TextView assign = findViewById(R.id.tvShowAssign);
+                TextView memo = findViewById(R.id.tvShowMemo);
+                memo.setText("");
+                assign.setText("");
+
                 CalendarLoad(uid, firebaseDate, showDate);
             }
         });
