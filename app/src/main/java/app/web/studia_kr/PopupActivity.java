@@ -30,10 +30,10 @@ public class PopupActivity extends AppCompatActivity {
         firebaseDate = getIntent().getStringExtra("dbDate");
 
         TextView tvEmail = findViewById(R.id.tvEmail);
-        Button btLogout = (Button)findViewById(R.id.btLogout);
-        Button btpasswordch = (Button)findViewById(R.id.btIforgot);
-        ImageButton btClose = (ImageButton)findViewById(R.id.btClose);
-        TextView tvPolicy = (TextView)findViewById(R.id.tvPolicy);
+        Button btLogout = findViewById(R.id.btLogout);
+        Button btpasswordch = findViewById(R.id.btIforgot);
+        ImageButton btClose = findViewById(R.id.btClose);
+        Button btSettings = findViewById(R.id.btSettings);
 
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
@@ -68,7 +68,7 @@ public class PopupActivity extends AppCompatActivity {
             }
         });
 
-        tvPolicy.setOnClickListener(new View.OnClickListener() {
+        btSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(PopupActivity.this, AppInfoActivity.class);
