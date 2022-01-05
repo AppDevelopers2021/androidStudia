@@ -11,10 +11,10 @@ android {
 
     defaultConfig {
         applicationId "app.web.studia_kr"
-        minSdk 21
+        minSdk 23
         targetSdk 31
         versionCode 1
-        versionName "1.0"
+        versionName "0.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
