@@ -44,7 +44,7 @@ public class LoginActivity extends AppCompatActivity{
     private GoogleSignInClient googleSignInClient;
     private FirebaseAuth mFirebaseAuth;
 
-    //Deprecated 처리된 startActivityForResult를 대체
+    // Deprecated 처리된 startActivityForResult를 대체
     public ActivityResultLauncher<Intent> signInLauncher;
 
     @Override
@@ -61,7 +61,7 @@ public class LoginActivity extends AppCompatActivity{
             firstRun = false;
         }
 
-        //GoogleSignInOptions에서 requestIdToken은 google-services.json의 client>oauth_client>client_id를 하드코딩함
+        // GoogleSignInOptions에서 requestIdToken은 google-services.json의 client>oauth_client>client_id를 하드코딩함
         GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
@@ -82,12 +82,12 @@ public class LoginActivity extends AppCompatActivity{
                 Password = etPassword.getText().toString();
 
                 if (Email.length() >= 6 && Password.length() >= 6) {
-                    if (firstRun == false) {
+                    if (!firstRun) {
                         mFirebaseAuth.signInWithEmailAndPassword(Email, Password).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
-                                    Log.d("LoginActivity", "Successful Login with Email and Password");
+                                    Log.d("LoginActivity", "Logged in successfully via email");
 
                                     FirebaseUser user = mFirebaseAuth.getCurrentUser();
 
@@ -104,14 +104,14 @@ public class LoginActivity extends AppCompatActivity{
                                     }
                                     else {
                                         Log.w("LoginActivity", task.getException());
-                                        Toast.makeText(getApplicationContext(), "알 수 없는 이유로 로그인에 실패했습니다.", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getApplicationContext(), "로그인에 실패했습니다.", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             }
                         });
                     }
                     else {
-                        if (chPolicy.isChecked() == true) {
+                        if (chPolicy.isChecked()) {
                             SharedPreferences settings = getSharedPreferences("PrefsFile", 0);
                             settings.edit().putBoolean("agreed", true).commit();
 
@@ -119,7 +119,7 @@ public class LoginActivity extends AppCompatActivity{
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()) {
-                                        Log.d("LoginActivity", "Successful Login with Email and Password");
+                                        Log.d("LoginActivity", "Logged in successfully via email");
 
                                         FirebaseUser user = mFirebaseAuth.getCurrentUser();
 
@@ -136,14 +136,14 @@ public class LoginActivity extends AppCompatActivity{
                                         }
                                         else {
                                             Log.w("LoginActivity", task.getException());
-                                            Toast.makeText(getApplicationContext(), "알 수 없는 이유로 로그인에 실패했습니다.", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(getApplicationContext(), "로그인에 실패했습니다.", Toast.LENGTH_SHORT).show();
                                         }
                                     }
                                 }
                             });
                         }
                         else {
-                            Toast.makeText(getApplicationContext(), "스튜디아 이용약관 및 개인정보처리방침에 동의해야합니다.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "스튜디아 이용약관 및 개인정보처리방침에 동의해야 합니다.", Toast.LENGTH_SHORT).show();
                         }
                     }
                 }
@@ -162,13 +162,13 @@ public class LoginActivity extends AppCompatActivity{
 
                     Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
                     try {
-                        // Google Sign In was successful, authenticate with Firebase
+                        // 구글 로그인 성공
                         GoogleSignInAccount account = task.getResult(ApiException.class);
                         Log.d("LoginActivity", "firebaseAuthWithGoogle: " + account.getId());
                         resultLogin(account.getIdToken());
                     } catch (ApiException e) {
-                        // Google Sign In failed, update UI appropriately
-                        Toast.makeText(getApplicationContext(), "알 수 없는 이유로 Google 로그인에 실패했습니다.", Toast.LENGTH_SHORT).show();
+                        // 구글 로그인 실패
+                        Toast.makeText(getApplicationContext(), "Google 로그인에 실패했습니다.", Toast.LENGTH_SHORT).show();
                         e.printStackTrace();
                         Log.w("LoginActivity", "Google sign in failed", e);
                     }
@@ -185,12 +185,12 @@ public class LoginActivity extends AppCompatActivity{
         btGoogle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (firstRun == false) {
+                if (!firstRun) {
                     Intent signInIntent = googleSignInClient.getSignInIntent();
                     signInLauncher.launch(signInIntent);
                 }
                 else {
-                    if (chPolicy.isChecked() == true) {
+                    if (chPolicy.isChecked()) {
                         SharedPreferences settings = getSharedPreferences("PrefsFile", 0);
                         settings.edit().putBoolean("agreed", true).commit();
 
@@ -198,7 +198,7 @@ public class LoginActivity extends AppCompatActivity{
                         signInLauncher.launch(signInIntent);
                     }
                     else {
-                        Toast.makeText(getApplicationContext(), "스튜디아 이용약관 및 개인정보처리방침에 동의해야합니다.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "스튜디아 이용약관 및 개인정보처리방침에 동의해야 합니다.", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -214,7 +214,7 @@ public class LoginActivity extends AppCompatActivity{
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            //Login Success
+                            // 로그인 성공
                             Log.d("LoginActivity", "Successful Google AuthCredential");
 
                             FirebaseUser user = mFirebaseAuth.getCurrentUser();
@@ -225,10 +225,10 @@ public class LoginActivity extends AppCompatActivity{
                             finish();
                         }
                         else {
-                            //Login Failure
+                            // 로그인 실패
                             task.getException().printStackTrace();
                             Log.w("LoginActivity", task.getException());
-                            Toast.makeText(getApplicationContext(), "알 수 없는 이유로 Google 로그인에 실패했습니다.", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "Google 로그인에 실패했습니다.", Toast.LENGTH_LONG).show();
                         }
                     }
                 });
