@@ -70,7 +70,7 @@ public class ScheduleActivity extends AppCompatActivity {
             }
         });
 
-        ImageButton btBack = (ImageButton)findViewById(R.id.btBack);
+        ImageButton btBack = findViewById(R.id.btBack);
         btBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -86,7 +86,7 @@ public class ScheduleActivity extends AppCompatActivity {
         });
 
 
-        Button btScheduleAdd = (Button)findViewById(R.id.btComplete);
+        Button btScheduleAdd = findViewById(R.id.btComplete);
         btScheduleAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

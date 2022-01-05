@@ -25,10 +25,8 @@ public class PolicyActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(PolicyActivity.this, AppInfoActivity.class);
-                if(showDate != null) {
-                    intent.putExtra("date", showDate);
-                    intent.putExtra("dbDate", firebaseDate);
-                }
+                intent.putExtra("date", showDate);
+                intent.putExtra("dbDate", firebaseDate);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
                 finish();

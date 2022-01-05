@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.provider.CalendarContract;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -21,13 +20,18 @@ public class AppInfoActivity extends AppCompatActivity {
     private Button btOpenSource;
     private ImageButton btBack;
     private SharedPreferences settings;
+    private String showDate;
+    private String firebaseDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_app_info);
 
-        SharedPreferences settings = getSharedPreferences("PrefsFile", 0);
+        showDate = getIntent().getStringExtra("date");
+        firebaseDate = getIntent().getStringExtra("dbDate");
+
+        settings = getSharedPreferences("PrefsFile", 0);
         tvVersion = findViewById(R.id.tvVersion);
         tvVersion.setText(settings.getString("version", "VERSION UNKNOWN"));
 
@@ -62,7 +66,10 @@ public class AppInfoActivity extends AppCompatActivity {
         btBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(AppInfoActivity.this, CalendarActivity.class));
+                Intent intent = new Intent(AppInfoActivity.this, CalendarActivity.class);
+                intent.putExtra("date", showDate);
+                intent.putExtra("dbDate", firebaseDate);
+                startActivity(intent);
                 overridePendingTransition(0, 0);
             }
         });
