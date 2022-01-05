@@ -44,11 +44,16 @@ public class ScheduleActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedule);
 
+        // Get rid of the 'flashing' effect
+        getWindow().setEnterTransition(null);
+        getWindow().getSharedElementEnterTransition().setDuration(200);
+
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
         uid = user.getUid();
 
         getWindow().setEnterTransition(null);
+        getWindow().getSharedElementEnterTransition().setDuration(200);
 
         Intent intent = getIntent();
         showDate = intent.getStringExtra("date");
@@ -60,7 +65,7 @@ public class ScheduleActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getApplicationContext(), "서프라이즈!", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://blog.studia.blue/notice/intro-blog/"));
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://blog.studia.blue"));
                 startActivity(intent);
             }
         });
@@ -69,10 +74,10 @@ public class ScheduleActivity extends AppCompatActivity {
         btBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                getWindow().setExitTransition(null);
                 Intent intent = new Intent(ScheduleActivity.this, CalendarActivity.class);
                 intent.putExtra("date", showDate);
                 intent.putExtra("dbDate", firebaseDate);
-                getWindow().setExitTransition(null);
                 ActivityOptions options = ActivityOptions
                         .makeSceneTransitionAnimation(ScheduleActivity.this, Bdate, "date");
                 startActivity(intent, options.toBundle());
@@ -122,10 +127,11 @@ public class ScheduleActivity extends AppCompatActivity {
                                                         Intent intent = new Intent(ScheduleActivity.this, CalendarActivity.class);
                                                         intent.putExtra("date", showDate);
                                                         intent.putExtra("dbDate", firebaseDate);
-                                                        startActivity(intent);
-                                                        finish();
-
-                                                        overridePendingTransition(0, 0);
+                                                        getWindow().setExitTransition(null);
+                                                        ActivityOptions options = ActivityOptions
+                                                                .makeSceneTransitionAnimation(ScheduleActivity.this, Bdate, "date");
+                                                        startActivity(intent, options.toBundle());
+                                                        finishAfterTransition();
                                                     } else {
                                                         noteRef.child("0");
                                                         DatabaseReference zeroRef = noteRef.child("0");
@@ -136,10 +142,11 @@ public class ScheduleActivity extends AppCompatActivity {
                                                         Intent intent = new Intent(ScheduleActivity.this, CalendarActivity.class);
                                                         intent.putExtra("date", showDate);
                                                         intent.putExtra("dbDate", firebaseDate);
-                                                        startActivity(intent);
-                                                        finish();
-
-                                                        overridePendingTransition(0, 0);
+                                                        getWindow().setExitTransition(null);
+                                                        ActivityOptions options = ActivityOptions
+                                                                .makeSceneTransitionAnimation(ScheduleActivity.this, Bdate, "date");
+                                                        startActivity(intent, options.toBundle());
+                                                        finishAfterTransition();
                                                     }
                                                 }
 
@@ -160,10 +167,11 @@ public class ScheduleActivity extends AppCompatActivity {
                                             Intent intent = new Intent(ScheduleActivity.this, CalendarActivity.class);
                                             intent.putExtra("date", showDate);
                                             intent.putExtra("dbDate", firebaseDate);
-                                            startActivity(intent);
-                                            finish();
-
-                                            overridePendingTransition(0, 0);
+                                            getWindow().setExitTransition(null);
+                                            ActivityOptions options = ActivityOptions
+                                                    .makeSceneTransitionAnimation(ScheduleActivity.this, Bdate, "date");
+                                            startActivity(intent, options.toBundle());
+                                            finishAfterTransition();
                                         }
                                     }
 
@@ -186,10 +194,11 @@ public class ScheduleActivity extends AppCompatActivity {
                                 Intent intent = new Intent(ScheduleActivity.this, CalendarActivity.class);
                                 intent.putExtra("date", showDate);
                                 intent.putExtra("dbDate", firebaseDate);
-                                startActivity(intent);
-                                finish();
-
-                                overridePendingTransition(0, 0);
+                                getWindow().setExitTransition(null);
+                                ActivityOptions options = ActivityOptions
+                                        .makeSceneTransitionAnimation(ScheduleActivity.this, Bdate, "date");
+                                startActivity(intent, options.toBundle());
+                                finishAfterTransition();
                             }
                         }
                         else {
@@ -208,10 +217,11 @@ public class ScheduleActivity extends AppCompatActivity {
                             Intent intent = new Intent(ScheduleActivity.this, CalendarActivity.class);
                             intent.putExtra("date", showDate);
                             intent.putExtra("dbDate", firebaseDate);
-                            startActivity(intent);
-                            finish();
-
-                            overridePendingTransition(0, 0);
+                            getWindow().setExitTransition(null);
+                            ActivityOptions options = ActivityOptions
+                                    .makeSceneTransitionAnimation(ScheduleActivity.this, Bdate, "date");
+                            startActivity(intent, options.toBundle());
+                            finishAfterTransition();
                         }
                     }
 

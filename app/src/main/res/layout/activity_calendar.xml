@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/white"
+    android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
 
@@ -44,7 +45,8 @@
                     android:textAlignment="center"
                     android:textColor="@color/white"
                     android:textSize="26sp"
-                    android:transitionName="date"/>
+                    android:transitionName="date"
+                    tools:ignore="SpeakableTextPresentCheck" />
 
                 <ImageButton
                     android:id="@+id/btNext"
@@ -75,7 +77,7 @@
                 android:layout_margin="10dp"
                 android:background="@drawable/notes_container"
                 android:orientation="vertical"
-                app:layout_constraintBottom_toTopOf="@+id/Memo"
+                app:layout_constraintBottom_toTopOf="@+id/Policy"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/TopBar">
@@ -108,7 +110,7 @@
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/Memo"
+                android:id="@+id/Policy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -155,7 +157,7 @@
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/Assign"
+                android:id="@+id/PersonalInfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"

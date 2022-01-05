@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.view.ViewGroup;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -32,38 +33,46 @@ import java.util.Date;
 
 public class CalendarActivity extends AppCompatActivity {
 
-    //Declaration
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
-    private RecyclerView.LayoutManager layoutManager;
     private ArrayList<Todo> arrayList;
     private Button btDate;
     private String uid;
     private String firebaseDate;
     private String showDate;
-    public FirebaseDatabase database;
-    public DatabaseReference databaseReference;
-    public DatabaseReference dateRef;
-    public DatabaseReference noteRef;
-    public DatabaseReference memoRef;
-    public DatabaseReference reminderRef;
-    public DatabaseReference uidRef;
-    public Calendar calendar;
-    public DateFormat dateFormat;
-    public DateFormat firebaseFormat;
-    public String Memo;
+    private String Memo;
+    private FirebaseDatabase database;
+    private DatabaseReference databaseReference;
+    private DatabaseReference dateRef;
+    private DatabaseReference noteRef;
+    private DatabaseReference memoRef;
+    private DatabaseReference reminderRef;
+    private DatabaseReference uidRef;
+    private Calendar calendar;
+    private DateFormat dateFormat;
+    private DateFormat firebaseFormat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
 
-        //Get calendar data
+        getWindow().setEnterTransition(null);
+
+        //현재 ScheduleActivity 등에서 다시 CalendarActivity로 복귀했을 때 원래 날짜 복원
         if (getIntent().getExtras() != null) {
-            showDate = getIntent().getStringExtra("data");
             firebaseDate = getIntent().getStringExtra("dbDate");
-            btDate = findViewById(R.id.btDate);
-            btDate.setText(showDate);
+            String[] arrayDate = firebaseDate.split("");
+
+            int year = Integer.parseInt(arrayDate[0] + arrayDate[1] + arrayDate[2] + arrayDate[3]);
+            int month = Integer.parseInt(arrayDate[4] + arrayDate[5]);
+            int date = Integer.parseInt(arrayDate[6] + arrayDate[7]);
+
+            calendar = Calendar.getInstance();
+            calendar.set(year, month, date);
+
+            dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+            showDate = dateFormat.format(calendar.getTime());
         }
         else {
             //Calendar Instance TimeSet
@@ -73,17 +82,14 @@ public class CalendarActivity extends AppCompatActivity {
             showDate = dateFormat.format(calendar.getTime());
             firebaseFormat = new SimpleDateFormat("yyyyMMdd");
             firebaseDate = firebaseFormat.format(calendar.getTime());
-            btDate = findViewById(R.id.btDate);
-            btDate.setText(showDate);
         }
-
-        // Get rid of the 'flashing' effect
-        getWindow().setEnterTransition(null);
+        btDate = findViewById(R.id.btDate);
+        btDate.setText(showDate);
 
         //Firebase RecyclerView Declare
         recyclerView = findViewById(R.id.rvTodo);
         recyclerView.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(this);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         arrayList = new ArrayList<>();
 
@@ -102,6 +108,13 @@ public class CalendarActivity extends AppCompatActivity {
 
                 firebaseDate = firebaseFormat.format(calendar.getTime());
                 showDate = dateFormat.format(calendar.getTime());
+
+                //Memo, Assign Init
+                TextView assign = findViewById(R.id.tvShowAssign);
+                TextView memo = findViewById(R.id.tvShowMemo);
+                memo.setText("");
+                assign.setText("");
+
                 CalendarLoad(uid, firebaseDate, showDate);
             }
         }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DATE));
@@ -121,6 +134,13 @@ public class CalendarActivity extends AppCompatActivity {
                 calendar.add(Calendar.DATE, -1);
                 firebaseDate = firebaseFormat.format(calendar.getTime());
                 showDate = dateFormat.format(calendar.getTime());
+
+                //Memo, Assign Init
+                TextView assign = findViewById(R.id.tvShowAssign);
+                TextView memo = findViewById(R.id.tvShowMemo);
+                memo.setText("");
+                assign.setText("");
+
                 CalendarLoad(uid, firebaseDate, showDate);
             }
         });
@@ -132,6 +152,13 @@ public class CalendarActivity extends AppCompatActivity {
                 calendar.add(Calendar.DATE, +1);
                 firebaseDate = firebaseFormat.format(calendar.getTime());
                 showDate = dateFormat.format(calendar.getTime());
+
+                //Memo, Assign Init
+                TextView assign = findViewById(R.id.tvShowAssign);
+                TextView memo = findViewById(R.id.tvShowMemo);
+                memo.setText("");
+                assign.setText("");
+
                 CalendarLoad(uid, firebaseDate, showDate);
             }
         });
@@ -149,6 +176,7 @@ public class CalendarActivity extends AppCompatActivity {
                 ActivityOptions options = ActivityOptions
                         .makeSceneTransitionAnimation(CalendarActivity.this, btDate, "date");
                 startActivity(intent, options.toBundle());
+                finishAfterTransition();
             }
         });
 
@@ -159,9 +187,13 @@ public class CalendarActivity extends AppCompatActivity {
                 Intent intent = new Intent(CalendarActivity.this, MemoEditActivity.class);
                 intent.putExtra("date", showDate);
                 intent.putExtra("dbDate", firebaseDate);
-                startActivity(intent);
+                getWindow().setExitTransition(null);
 
-                overridePendingTransition(0, 0);
+                // Custom transition effect
+                ActivityOptions options = ActivityOptions
+                        .makeSceneTransitionAnimation(CalendarActivity.this, btDate, "date");
+                startActivity(intent, options.toBundle());
+                finishAfterTransition();
             }
         });
 
@@ -172,9 +204,13 @@ public class CalendarActivity extends AppCompatActivity {
                 Intent intent = new Intent(CalendarActivity.this, MemoEditActivity.class);
                 intent.putExtra("date", showDate);
                 intent.putExtra("dbDate", firebaseDate);
-                startActivity(intent);
+                getWindow().setExitTransition(null);
 
-                overridePendingTransition(0, 0);
+                // Custom transition effect
+                ActivityOptions options = ActivityOptions
+                        .makeSceneTransitionAnimation(CalendarActivity.this, btDate, "date");
+                startActivity(intent, options.toBundle());
+                finishAfterTransition();
             }
         });
 
@@ -183,13 +219,15 @@ public class CalendarActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(CalendarActivity.this, PopupActivity.class);
+                intent.putExtra("date", showDate);
+                intent.putExtra("dbDate", firebaseDate);
                 startActivityForResult(intent, 1);
             }
         });
     }
 
     public void CalendarLoad(String uid, String firebaseDate, String showDate) {
-        Log.w("CalendarActivity", "void CalendarLoad started.");
+        Log.d("CalendarActivity", "void CalendarLoad started");
 
         TextView assign = findViewById(R.id.tvShowAssign);
         TextView memo = findViewById(R.id.tvShowMemo);
@@ -343,6 +381,6 @@ public class CalendarActivity extends AppCompatActivity {
             }
         });
 
-        Log.w("CalendarActivity", "void CalendarLoad finished.");
+        Log.d("CalendarActivity", "void CalendarLoad finished");
     }
 }
