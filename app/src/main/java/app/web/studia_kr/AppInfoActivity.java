@@ -12,9 +12,14 @@ import android.widget.TextView;
 
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 public class AppInfoActivity extends AppCompatActivity {
 
     private TextView tvVersion;
+    private TextView tvCopyright;
     private Button btPolicy;
     private Button btPrivatePolicy;
     private Button btOpenSource;
@@ -35,12 +40,18 @@ public class AppInfoActivity extends AppCompatActivity {
         tvVersion = findViewById(R.id.tvVersion);
         tvVersion.setText(settings.getString("version", "VERSION UNKNOWN"));
 
+        Calendar calendar = Calendar.getInstance();
+        DateFormat yearOnly = new SimpleDateFormat("yyyy");
+        tvCopyright = findViewById(R.id.tvCopyright);
+        tvCopyright.setText("Copyright © " + yearOnly.format(calendar.getTime()) +" App Developers. All Rights Reserved.");
+
         btPolicy = findViewById(R.id.btPolicy);
         btPolicy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(AppInfoActivity.this, PolicyActivity.class));
                 overridePendingTransition(0, 0);
+                finish();
             }
         });
 
@@ -50,6 +61,7 @@ public class AppInfoActivity extends AppCompatActivity {
             public void onClick(View view) {
                 startActivity(new Intent(AppInfoActivity.this, PolicyActivity.class));
                 overridePendingTransition(0, 0);
+                finish();
             }
         });
 
@@ -59,6 +71,7 @@ public class AppInfoActivity extends AppCompatActivity {
             public void onClick(View view) {
                 OssLicensesMenuActivity.setActivityTitle("Studia Android Open Source License");
                 startActivity(new Intent(getApplicationContext(), OssLicensesMenuActivity.class));
+                finish();
             }
         });
 
@@ -71,6 +84,7 @@ public class AppInfoActivity extends AppCompatActivity {
                 intent.putExtra("dbDate", firebaseDate);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
+                finish();
             }
         });
     }

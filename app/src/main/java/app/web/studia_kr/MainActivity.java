@@ -31,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
 
                 if(!settings.getBoolean("agreed", false)) {
                     // 사용자가 약관에 동의하지 않음
-                    settings.edit().putString("version","v1.0");
                     intent = new Intent(MainActivity.this, LoginActivity.class);
                     intent.putExtra("showAgreeBtn", true);
                 } else if(FirebaseAuth.getInstance().getCurrentUser() != null) {

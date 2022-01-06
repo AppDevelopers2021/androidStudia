@@ -15,10 +15,10 @@
         android:usesCleartextTraffic="true">
         <activity
             android:name="com.google.android.gms.oss.licenses.OssLicensesMenuActivity"
-            android:theme="@style/Theme.AndroidStudia" />
+            android:theme="@style/Theme.OSS" />
         <activity
             android:name="com.google.android.gms.oss.licenses.OssLicensesActivity"
-            android:theme="@style/Theme.AndroidStudia" />
+            android:theme="@style/Theme.OSS" />
         <activity
             android:name=".AppInfoActivity"
             android:exported="true" />

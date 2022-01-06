@@ -5,9 +5,7 @@ public class Todo {
     private String content;
     private String subject;
 
-    public Todo() {
-
-    }
+    public Todo() { }
 
     public String getContent() {
         return content;

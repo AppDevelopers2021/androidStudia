@@ -15,7 +15,6 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.view.ViewGroup;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -59,7 +58,7 @@ public class CalendarActivity extends AppCompatActivity {
 
         getWindow().setEnterTransition(null);
 
-        //현재 ScheduleActivity 등에서 다시 CalendarActivity로 복귀했을 때 원래 날짜 복원
+        //ScheduleActivity 등에서 다시 CalendarActivity로 복귀했을 때 원래 날짜 복원
         if (getIntent().hasExtra("dbDate")) {
             firebaseDate = getIntent().getStringExtra("dbDate");
             String[] arrayDate = firebaseDate.split("");
@@ -69,7 +68,7 @@ public class CalendarActivity extends AppCompatActivity {
             int date = Integer.parseInt(arrayDate[6] + arrayDate[7]);
 
             calendar = Calendar.getInstance();
-            calendar.set(year, month, date);
+            calendar.set(year, month - 1, date);
 
             dateFormat = new SimpleDateFormat("yyyy/MM/dd");
             showDate = dateFormat.format(calendar.getTime());
@@ -105,7 +104,6 @@ public class CalendarActivity extends AppCompatActivity {
         DatePickerDialog dialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-                Button btDate = (Button)findViewById(R.id.btDate);
                 calendar.set(i, i1, i2);
 
                 firebaseDate = firebaseFormat.format(calendar.getTime());
