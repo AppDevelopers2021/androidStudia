@@ -40,11 +40,6 @@ public class AppInfoActivity extends AppCompatActivity {
         tvVersion = findViewById(R.id.tvVersion);
         tvVersion.setText(settings.getString("version", "VERSION UNKNOWN"));
 
-        Calendar calendar = Calendar.getInstance();
-        DateFormat yearOnly = new SimpleDateFormat("yyyy");
-        tvCopyright = findViewById(R.id.tvCopyright);
-        tvCopyright.setText("Copyright © " + yearOnly.format(calendar.getTime()) +" App Developers. All Rights Reserved.");
-
         btPolicy = findViewById(R.id.btPolicy);
         btPolicy.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -142,7 +142,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:text="Copyright © 2022 App Developers. All Rights Reserved."
+                android:text="Copyright © 2021 App Developers. All Rights Reserved."
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="14sp" />
