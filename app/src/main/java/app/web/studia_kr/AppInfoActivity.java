@@ -18,13 +18,11 @@ import java.util.Calendar;
 
 public class AppInfoActivity extends AppCompatActivity {
 
-    private TextView tvVersion;
     private TextView tvCopyright;
     private Button btPolicy;
     private Button btPrivatePolicy;
     private Button btOpenSource;
     private ImageButton btBack;
-    private SharedPreferences settings;
     private String showDate;
     private String firebaseDate;
 

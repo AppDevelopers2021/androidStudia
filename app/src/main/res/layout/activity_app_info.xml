@@ -74,7 +74,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/nanumsquareeb"
-                android:text="v. 1.0"
+                android:text="v. 1.1"
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="20sp"
