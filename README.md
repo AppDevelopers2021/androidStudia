@@ -22,5 +22,5 @@ Firebase로 하나된 웹 앱, Android 앱, iOS 앱.
 현재 검토중입니다.
 
 𝒔𝒕𝒖𝒅𝒊𝒂
-Copyright © 2021 App Developers.
+Copyright © 2021-2022 App Developers.
 All Rights Reserved.

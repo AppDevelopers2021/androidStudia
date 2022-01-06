@@ -36,9 +36,10 @@ public class AppInfoActivity extends AppCompatActivity {
         showDate = getIntent().getStringExtra("date");
         firebaseDate = getIntent().getStringExtra("dbDate");
 
-        settings = getSharedPreferences("PrefsFile", 0);
-        tvVersion = findViewById(R.id.tvVersion);
-        tvVersion.setText(settings.getString("version", "VERSION UNKNOWN"));
+        tvCopyright = findViewById(R.id.tvCopyright);
+        Calendar calendar = Calendar.getInstance();
+        DateFormat yearFormat = new SimpleDateFormat("yyyy");
+        tvCopyright.setText("Copyright © 2021-" + yearFormat.format(calendar.getTime()) + " App Developers. All Rights Reserved.");
 
         btPolicy = findViewById(R.id.btPolicy);
         btPolicy.setOnClickListener(new View.OnClickListener() {
