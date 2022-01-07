@@ -11,6 +11,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomViewHolder> {
@@ -36,6 +38,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
 
     @Override
     public void onBindViewHolder(@NonNull CustomViewHolder holder, int position) {
+
         holder.content.setText(arrayList.get(position).getContent());
         holder.subject.setText(arrayList.get(position).getSubject());
 
@@ -77,6 +80,29 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
             holder.constraintLayout.setBackground(ContextCompat.getDrawable(context, R.drawable.rectanglegray));
         if (arrayList.get(position).getSubject().equals("기타"))
             holder.constraintLayout.setBackground(ContextCompat.getDrawable(context, R.drawable.rectanglegreen));
+
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                //Delete holder
+                int pos = holder.getAdapterPosition();
+
+                try{
+                    FirebaseDatabase database = FirebaseDatabase.getInstance();
+                    database.getReference().child("calendar").child(arrayList.get(pos).getUid())
+                            .child(arrayList.get(pos).getDate()).child("note")
+                            .child(arrayList.get(pos).getNumber()).removeValue();
+
+                    arrayList.remove(pos);
+                    notifyItemRemoved(pos);
+                }
+                catch(IndexOutOfBoundsException e){
+                    e.printStackTrace();
+                }
+
+                return true;
+            }
+        });
     }
 
     @Override
@@ -95,7 +121,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
 
             this.subject = itemView.findViewById(R.id.tvSubject);
             this.content = itemView.findViewById(R.id.tvContent);
-            this.constraintLayout = (ConstraintLayout) itemView.findViewById(R.id.layout);
+            this.constraintLayout = itemView.findViewById(R.id.layout);
         }
     }
 }

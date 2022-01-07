@@ -259,8 +259,16 @@ public class CalendarActivity extends AppCompatActivity {
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                             arrayList.clear();
+                                            int i = 0;
+
                                             for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                                                 Todo todo = snapshot.getValue(Todo.class);
+                                                todo.setDate(firebaseDate);
+                                                todo.setUid(uid);
+                                                todo.setNumber(Integer.toString(i));
+
+                                                i++;
+
                                                 arrayList.add(todo);
                                             }
                                             adapter = new CustomAdapter(arrayList, CalendarActivity.this);
