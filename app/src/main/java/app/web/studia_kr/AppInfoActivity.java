@@ -3,13 +3,13 @@ package app.web.studia_kr;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.firebase.ui.auth.BuildConfig;
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity;
 
 import java.text.DateFormat;
@@ -18,6 +18,7 @@ import java.util.Calendar;
 
 public class AppInfoActivity extends AppCompatActivity {
 
+    private TextView tvVersion;
     private TextView tvCopyright;
     private Button btPolicy;
     private Button btPrivatePolicy;
@@ -33,6 +34,9 @@ public class AppInfoActivity extends AppCompatActivity {
 
         showDate = getIntent().getStringExtra("date");
         firebaseDate = getIntent().getStringExtra("dbDate");
+
+        tvVersion = findViewById(R.id.tvVersion);
+        tvVersion.setText("v" + BuildConfig.VERSION_NAME);
 
         tvCopyright = findViewById(R.id.tvCopyright);
         Calendar calendar = Calendar.getInstance();
