@@ -65,6 +65,7 @@ public class PopupActivity extends AppCompatActivity {
                 intent.putExtra("dbDate", firebaseDate);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
+                finish();
             }
         });
 
@@ -76,6 +77,7 @@ public class PopupActivity extends AppCompatActivity {
                 intent.putExtra("dbDate", firebaseDate);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
+                finish();
             }
         });
     }

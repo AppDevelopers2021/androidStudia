@@ -74,7 +74,7 @@ public class LoginActivity extends AppCompatActivity{
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
 
-        Button btLogin =  (Button)findViewById(R.id.btLogin);
+        Button btLogin =  findViewById(R.id.btLogin);
         btLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -181,7 +181,7 @@ public class LoginActivity extends AppCompatActivity{
             }
         });
 
-        Button btGoogle = (Button)findViewById(R.id.btGoogle);
+        Button btGoogle = findViewById(R.id.btGoogle);
         btGoogle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -73,6 +73,6 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:backgroundTint="@color/white"
-        android:src="@drawable/ic_baseline_close_40"
+        android:src="@drawable/popup_close"
         tools:ignore="SpeakableTextPresentCheck" />
 </RelativeLayout>

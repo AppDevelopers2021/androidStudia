@@ -5,7 +5,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -64,13 +63,11 @@ public class ScheduleActivity extends AppCompatActivity {
         Bdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "서프라이즈!", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://blog.studia.blue"));
-                startActivity(intent);
+                Toast.makeText(getApplicationContext(), "너만큼 밝게 빛나는 별도 없다.", Toast.LENGTH_SHORT).show();
             }
         });
 
-        ImageButton btBack = (ImageButton)findViewById(R.id.btBack);
+        ImageButton btBack = findViewById(R.id.btBack);
         btBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -86,7 +83,7 @@ public class ScheduleActivity extends AppCompatActivity {
         });
 
 
-        Button btScheduleAdd = (Button)findViewById(R.id.btComplete);
+        Button btScheduleAdd = findViewById(R.id.btComplete);
         btScheduleAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

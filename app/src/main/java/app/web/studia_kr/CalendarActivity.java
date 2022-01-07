@@ -15,7 +15,6 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.view.ViewGroup;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -59,8 +58,8 @@ public class CalendarActivity extends AppCompatActivity {
 
         getWindow().setEnterTransition(null);
 
-        //현재 ScheduleActivity 등에서 다시 CalendarActivity로 복귀했을 때 원래 날짜 복원
-        if (getIntent().getExtras() != null) {
+        //ScheduleActivity 등에서 다시 CalendarActivity로 복귀했을 때 원래 날짜 복원
+        if (getIntent().hasExtra("dbDate")) {
             firebaseDate = getIntent().getStringExtra("dbDate");
             String[] arrayDate = firebaseDate.split("");
 
@@ -69,10 +68,12 @@ public class CalendarActivity extends AppCompatActivity {
             int date = Integer.parseInt(arrayDate[6] + arrayDate[7]);
 
             calendar = Calendar.getInstance();
-            calendar.set(year, month, date);
+            calendar.set(year, month - 1, date);
 
             dateFormat = new SimpleDateFormat("yyyy/MM/dd");
             showDate = dateFormat.format(calendar.getTime());
+            firebaseFormat = new SimpleDateFormat("yyyyMMdd");
+            firebaseDate = firebaseFormat.format(calendar.getTime());
         }
         else {
             //Calendar Instance TimeSet
@@ -103,7 +104,6 @@ public class CalendarActivity extends AppCompatActivity {
         DatePickerDialog dialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-                Button btDate = (Button)findViewById(R.id.btDate);
                 calendar.set(i, i1, i2);
 
                 firebaseDate = firebaseFormat.format(calendar.getTime());
@@ -119,7 +119,7 @@ public class CalendarActivity extends AppCompatActivity {
             }
         }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DATE));
 
-        Button btDate = (Button)findViewById(R.id.btDate);
+        Button btDate = findViewById(R.id.btDate);
         btDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -127,7 +127,7 @@ public class CalendarActivity extends AppCompatActivity {
             }
         });
 
-        ImageButton btPrevious = (ImageButton)findViewById(R.id.btPrevious);
+        ImageButton btPrevious = findViewById(R.id.btPrevious);
         btPrevious.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -145,7 +145,7 @@ public class CalendarActivity extends AppCompatActivity {
             }
         });
 
-        ImageButton btNext = (ImageButton)findViewById(R.id.btNext);
+        ImageButton btNext = findViewById(R.id.btNext);
         btNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -163,7 +163,7 @@ public class CalendarActivity extends AppCompatActivity {
             }
         });
 
-        ImageButton btSchedule = (ImageButton)findViewById(R.id.btAddSchedule);
+        ImageButton btSchedule = findViewById(R.id.btAddSchedule);
         btSchedule.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -180,7 +180,7 @@ public class CalendarActivity extends AppCompatActivity {
             }
         });
 
-        ImageButton btEditMemo = (ImageButton)findViewById(R.id.btEditMemo);
+        ImageButton btEditMemo = findViewById(R.id.btEditMemo);
         btEditMemo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -197,7 +197,7 @@ public class CalendarActivity extends AppCompatActivity {
             }
         });
 
-        ImageButton btEditAssign = (ImageButton)findViewById(R.id.btEditAssign);
+        ImageButton btEditAssign = findViewById(R.id.btEditAssign);
         btEditAssign.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -214,7 +214,7 @@ public class CalendarActivity extends AppCompatActivity {
             }
         });
 
-        ImageButton btProfile = (ImageButton)findViewById(R.id.btProfile);
+        ImageButton btProfile = findViewById(R.id.btProfile);
         btProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

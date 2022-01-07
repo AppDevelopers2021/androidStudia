@@ -17,18 +17,11 @@ public class PolicyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_policy);
 
-        showDate = getIntent().getStringExtra("date");
-        firebaseDate = getIntent().getStringExtra("dbDate");
-
         ImageButton btBack = findViewById(R.id.btAppBack);
         btBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(PolicyActivity.this, AppInfoActivity.class);
-                if(showDate != null) {
-                    intent.putExtra("date", showDate);
-                    intent.putExtra("dbDate", firebaseDate);
-                }
                 startActivity(intent);
                 overridePendingTransition(0, 0);
                 finish();
