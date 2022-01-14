@@ -50,6 +50,7 @@ public class CalendarActivity extends AppCompatActivity {
     private Calendar calendar;
     private DateFormat dateFormat;
     private DateFormat firebaseFormat;
+    private DatePickerDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +58,7 @@ public class CalendarActivity extends AppCompatActivity {
         setContentView(R.layout.activity_calendar);
 
         getWindow().setEnterTransition(null);
+        getWindow().getSharedElementEnterTransition().setDuration(200);
 
         //ScheduleActivity 등에서 다시 CalendarActivity로 복귀했을 때 원래 날짜 복원
         if (getIntent().hasExtra("dbDate")) {
@@ -68,6 +70,9 @@ public class CalendarActivity extends AppCompatActivity {
             int date = Integer.parseInt(arrayDate[6] + arrayDate[7]);
 
             calendar = Calendar.getInstance();
+
+            //그냥 int month 자체를 사용했을 때, 제대로 로드되지 않는 오류가 있음
+            //따라서, month 대신 month - 1 사용
             calendar.set(year, month - 1, date);
 
             dateFormat = new SimpleDateFormat("yyyy/MM/dd");
@@ -76,7 +81,7 @@ public class CalendarActivity extends AppCompatActivity {
             firebaseDate = firebaseFormat.format(calendar.getTime());
         }
         else {
-            //Calendar Instance TimeSet
+            //Calendar 현 시간 설정
             calendar = Calendar.getInstance();
             calendar.setTime(new Date());
             dateFormat = new SimpleDateFormat("yyyy/MM/dd");
@@ -101,29 +106,11 @@ public class CalendarActivity extends AppCompatActivity {
 
         CalendarLoad(uid, firebaseDate, showDate);
 
-        DatePickerDialog dialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-                calendar.set(i, i1, i2);
-
-                firebaseDate = firebaseFormat.format(calendar.getTime());
-                showDate = dateFormat.format(calendar.getTime());
-
-                //Memo, Assign Init
-                TextView assign = findViewById(R.id.tvShowAssign);
-                TextView memo = findViewById(R.id.tvShowMemo);
-                memo.setText("");
-                assign.setText("");
-
-                CalendarLoad(uid, firebaseDate, showDate);
-            }
-        }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DATE));
-
         Button btDate = findViewById(R.id.btDate);
         btDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dialog.show();
+                dialogOpen(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DATE));
             }
         });
 
@@ -226,6 +213,28 @@ public class CalendarActivity extends AppCompatActivity {
         });
     }
 
+    public void dialogOpen(int year, int month, int date) {
+        dialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+                calendar.set(i, i1, i2);
+
+                firebaseDate = firebaseFormat.format(calendar.getTime());
+                showDate = dateFormat.format(calendar.getTime());
+
+                //Memo, Assign Init
+                TextView assign = findViewById(R.id.tvShowAssign);
+                TextView memo = findViewById(R.id.tvShowMemo);
+                memo.setText("");
+                assign.setText("");
+
+                CalendarLoad(uid, firebaseDate, showDate);
+            }
+        }, year, month, date);
+
+        dialog.show();
+    }
+
     public void CalendarLoad(String uid, String firebaseDate, String showDate) {
         Log.d("CalendarActivity", "void CalendarLoad started");
 
@@ -272,7 +281,6 @@ public class CalendarActivity extends AppCompatActivity {
                                                 arrayList.add(todo);
                                             }
                                             adapter = new CustomAdapter(arrayList, CalendarActivity.this);
-
                                             adapter.notifyDataSetChanged();
                                             recyclerView.setAdapter(adapter);
                                         }
@@ -329,23 +337,15 @@ public class CalendarActivity extends AppCompatActivity {
                                     reminderRef.addValueEventListener(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                                            int Count = 1;
-
                                             for (DataSnapshot datasnapshot : snapshot.getChildren()) {
                                                 String reminder = datasnapshot.getValue().toString();
+                                                TextView tvAssign = findViewById(R.id.tvShowAssign);
 
-                                                if (Count == 1) {
-                                                    TextView tvAssign = findViewById(R.id.tvShowAssign);
-                                                    tvAssign.append("•" + reminder);
-
-                                                    Count = Count +1;
+                                                if (tvAssign.getText().equals("") || tvAssign.getText().equals(null)) {
+                                                    tvAssign.setText("·" + reminder);
                                                 }
                                                 else {
-                                                    TextView tvAssign = findViewById(R.id.tvShowAssign);
-                                                    tvAssign.append("\n" + "•" + reminder);
-
-                                                    Count = Count +1;
+                                                    tvAssign.append("\n" + "·" + reminder);
                                                 }
                                             }
                                         }
@@ -377,7 +377,6 @@ public class CalendarActivity extends AppCompatActivity {
                             memo.setText("");
                             assign.setText("");
                         }
-
                     }
                 }
 

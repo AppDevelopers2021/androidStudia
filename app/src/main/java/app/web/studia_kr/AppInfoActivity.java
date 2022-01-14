@@ -35,9 +35,6 @@ public class AppInfoActivity extends AppCompatActivity {
         showDate = getIntent().getStringExtra("date");
         firebaseDate = getIntent().getStringExtra("dbDate");
 
-        tvVersion = findViewById(R.id.tvVersion);
-        tvVersion.setText("v" + BuildConfig.VERSION_NAME);
-
         tvCopyright = findViewById(R.id.tvCopyright);
         Calendar calendar = Calendar.getInstance();
         DateFormat yearFormat = new SimpleDateFormat("yyyy");
