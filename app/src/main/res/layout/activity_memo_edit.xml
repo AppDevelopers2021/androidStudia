@@ -18,12 +18,12 @@
                 android:orientation="vertical">
 
             <LinearLayout
-                    android:id="@+id/TopBar"
-                    android:layout_width="match_parent"
-                    android:layout_height="70dp"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:background="#2291FF">
+                android:id="@+id/TopBar"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="#2291FF">
 
                 <ImageButton
                     android:id="@+id/btBack"
@@ -35,30 +35,29 @@
                     tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
                 <View
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"/>
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
 
-                <TextView
-                        android:id="@+id/btDate"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:background="#2291FF"
-                        android:fontFamily="@font/nanumsquareb"
-                        android:text="2021/12/25"
-                        android:textAlignment="center"
-                        android:textColor="@color/white"
-                        android:textSize="26sp"
-                        android:stateListAnimator="@null"
-                        android:transitionName="date"/>
-
+                <Button
+                    android:id="@+id/btDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="#2291FF"
+                    android:fontFamily="@font/nanumsquareb"
+                    android:text="2021/12/25"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="26sp"
+                    android:stateListAnimator="@null"
+                    android:transitionName="date"/>
 
                 <View
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:layout_marginEnd="55dp"/>
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="55dp"/>
 
             </LinearLayout>
 
