@@ -1,5 +1,6 @@
 package app.web.studia_kr;
 
+import android.animation.Animator;
 import android.app.ActivityOptions;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,11 +12,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.api.Distribution;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -128,7 +132,19 @@ public class CalendarActivity extends AppCompatActivity {
                 memo.setText("");
                 assign.setText("");
 
+                View linearLayout = findViewById(R.id.SwipeLayout);
+
+                TranslateAnimation anim1 = new TranslateAnimation(0, linearLayout.getWidth() /2,0, 0);
+                anim1.setDuration(0200);
+                anim1.setFillAfter(true);
+                linearLayout.startAnimation(anim1);
+
                 CalendarLoad(uid, firebaseDate, showDate);
+
+                TranslateAnimation anim2 = new TranslateAnimation(0 - linearLayout.getWidth() /2, 0, 0, 0);
+                anim2.setDuration(0200);
+                anim2.setFillAfter(true);
+                linearLayout.startAnimation(anim2);
             }
         });
 
@@ -146,7 +162,19 @@ public class CalendarActivity extends AppCompatActivity {
                 memo.setText("");
                 assign.setText("");
 
+                View linearLayout = findViewById(R.id.SwipeLayout);
+
+                TranslateAnimation anim1 = new TranslateAnimation(0, 0 - linearLayout.getWidth() /2,0, 0);
+                anim1.setDuration(0200);
+                anim1.setFillAfter(true);
+                linearLayout.startAnimation(anim1);
+
                 CalendarLoad(uid, firebaseDate, showDate);
+
+                TranslateAnimation anim2 = new TranslateAnimation(linearLayout.getWidth() /2, 0, 0, 0);
+                anim2.setDuration(0200);
+                anim2.setFillAfter(true);
+                linearLayout.startAnimation(anim2);
             }
         });
 
@@ -268,16 +296,9 @@ public class CalendarActivity extends AppCompatActivity {
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                             arrayList.clear();
-                                            int i = 0;
 
                                             for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                                                 Todo todo = snapshot.getValue(Todo.class);
-                                                todo.setDate(firebaseDate);
-                                                todo.setUid(uid);
-                                                todo.setNumber(Integer.toString(i));
-
-                                                i++;
-
                                                 arrayList.add(todo);
                                             }
                                             adapter = new CustomAdapter(arrayList, CalendarActivity.this);
@@ -337,15 +358,18 @@ public class CalendarActivity extends AppCompatActivity {
                                     reminderRef.addValueEventListener(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            int i = 1;
+
                                             for (DataSnapshot datasnapshot : snapshot.getChildren()) {
                                                 String reminder = datasnapshot.getValue().toString();
                                                 TextView tvAssign = findViewById(R.id.tvShowAssign);
 
-                                                if (tvAssign.getText().equals("") || tvAssign.getText().equals(null)) {
-                                                    tvAssign.setText("·" + reminder);
+                                                if (i != snapshot.getChildrenCount()) {
+                                                     tvAssign.append("·" + reminder + "\n");
+                                                     i++;
                                                 }
                                                 else {
-                                                    tvAssign.append("\n" + "·" + reminder);
+                                                    tvAssign.append("·" + reminder);
                                                 }
                                             }
                                         }
@@ -390,4 +414,10 @@ public class CalendarActivity extends AppCompatActivity {
 
         Log.d("CalendarActivity", "void CalendarLoad finished");
     }
+
+    public String getFirebaseDate() { return firebaseDate; }
+
+    public String getUid() { return uid; }
+
+    public String getShowDate() { return showDate; }
 }
