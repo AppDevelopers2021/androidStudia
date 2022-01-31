@@ -66,11 +66,12 @@ public class AppInfoActivity extends AppCompatActivity {
             public void onClick(View view) {
                 OssLicensesMenuActivity.setActivityTitle("Studia Android Open Source License");
                 startActivity(new Intent(getApplicationContext(), OssLicensesMenuActivity.class));
+                overridePendingTransition(0, 0);
                 finish();
             }
         });
 
-        btBack = findViewById(R.id.btAppBack);
+        btBack = findViewById(R.id.btBack);
         btBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -14,10 +14,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomViewHolder> {
 
@@ -42,7 +44,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
 
     @Override
     public void onBindViewHolder(@NonNull CustomViewHolder holder, int position) {
-
         holder.content.setText(arrayList.get(position).getContent());
         holder.subject.setText(arrayList.get(position).getSubject());
 
@@ -84,66 +85,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
             holder.constraintLayout.setBackground(ContextCompat.getDrawable(context, R.drawable.rectanglegray));
         if (arrayList.get(position).getSubject().equals("기타"))
             holder.constraintLayout.setBackground(ContextCompat.getDrawable(context, R.drawable.rectanglegreen));
-
-        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                //Delete holder
-                int pos = holder.getAdapterPosition();
-
-                try{
-                    FirebaseDatabase database = FirebaseDatabase.getInstance();
-                    database.getReference().child("calendar").child(arrayList.get(pos).getUid())
-                            .child(arrayList.get(pos).getDate()).child("note")
-                            .child(arrayList.get(pos).getNumber()).removeValue();
-
-                    //지워진 번호로 생긴 공백 부분을 채우기 위해 하나씩 당겨줌
-                    database.getReference().child("calendar").child(arrayList.get(pos).getUid())
-                            .child(arrayList.get(pos).getDate()).child("note")
-                            .addListenerForSingleValueEvent(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                    if (dataSnapshot.getChildrenCount() != Integer.parseInt(arrayList.get(pos).getNumber())) {
-                                        for (int i=Integer.parseInt(arrayList.get(pos).getNumber()); i<dataSnapshot.getChildrenCount() - Integer.parseInt(arrayList.get(pos).getNumber()) - 1; i++) {
-                                            //윗 번호의 데이터를 현재 i 번호로 옮김
-
-                                            //Content
-                                            database.getReference().child("calendar").child(arrayList.get(pos).getUid())
-                                                    .child(arrayList.get(pos).getDate()).child("note")
-                                                    .child(arrayList.get(i).getNumber()).child("content").setValue(database.getReference().child("calendar").child(arrayList.get(pos).getUid())
-                                                    .child(arrayList.get(pos).getDate()).child("note")
-                                                    .child(arrayList.get(i + 1).getNumber()).child("content"));
-
-                                            //Subject
-                                            database.getReference().child("calendar").child(arrayList.get(pos).getUid())
-                                                    .child(arrayList.get(pos).getDate()).child("note")
-                                                    .child(arrayList.get(i).getNumber()).child("subject").setValue(database.getReference().child("calendar").child(arrayList.get(pos).getUid())
-                                                    .child(arrayList.get(pos).getDate()).child("note")
-                                                    .child(arrayList.get(i + 1).getNumber()).child("subject"));
-
-                                            //윗 번호의 데이터 삭제
-                                            database.getReference().child("calendar").child(arrayList.get(pos).getUid())
-                                                    .child(arrayList.get(pos).getDate()).child("note")
-                                                    .child(arrayList.get(i + 1).getNumber()).removeValue();
-                                        }
-                                    }
-                                }
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError databaseError) {
-                                    Log.d("CustomAdapter", String.valueOf(databaseError.toException()));
-                                }
-                            });
-
-                    arrayList.remove(pos);
-                    notifyItemRemoved(pos);
-                }
-                catch(IndexOutOfBoundsException e){
-                    e.printStackTrace();
-                }
-
-                return true;
-            }
-        });
     }
 
     @Override
