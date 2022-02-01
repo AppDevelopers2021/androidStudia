@@ -1,6 +1,5 @@
 package app.web.studia_kr;
 
-import android.animation.Animator;
 import android.app.ActivityOptions;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,10 +15,8 @@ import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.google.api.Distribution;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -126,6 +123,8 @@ public class CalendarActivity extends AppCompatActivity {
                 firebaseDate = firebaseFormat.format(calendar.getTime());
                 showDate = dateFormat.format(calendar.getTime());
 
+                arrayClear();
+
                 //Memo, Assign Init
                 TextView assign = findViewById(R.id.tvShowAssign);
                 TextView memo = findViewById(R.id.tvShowMemo);
@@ -155,6 +154,8 @@ public class CalendarActivity extends AppCompatActivity {
                 calendar.add(Calendar.DATE, +1);
                 firebaseDate = firebaseFormat.format(calendar.getTime());
                 showDate = dateFormat.format(calendar.getTime());
+
+                arrayClear();
 
                 //Memo, Assign Init
                 TextView assign = findViewById(R.id.tvShowAssign);
@@ -249,6 +250,8 @@ public class CalendarActivity extends AppCompatActivity {
 
                 firebaseDate = firebaseFormat.format(calendar.getTime());
                 showDate = dateFormat.format(calendar.getTime());
+
+                arrayClear();
 
                 //Memo, Assign Init
                 TextView assign = findViewById(R.id.tvShowAssign);
@@ -359,10 +362,11 @@ public class CalendarActivity extends AppCompatActivity {
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                                             int i = 1;
+                                            TextView tvAssign = findViewById(R.id.tvShowAssign);
+                                            tvAssign.setText("");
 
                                             for (DataSnapshot datasnapshot : snapshot.getChildren()) {
                                                 String reminder = datasnapshot.getValue().toString();
-                                                TextView tvAssign = findViewById(R.id.tvShowAssign);
 
                                                 if (i != snapshot.getChildrenCount()) {
                                                      tvAssign.append("·" + reminder + "\n");
@@ -415,9 +419,14 @@ public class CalendarActivity extends AppCompatActivity {
         Log.d("CalendarActivity", "void CalendarLoad finished");
     }
 
-    public String getFirebaseDate() { return firebaseDate; }
+    public void arrayClear() {
+        int arraySize = arrayList.size();
+        arrayList.clear();
 
-    public String getUid() { return uid; }
-
-    public String getShowDate() { return showDate; }
+        for (int i = 0; i<arraySize; i++) {
+            adapter = new CustomAdapter(arrayList, CalendarActivity.this);
+            adapter.notifyItemRemoved(i);
+            recyclerView.setAdapter(adapter);
+        }
+    }
 }
