@@ -137,7 +137,7 @@
                             android:text="메모"
                             android:textAlignment="center"
                             android:textColor="@color/black"
-                            android:textSize="24sp"
+                            android:textSize="22sp"
                             android:textStyle="bold" />
 
                         <TextView
@@ -185,7 +185,7 @@
                             android:fontFamily="@font/nanumgothic"
                             android:text="과제 및 준비물"
                             android:textColor="@color/black"
-                            android:textSize="24sp"
+                            android:textSize="22sp"
                             android:textStyle="bold" />
 
                         <TextView
