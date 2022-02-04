@@ -9,15 +9,12 @@ import android.widget.ImageButton;
 
 public class PolicyActivity extends AppCompatActivity {
 
-    private String showDate;
-    private String firebaseDate;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_policy);
 
-        ImageButton btBack = findViewById(R.id.btAppBack);
+        ImageButton btBack = findViewById(R.id.btBack);
         btBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

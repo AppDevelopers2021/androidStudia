@@ -21,16 +21,17 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 public class MemoEditActivity extends AppCompatActivity {
 
     private EditText etMemo;
     private EditText etAssign;
-    private TextView Bdate;
+    private TextView btDate;
     private String showDate;
     private String firebaseDate;
     private String uid;
     private String memoString;
-    private String assignString;
     private FirebaseDatabase database;
     private DatabaseReference databaseReference;
     private DatabaseReference uidRef;
@@ -54,8 +55,8 @@ public class MemoEditActivity extends AppCompatActivity {
         Intent intent = getIntent();
         showDate = intent.getStringExtra("date");
         firebaseDate = intent.getStringExtra("dbDate");
-        Bdate = findViewById(R.id.btDate);
-        Bdate.setText(showDate);
+        btDate = findViewById(R.id.btDate);
+        btDate.setText(showDate);
 
         CalendarLoad(uid, firebaseDate);
 
@@ -68,7 +69,7 @@ public class MemoEditActivity extends AppCompatActivity {
                 intent.putExtra("dbDate", firebaseDate);
                 getWindow().setExitTransition(null);
                 ActivityOptions options = ActivityOptions
-                        .makeSceneTransitionAnimation(MemoEditActivity.this, Bdate, "date");
+                        .makeSceneTransitionAnimation(MemoEditActivity.this, btDate, "date");
                 startActivity(intent, options.toBundle());
                 finishAfterTransition();
             }
@@ -81,11 +82,12 @@ public class MemoEditActivity extends AppCompatActivity {
                 etMemo = findViewById(R.id.etMemo);
                 memoString = etMemo.getText().toString();
                 etAssign = findViewById(R.id.etAssign);
-                assignString = etAssign.getText().toString();
 
                 database = FirebaseDatabase.getInstance();
                 databaseReference = database.getReference();
                 uidRef = databaseReference.child("calendar").child(uid);
+
+                clearReminderRef();
 
                 uidRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -99,23 +101,6 @@ public class MemoEditActivity extends AppCompatActivity {
                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                                         if (snapshot.hasChild("memo")) {
                                             memoRef = dateRef.child("memo");
-
-                                            memoRef.addValueEventListener(new ValueEventListener() {
-                                                @Override
-                                                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                                    memoRef.setValue(memoString);
-                                                }
-
-                                                @Override
-                                                public void onCancelled(@NonNull DatabaseError error) {
-                                                    Log.e("MemoEditActivity", String.valueOf(error.toException()));
-                                                }
-                                            });
-                                        }
-                                        else {
-                                            dateRef.child("memo");
-                                            memoRef = dateRef.child("memo");
-
                                             memoRef.setValue(memoString);
 
                                             Intent intent = new Intent(MemoEditActivity.this, CalendarActivity.class);
@@ -123,7 +108,21 @@ public class MemoEditActivity extends AppCompatActivity {
                                             intent.putExtra("dbDate", firebaseDate);
                                             getWindow().setExitTransition(null);
                                             ActivityOptions options = ActivityOptions
-                                                    .makeSceneTransitionAnimation(MemoEditActivity.this, Bdate, "date");
+                                                    .makeSceneTransitionAnimation(MemoEditActivity.this, btDate, "date");
+                                            startActivity(intent, options.toBundle());
+                                            finishAfterTransition();
+                                        }
+                                        else {
+                                            dateRef.child("memo");
+                                            memoRef = dateRef.child("memo");
+                                            memoRef.setValue(memoString);
+
+                                            Intent intent = new Intent(MemoEditActivity.this, CalendarActivity.class);
+                                            intent.putExtra("date", showDate);
+                                            intent.putExtra("dbDate", firebaseDate);
+                                            getWindow().setExitTransition(null);
+                                            ActivityOptions options = ActivityOptions
+                                                    .makeSceneTransitionAnimation(MemoEditActivity.this, btDate, "date");
                                             startActivity(intent, options.toBundle());
                                             finishAfterTransition();
                                         }
@@ -146,16 +145,22 @@ public class MemoEditActivity extends AppCompatActivity {
                                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                                                     String getReminder = etAssign.getText().toString();
                                                     if (getReminder != "") {
-                                                        String[] lines;
-                                                        String delimiter = "\n";
+                                                        ArrayList lines = new ArrayList<>();
+                                                        String[] extract;
+                                                        extract = getReminder.split("\n");
 
-                                                        lines = getReminder.split(delimiter);
+                                                        for (int k = 0; k<extract.length; k++) {
+                                                            lines.add(extract[k]);
+                                                        }
 
-                                                        for(int i=0; i<lines.length; i++) {
-                                                            reminderRef.child(Integer.toString(i)).setValue(lines[i]);
+                                                        for(int i=0; i<lines.size(); i++) {
+                                                            String data = lines.get(i).toString();
+                                                            reminderRef.child(Integer.toString(i)).setValue(data);
                                                         }
                                                     }
-
+                                                    else {
+                                                        reminderRef.removeValue();
+                                                    }
                                                 }
 
                                                 @Override
@@ -168,10 +173,24 @@ public class MemoEditActivity extends AppCompatActivity {
                                             dateRef.child("reminder");
                                             reminderRef = dateRef.child("reminder");
 
-                                            reminderRef.child("0");
-                                            DatabaseReference zeroRef = reminderRef.child("0");
+                                            String getReminder = etAssign.getText().toString();
+                                            if (getReminder != "") {
+                                                ArrayList lines = new ArrayList<>();
+                                                String[] extract;
+                                                extract = getReminder.split("\n");
 
-                                            zeroRef.setValue(assignString);
+                                                for (int k = 0; k<extract.length; k++) {
+                                                    lines.add(extract[k]);
+                                                }
+
+                                                for(int i=0; i<lines.size(); i++) {
+                                                    String data = lines.get(i).toString();
+                                                    reminderRef.child(Integer.toString(i)).setValue(data);
+                                                }
+                                            }
+                                            else {
+                                                reminderRef.removeValue();
+                                            }
                                         }
                                     }
 
@@ -186,7 +205,7 @@ public class MemoEditActivity extends AppCompatActivity {
                                 intent.putExtra("dbDate", firebaseDate);
                                 getWindow().setExitTransition(null);
                                 ActivityOptions options = ActivityOptions
-                                        .makeSceneTransitionAnimation(MemoEditActivity.this, Bdate, "date");
+                                        .makeSceneTransitionAnimation(MemoEditActivity.this, btDate, "date");
                                 startActivity(intent, options.toBundle());
                                 finishAfterTransition();
                             }
@@ -200,13 +219,22 @@ public class MemoEditActivity extends AppCompatActivity {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                                         String getReminder = etAssign.getText().toString();
-                                        String[] lines;
-                                        String delimiter = "\n";
+                                        if (getReminder != "") {
+                                            ArrayList lines = new ArrayList<>();
+                                            String[] extract;
+                                            extract = getReminder.split("\n");
 
-                                        lines = getReminder.split(delimiter);
+                                            for (int k = 0; k<extract.length; k++) {
+                                                lines.add(extract[k]);
+                                            }
 
-                                        for(int i=0; i<lines.length; i++) {
-                                            reminderRef.child(Integer.toString(i)).setValue(lines[i]);
+                                            for(int i=0; i<lines.size(); i++) {
+                                                String data = lines.get(i).toString();
+                                                reminderRef.child(Integer.toString(i)).setValue(data);
+                                            }
+                                        }
+                                        else {
+                                            reminderRef.removeValue();
                                         }
                                     }
 
@@ -221,7 +249,7 @@ public class MemoEditActivity extends AppCompatActivity {
                                 intent.putExtra("dbDate", firebaseDate);
                                 getWindow().setExitTransition(null);
                                 ActivityOptions options = ActivityOptions
-                                        .makeSceneTransitionAnimation(MemoEditActivity.this, Bdate, "date");
+                                        .makeSceneTransitionAnimation(MemoEditActivity.this, btDate, "date");
                                 startActivity(intent, options.toBundle());
                                 finishAfterTransition();
                             }
@@ -239,13 +267,22 @@ public class MemoEditActivity extends AppCompatActivity {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                                     String getReminder = etAssign.getText().toString();
-                                    String[] lines;
-                                    String delimiter = "\n";
+                                    if (getReminder != "") {
+                                        ArrayList lines = new ArrayList<>();
+                                        String[] extract;
+                                        extract = getReminder.split("\n");
 
-                                    lines = getReminder.split(delimiter);
+                                        for (int k = 0; k<extract.length; k++) {
+                                            lines.add(extract[k]);
+                                        }
 
-                                    for(int i=0; i<lines.length; i++) {
-                                        reminderRef.child(Integer.toString(i)).setValue(lines[i]);
+                                        for(int i=0; i<lines.size(); i++) {
+                                            String data = lines.get(i).toString();
+                                            reminderRef.child(Integer.toString(i)).setValue(data);
+                                        }
+                                    }
+                                    else {
+                                        reminderRef.removeValue();
                                     }
                                 }
 
@@ -260,7 +297,7 @@ public class MemoEditActivity extends AppCompatActivity {
                             intent.putExtra("dbDate", firebaseDate);
                             getWindow().setExitTransition(null);
                             ActivityOptions options = ActivityOptions
-                                    .makeSceneTransitionAnimation(MemoEditActivity.this, Bdate, "date");
+                                    .makeSceneTransitionAnimation(MemoEditActivity.this, btDate, "date");
                             startActivity(intent, options.toBundle());
                             finishAfterTransition();
                         }
@@ -328,16 +365,19 @@ public class MemoEditActivity extends AppCompatActivity {
                                     reminderRef.addListenerForSingleValueEvent(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            int i = 1;
+                                            TextView etAssign = findViewById(R.id.etAssign);
+                                            etAssign.setText("");
+
                                             for (DataSnapshot datasnapshot : snapshot.getChildren()) {
                                                 String reminder = datasnapshot.getValue().toString();
 
-                                                EditText tvAssign = findViewById(R.id.etAssign);
-
-                                                if (datasnapshot.getKey() == "0") {
-                                                    tvAssign.append(reminder);
+                                                if (i != snapshot.getChildrenCount()) {
+                                                    etAssign.append(reminder + "\n");
+                                                    i++;
                                                 }
                                                 else {
-                                                    tvAssign.append("\n" + reminder);
+                                                    etAssign.append(reminder);
                                                 }
                                             }
                                         }
@@ -374,5 +414,10 @@ public class MemoEditActivity extends AppCompatActivity {
         });
 
         Log.w("MemoEditActivity", "void CalendarLoad finished.");
+    }
+
+    public void clearReminderRef() {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        database.getReference().child("calendar").child(uid).child(firebaseDate).child("reminder").removeValue();
     }
 }

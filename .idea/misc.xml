@@ -9,6 +9,7 @@
         <entry key="..\:/adprojects/projects/AndroidStudia/app/src/main/res/drawable/dialogbutton.xml" value="0.26979166666666665" />
         <entry key="..\:/adprojects/projects/AndroidStudia/app/src/main/res/drawable/ic_launcher_background.xml" value="0.26564102564102565" />
         <entry key="..\:/adprojects/projects/AndroidStudia/app/src/main/res/drawable/ic_launcher_studia_background.xml" value="0.26564102564102565" />
+        <entry key="..\:/adprojects/projects/AndroidStudia/app/src/main/res/drawable/logingooglebtn.xml" value="0.26979166666666665" />
         <entry key="..\:/adprojects/projects/AndroidStudia/app/src/main/res/drawable/logintextbox.xml" value="0.26979166666666665" />
         <entry key="..\:/adprojects/projects/AndroidStudia/app/src/main/res/drawable/rectangle.xml" value="0.26979166666666665" />
         <entry key="..\:/adprojects/projects/AndroidStudia/app/src/main/res/drawable/rectangleblue.xml" value="0.26979166666666665" />
@@ -28,11 +29,11 @@
         <entry key="..\:/adprojects/projects/AndroidStudia/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/adprojects/projects/AndroidStudia/app/src/main/res/layout/activity_memo_edit.xml" value="0.264" />
         <entry key="..\:/adprojects/projects/AndroidStudia/app/src/main/res/layout/activity_no_network.xml" value="0.264" />
-        <entry key="..\:/adprojects/projects/AndroidStudia/app/src/main/res/layout/activity_policy.xml" value="0.4" />
+        <entry key="..\:/adprojects/projects/AndroidStudia/app/src/main/res/layout/activity_policy.xml" value="0.264" />
         <entry key="..\:/adprojects/projects/AndroidStudia/app/src/main/res/layout/activity_popup.xml" value="0.264" />
         <entry key="..\:/adprojects/projects/AndroidStudia/app/src/main/res/layout/activity_schedule.xml" value="0.264" />
         <entry key="..\:/adprojects/projects/AndroidStudia/app/src/main/res/layout/fragment_activity_login.xml" value="0.25364583333333335" />
-        <entry key="..\:/adprojects/projects/AndroidStudia/app/src/main/res/layout/list_view.xml" value="0.264" />
+        <entry key="..\:/adprojects/projects/AndroidStudia/app/src/main/res/layout/list_view.xml" value="0.2" />
         <entry key="..\:/adprojects/projects/AndroidStudia/app/src/main/res/layout/menu_drawer.xml" value="0.25364583333333335" />
         <entry key="..\:/adprojects/projects/AndroidStudia/app/src/main/res/layout/square.xml" value="0.25364583333333335" />
         <entry key="..\:/adprojects/projects/AndroidStudia/app/src/main/res/layout/test.xml" value="0.264" />

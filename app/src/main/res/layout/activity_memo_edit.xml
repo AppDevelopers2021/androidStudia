@@ -18,12 +18,12 @@
                 android:orientation="vertical">
 
             <LinearLayout
-                    android:id="@+id/TopBar"
-                    android:layout_width="match_parent"
-                    android:layout_height="70dp"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:background="#2291FF">
+                android:id="@+id/TopBar"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="#2291FF">
 
                 <ImageButton
                     android:id="@+id/btBack"
@@ -35,35 +35,33 @@
                     tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
                 <View
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"/>
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
 
-                <TextView
-                        android:id="@+id/btDate"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:background="#2291FF"
-                        android:fontFamily="@font/nanumsquareb"
-                        android:text="2021/12/25"
-                        android:textAlignment="center"
-                        android:textColor="@color/white"
-                        android:textSize="26sp"
-                        android:stateListAnimator="@null"
-                        android:transitionName="date"/>
-
+                <Button
+                    android:id="@+id/btDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="#2291FF"
+                    android:fontFamily="sans-serif-light"
+                    android:stateListAnimator="@null"
+                    android:text="2021/12/25"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="26sp"
+                    android:transitionName="date" />
 
                 <View
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:layout_marginEnd="55dp"/>
-
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="55dp"/>
             </LinearLayout>
 
             <LinearLayout
-                    android:id="@+id/Policy"
+                    android:id="@+id/Memo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
@@ -72,15 +70,16 @@
                     android:background="@drawable/calendarsection">
 
                 <TextView
-                        android:id="@+id/tvMemo"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:fontFamily="@font/nanumsquareb"
-                        android:text="메모"
-                        android:textAlignment="center"
-                        android:textColor="@color/black"
-                        android:textSize="24sp"/>
+                    android:id="@+id/tvMemo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/nanumgothic"
+                    android:text="메모"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
 
                 <EditText
                         android:id="@+id/etMemo"
@@ -99,7 +98,7 @@
             </LinearLayout>
 
             <LinearLayout
-                    android:id="@+id/PersonalInfo"
+                    android:id="@+id/Assignment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
@@ -107,16 +106,17 @@
                     android:layout_margin="15dp"
                     android:background="@drawable/calendarsection">
 
-                    <TextView
-                            android:id="@+id/tvContent"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:fontFamily="@font/nanumsquareb"
-                            android:text="과제 및 준비물"
-                            android:textAlignment="center"
-                            android:textColor="@color/black"
-                            android:textSize="24sp"/>
+                <TextView
+                    android:id="@+id/tvContent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/nanumgothic"
+                    android:text="과제 및 준비물"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
 
                     <EditText
                             android:id="@+id/etAssign"

@@ -40,18 +40,18 @@
                         android:layout_weight="1" />
 
                 <Button
-                        android:id="@+id/btDate"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:background="#2291FF"
-                        android:fontFamily="@font/nanumsquareb"
-                        android:text="2021/12/25"
-                        android:textAlignment="center"
-                        android:textColor="@color/white"
-                        android:textSize="26sp"
-                        android:stateListAnimator="@null"
-                        android:transitionName="date"/>
+                    android:id="@+id/btDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="#2291FF"
+                    android:fontFamily="sans-serif-light"
+                    android:stateListAnimator="@null"
+                    android:text="2021/12/25"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="26sp"
+                    android:transitionName="date" />
 
                 <View
                         android:layout_width="0dp"

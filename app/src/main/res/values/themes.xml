@@ -14,7 +14,7 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="Theme.OSS" parent="Theme.AppCompat">
+    <style name="Theme.OSS" parent="Theme.AppCompat.Light">
         <!-- Primary brand color. -->
         <item name="colorPrimary">#2291FF</item>
         <item name="colorPrimaryVariant">#2291FF</item>

@@ -19,7 +19,7 @@ Customized for students only! Studia, anytime, anywhere!
 Firebase로 하나된 웹 앱, Android 앱, iOS 앱.  
   
 ## Google Playstore
-현재 검토중입니다.
+[Playstore 방문하기](https://play.google.com/store/apps/details?id=app.web.studia_kr)
 
 𝒔𝒕𝒖𝒅𝒊𝒂
 Copyright © 2021-2022 App Developers.

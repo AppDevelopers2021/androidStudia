@@ -40,8 +40,10 @@
                     style="@style/Widget.AppCompat.Button.Borderless.Colored"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="1dp"
                     android:background="#2291FF"
-                    android:fontFamily="@font/nanumsquareb"
+                    android:fontFamily="sans-serif-light"
+                    android:text="yyyy/mm/dd"
                     android:textAlignment="center"
                     android:textColor="@color/white"
                     android:textSize="26sp"
@@ -70,135 +72,145 @@
                     tools:ignore="SpeakableTextPresentCheck" />
             </LinearLayout>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/Note"
+            <LinearLayout
+                android:id="@+id/SwipeLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:background="@drawable/notes_container"
-                android:orientation="vertical"
-                app:layout_constraintBottom_toTopOf="@+id/Policy"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/TopBar">
+                android:orientation="vertical">
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvTodo"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/Note"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:minHeight="200dp"
-                    android:padding="10dp"
-
+                    android:layout_margin="10dp"
+                    android:background="@drawable/notes_container"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toTopOf="@+id/Memo"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toBottomOf="@+id/TopBar">
 
-
-                <ImageButton
-                    android:id="@+id/btAddSchedule"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginBottom="10dp"
-
-                    android:background="@drawable/mainbtn"
-                    android:src="@drawable/ic_baseline_add_40"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    tools:ignore="SpeakableTextPresentCheck" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/Policy"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:background="@drawable/calendarsection">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:padding="10dp">
-
-                    <TextView
-                        android:id="@+id/tvSubject"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/nanumsquareb"
-                        android:text="메모"
-                        android:textAlignment="center"
-                        android:textColor="@color/black"
-                        android:textSize="24sp" />
-
-                    <TextView
-                        android:id="@+id/tvShowMemo"
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvTodo"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:minLines="6"
-                        android:textColor="@color/black" />
+                        android:minHeight="200dp"
+                        android:padding="10dp"
 
-                </LinearLayout>
-
-                <ImageButton
-                    android:id="@+id/btEditMemo"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginBottom="10dp"
-
-                    android:background="@drawable/mainbtn"
-                    android:src="@drawable/ic_baseline_edit_35"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    tools:ignore="SpeakableTextPresentCheck" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/PersonalInfo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:background="@drawable/calendarsection">
+                    <ImageButton
+                        android:id="@+id/btAddSchedule"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
 
-                <LinearLayout
+                        android:background="@drawable/mainbtn"
+                        android:src="@drawable/ic_baseline_add_40"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        tools:ignore="SpeakableTextPresentCheck" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/Memo"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:padding="10dp">
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/calendarsection">
 
-                    <TextView
-                        android:id="@+id/tvContent"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/nanumsquareb"
-                        android:text="과제 및 준비물"
-                        android:textColor="@color/black"
-                        android:textSize="24sp" />
-
-                    <TextView
-                        android:id="@+id/tvShowAssign"
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:minLines="6"
-                        android:textColor="@color/black" />
-                </LinearLayout>
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="10dp">
 
-                <ImageButton
-                    android:id="@+id/btEditAssign"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginBottom="10dp"
+                        <TextView
+                            android:id="@+id/tvSubject"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/nanumgothic"
+                            android:text="메모"
+                            android:textAlignment="center"
+                            android:textColor="@color/black"
+                            android:textSize="22sp"
+                            android:textStyle="bold" />
 
-                    android:background="@drawable/mainbtn"
-                    android:src="@drawable/ic_baseline_edit_35"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    tools:ignore="SpeakableTextPresentCheck" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                        <TextView
+                            android:id="@+id/tvShowMemo"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:minLines="6"
+                            android:textColor="@color/black" />
+
+                    </LinearLayout>
+
+                    <ImageButton
+                        android:id="@+id/btEditMemo"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
+
+                        android:background="@drawable/mainbtn"
+                        android:src="@drawable/ic_baseline_edit_35"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        tools:ignore="SpeakableTextPresentCheck" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/Assignment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/calendarsection">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="10dp">
+
+                        <TextView
+                            android:id="@+id/tvContent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/nanumgothic"
+                            android:text="과제 및 준비물"
+                            android:textColor="@color/black"
+                            android:textSize="22sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tvShowAssign"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:minLines="6"
+                            android:textColor="@color/black" />
+                    </LinearLayout>
+
+                    <ImageButton
+                        android:id="@+id/btEditAssign"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
+
+                        android:background="@drawable/mainbtn"
+                        android:src="@drawable/ic_baseline_edit_35"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        tools:ignore="SpeakableTextPresentCheck" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

@@ -29,7 +29,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
@@ -96,16 +95,7 @@ public class LoginActivity extends AppCompatActivity{
                                     finish();
                                 }
                                 else {
-                                    String errorCode = ((FirebaseAuthException) task.getException()).getErrorCode();
-
-                                    if (errorCode == "ERROR_USER_NOT_FOUND") {
-                                        Log.w("LoginActivity", task.getException());
-                                        Toast.makeText(getApplicationContext(), "이메일 또는 비밀번호가 옳지 않습니다.", Toast.LENGTH_SHORT).show();
-                                    }
-                                    else {
-                                        Log.w("LoginActivity", task.getException());
-                                        Toast.makeText(getApplicationContext(), "로그인에 실패했습니다.", Toast.LENGTH_SHORT).show();
-                                    }
+                                    Toast.makeText(getApplicationContext(), "로그인에 실패했습니다.", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });
@@ -128,16 +118,7 @@ public class LoginActivity extends AppCompatActivity{
                                         finish();
                                     }
                                     else {
-                                        String errorCode = ((FirebaseAuthException) task.getException()).getErrorCode();
-
-                                        if (errorCode == "ERROR_USER_NOT_FOUND") {
-                                            Log.w("LoginActivity", task.getException());
-                                            Toast.makeText(getApplicationContext(), "이메일 또는 비밀번호가 옳지 않습니다.", Toast.LENGTH_SHORT).show();
-                                        }
-                                        else {
-                                            Log.w("LoginActivity", task.getException());
-                                            Toast.makeText(getApplicationContext(), "로그인에 실패했습니다.", Toast.LENGTH_SHORT).show();
-                                        }
+                                        Toast.makeText(getApplicationContext(), "로그인에 실패했습니다.", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             });

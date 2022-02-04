@@ -13,18 +13,4 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
-
-    <style name="Theme.OSS" parent="Theme.AppCompat">
-        <!-- Primary brand color. -->
-        <item name="colorPrimary">#2291FF</item>
-        <item name="colorPrimaryVariant">#2291FF</item>
-        <item name="colorOnPrimary">#2291FF</item>
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">#2291FF</item>
-        <item name="colorSecondaryVariant">#2291FF</item>
-        <item name="colorOnSecondary">#2291FF</item>
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
-    </style>
 </resources>

@@ -95,7 +95,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
 
             this.subject = itemView.findViewById(R.id.tvSubject);
             this.content = itemView.findViewById(R.id.tvContent);
-            this.constraintLayout = (ConstraintLayout) itemView.findViewById(R.id.layout);
+            this.constraintLayout = itemView.findViewById(R.id.layout);
         }
     }
 }

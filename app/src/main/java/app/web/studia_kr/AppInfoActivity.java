@@ -18,7 +18,6 @@ import java.util.Calendar;
 
 public class AppInfoActivity extends AppCompatActivity {
 
-    private TextView tvVersion;
     private TextView tvCopyright;
     private Button btPolicy;
     private Button btPrivatePolicy;
@@ -31,12 +30,6 @@ public class AppInfoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_app_info);
-
-        showDate = getIntent().getStringExtra("date");
-        firebaseDate = getIntent().getStringExtra("dbDate");
-
-        tvVersion = findViewById(R.id.tvVersion);
-        tvVersion.setText("v" + BuildConfig.VERSION_NAME);
 
         tvCopyright = findViewById(R.id.tvCopyright);
         Calendar calendar = Calendar.getInstance();
@@ -69,11 +62,12 @@ public class AppInfoActivity extends AppCompatActivity {
             public void onClick(View view) {
                 OssLicensesMenuActivity.setActivityTitle("Studia Android Open Source License");
                 startActivity(new Intent(getApplicationContext(), OssLicensesMenuActivity.class));
+                overridePendingTransition(0, 0);
                 finish();
             }
         });
 
-        btBack = findViewById(R.id.btAppBack);
+        btBack = findViewById(R.id.btBack);
         btBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
