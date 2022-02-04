@@ -192,7 +192,6 @@ public class CalendarActivity extends AppCompatActivity {
                 ActivityOptions options = ActivityOptions
                         .makeSceneTransitionAnimation(CalendarActivity.this, btDate, "date");
                 startActivity(intent, options.toBundle());
-                finishAfterTransition();
             }
         });
 
@@ -209,7 +208,6 @@ public class CalendarActivity extends AppCompatActivity {
                 ActivityOptions options = ActivityOptions
                         .makeSceneTransitionAnimation(CalendarActivity.this, btDate, "date");
                 startActivity(intent, options.toBundle());
-                finishAfterTransition();
             }
         });
 
@@ -226,7 +224,6 @@ public class CalendarActivity extends AppCompatActivity {
                 ActivityOptions options = ActivityOptions
                         .makeSceneTransitionAnimation(CalendarActivity.this, btDate, "date");
                 startActivity(intent, options.toBundle());
-                finishAfterTransition();
             }
         });
 

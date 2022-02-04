@@ -32,7 +32,6 @@ public class MemoEditActivity extends AppCompatActivity {
     private String firebaseDate;
     private String uid;
     private String memoString;
-    private String assignString;
     private FirebaseDatabase database;
     private DatabaseReference databaseReference;
     private DatabaseReference uidRef;
@@ -83,7 +82,6 @@ public class MemoEditActivity extends AppCompatActivity {
                 etMemo = findViewById(R.id.etMemo);
                 memoString = etMemo.getText().toString();
                 etAssign = findViewById(R.id.etAssign);
-                assignString = etAssign.getText().toString();
 
                 database = FirebaseDatabase.getInstance();
                 databaseReference = database.getReference();
@@ -103,23 +101,20 @@ public class MemoEditActivity extends AppCompatActivity {
                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                                         if (snapshot.hasChild("memo")) {
                                             memoRef = dateRef.child("memo");
+                                            memoRef.setValue(memoString);
 
-                                            memoRef.addValueEventListener(new ValueEventListener() {
-                                                @Override
-                                                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                                    memoRef.setValue(memoString);
-                                                }
-
-                                                @Override
-                                                public void onCancelled(@NonNull DatabaseError error) {
-                                                    Log.e("MemoEditActivity", String.valueOf(error.toException()));
-                                                }
-                                            });
+                                            Intent intent = new Intent(MemoEditActivity.this, CalendarActivity.class);
+                                            intent.putExtra("date", showDate);
+                                            intent.putExtra("dbDate", firebaseDate);
+                                            getWindow().setExitTransition(null);
+                                            ActivityOptions options = ActivityOptions
+                                                    .makeSceneTransitionAnimation(MemoEditActivity.this, btDate, "date");
+                                            startActivity(intent, options.toBundle());
+                                            finishAfterTransition();
                                         }
                                         else {
                                             dateRef.child("memo");
                                             memoRef = dateRef.child("memo");
-
                                             memoRef.setValue(memoString);
 
                                             Intent intent = new Intent(MemoEditActivity.this, CalendarActivity.class);
@@ -151,14 +146,11 @@ public class MemoEditActivity extends AppCompatActivity {
                                                     String getReminder = etAssign.getText().toString();
                                                     if (getReminder != "") {
                                                         ArrayList lines = new ArrayList<>();
+                                                        String[] extract;
+                                                        extract = getReminder.split("\n");
 
-                                                        for(int i=0; i<etAssign.getLineCount(); i++) {
-                                                            int start = etAssign.getLayout().getLineStart(i);
-                                                            int end = etAssign.getLayout().getLineEnd(i);
-
-                                                            String getLine = String.valueOf(etAssign.getText().subSequence(start, end));
-                                                            getLine = getLine.replace("\n", "");
-                                                            lines.add(getLine);
+                                                        for (int k = 0; k<extract.length; k++) {
+                                                            lines.add(extract[k]);
                                                         }
 
                                                         for(int i=0; i<lines.size(); i++) {
@@ -181,10 +173,24 @@ public class MemoEditActivity extends AppCompatActivity {
                                             dateRef.child("reminder");
                                             reminderRef = dateRef.child("reminder");
 
-                                            reminderRef.child("0");
-                                            DatabaseReference zeroRef = reminderRef.child("0");
+                                            String getReminder = etAssign.getText().toString();
+                                            if (getReminder != "") {
+                                                ArrayList lines = new ArrayList<>();
+                                                String[] extract;
+                                                extract = getReminder.split("\n");
 
-                                            zeroRef.setValue(assignString);
+                                                for (int k = 0; k<extract.length; k++) {
+                                                    lines.add(extract[k]);
+                                                }
+
+                                                for(int i=0; i<lines.size(); i++) {
+                                                    String data = lines.get(i).toString();
+                                                    reminderRef.child(Integer.toString(i)).setValue(data);
+                                                }
+                                            }
+                                            else {
+                                                reminderRef.removeValue();
+                                            }
                                         }
                                     }
 
@@ -215,14 +221,11 @@ public class MemoEditActivity extends AppCompatActivity {
                                         String getReminder = etAssign.getText().toString();
                                         if (getReminder != "") {
                                             ArrayList lines = new ArrayList<>();
+                                            String[] extract;
+                                            extract = getReminder.split("\n");
 
-                                            for(int i=0; i<etAssign.getLineCount(); i++) {
-                                                int start = etAssign.getLayout().getLineStart(i);
-                                                int end = etAssign.getLayout().getLineEnd(i);
-
-                                                String getLine = String.valueOf(etAssign.getText().subSequence(start, end));
-                                                getLine = getLine.replace("\n", "");
-                                                lines.add(getLine);
+                                            for (int k = 0; k<extract.length; k++) {
+                                                lines.add(extract[k]);
                                             }
 
                                             for(int i=0; i<lines.size(); i++) {
@@ -266,13 +269,11 @@ public class MemoEditActivity extends AppCompatActivity {
                                     String getReminder = etAssign.getText().toString();
                                     if (getReminder != "") {
                                         ArrayList lines = new ArrayList<>();
+                                        String[] extract;
+                                        extract = getReminder.split("\n");
 
-                                        for(int i=0; i<etAssign.getLineCount(); i++) {
-                                            int start = etAssign.getLayout().getLineStart(i);
-                                            int end = etAssign.getLayout().getLineEnd(i);
-
-                                            String getLine = String.valueOf(etAssign.getText().subSequence(start, end));
-                                            lines.add(getLine.substring(0, getLine.length() - 1));
+                                        for (int k = 0; k<extract.length; k++) {
+                                            lines.add(extract[k]);
                                         }
 
                                         for(int i=0; i<lines.size(); i++) {
