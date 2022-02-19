@@ -66,7 +66,12 @@ public class CalendarActivity extends AppCompatActivity {
             firebaseDate = getIntent().getStringExtra("dbDate");
             String[] arrayDate = firebaseDate.split("");
 
-            int year = Integer.parseInt(arrayDate[0] + arrayDate[1] + arrayDate[2] + arrayDate[3]);
+            String yearSet = null;
+            for (int i = 0; i<arrayDate.length - 4; i++) {
+                yearSet = yearSet + arrayDate[i];
+            }
+
+            int year = Integer.parseInt(yearSet);
             int month = Integer.parseInt(arrayDate[4] + arrayDate[5]);
             int date = Integer.parseInt(arrayDate[6] + arrayDate[7]);
 
