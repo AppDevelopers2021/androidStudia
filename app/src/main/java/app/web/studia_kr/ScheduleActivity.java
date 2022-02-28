@@ -63,7 +63,7 @@ public class ScheduleActivity extends AppCompatActivity {
         Bdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "너만큼 밝게 빛나는 별도 없다.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Pray for Ukraine", Toast.LENGTH_SHORT).show();
             }
         });
 
