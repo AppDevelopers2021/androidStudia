@@ -9,7 +9,6 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.firebase.ui.auth.BuildConfig;
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity;
 
 import java.text.DateFormat;
@@ -79,5 +78,7 @@ public class AppInfoActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        //TODO Add account delete function
     }
 }
