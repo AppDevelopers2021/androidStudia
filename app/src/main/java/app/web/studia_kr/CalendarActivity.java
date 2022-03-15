@@ -281,6 +281,7 @@ public class CalendarActivity extends AppCompatActivity {
 
         //Firebase Database Refresh
         database = FirebaseDatabase.getInstance();
+        database.setPersistenceEnabled(true);
         databaseReference = database.getReference();
         uidRef = databaseReference.child("calendar").child(uid);
 
