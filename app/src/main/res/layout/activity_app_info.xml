@@ -76,7 +76,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/nanumsquareeb"
-                android:text="v. 1.1.1"
+                android:text="v. 1.2.1"
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="20sp"
@@ -125,6 +125,21 @@
                 android:text="오픈소스 라이선스"
                 android:textAlignment="center"
                 android:textColor="@color/black"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/btAccountDelete"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/dialogbutton"
+                android:fontFamily="@font/nanumsquareb"
+                android:text="계정 삭제"
+                android:textAlignment="center"
+                android:textColor="#eb1a1a"
                 android:textSize="20sp" />
 
             <TextView
