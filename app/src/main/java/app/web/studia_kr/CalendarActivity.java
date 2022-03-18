@@ -1,5 +1,6 @@
 package app.web.studia_kr;
 
+import android.animation.ObjectAnimator;
 import android.app.ActivityOptions;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -138,17 +139,17 @@ public class CalendarActivity extends AppCompatActivity {
 
                 View linearLayout = findViewById(R.id.SwipeLayout);
 
-                TranslateAnimation anim1 = new TranslateAnimation(0, linearLayout.getWidth() /2,0, 0);
-                anim1.setDuration(0200);
-                anim1.setFillAfter(true);
-                linearLayout.startAnimation(anim1);
+                ObjectAnimator toLeft = ObjectAnimator.ofFloat(linearLayout, "translationX", linearLayout.getX() + 500);
+                toLeft.setDuration(0200);
+                toLeft.start();
 
-                CalendarLoad(uid, firebaseDate, showDate);
+                ObjectAnimator toRight = ObjectAnimator.ofFloat(linearLayout, "translationX", linearLayout.getX() - 1000);
+                toRight.setDuration(0001);
+                toRight.start();
 
-                TranslateAnimation anim2 = new TranslateAnimation(0 - linearLayout.getWidth() /2, 0, 0, 0);
-                anim2.setDuration(0200);
-                anim2.setFillAfter(true);
-                linearLayout.startAnimation(anim2);
+                ObjectAnimator toCenter = ObjectAnimator.ofFloat(linearLayout, "translationX", linearLayout.getX() + 500);
+                toCenter.setDuration(0200);
+                toCenter.start();
             }
         });
 
@@ -431,5 +432,9 @@ public class CalendarActivity extends AppCompatActivity {
             adapter.notifyItemRemoved(i);
             recyclerView.setAdapter(adapter);
         }
+    }
+
+    public static void showMemoEdit() {
+
     }
 }
