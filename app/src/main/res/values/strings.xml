@@ -6,7 +6,6 @@
     <string name="author">App Developers</string>
 
     <!-- LoginActivity -->
-    <string name="appMotto">나만의\n독창적인 공부\n스타일 찾기</string>
     <string name="email">이메일 주소</string>
     <string name="password">비밀번호</string>
     <string name="emailhint">email@example.com</string>
@@ -15,4 +14,29 @@
     <string name="iforgot">비밀번호 찾기</string>
     <string name="signin">로그인</string>
     <string name="googlesignin">Google 계정으로 로그인</string>
+    <string name="appMotto">나만의\n독창적인\n공부 스타일 찾기</string>
+
+    <!-- CalendarActivity -->
+    <string name="memo">메모</string>
+    <string name="reminder">과제 및 준비물</string>
+
+    <!-- ScheduleActivity -->
+    <string name="addNote">노트 추가</string>
+    <string name="writeContent">내용을 입력하세요</string>
+    <string name="done">완료</string>
+
+    <!-- AppInfoActivity -->
+    <string name="policy">이용약관</string>
+    <string name="private_policy">개인정보처리방침</string>
+    <string name="opensource_license">오픈소스 라이선스</string>
+    <string name="deleteAccount">계정 삭제</string>
+    <string name="google_play_policy">App Developers는 Google Play 개발자 정책을 준수합니다.</string>
+
+    <!-- PolicyActivity -->
+    <string name="policyAndprivatepolicy">약관 및 개인정보처리방침</string>
+
+    <!-- PopupActivity -->
+    <string name="logout">로그아웃</string>
+    <string name="changePassword">비밀번호 변경</string>
+    <string name="applicationInfo">애플리케이션 정보</string>
 </resources>
