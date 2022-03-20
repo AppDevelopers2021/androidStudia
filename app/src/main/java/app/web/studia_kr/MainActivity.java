@@ -4,11 +4,16 @@ import android.content.SharedPreferences;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Timer;
 import java.util.TimerTask;
+
+import app.web.studia_kr.network.NetworkConnection;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,6 +41,15 @@ public class MainActivity extends AppCompatActivity {
                 } else if(FirebaseAuth.getInstance().getCurrentUser() != null) {
                     // 사용자가 로그인됨
                     intent = new Intent(MainActivity.this, CalendarActivity.class);
+                    if (!NetworkConnection.isConnected(getApplicationContext())) {
+                        Handler handler = new Handler(Looper.getMainLooper());
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(getApplicationContext(), "연결 가능한 네트워크를 찾을 수 없습니다. 오프라인 지속성을 자동 실행합니다.", Toast.LENGTH_SHORT).show();
+                            }
+                        }, 0);
+                    }
                 } else {
                     // 정상적으로 로그인되지 않음
                     intent = new Intent(MainActivity.this, LoginActivity.class);
