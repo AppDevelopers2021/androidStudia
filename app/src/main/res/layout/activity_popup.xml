@@ -34,7 +34,7 @@
             android:layout_marginTop="10dp"
             android:background="@drawable/dialogbutton"
             android:fontFamily="@font/nanumsquareb"
-            android:text="로그아웃"
+            android:text="@string/logout"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="17sp" />
@@ -46,7 +46,7 @@
             android:layout_marginTop="10dp"
             android:background="@drawable/dialogbutton"
             android:fontFamily="@font/nanumsquareb"
-            android:text="비밀번호 변경"
+            android:text="@string/changePassword"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="17sp" />
@@ -59,7 +59,7 @@
             android:layout_marginBottom="10dp"
             android:background="@drawable/dialogbutton"
             android:fontFamily="@font/nanumsquareb"
-            android:text="애플리케이션 정보"
+            android:text="@string/applicationInfo"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="17sp" />

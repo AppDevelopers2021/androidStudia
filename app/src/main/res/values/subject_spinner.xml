@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name = "subject">
-        <item>가정</item>
-        <item>과학</item>
-        <item>국어</item>
-        <item>기술</item>
-        <item>도덕</item>
-        <item>독서</item>
-        <item>미술</item>
-        <item>보건</item>
-        <item>사회</item>
-        <item>수학</item>
-        <item>영어</item>
-        <item>음악</item>
-        <item>정보</item>
-        <item>진로</item>
-        <item>창체</item>
-        <item>체육</item>
-        <item>환경</item>
-        <item>자율</item>
-        <item>기타</item>
+        <item>@string/spinnerHome</item>
+        <item>@string/spinnerScience</item>
+        <item>@string/spinnerKorean</item>
+        <item>@string/spinnerArtcraft</item>
+        <item>@string/spinnerCivics</item>
+        <item>@string/spinnerReading</item>
+        <item>@string/spinnerArt</item>
+        <item>@string/spinnerHealthEdu</item>
+        <item>@string/spinnerSocialStudies</item>
+        <item>@string/spinnerMath</item>
+        <item>@string/spinnerEnglish</item>
+        <item>@string/spinnerMusic</item>
+        <item>@string/spinnerComputerScience</item>
+        <item>@string/spinnerCareer</item>
+        <item>@string/spinnerCreativeActivity</item>
+        <item>@string/spinnerPhysicalEducation</item>
+        <item>@string/spinnerEnvironments</item>
+        <item>@string/spinnerAutonomy</item>
+        <item>@string/spinnerEtc</item>
     </string-array>
 </resources>

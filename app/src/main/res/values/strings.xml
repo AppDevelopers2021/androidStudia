@@ -39,4 +39,46 @@
     <string name="logout">로그아웃</string>
     <string name="changePassword">비밀번호 변경</string>
     <string name="applicationInfo">애플리케이션 정보</string>
+
+    <!-- list-view.xml -->
+    <string name="Home">가정</string>
+    <string name="Science">과학</string>
+    <string name="Korean">국어</string>
+    <string name="Artcraft">기술</string>
+    <string name="Civics">도덕</string>
+    <string name="Reading">독서</string>
+    <string name="Art">미술</string>
+    <string name="HealthEdu">보건</string>
+    <string name="SocialStudies">사회</string>
+    <string name="Math">수학</string>
+    <string name="English">영어</string>
+    <string name="Music">음악</string>
+    <string name="ComputerScience">정보</string>
+    <string name="Career">진로</string>
+    <string name="CreativeActivity">창체</string>
+    <string name="PhysicalEducation">체육</string>
+    <string name="Environments">환경</string>
+    <string name="Autonomy">자율</string>
+    <string name="Etc">기타</string>
+
+    <!-- subject_spinner.xml -->
+    <string name="spinnerHome">가정</string>
+    <string name="spinnerScience">과학</string>
+    <string name="spinnerKorean">국어</string>
+    <string name="spinnerArtcraft">기술</string>
+    <string name="spinnerCivics">도덕</string>
+    <string name="spinnerReading">독서</string>
+    <string name="spinnerArt">미술</string>
+    <string name="spinnerHealthEdu">보건</string>
+    <string name="spinnerSocialStudies">사회</string>
+    <string name="spinnerMath">수학</string>
+    <string name="spinnerEnglish">영어</string>
+    <string name="spinnerMusic">음악</string>
+    <string name="spinnerComputerScience">정보</string>
+    <string name="spinnerCareer">진로</string>
+    <string name="spinnerCreativeActivity">창체</string>
+    <string name="spinnerPhysicalEducation">체육</string>
+    <string name="spinnerEnvironments">환경</string>
+    <string name="spinnerAutonomy">자율</string>
+    <string name="spinnerEtc">기타</string>
 </resources>

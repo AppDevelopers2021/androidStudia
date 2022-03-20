@@ -72,15 +72,15 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
-                        android:id="@+id/tvContent"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:fontFamily="@font/nanumsquareb"
-                        android:text="노트 추가"
-                        android:textAlignment="center"
-                        android:textColor="@color/black"
-                        android:textSize="30sp"/>
+                    android:id="@+id/tvContent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/nanumsquareb"
+                    android:text="@string/addNote"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="30sp" />
 
                 <LinearLayout
                         android:layout_width="match_parent"
@@ -120,7 +120,7 @@
                     android:layout_height="40dp"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/loginbtn"
-                    android:text="완료"
+                    android:text="@string/done"
                     android:textColor="@color/white"
                     tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 

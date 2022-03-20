@@ -134,7 +134,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/nanumgothic"
-                            android:text="메모"
+                            android:text="@string/memo"
                             android:textAlignment="center"
                             android:textColor="@color/black"
                             android:textSize="22sp"
@@ -183,7 +183,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/nanumgothic"
-                            android:text="과제 및 준비물"
+                            android:text="@string/reminder"
                             android:textColor="@color/black"
                             android:textSize="22sp"
                             android:textStyle="bold" />

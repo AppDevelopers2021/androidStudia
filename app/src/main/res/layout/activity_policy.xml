@@ -40,19 +40,19 @@
                     android:layout_height="0dp"
                     android:layout_weight="1" />
 
-                <Button
-                    android:id="@+id/btDate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:background="#2291FF"
-                    android:fontFamily="@font/nanumsquareb"
-                    android:text="약관 및 개인정보처리방침"
-                    android:textAlignment="center"
-                    android:textColor="@color/white"
-                    android:textSize="16sp"
-                    android:stateListAnimator="@null"
-                    android:transitionName="date"/>
+                 <Button
+                     android:id="@+id/btDate"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_gravity="center"
+                     android:background="#2291FF"
+                     android:fontFamily="@font/nanumsquareb"
+                     android:stateListAnimator="@null"
+                     android:text="@string/policyAndprivatepolicy"
+                     android:textAlignment="center"
+                     android:textColor="@color/white"
+                     android:textSize="16sp"
+                     android:transitionName="date" />
 
                 <View
                     android:layout_width="0dp"

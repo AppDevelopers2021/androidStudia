@@ -75,7 +75,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:fontFamily="@font/nanumgothic"
-                    android:text="메모"
+                    android:text="@string/memo"
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="24sp"
@@ -112,7 +112,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:fontFamily="@font/nanumgothic"
-                    android:text="과제 및 준비물"
+                    android:text="@string/reminder"
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="24sp"
@@ -140,7 +140,7 @@
                 android:layout_height="40dp"
                 android:layout_margin="15dp"
                 android:background="@drawable/loginbtn"
-                android:text="완료"
+                android:text="@string/done"
                 android:textColor="@color/white"
                 tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
