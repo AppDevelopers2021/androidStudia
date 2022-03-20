@@ -13,22 +13,16 @@
     <string name="signin">Login</string>
     <string name="googlesignin">Login with Google</string>
     <string name="memo">Memo</string>
-    <string name="memo">M</string>
-    <string name="memo">M</string>
     <string name="reminder">Assignment</string>
     <string name="policy">Studia Policy</string>
     <string name="private_policy">Private Policy</string>
-    <string name="private_policy">P</string>
     <string name="opensource_license">Opensource License</string>
     <string name="deleteAccount">Delete Account</string>
     <string name="google_play_policy">App Developers adhere to the Google Play Developer Policy.</string>
     <string name="addNote">Add note</string>
-    <string name="addNote">A</string>
     <string name="writeContent">Enter here...</string>
     <string name="done">Complete</string>
     <string name="policyAndprivatepolicy">Studia policy and private policy</string>
-    <string name="policyAndprivatepolicy">Studia policy and Private policy</string>
-    <string name="logout">Logout</string>
     <string name="logout">Sign out</string>
     <string name="changePassword">Change Password</string>
     <string name="applicationInfo">Application Information</string>
@@ -70,4 +64,8 @@
     <string name="spinnerEnvironments">Environment</string>
     <string name="spinnerAutonomy">Class Autonomy</string>
     <string name="spinnerEtc">Etc...</string>
+    <string name="yakgawndonge">I agree to Studia policy and Private policy</string>
+    <string name="goodbye">Let\'s meet\\nagain when\\nthe flowers bloom</string>
+    <string name="hawkin">I know deleting account cannot be undone.</string>
+    <string name="deleteAnnouncement">Currently, the delete account feature is not supported for social login users.</string>
 </resources>

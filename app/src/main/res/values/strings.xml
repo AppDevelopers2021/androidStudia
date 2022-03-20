@@ -15,6 +15,7 @@
     <string name="signin">로그인</string>
     <string name="googlesignin">Google 계정으로 로그인</string>
     <string name="appMotto">나만의\n독창적인\n공부 스타일 찾기</string>
+    <string name="yakgawndonge">스튜디아 이용약관과 개인정보처리방침에 동의합니다.</string>
 
     <!-- CalendarActivity -->
     <string name="memo">메모</string>
@@ -39,6 +40,11 @@
     <string name="logout">로그아웃</string>
     <string name="changePassword">비밀번호 변경</string>
     <string name="applicationInfo">애플리케이션 정보</string>
+
+    <!-- DeleteAccount -->
+    <string name="goodbye">꽃이 피면\n스튜디아와\n다시 만나요!</string>
+    <string name="hawkin">계정 삭제는 돌이킬 수 없다는 것을 알고있습니다.</string>
+    <string name="deleteAnnouncement">현재 계정 삭제 기능은 소셜 로그인 사용자에게 지원되지 않습니다.</string>
 
     <!-- list-view.xml -->
     <string name="Home">가정</string>
