@@ -14,6 +14,9 @@
         android:theme="@style/Theme.AndroidStudia"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".DeleteAccount"
+            android:exported="false" />
+        <activity
             android:name="com.google.android.gms.oss.licenses.OssLicensesMenuActivity"
             android:theme="@style/Theme.OSS" />
         <activity
@@ -54,8 +57,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <meta-data
-                android:name="firebase_performance_logcat_enabled"
-                android:value="true" />
+            android:name="firebase_performance_logcat_enabled"
+            android:value="true" />
     </application>
+
 </manifest>
