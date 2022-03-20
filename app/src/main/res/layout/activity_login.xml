@@ -96,7 +96,19 @@
             android:onClick="Lost"
             android:text="@string/iforgot"
             android:textStyle="bold" />
+
     </RelativeLayout>
+
+    <CheckBox
+        android:id="@+id/cbPolicy"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="5dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:text="스튜디아 이용약관과 개인정보처리방침에 동의합니다."
+        android:textSize="13sp"
+        android:visibility="gone" />
 
     <Button
         android:id="@+id/btLogin"
@@ -121,14 +133,4 @@
         android:textAllCaps="false"
         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
-    <CheckBox
-        android:id="@+id/cbPolicy"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginTop="5dp"
-        android:paddingStart="20dp"
-        android:paddingEnd="20dp"
-        android:text="스튜디아 이용약관과 개인정보처리방침에 동의합니다."
-        android:textSize="13sp"
-        android:visibility="gone" />
 </LinearLayout>
