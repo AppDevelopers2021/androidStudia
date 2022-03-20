@@ -82,19 +82,20 @@
                     android:textStyle="bold" />
 
                 <EditText
-                        android:id="@+id/etMemo"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:gravity="top"
-                        android:background="@android:color/transparent"
-                        android:ems="10"
-                        android:hint="내용을 입력하세요"
-                        android:inputType="textMultiLine"
-                        android:minLines="6"
-                        android:scrollHorizontally="false"
-                        android:textColor="@color/black"
-                        tools:ignore="SpeakableTextPresentCheck"/>
+                    android:id="@+id/etMemo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@android:color/transparent"
+                    android:ems="10"
+                    android:fontFamily="@font/nanumgothic"
+                    android:gravity="top"
+                    android:hint="내용을 입력하세요"
+                    android:inputType="textMultiLine"
+                    android:minLines="6"
+                    android:scrollHorizontally="false"
+                    android:textColor="@color/black"
+                    tools:ignore="SpeakableTextPresentCheck" />
             </LinearLayout>
 
             <LinearLayout
@@ -118,20 +119,21 @@
                     android:textSize="24sp"
                     android:textStyle="bold" />
 
-                    <EditText
-                            android:id="@+id/etAssign"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:gravity="top"
-                            android:background="@android:color/transparent"
-                            android:ems="10"
-                            android:hint="내용을 입력하세요"
-                            android:inputType="textMultiLine"
-                            android:minLines="6"
-                            android:scrollHorizontally="false"
-                            android:textColor="@color/black"
-                            tools:ignore="SpeakableTextPresentCheck"/>
+                <EditText
+                    android:id="@+id/etAssign"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@android:color/transparent"
+                    android:ems="10"
+                    android:fontFamily="@font/nanumgothic"
+                    android:gravity="top"
+                    android:hint="내용을 입력하세요"
+                    android:inputType="textMultiLine"
+                    android:minLines="6"
+                    android:scrollHorizontally="false"
+                    android:textColor="@color/black"
+                    tools:ignore="SpeakableTextPresentCheck" />
             </LinearLayout>
 
             <Button
@@ -140,6 +142,7 @@
                 android:layout_height="40dp"
                 android:layout_margin="15dp"
                 android:background="@drawable/loginbtn"
+                android:fontFamily="@font/nanumgothic"
                 android:text="@string/done"
                 android:textColor="@color/white"
                 tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />

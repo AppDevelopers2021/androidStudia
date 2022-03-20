@@ -38,12 +38,13 @@
         android:id="@+id/etEmail"
         android:layout_width="match_parent"
         android:layout_height="41dp"
-        android:hint="@string/emailhint"
-        android:paddingStart="20dp"
-        android:paddingEnd="20dp"
         android:background="@drawable/logintextbox"
         android:ems="10"
+        android:fontFamily="@font/nanumgothic"
+        android:hint="@string/emailhint"
         android:inputType="textEmailAddress"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
     <TextView
@@ -61,11 +62,12 @@
         android:id="@+id/etPassword"
         android:layout_width="match_parent"
         android:layout_height="44dp"
-        android:hint="@string/pwhint"
-        android:paddingStart="20dp"
         android:background="@drawable/logintextbox"
         android:ems="10"
+        android:fontFamily="@font/nanumgothic"
+        android:hint="@string/pwhint"
         android:inputType="textPassword"
+        android:paddingStart="20dp"
         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <RelativeLayout

@@ -91,11 +91,12 @@
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/dialogbutton"
-                android:fontFamily="@font/nanumsquareb"
+                android:fontFamily="@font/nanumgothic"
                 android:text="@string/policy"
                 android:textAlignment="center"
                 android:textColor="@color/black"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/btPrivatePolicy"
@@ -106,11 +107,12 @@
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/dialogbutton"
-                android:fontFamily="@font/nanumsquareb"
+                android:fontFamily="@font/nanumgothic"
                 android:text="@string/private_policy"
                 android:textAlignment="center"
                 android:textColor="@color/black"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/btLicense"
@@ -121,26 +123,28 @@
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/dialogbutton"
-                android:fontFamily="@font/nanumsquareb"
+                android:fontFamily="@font/nanumgothic"
                 android:text="@string/opensource_license"
                 android:textAlignment="center"
                 android:textColor="@color/black"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/btAccountDelete"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
                 android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
                 android:background="@drawable/dialogbutton"
-                android:fontFamily="@font/nanumsquareb"
+                android:fontFamily="@font/nanumgothic"
                 android:text="@string/deleteAccount"
                 android:textAlignment="center"
                 android:textColor="#eb1a1a"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tvInform"
@@ -148,6 +152,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
+                android:fontFamily="@font/nanumgothic"
                 android:text="@string/google_play_policy"
                 android:textAlignment="center"
                 android:textColor="@color/black"
@@ -159,6 +164,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
+                android:fontFamily="@font/nanumgothic"
                 android:text="Copyright © 2021 App Developers. All Rights Reserved."
                 android:textAlignment="center"
                 android:textColor="@color/black"

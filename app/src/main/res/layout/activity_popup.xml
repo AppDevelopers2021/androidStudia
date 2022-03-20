@@ -33,11 +33,12 @@
             android:layout_height="50dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/dialogbutton"
-            android:fontFamily="@font/nanumsquareb"
+            android:fontFamily="@font/nanumgothic"
             android:text="@string/logout"
             android:textAlignment="center"
             android:textColor="@color/black"
-            android:textSize="17sp" />
+            android:textSize="17sp"
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/btIforgot"
@@ -45,11 +46,12 @@
             android:layout_height="50dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/dialogbutton"
-            android:fontFamily="@font/nanumsquareb"
+            android:fontFamily="@font/nanumgothic"
             android:text="@string/changePassword"
             android:textAlignment="center"
             android:textColor="@color/black"
-            android:textSize="17sp" />
+            android:textSize="17sp"
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/btSettings"
@@ -58,11 +60,12 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:background="@drawable/dialogbutton"
-            android:fontFamily="@font/nanumsquareb"
+            android:fontFamily="@font/nanumgothic"
             android:text="@string/applicationInfo"
             android:textAlignment="center"
             android:textColor="@color/black"
-            android:textSize="17sp" />
+            android:textSize="17sp"
+            android:textStyle="bold" />
     </LinearLayout>
 
 
