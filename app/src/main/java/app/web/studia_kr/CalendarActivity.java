@@ -41,13 +41,7 @@ public class CalendarActivity extends AppCompatActivity {
     private String uid;
     private String firebaseDate;
     private String showDate;
-    private String Memo;
     private FirebaseDatabase database;
-    private DatabaseReference databaseReference;
-    private DatabaseReference dateRef;
-    private DatabaseReference noteRef;
-    private DatabaseReference memoRef;
-    private DatabaseReference reminderRef;
     private DatabaseReference uidRef;
     private Calendar calendar;
     private DateFormat dateFormat;
@@ -131,24 +125,20 @@ public class CalendarActivity extends AppCompatActivity {
 
                 arrayClear();
 
-                //Memo, Assign Init
-                TextView assign = findViewById(R.id.tvShowAssign);
-                TextView memo = findViewById(R.id.tvShowMemo);
-                memo.setText("");
-                assign.setText("");
-
                 View linearLayout = findViewById(R.id.SwipeLayout);
 
                 ObjectAnimator toLeft = ObjectAnimator.ofFloat(linearLayout, "translationX", linearLayout.getX() + 500);
-                toLeft.setDuration(0200);
+                toLeft.setDuration(0050);
                 toLeft.start();
+
+                CalendarLoad(uid, firebaseDate, showDate);
 
                 ObjectAnimator toRight = ObjectAnimator.ofFloat(linearLayout, "translationX", linearLayout.getX() - 1000);
                 toRight.setDuration(0001);
                 toRight.start();
 
                 ObjectAnimator toCenter = ObjectAnimator.ofFloat(linearLayout, "translationX", linearLayout.getX() + 500);
-                toCenter.setDuration(0200);
+                toCenter.setDuration(0050);
                 toCenter.start();
             }
         });
@@ -162,12 +152,6 @@ public class CalendarActivity extends AppCompatActivity {
                 showDate = dateFormat.format(calendar.getTime());
 
                 arrayClear();
-
-                //Memo, Assign Init
-                TextView assign = findViewById(R.id.tvShowAssign);
-                TextView memo = findViewById(R.id.tvShowMemo);
-                memo.setText("");
-                assign.setText("");
 
                 View linearLayout = findViewById(R.id.SwipeLayout);
 
@@ -256,12 +240,6 @@ public class CalendarActivity extends AppCompatActivity {
 
                 arrayClear();
 
-                //Memo, Assign Init
-                TextView assign = findViewById(R.id.tvShowAssign);
-                TextView memo = findViewById(R.id.tvShowMemo);
-                memo.setText("");
-                assign.setText("");
-
                 CalendarLoad(uid, firebaseDate, showDate);
             }
         }, year, month, date);
@@ -283,30 +261,24 @@ public class CalendarActivity extends AppCompatActivity {
         //Firebase Database Refresh
         database = FirebaseDatabase.getInstance();
         database.setPersistenceEnabled(true);
-        databaseReference = database.getReference();
-        uidRef = databaseReference.child("calendar").child(uid);
+        uidRef = database.getReference().child("calendar").child(uid);
 
         uidRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     if (snapshot.hasChild(firebaseDate)) {
-                        dateRef = uidRef.child(firebaseDate);
-
-                        dateRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                        uidRef.child(firebaseDate).addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                 if (snapshot.hasChild("note")) {
-                                    noteRef = dateRef.child("note");
-
-                                    noteRef.addValueEventListener(new ValueEventListener() {
+                                    uidRef.child(firebaseDate).child("note").addValueEventListener(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                             arrayList.clear();
 
                                             for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                                                Todo todo = snapshot.getValue(Todo.class);
-                                                arrayList.add(todo);
+                                                arrayList.add(snapshot.getValue(Todo.class));
                                             }
                                             adapter = new CustomAdapter(arrayList, CalendarActivity.this);
                                             adapter.notifyDataSetChanged();
@@ -327,18 +299,15 @@ public class CalendarActivity extends AppCompatActivity {
                             }
                         });
 
-                        dateRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                        uidRef.child(firebaseDate).addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                 if (snapshot.hasChild("memo")) {
-                                    memoRef = dateRef.child("memo");
-
-                                    memoRef.addValueEventListener(new ValueEventListener() {
+                                    uidRef.child(firebaseDate).child("memo").addValueEventListener(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                            Memo = snapshot.getValue(String.class);
                                             TextView tvMemo = findViewById(R.id.tvShowMemo);
-                                            tvMemo.setText(Memo);
+                                            tvMemo.setText(snapshot.getValue(String.class));
                                         }
 
                                         @Override
@@ -356,13 +325,11 @@ public class CalendarActivity extends AppCompatActivity {
                         });
 
 
-                        dateRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                        uidRef.child(firebaseDate).addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                 if (snapshot.hasChild("reminder")) {
-                                    reminderRef = dateRef.child("reminder");
-
-                                    reminderRef.addValueEventListener(new ValueEventListener() {
+                                    uidRef.child(firebaseDate).child("reminder").addValueEventListener(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                                             int i = 1;
@@ -370,14 +337,12 @@ public class CalendarActivity extends AppCompatActivity {
                                             tvAssign.setText("");
 
                                             for (DataSnapshot datasnapshot : snapshot.getChildren()) {
-                                                String reminder = datasnapshot.getValue().toString();
-
                                                 if (i != snapshot.getChildrenCount()) {
-                                                     tvAssign.append("·" + reminder + "\n");
+                                                     tvAssign.append("·" + datasnapshot.getValue().toString() + "\n");
                                                      i++;
                                                 }
                                                 else {
-                                                    tvAssign.append("·" + reminder);
+                                                    tvAssign.append("·" + datasnapshot.getValue().toString());
                                                 }
                                             }
                                         }
@@ -397,7 +362,6 @@ public class CalendarActivity extends AppCompatActivity {
                         });
                     }
                     else {
-
                         TextView assign = findViewById(R.id.tvShowAssign);
                         TextView memo = findViewById(R.id.tvShowMemo);
 
@@ -427,14 +391,15 @@ public class CalendarActivity extends AppCompatActivity {
         int arraySize = arrayList.size();
         arrayList.clear();
 
+        TextView assign = findViewById(R.id.tvShowAssign);
+        TextView memo = findViewById(R.id.tvShowMemo);
+        memo.setText("");
+        assign.setText("");
+
         for (int i = 0; i<arraySize; i++) {
             adapter = new CustomAdapter(arrayList, CalendarActivity.this);
             adapter.notifyItemRemoved(i);
             recyclerView.setAdapter(adapter);
         }
-    }
-
-    public static void showMemoEdit() {
-
     }
 }
