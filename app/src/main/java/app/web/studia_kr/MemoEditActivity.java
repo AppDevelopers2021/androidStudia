@@ -23,6 +23,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+import app.web.studia_kr.backgroundservice.NotificationRestarter;
+
 public class MemoEditActivity extends AppCompatActivity {
 
     private EditText etMemo;
@@ -419,5 +421,14 @@ public class MemoEditActivity extends AppCompatActivity {
     public void clearReminderRef() {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         database.getReference().child("calendar").child(uid).child(firebaseDate).child("reminder").removeValue();
+    }
+
+    @Override
+    protected void onDestroy() {
+        Intent broadcastIntent = new Intent();
+        broadcastIntent.setAction("restartService");
+        broadcastIntent.setClass(this, NotificationRestarter.class);
+        this.sendBroadcast(broadcastIntent);
+        super.onDestroy();
     }
 }

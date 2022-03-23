@@ -15,6 +15,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import app.web.studia_kr.backgroundservice.NotificationRestarter;
+
 public class AppInfoActivity extends AppCompatActivity {
 
     private TextView tvCopyright;
@@ -80,5 +82,14 @@ public class AppInfoActivity extends AppCompatActivity {
         });
 
         //TODO Add account delete function
+    }
+
+    @Override
+    protected void onDestroy() {
+        Intent broadcastIntent = new Intent();
+        broadcastIntent.setAction("restartService");
+        broadcastIntent.setClass(this, NotificationRestarter.class);
+        this.sendBroadcast(broadcastIntent);
+        super.onDestroy();
     }
 }

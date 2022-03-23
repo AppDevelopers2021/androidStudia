@@ -19,6 +19,8 @@ import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import app.web.studia_kr.backgroundservice.NotificationRestarter;
+
 public class DeleteAccount extends AppCompatActivity {
 
     private EditText emailText;
@@ -72,5 +74,14 @@ public class DeleteAccount extends AppCompatActivity {
                 });
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        Intent broadcastIntent = new Intent();
+        broadcastIntent.setAction("restartService");
+        broadcastIntent.setClass(this, NotificationRestarter.class);
+        this.sendBroadcast(broadcastIntent);
+        super.onDestroy();
     }
 }

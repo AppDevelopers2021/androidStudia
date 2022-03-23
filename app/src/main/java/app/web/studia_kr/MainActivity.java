@@ -1,5 +1,6 @@
 package app.web.studia_kr;
 
+import android.app.ActivityManager;
 import android.content.SharedPreferences;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
@@ -13,6 +14,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import app.web.studia_kr.backgroundservice.NotificationRestarter;
+import app.web.studia_kr.backgroundservice.NotificationService;
 import app.web.studia_kr.network.NetworkConnection;
 
 public class MainActivity extends AppCompatActivity {
@@ -23,6 +26,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //애플리케이션 실행 시 Notification Service 실행
+        if (!isMyServiceRunning(NotificationService.class)) {
+            startService(new Intent(MainActivity.this, NotificationService.class));
+        }
 
         // 처음 Splash Screen이 띄워지는 시간 설정 타이머(1초)
         introtimer = new Timer();
@@ -58,5 +66,25 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         }, 1000);
+    }
+
+    //스오플 복붙 크흠
+    private boolean isMyServiceRunning(Class<?> serviceClass) {
+        ActivityManager manager = (ActivityManager) getSystemService(getApplicationContext().ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    protected void onDestroy() {
+        Intent broadcastIntent = new Intent();
+        broadcastIntent.setAction("restartService");
+        broadcastIntent.setClass(this, NotificationRestarter.class);
+        this.sendBroadcast(broadcastIntent);
+        super.onDestroy();
     }
 }

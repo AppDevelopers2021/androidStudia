@@ -15,6 +15,8 @@ import android.widget.TextView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import app.web.studia_kr.backgroundservice.NotificationRestarter;
+
 public class PopupActivity extends AppCompatActivity {
 
     private String showDate;
@@ -88,5 +90,14 @@ public class PopupActivity extends AppCompatActivity {
             return false;
         }
         return true;
+    }
+
+    @Override
+    protected void onDestroy() {
+        Intent broadcastIntent = new Intent();
+        broadcastIntent.setAction("restartService");
+        broadcastIntent.setClass(this, NotificationRestarter.class);
+        this.sendBroadcast(broadcastIntent);
+        super.onDestroy();
     }
 }

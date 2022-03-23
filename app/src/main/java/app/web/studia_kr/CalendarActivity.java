@@ -32,6 +32,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+import app.web.studia_kr.backgroundservice.NotificationRestarter;
+
 public class CalendarActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
@@ -401,5 +403,14 @@ public class CalendarActivity extends AppCompatActivity {
             adapter.notifyItemRemoved(i);
             recyclerView.setAdapter(adapter);
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        Intent broadcastIntent = new Intent();
+        broadcastIntent.setAction("restartService");
+        broadcastIntent.setClass(this, NotificationRestarter.class);
+        this.sendBroadcast(broadcastIntent);
+        super.onDestroy();
     }
 }

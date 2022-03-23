@@ -32,6 +32,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
+import app.web.studia_kr.backgroundservice.NotificationRestarter;
+
 public class LoginActivity extends AppCompatActivity{
 
     private EditText etEmail;
@@ -223,5 +225,14 @@ public class LoginActivity extends AppCompatActivity{
     public void Lost(View view) {
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://studia.blue/iforgot/"));
         startActivity(intent);
+    }
+
+    @Override
+    protected void onDestroy() {
+        Intent broadcastIntent = new Intent();
+        broadcastIntent.setAction("restartService");
+        broadcastIntent.setClass(this, NotificationRestarter.class);
+        this.sendBroadcast(broadcastIntent);
+        super.onDestroy();
     }
 }
