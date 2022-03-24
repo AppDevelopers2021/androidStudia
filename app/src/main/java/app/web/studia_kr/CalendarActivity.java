@@ -58,6 +58,9 @@ public class CalendarActivity extends AppCompatActivity {
         getWindow().setEnterTransition(null);
         getWindow().getSharedElementEnterTransition().setDuration(200);
 
+        database = FirebaseDatabase.getInstance();
+        database.setPersistenceEnabled(true);
+
         //ScheduleActivity 등에서 다시 CalendarActivity로 복귀했을 때 원래 날짜 복원
         if (getIntent().hasExtra("dbDate")) {
             firebaseDate = getIntent().getStringExtra("dbDate");
@@ -261,8 +264,6 @@ public class CalendarActivity extends AppCompatActivity {
         btDate.setText(showDate);
 
         //Firebase Database Refresh
-        database = FirebaseDatabase.getInstance();
-        database.setPersistenceEnabled(true);
         uidRef = database.getReference().child("calendar").child(uid);
 
         uidRef.addListenerForSingleValueEvent(new ValueEventListener() {
