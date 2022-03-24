@@ -404,13 +404,4 @@ public class CalendarActivity extends AppCompatActivity {
             recyclerView.setAdapter(adapter);
         }
     }
-
-    @Override
-    protected void onDestroy() {
-        Intent broadcastIntent = new Intent();
-        broadcastIntent.setAction("restartService");
-        broadcastIntent.setClass(this, NotificationRestarter.class);
-        this.sendBroadcast(broadcastIntent);
-        super.onDestroy();
-    }
 }

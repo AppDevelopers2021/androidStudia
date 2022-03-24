@@ -1,6 +1,8 @@
 package app.web.studia_kr;
 
-import android.app.ActivityManager;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.SharedPreferences;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
@@ -11,11 +13,11 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.Calendar;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import app.web.studia_kr.backgroundservice.NotificationRestarter;
-import app.web.studia_kr.backgroundservice.NotificationService;
 import app.web.studia_kr.network.NetworkConnection;
 
 public class MainActivity extends AppCompatActivity {
@@ -27,10 +29,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //애플리케이션 실행 시 Notification Service 실행
-        if (!isMyServiceRunning(NotificationService.class)) {
-            startService(new Intent(MainActivity.this, NotificationService.class));
-        }
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.set(Calendar.HOUR_OF_DAY, 8);
+
+        Intent notifyIntent = new Intent(this,NotificationRestarter.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 2, notifyIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        AlarmManager alarmManager = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,  calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
 
         // 처음 Splash Screen이 띄워지는 시간 설정 타이머(1초)
         introtimer = new Timer();
@@ -66,25 +72,5 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         }, 1000);
-    }
-
-    //스오플 복붙 크흠
-    private boolean isMyServiceRunning(Class<?> serviceClass) {
-        ActivityManager manager = (ActivityManager) getSystemService(getApplicationContext().ACTIVITY_SERVICE);
-        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
-            if (serviceClass.getName().equals(service.service.getClassName())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    protected void onDestroy() {
-        Intent broadcastIntent = new Intent();
-        broadcastIntent.setAction("restartService");
-        broadcastIntent.setClass(this, NotificationRestarter.class);
-        this.sendBroadcast(broadcastIntent);
-        super.onDestroy();
     }
 }

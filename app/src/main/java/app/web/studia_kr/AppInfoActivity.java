@@ -83,13 +83,4 @@ public class AppInfoActivity extends AppCompatActivity {
 
         //TODO Add account delete function
     }
-
-    @Override
-    protected void onDestroy() {
-        Intent broadcastIntent = new Intent();
-        broadcastIntent.setAction("restartService");
-        broadcastIntent.setClass(this, NotificationRestarter.class);
-        this.sendBroadcast(broadcastIntent);
-        super.onDestroy();
-    }
 }

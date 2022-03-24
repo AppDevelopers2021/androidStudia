@@ -91,13 +91,4 @@ public class PopupActivity extends AppCompatActivity {
         }
         return true;
     }
-
-    @Override
-    protected void onDestroy() {
-        Intent broadcastIntent = new Intent();
-        broadcastIntent.setAction("restartService");
-        broadcastIntent.setClass(this, NotificationRestarter.class);
-        this.sendBroadcast(broadcastIntent);
-        super.onDestroy();
-    }
 }

@@ -226,13 +226,4 @@ public class LoginActivity extends AppCompatActivity{
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://studia.blue/iforgot/"));
         startActivity(intent);
     }
-
-    @Override
-    protected void onDestroy() {
-        Intent broadcastIntent = new Intent();
-        broadcastIntent.setAction("restartService");
-        broadcastIntent.setClass(this, NotificationRestarter.class);
-        this.sendBroadcast(broadcastIntent);
-        super.onDestroy();
-    }
 }

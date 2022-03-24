@@ -64,6 +64,12 @@
 
         <service
             android:name=".backgroundservice.NotificationService"
-            android:enabled="true" />
+            android:exported="false" />
+
+        <receiver
+            android:name=".backgroundservice.NotificationRestarter"
+            android:enabled="true"
+            android:exported="false" >
+        </receiver>
     </application>
 </manifest>
