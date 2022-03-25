@@ -14,6 +14,10 @@
         android:theme="@style/Theme.AndroidStudia"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".NoteManagerPopup"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.DayNight.Dialog" />
+        <activity
             android:name=".DeleteAccount"
             android:exported="false" />
         <activity
@@ -69,7 +73,7 @@
         <receiver
             android:name=".backgroundservice.NotificationRestarter"
             android:enabled="true"
-            android:exported="false" >
-        </receiver>
+            android:exported="false"></receiver>
     </application>
+
 </manifest>

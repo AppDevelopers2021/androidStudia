@@ -77,6 +77,13 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
             holder.constraintLayout.setBackground(ContextCompat.getDrawable(context, R.drawable.rectanglegray));
         if (arrayList.get(position).getSubject().equals("기타"))
             holder.constraintLayout.setBackground(ContextCompat.getDrawable(context, R.drawable.rectanglegreen));
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CalendarActivity.startNoteManagerPopup(arrayList.get(holder.getAdapterPosition()).getSubject(), arrayList.get(holder.getAdapterPosition()).getContent());
+            }
+        });
     }
 
     @Override

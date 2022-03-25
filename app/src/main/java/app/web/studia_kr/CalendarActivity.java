@@ -1,6 +1,7 @@
 package app.web.studia_kr;
 
 import android.animation.ObjectAnimator;
+import android.app.Activity;
 import android.app.ActivityOptions;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -32,8 +34,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-import app.web.studia_kr.backgroundservice.NotificationRestarter;
-
 public class CalendarActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
@@ -49,6 +49,9 @@ public class CalendarActivity extends AppCompatActivity {
     private DateFormat dateFormat;
     private DateFormat firebaseFormat;
     private DatePickerDialog dialog;
+    public static Context context;
+    public static Activity activity;
+    public static String staticDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,8 +61,8 @@ public class CalendarActivity extends AppCompatActivity {
         getWindow().setEnterTransition(null);
         getWindow().getSharedElementEnterTransition().setDuration(200);
 
-        database = FirebaseDatabase.getInstance();
-        database.setPersistenceEnabled(true);
+        context = this;
+        activity = this;
 
         //ScheduleActivity 등에서 다시 CalendarActivity로 복귀했을 때 원래 날짜 복원
         if (getIntent().hasExtra("dbDate")) {
@@ -95,7 +98,7 @@ public class CalendarActivity extends AppCompatActivity {
             firebaseFormat = new SimpleDateFormat("yyyyMMdd");
             firebaseDate = firebaseFormat.format(calendar.getTime());
         }
-        btDate = findViewById(R.id.btDate);
+        btDate = findViewById(R.id.btNote);
         btDate.setText(showDate);
 
         //Firebase RecyclerView Declare
@@ -112,7 +115,7 @@ public class CalendarActivity extends AppCompatActivity {
 
         CalendarLoad(uid, firebaseDate, showDate);
 
-        Button btDate = findViewById(R.id.btDate);
+        Button btDate = findViewById(R.id.btNote);
         btDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -127,6 +130,8 @@ public class CalendarActivity extends AppCompatActivity {
                 calendar.add(Calendar.DATE, -1);
                 firebaseDate = firebaseFormat.format(calendar.getTime());
                 showDate = dateFormat.format(calendar.getTime());
+
+                staticDate = firebaseFormat.format(calendar.getTime());
 
                 arrayClear();
 
@@ -155,6 +160,8 @@ public class CalendarActivity extends AppCompatActivity {
                 calendar.add(Calendar.DATE, +1);
                 firebaseDate = firebaseFormat.format(calendar.getTime());
                 showDate = dateFormat.format(calendar.getTime());
+
+                staticDate = firebaseFormat.format(calendar.getTime());
 
                 arrayClear();
 
@@ -242,6 +249,8 @@ public class CalendarActivity extends AppCompatActivity {
 
                 firebaseDate = firebaseFormat.format(calendar.getTime());
                 showDate = dateFormat.format(calendar.getTime());
+
+                staticDate = firebaseFormat.format(calendar.getTime());
 
                 arrayClear();
 
@@ -404,5 +413,13 @@ public class CalendarActivity extends AppCompatActivity {
             adapter.notifyItemRemoved(i);
             recyclerView.setAdapter(adapter);
         }
+    }
+
+    public static void startNoteManagerPopup(String subject, String content) {
+        Intent intent = new Intent(context, NoteManagerPopup.class);
+        intent.putExtra(subject, "subject");
+        intent.putExtra(content, "content");
+        intent.putExtra(staticDate, "date");
+        activity.startActivityForResult(intent, 1);
     }
 }
