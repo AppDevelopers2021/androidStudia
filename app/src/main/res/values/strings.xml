@@ -87,4 +87,7 @@
     <string name="spinnerEnvironments">환경</string>
     <string name="spinnerAutonomy">자율</string>
     <string name="spinnerEtc">기타</string>
+
+    <!-- activity_note_manager_popup.xml -->
+    <string name="editNote">노트 수정</string>
 </resources>

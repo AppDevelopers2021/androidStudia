@@ -36,14 +36,14 @@
                     tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
                 <Button
-                    android:id="@+id/btDate"
+                    android:id="@+id/btNote"
                     style="@style/Widget.AppCompat.Button.Borderless.Colored"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="1dp"
                     android:background="#2291FF"
                     android:fontFamily="sans-serif-light"
-                    android:text="yyyy/mm/dd"
+                    android:text="2022/04/26"
                     android:textAlignment="center"
                     android:textColor="@color/white"
                     android:textSize="26sp"
