@@ -135,21 +135,29 @@ public class CalendarActivity extends AppCompatActivity {
 
                 arrayClear();
 
-                View linearLayout = findViewById(R.id.SwipeLayout);
+                try {
+                    View linearLayout = findViewById(R.id.SwipeLayout);
 
-                ObjectAnimator toLeft = ObjectAnimator.ofFloat(linearLayout, "translationX", linearLayout.getX() + 500);
-                toLeft.setDuration(0050);
-                toLeft.start();
+                    ObjectAnimator toLeft = ObjectAnimator.ofFloat(linearLayout, "translationX", linearLayout.getX() + 500);
+                    toLeft.setDuration(0050);
+                    toLeft.start();
 
-                CalendarLoad(uid, firebaseDate, showDate);
+                    Thread.sleep(0050);
 
-                ObjectAnimator toRight = ObjectAnimator.ofFloat(linearLayout, "translationX", linearLayout.getX() - 1000);
-                toRight.setDuration(0001);
-                toRight.start();
+                    CalendarLoad(uid, firebaseDate, showDate);
 
-                ObjectAnimator toCenter = ObjectAnimator.ofFloat(linearLayout, "translationX", linearLayout.getX() + 500);
-                toCenter.setDuration(0050);
-                toCenter.start();
+                    ObjectAnimator toRight = ObjectAnimator.ofFloat(linearLayout, "translationX", linearLayout.getX() - 1000);
+                    toRight.setDuration(0001);
+                    toRight.start();
+
+                    Thread.sleep(0001);
+
+                    ObjectAnimator toCenter = ObjectAnimator.ofFloat(linearLayout, "translationX", linearLayout.getX() + 500);
+                    toCenter.setDuration(0050);
+                    toCenter.start();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -165,19 +173,29 @@ public class CalendarActivity extends AppCompatActivity {
 
                 arrayClear();
 
-                View linearLayout = findViewById(R.id.SwipeLayout);
+                try {
+                    View linearLayout = findViewById(R.id.SwipeLayout);
 
-                TranslateAnimation anim1 = new TranslateAnimation(0, 0 - linearLayout.getWidth() /2,0, 0);
-                anim1.setDuration(0200);
-                anim1.setFillAfter(true);
-                linearLayout.startAnimation(anim1);
+                    ObjectAnimator toLeft = ObjectAnimator.ofFloat(linearLayout, "translationX", linearLayout.getX() - 500);
+                    toLeft.setDuration(0050);
+                    toLeft.start();
 
-                CalendarLoad(uid, firebaseDate, showDate);
+                    Thread.sleep(0050);
 
-                TranslateAnimation anim2 = new TranslateAnimation(linearLayout.getWidth() /2, 0, 0, 0);
-                anim2.setDuration(0200);
-                anim2.setFillAfter(true);
-                linearLayout.startAnimation(anim2);
+                    CalendarLoad(uid, firebaseDate, showDate);
+
+                    ObjectAnimator toRight = ObjectAnimator.ofFloat(linearLayout, "translationX", linearLayout.getX() + 1000);
+                    toRight.setDuration(0001);
+                    toRight.start();
+
+                    Thread.sleep(0001);
+
+                    ObjectAnimator toCenter = ObjectAnimator.ofFloat(linearLayout, "translationX", linearLayout.getX() - 500);
+                    toCenter.setDuration(0050);
+                    toCenter.start();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         });
 

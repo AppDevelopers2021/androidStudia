@@ -22,8 +22,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import app.web.studia_kr.backgroundservice.NotificationRestarter;
-
 public class ScheduleActivity extends AppCompatActivity {
 
     private EditText content;
@@ -56,10 +54,11 @@ public class ScheduleActivity extends AppCompatActivity {
         getWindow().setEnterTransition(null);
         getWindow().getSharedElementEnterTransition().setDuration(200);
 
+
         Intent intent = getIntent();
         showDate = intent.getStringExtra("date");
         firebaseDate = intent.getStringExtra("dbDate");
-        Bdate = findViewById(R.id.btDate);
+        Bdate = findViewById(R.id.btNote);
         Bdate.setText(showDate);
 
         Bdate.setOnClickListener(new View.OnClickListener() {
@@ -95,9 +94,7 @@ public class ScheduleActivity extends AppCompatActivity {
 
                 subjectString = subject.getSelectedItem().toString();
 
-                database = FirebaseDatabase.getInstance();
-                databaseReference = database.getReference();
-                uidRef = databaseReference.child("calendar").child(uid);
+                uidRef = FirebaseDatabase.getInstance().getReference().child("calendar").child(uid);
 
                 uidRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override

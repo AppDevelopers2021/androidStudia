@@ -23,8 +23,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-import app.web.studia_kr.backgroundservice.NotificationRestarter;
-
 public class MemoEditActivity extends AppCompatActivity {
 
     private EditText etMemo;
@@ -57,7 +55,7 @@ public class MemoEditActivity extends AppCompatActivity {
         Intent intent = getIntent();
         showDate = intent.getStringExtra("date");
         firebaseDate = intent.getStringExtra("dbDate");
-        btDate = findViewById(R.id.btDate);
+        btDate = findViewById(R.id.btNote);
         btDate.setText(showDate);
 
         CalendarLoad(uid, firebaseDate);
