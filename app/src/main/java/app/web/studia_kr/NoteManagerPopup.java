@@ -51,43 +51,43 @@ public class NoteManagerPopup extends AppCompatActivity {
         contentString = getIntent().getStringExtra("content");
         dateString = getIntent().getStringExtra("date");
 
-        if (getIntent().getStringExtra("subject").equals("가정")) {
+        if (subjectString.equals("가정")) {
             subject.setSelection(0);
-        } else if (getIntent().getStringExtra("subject").equals("과학")) {
+        } else if (subjectString.equals("과학")) {
             subject.setSelection(1);
-        } else if (getIntent().getStringExtra("subject").equals("국어")) {
+        } else if (subjectString.equals("국어")) {
             subject.setSelection(2);
-        } else if (getIntent().getStringExtra("subject").equals("기술")) {
+        } else if (subjectString.equals("기술")) {
             subject.setSelection(3);
-        } else if (getIntent().getStringExtra("subject").equals("도덕")) {
+        } else if (subjectString.equals("도덕")) {
             subject.setSelection(4);
-        } else if (getIntent().getStringExtra("subject").equals("독서")) {
+        } else if (subjectString.equals("독서")) {
             subject.setSelection(5);
-        } else if (getIntent().getStringExtra("subject").equals("미술")) {
+        } else if (subjectString.equals("미술")) {
             subject.setSelection(6);
-        } else if (getIntent().getStringExtra("subject").equals("보건")) {
+        } else if (subjectString.equals("보건")) {
             subject.setSelection(7);
-        } else if (getIntent().getStringExtra("subject").equals("사회")) {
+        } else if (subjectString.equals("사회")) {
             subject.setSelection(8);
-        } else if (getIntent().getStringExtra("subject").equals("수학")) {
+        } else if (subjectString.equals("수학")) {
             subject.setSelection(9);
-        } else if (getIntent().getStringExtra("subject").equals("영어")) {
+        } else if (subjectString.equals("영어")) {
             subject.setSelection(10);
-        } else if (getIntent().getStringExtra("subject").equals("음악")) {
+        } else if (subjectString.equals("음악")) {
             subject.setSelection(11);
-        } else if (getIntent().getStringExtra("subject").equals("정보")) {
+        } else if (subjectString.equals("정보")) {
             subject.setSelection(12);
-        } else if (getIntent().getStringExtra("subject").equals("진로")) {
+        } else if (subjectString.equals("진로")) {
             subject.setSelection(13);
-        } else if (getIntent().getStringExtra("subject").equals("창체")) {
+        } else if (subjectString.equals("창체")) {
             subject.setSelection(14);
-        } else if (getIntent().getStringExtra("subject").equals("체육")) {
+        } else if (subjectString.equals("체육")) {
             subject.setSelection(15);
-        } else if (getIntent().getStringExtra("subject").equals("환경")) {
+        } else if (subjectString.equals("환경")) {
             subject.setSelection(16);
-        } else if (getIntent().getStringExtra("subject").equals("자율")) {
+        } else if (subjectString.equals("자율")) {
             subject.setSelection(17);
-        } else if (getIntent().getStringExtra("subject").equals("기타")) {
+        } else if (subjectString.equals("기타")) {
             subject.setSelection(18);
         }
 
