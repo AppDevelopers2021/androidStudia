@@ -32,12 +32,9 @@ public class MemoEditActivity extends AppCompatActivity {
     private String firebaseDate;
     private String uid;
     private String memoString;
-    private FirebaseDatabase database;
-    private DatabaseReference databaseReference;
     private DatabaseReference uidRef;
     private DatabaseReference memoRef;
     private DatabaseReference reminderRef;
-    private DatabaseReference dateRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,9 +80,7 @@ public class MemoEditActivity extends AppCompatActivity {
                 memoString = etMemo.getText().toString();
                 etAssign = findViewById(R.id.etAssign);
 
-                database = FirebaseDatabase.getInstance();
-                databaseReference = database.getReference();
-                uidRef = databaseReference.child("calendar").child(uid);
+                uidRef = FirebaseDatabase.getInstance().getReference().child("calendar").child(uid);
 
                 clearReminderRef();
 
@@ -94,14 +89,11 @@ public class MemoEditActivity extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if (snapshot.exists()) {
                             if (snapshot.hasChild(firebaseDate)) {
-                                dateRef = uidRef.child(firebaseDate);
-
-                                dateRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                uidRef.child(firebaseDate).addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                                         if (snapshot.hasChild("memo")) {
-                                            memoRef = dateRef.child("memo");
-                                            memoRef.setValue(memoString);
+                                            uidRef.child(firebaseDate).child("memo").setValue(memoString);
 
                                             Intent intent = new Intent(MemoEditActivity.this, CalendarActivity.class);
                                             intent.putExtra("date", showDate);
@@ -113,9 +105,7 @@ public class MemoEditActivity extends AppCompatActivity {
                                             finishAfterTransition();
                                         }
                                         else {
-                                            dateRef.child("memo");
-                                            memoRef = dateRef.child("memo");
-                                            memoRef.setValue(memoString);
+                                            uidRef.child(firebaseDate).child("memo").setValue(memoString);
 
                                             Intent intent = new Intent(MemoEditActivity.this, CalendarActivity.class);
                                             intent.putExtra("date", showDate);
@@ -134,11 +124,11 @@ public class MemoEditActivity extends AppCompatActivity {
                                     }
                                 });
 
-                                dateRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                uidRef.child(firebaseDate).addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                                         if (snapshot.hasChild("reminder")) {
-                                            reminderRef = dateRef.child("reminder");
+                                            reminderRef = uidRef.child(firebaseDate).child("reminder");
 
                                             reminderRef.addValueEventListener(new ValueEventListener() {
                                                 @Override
@@ -170,8 +160,8 @@ public class MemoEditActivity extends AppCompatActivity {
                                             });
                                         }
                                         else {
-                                            dateRef.child("reminder");
-                                            reminderRef = dateRef.child("reminder");
+                                            uidRef.child(firebaseDate).child("reminder");
+                                            reminderRef = uidRef.child(firebaseDate).child("reminder").child("reminder");
 
                                             String getReminder = etAssign.getText().toString();
                                             if (getReminder != "") {
@@ -210,10 +200,9 @@ public class MemoEditActivity extends AppCompatActivity {
                                 finishAfterTransition();
                             }
                             else {
-                                dateRef = uidRef.child(firebaseDate);
-                                dateRef.child("memo").setValue(memoString);
-                                dateRef.child("reminder");
-                                reminderRef = dateRef.child("reminder");
+                                uidRef.child(firebaseDate).child("memo").setValue(memoString);
+                                uidRef.child(firebaseDate).child("reminder");
+                                reminderRef = uidRef.child(firebaseDate).child("reminder");
 
                                 reminderRef.addValueEventListener(new ValueEventListener() {
                                     @Override
@@ -255,13 +244,12 @@ public class MemoEditActivity extends AppCompatActivity {
                             }
                         }
                         else {
-                            databaseReference.child("calendar").child(uid);
-                            uidRef = databaseReference.child("calendar").child(uid);
+                            FirebaseDatabase.getInstance().getReference().child("calendar").child(uid);
+                            uidRef = FirebaseDatabase.getInstance().getReference().child("calendar").child(uid);
                             uidRef.child(firebaseDate);
-                            dateRef = uidRef.child(firebaseDate);
-                            dateRef.child("memo").setValue(memoString);
-                            dateRef.child("reminder");
-                            reminderRef = dateRef.child("reminder");
+                            uidRef.child(firebaseDate).child("memo").setValue(memoString);
+                            uidRef.child(firebaseDate).child("reminder");
+                            reminderRef = uidRef.child(firebaseDate).child("reminder");
 
                             reminderRef.addValueEventListener(new ValueEventListener() {
                                 @Override
@@ -316,22 +304,18 @@ public class MemoEditActivity extends AppCompatActivity {
         Log.w("MemoEditActivity", "void CalendarLoad started.");
 
         //Firebase Database Refresh
-        database = FirebaseDatabase.getInstance();
-        databaseReference = database.getReference();
-        uidRef = databaseReference.child("calendar").child(uid);
+        uidRef = FirebaseDatabase.getInstance().getReference().child("calendar").child(uid);
 
         uidRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     if (snapshot.hasChild(firebaseDate)) {
-                        dateRef = uidRef.child(firebaseDate);
-
-                        dateRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                        uidRef.child(firebaseDate).addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                 if (snapshot.hasChild("memo")) {
-                                    memoRef = dateRef.child("memo");
+                                    memoRef = uidRef.child(firebaseDate).child("memo");
 
                                     memoRef.addValueEventListener(new ValueEventListener() {
                                         @Override
@@ -356,11 +340,11 @@ public class MemoEditActivity extends AppCompatActivity {
                         });
 
 
-                        dateRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                        uidRef.child(firebaseDate).addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                 if (snapshot.hasChild("reminder")) {
-                                    reminderRef = dateRef.child("reminder");
+                                    reminderRef = uidRef.child(firebaseDate).child("reminder");
 
                                     reminderRef.addListenerForSingleValueEvent(new ValueEventListener() {
                                         @Override
