@@ -43,7 +43,6 @@ public class CalendarActivity extends AppCompatActivity {
     private String uid;
     private String firebaseDate;
     private String showDate;
-    private FirebaseDatabase database;
     private DatabaseReference uidRef;
     private Calendar calendar;
     private DateFormat dateFormat;
@@ -291,7 +290,7 @@ public class CalendarActivity extends AppCompatActivity {
         btDate.setText(showDate);
 
         //Firebase Database Refresh
-        uidRef = database.getReference().child("calendar").child(uid);
+        uidRef = FirebaseDatabase.getInstance().getReference().child("calendar").child(uid);
 
         uidRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -435,9 +434,9 @@ public class CalendarActivity extends AppCompatActivity {
 
     public static void startNoteManagerPopup(String subject, String content) {
         Intent intent = new Intent(context, NoteManagerPopup.class);
-        intent.putExtra(subject, "subject");
-        intent.putExtra(content, "content");
-        intent.putExtra(staticDate, "date");
+        intent.putExtra("subject", subject);
+        intent.putExtra("content", content);
+        intent.putExtra("date", staticDate);
         activity.startActivityForResult(intent, 1);
     }
 }
