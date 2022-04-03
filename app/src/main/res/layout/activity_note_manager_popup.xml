@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:theme="@android:style/Theme.Dialog"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="15dp"
     android:background="#FFFFFF"
-    android:padding="15dp"
+    android:theme="@android:style/Theme.Dialog"
     tools:context=".PopupActivity">
 
     <LinearLayout
@@ -20,9 +19,9 @@
             android:id="@+id/TopBar"
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:orientation="horizontal"
+            android:background="#2291FF"
             android:gravity="center_vertical"
-            android:background="#2291FF">
+            android:orientation="horizontal">
 
             <ImageButton
                 android:id="@+id/btBack"
@@ -56,8 +55,8 @@
             <View
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_weight="1"
-                android:layout_marginEnd="55dp"/>
+                android:layout_marginEnd="55dp"
+                android:layout_weight="1" />
 
         </LinearLayout>
 
@@ -85,10 +84,10 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="10dp"
                 android:layout_marginTop="15dp"
-                android:background="@drawable/calendarsection">
+                android:background="@drawable/calendarsection"
+                android:orientation="vertical"
+                android:padding="10dp">
 
                 <Spinner
                     android:id="@+id/snSubject"
@@ -96,7 +95,7 @@
                     android:layout_height="50dp"
                     android:layout_gravity="left"
                     android:entries="@array/subject"
-                    tools:ignore="SpeakableTextPresentCheck"/>
+                    tools:ignore="SpeakableTextPresentCheck" />
 
                 <EditText
                     android:id="@+id/etAssign"
