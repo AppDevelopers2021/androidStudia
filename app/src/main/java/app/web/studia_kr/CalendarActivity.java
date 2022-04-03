@@ -1,13 +1,7 @@
 package app.web.studia_kr;
 
-import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.app.ActivityOptions;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -20,6 +14,11 @@ import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -28,8 +27,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.text.SimpleDateFormat;
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -70,7 +69,10 @@ public class CalendarActivity extends AppCompatActivity {
 
             String yearSet = null;
             for (int i = 0; i<arrayDate.length - 4; i++) {
-                yearSet = yearSet + arrayDate[i];
+                if (yearSet != null)
+                    yearSet = yearSet + arrayDate[i];
+                else
+                    yearSet = arrayDate[i];
             }
 
             int year = Integer.parseInt(yearSet);
@@ -137,23 +139,26 @@ public class CalendarActivity extends AppCompatActivity {
                 try {
                     View linearLayout = findViewById(R.id.SwipeLayout);
 
-                    ObjectAnimator toLeft = ObjectAnimator.ofFloat(linearLayout, "translationX", linearLayout.getX() + 500);
-                    toLeft.setDuration(0050);
-                    toLeft.start();
+                    TranslateAnimation toRight = new TranslateAnimation(0, 1000, 0, 0);
+                    toRight.setDuration(0050);
+                    toRight.setFillAfter(true);
+                    linearLayout.startAnimation(toRight);
 
                     Thread.sleep(0050);
 
                     CalendarLoad(uid, firebaseDate, showDate);
 
-                    ObjectAnimator toRight = ObjectAnimator.ofFloat(linearLayout, "translationX", linearLayout.getX() - 1000);
-                    toRight.setDuration(0001);
-                    toRight.start();
+                    TranslateAnimation toLeft = new TranslateAnimation(0, -1000, 0, 0);
+                    toLeft.setDuration(0001);
+                    toLeft.setFillAfter(false);
+                    linearLayout.startAnimation(toLeft);
 
                     Thread.sleep(0001);
 
-                    ObjectAnimator toCenter = ObjectAnimator.ofFloat(linearLayout, "translationX", linearLayout.getX() + 500);
+                    TranslateAnimation toCenter = new TranslateAnimation(-1000, 0, 0, 0);
                     toCenter.setDuration(0050);
-                    toCenter.start();
+                    toCenter.setFillAfter(true);
+                    linearLayout.startAnimation(toCenter);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -175,23 +180,26 @@ public class CalendarActivity extends AppCompatActivity {
                 try {
                     View linearLayout = findViewById(R.id.SwipeLayout);
 
-                    ObjectAnimator toLeft = ObjectAnimator.ofFloat(linearLayout, "translationX", linearLayout.getX() - 500);
-                    toLeft.setDuration(0050);
-                    toLeft.start();
+                    TranslateAnimation toLeft = new TranslateAnimation(0, -1000, 0, 0);
+                    toLeft.setDuration(0001);
+                    toLeft.setFillAfter(true);
+                    linearLayout.startAnimation(toLeft);
 
                     Thread.sleep(0050);
 
                     CalendarLoad(uid, firebaseDate, showDate);
 
-                    ObjectAnimator toRight = ObjectAnimator.ofFloat(linearLayout, "translationX", linearLayout.getX() + 1000);
-                    toRight.setDuration(0001);
-                    toRight.start();
+                    TranslateAnimation toRight = new TranslateAnimation(0, 1000, 0, 0);
+                    toRight.setDuration(0050);
+                    toRight.setFillAfter(false);
+                    linearLayout.startAnimation(toRight);
 
                     Thread.sleep(0001);
 
-                    ObjectAnimator toCenter = ObjectAnimator.ofFloat(linearLayout, "translationX", linearLayout.getX() - 500);
+                    TranslateAnimation toCenter = new TranslateAnimation(1000, 0, 0, 0);
                     toCenter.setDuration(0050);
-                    toCenter.start();
+                    toCenter.setFillAfter(true);
+                    linearLayout.startAnimation(toCenter);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -205,12 +213,10 @@ public class CalendarActivity extends AppCompatActivity {
                 Intent intent = new Intent(CalendarActivity.this, ScheduleActivity.class);
                 intent.putExtra("date", showDate);
                 intent.putExtra("dbDate", firebaseDate);
-                getWindow().setExitTransition(null);
 
-                // Custom transition effect
-                ActivityOptions options = ActivityOptions
-                        .makeSceneTransitionAnimation(CalendarActivity.this, btDate, "date");
-                startActivity(intent, options.toBundle());
+                overridePendingTransition(R.anim.fade_out_left, R.anim.fade_in_left);
+
+                startActivity(intent);
             }
         });
 
@@ -221,12 +227,10 @@ public class CalendarActivity extends AppCompatActivity {
                 Intent intent = new Intent(CalendarActivity.this, MemoEditActivity.class);
                 intent.putExtra("date", showDate);
                 intent.putExtra("dbDate", firebaseDate);
-                getWindow().setExitTransition(null);
 
-                // Custom transition effect
-                ActivityOptions options = ActivityOptions
-                        .makeSceneTransitionAnimation(CalendarActivity.this, btDate, "date");
-                startActivity(intent, options.toBundle());
+                overridePendingTransition(R.anim.fade_out_left, R.anim.fade_in_left);
+
+                startActivity(intent);
             }
         });
 
@@ -237,12 +241,10 @@ public class CalendarActivity extends AppCompatActivity {
                 Intent intent = new Intent(CalendarActivity.this, MemoEditActivity.class);
                 intent.putExtra("date", showDate);
                 intent.putExtra("dbDate", firebaseDate);
-                getWindow().setExitTransition(null);
 
-                // Custom transition effect
-                ActivityOptions options = ActivityOptions
-                        .makeSceneTransitionAnimation(CalendarActivity.this, btDate, "date");
-                startActivity(intent, options.toBundle());
+                overridePendingTransition(R.anim.fade_out_left, R.anim.fade_in_left);
+
+                startActivity(intent);
             }
         });
 

@@ -43,17 +43,9 @@ public class ScheduleActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedule);
 
-        // Get rid of the 'flashing' effect
-        getWindow().setEnterTransition(null);
-        getWindow().getSharedElementEnterTransition().setDuration(200);
-
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
         uid = user.getUid();
-
-        getWindow().setEnterTransition(null);
-        getWindow().getSharedElementEnterTransition().setDuration(200);
-
 
         Intent intent = getIntent();
         showDate = intent.getStringExtra("date");
