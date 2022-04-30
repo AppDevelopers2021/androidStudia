@@ -9,8 +9,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/calendar_todoitembg"
+        android:layout_height="64dp"
+        android:background="@drawable/ic_calendar_todoitembg"
         android:minHeight="65dp"
         android:orientation="horizontal">
 
