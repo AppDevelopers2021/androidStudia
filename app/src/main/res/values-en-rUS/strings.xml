@@ -1,13 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="displayName">STUDIA</string>
-    <string name="appName">studia</string>
-    <string name="author">App Developers</string>
     <string name="appMotto">"Find your\\nown unique\\nstudy style "</string>
     <string name="email">Email Address</string>
     <string name="password">Password</string>
-    <string name="emailhint">email@example.com</string>
-    <string name="pwhint">• • • • • • • •</string>
     <string name="signup">Make your Account</string>
     <string name="iforgot">Find your Password</string>
     <string name="signin">Login</string>

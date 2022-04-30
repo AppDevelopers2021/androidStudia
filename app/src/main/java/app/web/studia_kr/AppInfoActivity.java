@@ -1,7 +1,5 @@
 package app.web.studia_kr;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,13 +7,13 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-
-import app.web.studia_kr.backgroundservice.NotificationRestarter;
 
 public class AppInfoActivity extends AppCompatActivity {
 
@@ -73,8 +71,6 @@ public class AppInfoActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(AppInfoActivity.this, CalendarActivity.class);
-                intent.putExtra("date", showDate);
-                intent.putExtra("dbDate", firebaseDate);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
                 finish();

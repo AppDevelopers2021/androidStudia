@@ -255,6 +255,9 @@ public class CalendarActivity extends AppCompatActivity {
                 Intent intent = new Intent(CalendarActivity.this, PopupActivity.class);
                 intent.putExtra("date", showDate);
                 intent.putExtra("dbDate", firebaseDate);
+
+                overridePendingTransition(R.anim.fade_out_left, R.anim.fade_in_left);
+
                 startActivityForResult(intent, 1);
             }
         });
@@ -435,10 +438,10 @@ public class CalendarActivity extends AppCompatActivity {
     }
 
     public static void startNoteManagerPopup(String subject, String content) {
-        Intent intent = new Intent(context, NoteManagerPopup.class);
+        /*Intent intent = new Intent(context, NoteManagerPopup.class);
         intent.putExtra("subject", subject);
         intent.putExtra("content", content);
         intent.putExtra("date", staticDate);
-        activity.startActivityForResult(intent, 1);
+        activity.startActivityForResult(intent, 1);*/
     }
 }

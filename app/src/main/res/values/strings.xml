@@ -1,15 +1,15 @@
 <resources>
-    <string name="displayName">STUDIA</string>
+    <string name="displayName" translatable="false">STUDIA</string>
 
     <!-- MainActivity -->
-    <string name="appName">studia</string>
-    <string name="author">App Developers</string>
+    <string name="appName" translatable="false">studia</string>
+    <string name="author" translatable="false">App Developers</string>
 
     <!-- LoginActivity -->
     <string name="email">이메일 주소</string>
     <string name="password">비밀번호</string>
-    <string name="emailhint">email@example.com</string>
-    <string name="pwhint">• • • • • • • •</string>
+    <string name="emailhint" translatable="false">email@example.com</string>
+    <string name="pwhint" translatable="false">• • • • • • • •</string>
     <string name="signup">계정 만들기</string>
     <string name="iforgot">비밀번호 찾기</string>
     <string name="signin">로그인</string>
@@ -88,6 +88,6 @@
     <string name="spinnerAutonomy">자율</string>
     <string name="spinnerEtc">기타</string>
 
-    <!-- activity_note_manager_popup.xml -->
+    <!-- activity_notemanager.xml -->
     <string name="editNote">노트 수정</string>
 </resources>
