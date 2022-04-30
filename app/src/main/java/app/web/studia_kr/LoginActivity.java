@@ -32,8 +32,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
-import app.web.studia_kr.backgroundservice.NotificationRestarter;
-
 public class LoginActivity extends AppCompatActivity{
 
     private EditText etEmail;

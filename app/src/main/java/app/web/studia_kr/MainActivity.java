@@ -1,8 +1,5 @@
 package app.web.studia_kr;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.SharedPreferences;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
@@ -18,7 +15,6 @@ import java.util.Calendar;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import app.web.studia_kr.backgroundservice.NotificationRestarter;
 import app.web.studia_kr.network.NetworkConnection;
 
 public class MainActivity extends AppCompatActivity {
@@ -35,11 +31,6 @@ public class MainActivity extends AppCompatActivity {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
         calendar.set(Calendar.HOUR_OF_DAY, 8);
-
-        Intent notifyIntent = new Intent(this,NotificationRestarter.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 2, notifyIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-        AlarmManager alarmManager = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,  calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
 
         // 처음 Splash Screen이 띄워지는 시간 설정 타이머(1초)
         introtimer = new Timer();

@@ -7,8 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 
-import app.web.studia_kr.backgroundservice.NotificationRestarter;
-
 public class PolicyActivity extends AppCompatActivity {
 
     @Override
