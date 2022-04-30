@@ -6,4 +6,4 @@
     android:toXDelta="0%"
     android:fromYDelta="0%"
     android:toYDelta="0%"
-    android:setFillAfter="true" />
+    android:fillAfter="true" />
