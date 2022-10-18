@@ -1,3 +1,5 @@
+## ⚠️ This repository is no longer managed. New issues and pull requests will not be accepted.
+
 # <center>𝒔𝒕𝒖𝒅𝒊𝒂 Android App</center>
 
 ![Background image of Jacob Lim Google Playstore Account](https://play-lh.googleusercontent.com/jGPB7MySKjn6nALQH6mpvkWASBjCMPfTRaUmgHDTw36rBxnMv_yXzsxfp9AAb1p2X4I=w3840-h2160-rw)
